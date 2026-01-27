@@ -1,8 +1,9 @@
 # AI 编程工具综合培训网站 - 架构设计文档 (Architecture Design)
 
-> **文档版本**：v1.0  
-> **最后更新**：2025-01-26  
-> **文档状态**：待评审
+> **文档版本**：v1.1
+> **最后更新**：2025-01-27
+> **文档状态**：已更新-待评审
+> **基于大纲**：AI编程工具综合培训网站大纲 v1.0
 
 ---
 
@@ -347,6 +348,82 @@ easy-go-vibe-coding/
 └── README.md
 ```
 
+**参考大纲**：AI编程工具综合培训网站大纲.md, 第 1906-1973 行
+
+#### 3.1.1 内容目录详细结构
+
+根据大纲要求，content/ 目录按照8大内容模块组织，每个模块包含多个章节文件：
+
+```
+content/
+├── basic/                      # 基础篇：零基础入门
+│   ├── 00-intro.mdx            # 序章
+│   ├── 01-awakening.mdx        # 觉醒
+│   ├── 02-mindset.mdx          # 心法
+│   ├── 03-technology.mdx       # 技术原理
+│   ├── 04-practice.mdx         # 工具实战
+│   ├── 05-from-0-to-1.mdx      # 从0到1实战
+│   └── 06-skills.mdx           # 精进技能
+├── advanced/                   # 进阶篇：从工具到架构
+│   ├── 00-preface.mdx          # 序
+│   ├── 01-environment.mdx      # 环境搭建
+│   ├── 02-ai-manual.mdx        # AI使用说明书
+│   ├── 03-prd.mdx              # PRD与文档驱动
+│   ├── 04-16-...mdx            # 其他章节
+│   └── ...
+├── tools/                      # 工具篇：AI编程工具深度解析
+│   ├── 01-ide-tools.mdx        # IDE类工具详解
+│   ├── 02-web-editors.mdx      # 网页编辑类工具详解
+│   ├── 03-cli-tools.mdx        # 命令行类工具详解
+│   ├── 04-core-tech.mdx        # 核心技术深度解析
+│   ├── 05-fabric.mdx           # Fabric AI增强框架
+│   ├── 06-selection.mdx        # 工具选型决策
+│   └── 07-enterprise.mdx       # 企业级实践
+├── architecture/               # 架构篇：AI大模型架构深度解析
+│   ├── 01-transformer-intro.mdx     # Transformer是什么
+│   ├── 02-transformer-mechanism.mdx # Transformer核心机制
+│   ├── 03-transformer-strengths.mdx # Transformer强项
+│   ├── 04-transformer-limitations.mdx # Transformer局限性
+│   ├── 05-mamba.mdx            # Mamba/SSM
+│   ├── 06-moe.mdx              # MoE
+│   ├── 07-rag.mdx              # RAG
+│   ├── 08-other-architectures.mdx # 其他新兴架构
+│   ├── 09-selection.mdx        # 架构对比与选型
+│   └── 10-future.mdx           # 未来趋势与展望
+├── practice/                   # 实践篇：项目实战
+│   ├── intro.mdx               # 序言
+│   ├── humanities.mdx          # 文科生/商科生项目
+│   ├── stem.mdx                # 理工科学生项目
+│   └── workplace.mdx           # 职场人士项目
+├── team/                       # 团队篇：从零打造AI团队
+│   ├── 01-why-ai-team.mdx      # 为什么需要AI团队
+│   ├── 02-team-building.mdx    # 团队组建与角色定义
+│   ├── 03-tool-selection.mdx   # 工具选型与统一配置
+│   ├── 04-workflow.mdx         # 工作流程与协作机制
+│   ├── 05-knowledge-management.mdx # 知识管理与沉淀
+│   ├── 06-culture.mdx          # 文化建设与学习型组织
+│   ├── 07-cost-management.mdx  # 成本管理与优化
+│   ├── 08-security-compliance.mdx # 安全与合规
+│   ├── 09-team-growth.mdx      # 团队成长与职业发展
+│   └── 10-cases-best-practices.mdx # 实战案例与最佳实践
+├── ecosystem/                  # 生态导航：AI编程工具生态全景
+│   ├── 01-tool-categories.mdx  # 工具分类导航
+│   ├── 02-llm-providers.mdx    # 大模型提供商导航
+│   ├── 03-mcp-servers.mdx      # MCP Servers导航
+│   ├── 04-skills-patterns.mdx  # Skill/Patterns库导航
+│   ├── 05-communities-resources.mdx # 社区与资源导航
+│   ├── 06-tool-comparison.mdx  # 工具对比与选型导航
+│   ├── 07-quick-find.mdx       # 快速查找工具
+│   └── 08-updates-dynamics.mdx # 资源更新与动态
+└── resources/                  # 优质资源篇
+    ├── intro.mdx               # 序言
+    ├── blogs.mdx               # 知名公司博客
+    ├── podcasts.mdx            # 优质播客
+    ├── reports.mdx             # 研究报告
+    ├── newsletters.mdx         # 优质Newsletter
+    └── communities.mdx         # 开发者社区
+```
+
 ### 3.2 组件架构
 
 #### 3.2.1 布局组件
@@ -392,20 +469,242 @@ easy-go-vibe-coding/
 
 #### 3.2.3 交互式组件
 
-**ToolComparison 组件**：
-- 工具对比表
-- 多维度筛选
-- 动态对比
-- 工具详情展示
+**ToolComparison 组件（工具对比矩阵）**
 
-**SelectionAssistant 组件**：
-- 问答式选型界面
-- 问题流程
-- 推荐算法
-- 结果展示
+**组件描述**：动态工具对比表，支持多维度筛选和对比
+
+**Props 接口**：
+```typescript
+interface ToolComparisonProps {
+  tools: Tool[];              // 工具列表
+  defaultFilters?: Filters;   // 默认筛选条件
+  maxCompare?: number;        // 最大对比数量（默认4）
+}
+
+interface Tool {
+  id: string;
+  name: string;
+  type: 'IDE' | 'WebEditor' | 'CLI';
+  features: string[];
+  pricing: {
+    free: boolean;
+    paid: boolean;
+    enterprise: boolean;
+    price?: string;
+  };
+  scenarios: Array<'个人' | '团队' | '企业'>;
+  description: string;
+  homepage?: string;
+}
+
+interface Filters {
+  type?: 'IDE' | 'WebEditor' | 'CLI' | 'All';
+  features?: string[];
+  pricing?: 'free' | 'paid' | 'enterprise' | 'all';
+  scenarios?: Array<'个人' | '团队' | '企业'>;
+}
+```
+
+**组件功能**：
+- 工具列表展示（Grid或Table布局）
+- 多维度筛选（类型、功能、定价、场景）
+- 动态对比功能（选择2-4个工具进行详细对比）
+- 工具详情展示（Modal或Drawer）
+- 筛选结果高亮
+- 响应式设计
+
+**状态管理**：
+```typescript
+const [filters, setFilters] = useState<Filters>({});
+const [selectedTools, setSelectedTools] = useState<string[]>([]);
+const [compareMode, setCompareMode] = useState<boolean>(false);
+```
+
+**数据结构**（data/tools.json）：
+```json
+{
+  "tools": [
+    {
+      "id": "cursor",
+      "name": "Cursor",
+      "type": "IDE",
+      "features": ["代码补全", "Agent模式", "MCP支持", "Skill系统"],
+      "pricing": {
+        "free": false,
+        "paid": true,
+        "enterprise": true,
+        "price": "$20/月"
+      },
+      "scenarios": ["个人", "团队", "企业"],
+      "description": "AI-first IDE，Skill系统、Agent模式、MCP配置",
+      "homepage": "https://cursor.sh"
+    }
+  ]
+}
+```
+
+**相关任务**：详见《Task_Details.md》DEV-019
+**参考大纲**：AI编程工具综合培训网站大纲.md, 第 2038-2045 行
+
+---
+
+**SelectionAssistant 组件（选型决策助手）**
+
+**组件描述**：问答式选型助手，支持工具选型和架构选型
+
+**Props 接口**：
+```typescript
+interface SelectionAssistantProps {
+  mode: 'tool' | 'architecture';  // 选型模式
+  onComplete?: (result: SelectionResult) => void;
+}
+
+interface SelectionResult {
+  recommendation: string;         // 推荐方案
+  reason: string;                 // 推荐理由
+  alternatives?: string[];        // 备选方案
+  details?: any;                  // 详细信息
+}
+
+interface Question {
+  id: string;
+  text: string;
+  options: QuestionOption[];
+  type: 'single' | 'multiple';
+}
+
+interface QuestionOption {
+  value: string;
+  label: string;
+  description?: string;
+}
+```
+
+**选型流程**：
+
+**工具选型流程**：
+1. 团队规模（个人/小团队/中大型团队/企业）
+2. 技术栈（前端/后端/全栈/移动端）
+3. 预算范围（免费/有限预算/充足预算）
+4. 使用场景（日常开发/快速原型/代码审查/企业集成）
+5. 推荐结果（推荐工具、选择理由、配置建议）
+
+**架构选型流程**：
+1. 应用场景（企业知识库/长代码分析/多语言翻译/实时应用）
+2. 资源约束（计算资源/内存限制/推理速度要求）
+3. 性能要求（准确性/实时性/成本/可扩展性）
+4. 推荐结果（推荐架构、选择理由、混合架构建议）
+
+**推荐算法**：
+```typescript
+function recommendTool(answers: QuestionAnswers): SelectionResult {
+  // 基于决策树的推荐算法
+  if (answers.teamSize === '个人' && answers.budget === '免费') {
+    return {
+      recommendation: 'GitHub Copilot (学生版) + Cursor (免费试用)',
+      reason: '适合个人开发者，成本低，功能全面',
+      alternatives: ['Continue.dev', 'Windsurf']
+    };
+  }
+  // ...更多规则
+}
+
+function recommendArchitecture(answers: QuestionAnswers): SelectionResult {
+  if (answers.scenario === '企业知识库' && answers.realtime === 'high') {
+    return {
+      recommendation: 'RAG + Transformer',
+      reason: '知识库需要检索增强，Transformer保证理解能力',
+      alternatives: ['RAG + Mamba (更快推理)']
+    };
+  }
+  // ...更多规则
+}
+```
+
+**组件状态**：
+```typescript
+const [currentQuestion, setCurrentQuestion] = useState<number>(0);
+const [answers, setAnswers] = useState<QuestionAnswers>({});
+const [result, setResult] = useState<SelectionResult | null>(null);
+```
+
+**相关任务**：详见《Task_Details.md》DEV-020
+**参考大纲**：AI编程工具综合培训网站大纲.md, 第 2047-2054 行
+
+---
+
+**LearningPathRecommender 组件（学习路径推荐器）**
+
+**组件描述**：根据用户角色推荐个性化学习路径
+
+**Props 接口**：
+```typescript
+interface LearningPathRecommenderProps {
+  onSelect?: (path: LearningPath) => void;
+}
+
+interface LearningPath {
+  role: UserRole;
+  modules: Module[];
+  estimatedTime: string;
+  description: string;
+}
+
+type UserRole = '设计师/产品经理' | '开发者' | '架构师' | '技术管理者' | '团队Leader';
+
+interface Module {
+  id: string;
+  name: string;
+  description: string;
+  chapters: number;
+  estimatedHours: number;
+  priority: 'high' | 'medium' | 'low';
+}
+```
+
+**路径映射**：
+```typescript
+const learningPaths: Record<UserRole, LearningPath> = {
+  '设计师/产品经理': {
+    role: '设计师/产品经理',
+    modules: [
+      { id: 'basic', name: '基础篇', description: '零基础入门', chapters: 6, estimatedHours: 20, priority: 'high' },
+      { id: 'tools-web', name: '工具篇（网页编辑）', description: 'v0、bolt.new等', chapters: 2, estimatedHours: 8, priority: 'high' },
+      { id: 'practice', name: '实践篇', description: '项目实战', chapters: 2, estimatedHours: 16, priority: 'medium' }
+    ],
+    estimatedTime: '44小时 (约6周)',
+    description: '理解AI编程工具，掌握基础使用，做出第一个作品'
+  },
+  '开发者': {
+    role: '开发者',
+    modules: [
+      { id: 'basic', name: '基础篇', estimatedHours: 20, priority: 'high' },
+      { id: 'advanced', name: '进阶篇', estimatedHours: 100, priority: 'high' },
+      { id: 'tools', name: '工具篇', estimatedHours: 40, priority: 'high' },
+      { id: 'practice', name: '实践篇', estimatedHours: 24, priority: 'medium' }
+    ],
+    estimatedTime: '184小时 (约23周)',
+    description: '掌握核心技术原理，企业级实践，积累实战经验'
+  },
+  // ...其他角色
+};
+```
+
+**组件功能**：
+- 角色选择界面（清晰的角色说明和示例）
+- 路径可视化展示（时间线、模块卡片）
+- 进度估算（根据用户时间投入）
+- 个性化调整（允许用户调整模块顺序）
+
+**相关任务**：详见《Task_Details.md》DEV-021
+**参考大纲**：AI编程工具综合培训网站大纲.md, 第 2028-2036 行
+
+---
+
+**其他交互式组件**
 
 **PromptGenerator 组件**：
-- RTCC 框架模板
+- RTCC 框架模板（Role/Task/Context/Constraint）
 - 模板编辑
 - 模板导出
 
@@ -1214,6 +1513,8 @@ docs(readme): 更新部署文档
 
 ---
 
-**文档版本**：v1.0  
-**最后更新**：2025-01-26  
-**文档状态**：待评审
+**文档版本**：v1.1
+**最后更新**：2025-01-27
+**文档状态**：已更新-待评审
+**基于大纲**：AI编程工具综合培训网站大纲 v1.0
+**新增内容**：内容目录详细结构、三个交互式组件架构设计（ToolComparison、SelectionAssistant、LearningPathRecommender）
