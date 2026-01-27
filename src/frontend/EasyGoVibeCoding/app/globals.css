@@ -197,6 +197,33 @@
   [class*="bg-gradient-to-br"] [class*="bg-secondary"] span.text-foreground {
     color: rgb(17 24 39) !important; /* gray-900 */
   }
+  
+  /* 确保输入框文字在明亮背景下清晰可见 */
+  [class*="bg-gradient-to-br"] input[type="text"],
+  [class*="bg-gradient-to-br"] input[type="search"],
+  [class*="bg-gradient-to-br"] input[type="email"],
+  [class*="bg-gradient-to-br"] input[type="password"],
+  [class*="bg-gradient-to-br"] input[type="number"],
+  [class*="bg-gradient-to-br"] textarea,
+  [class*="bg-gradient-to-br"] [data-slot="input"] {
+    color: rgb(17 24 39) !important; /* gray-900 */
+  }
+  
+  [class*="bg-gradient-to-br"] input::placeholder,
+  [class*="bg-gradient-to-br"] textarea::placeholder,
+  [class*="bg-gradient-to-br"] [data-slot="input"]::placeholder {
+    color: rgb(107 114 128) !important; /* gray-500 */
+  }
+  
+  [class*="bg-gradient-to-br"] input[type="text"]:focus,
+  [class*="bg-gradient-to-br"] input[type="search"]:focus,
+  [class*="bg-gradient-to-br"] input[type="email"]:focus,
+  [class*="bg-gradient-to-br"] input[type="password"]:focus,
+  [class*="bg-gradient-to-br"] input[type="number"]:focus,
+  [class*="bg-gradient-to-br"] textarea:focus,
+  [class*="bg-gradient-to-br"] [data-slot="input"]:focus {
+    color: rgb(17 24 39) !important; /* gray-900 */
+  }
 }
 
 @layer utilities {

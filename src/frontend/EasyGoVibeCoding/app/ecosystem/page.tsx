@@ -86,7 +86,7 @@ export default function EcosystemPage() {
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
               <Input
                 placeholder="搜索工具..."
-                className="pl-10 bg-white/80 backdrop-blur-md border-2 border-white/50 shadow-lg"
+                className="pl-10 bg-white/80 backdrop-blur-md border-2 border-white/50 shadow-lg text-gray-900 placeholder:text-gray-500"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
