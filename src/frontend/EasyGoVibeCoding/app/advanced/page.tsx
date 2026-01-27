@@ -7,6 +7,8 @@ const chapters = [
   { title: "环境搭建与代码运行基础", href: "/advanced/environment" },
   { title: "AI 使用说明书", href: "/advanced/ai-guide" },
   { title: "PRD 与文档驱动", href: "/advanced/prd" },
+  { title: "AI 原生开发模式", href: "/advanced/ai-native-patterns" },
+  { title: "AI 适配架构范式", href: "/advanced/ai-architecture-patterns" },
   { title: "开发常识", href: "/advanced/dev-basics" },
   { title: "界面交互", href: "/advanced/ui" },
   { title: "数据持久化", href: "/advanced/data" },

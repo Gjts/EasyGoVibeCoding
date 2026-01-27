@@ -9,6 +9,8 @@ const chapters = [
   { title: "环境搭建与代码运行基础", href: "/advanced/environment" },
   { title: "AI 使用说明书", href: "/advanced/ai-guide" },
   { title: "PRD 与文档驱动", href: "/advanced/prd" },
+  { title: "AI 原生开发模式", href: "/advanced/ai-native-patterns" },
+  { title: "AI 适配架构范式", href: "/advanced/ai-architecture-patterns" },
   { title: "开发常识", href: "/advanced/dev-basics" },
   { title: "界面交互", href: "/advanced/ui" },
   { title: "数据持久化", href: "/advanced/data" },
@@ -27,7 +29,7 @@ export default function DataPage() {
       {/* Header */}
       <div className="mb-12">
         <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm text-primary mb-4">
-          第 6 章
+          第 8 章
         </div>
         <h1 className="text-4xl font-bold text-foreground mb-4">
           数据持久化
