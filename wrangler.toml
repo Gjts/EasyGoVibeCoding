@@ -1,0 +1,14 @@
+#:schema node_modules/wrangler/config-schema.json
+name = "easy-go-vibe-coding"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+
+# Cloudflare Pages 静态部署配置
+# 注意：实际 Next.js 项目在 src/frontend/EasyGoVibeCoding/ 目录
+# 请在 Cloudflare Pages 设置中配置：
+# - Root directory: src/frontend/EasyGoVibeCoding
+# - Build command: npm install && npm run build
+# - Build output directory: out
+
+[observability]
+enabled = true
