@@ -1,12 +1,13 @@
 import { CourseLayout } from "@/components/course/course-layout"
 import Link from "next/link"
-import { ArrowRight, Code, GraduationCap, Briefcase, Lightbulb, BookOpen, Wrench } from "lucide-react"
+import { ArrowRight, Code, GraduationCap, Briefcase, Lightbulb, BookOpen, Wrench, Zap } from "lucide-react"
 
 const chapters = [
   { title: "实践篇概述", href: "/practice" },
   { title: "文科生 / 商科生项目", href: "/practice/humanities" },
   { title: "理工科学生项目", href: "/practice/engineering" },
   { title: "职场人士项目", href: "/practice/professional" },
+  { title: "高级实战场景", href: "/practice/advanced" },
   { title: "核心技能：AI Agent 开发", href: "/practice/agent" },
   { title: "核心技能：全栈项目实战", href: "/practice/fullstack" },
   { title: "核心技能：工具与效率", href: "/practice/efficiency" },
@@ -141,6 +142,42 @@ export default function PracticePage() {
             )
           })}
         </div>
+      </div>
+
+      {/* Advanced Scenarios */}
+      <div className="mb-12">
+        <h2 className="text-xl font-semibold text-foreground mb-6">高级实战场景</h2>
+        <Link
+          href="/practice/advanced"
+          className="block p-6 rounded-xl border border-border bg-card hover:border-primary/50 transition-colors group"
+        >
+          <div className="flex items-start gap-4">
+            <div className="h-12 w-12 rounded-lg bg-secondary flex items-center justify-center shrink-0">
+              <Zap className="h-6 w-6 text-foreground" />
+            </div>
+            <div className="flex-1">
+              <div className="flex items-center justify-between mb-2">
+                <h3 className="font-semibold text-foreground">高级实战场景</h3>
+                <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
+              </div>
+              <p className="text-sm text-muted-foreground mb-4">
+                面向所有开发者的高级实战场景，涵盖项目启动、快速上手、业务切换等职场常见挑战
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                {[
+                  { name: "场景1：从零开始创建新项目", desc: "架构设计、技术选型、项目初始化" },
+                  { name: "场景2：快速熟悉新公司项目", desc: "代码阅读、理解、快速上手" },
+                  { name: "场景3：业务线切换实战", desc: "业务理解、技术栈迁移、知识迁移" },
+                ].map((scenario) => (
+                  <div key={scenario.name} className="p-3 rounded-lg bg-secondary/50">
+                    <div className="text-sm font-medium text-foreground mb-1">{scenario.name}</div>
+                    <div className="text-xs text-muted-foreground">{scenario.desc}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </Link>
       </div>
 
       {/* Core Skills */}
