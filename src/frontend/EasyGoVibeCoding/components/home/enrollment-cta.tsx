@@ -5,7 +5,7 @@ import { ArrowRight, Sparkles, CheckCircle2, Rocket, Gift, Users } from "lucide-
 import Link from "next/link"
 
 const benefits = [
-  "7+ 完整课程模块",
+  "6+ 完整课程模块",
   "10+ 实战项目案例",
   "20+ AI 工具深度解析",
   "企业级最佳实践",

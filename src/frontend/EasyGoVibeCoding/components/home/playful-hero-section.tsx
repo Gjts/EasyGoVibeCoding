@@ -68,7 +68,7 @@ export function PlayfulHeroSection() {
           {/* Stats */}
           <div className="mt-16 grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-6">
             {[
-              { label: "课程模块", value: "7+", icon: Code2, color: "from-pink-400 to-rose-400" },
+              { label: "课程模块", value: "6+", icon: Code2, color: "from-pink-400 to-rose-400" },
               { label: "实战项目", value: "10+", icon: Rocket, color: "from-purple-400 to-indigo-400" },
               { label: "工具覆盖", value: "20+", icon: Code2, color: "from-blue-400 to-cyan-400" },
               { label: "企业案例", value: "6+", icon: Users, color: "from-green-400 to-emerald-400" },

@@ -70,9 +70,29 @@ export default function TeamPage() {
         </div>
       </div>
 
-      {/* Topics Overview */}
+      {/* Learning Goals */}
       <div className="mb-12">
-        <h2 className="text-xl font-bold text-gray-900 mb-6">核心主题</h2>
+        <h2 className="text-xl font-bold text-gray-900 mb-4">学习目标</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {["组建 AI 团队", "建立工作流程", "打造学习型组织"].map((goal, index) => {
+            const gradients = [
+              "from-green-400 to-emerald-400",
+              "from-blue-400 to-cyan-400",
+              "from-purple-400 to-pink-400",
+            ]
+            return (
+              <div key={goal} className={`p-5 rounded-2xl bg-gradient-to-br ${gradients[index]} text-white shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex items-center gap-3`}>
+                <Award className="h-6 w-6" />
+                <span className="font-bold text-lg">{goal}</span>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+
+      {/* Course Overview */}
+      <div className="mb-12">
+        <h2 className="text-xl font-bold text-gray-900 mb-6">课程大纲</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {topics.map((topic) => {
             const Icon = topic.icon
@@ -99,26 +119,6 @@ export default function TeamPage() {
               <p className="text-sm opacity-90">{role.skills}</p>
             </div>
           ))}
-        </div>
-      </div>
-
-      {/* Learning Goals */}
-      <div className="mb-12">
-        <h2 className="text-xl font-bold text-gray-900 mb-4">学习目标</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          {["组建 AI 团队", "建立工作流程", "打造学习型组织"].map((goal, index) => {
-            const gradients = [
-              "from-green-400 to-emerald-400",
-              "from-blue-400 to-cyan-400",
-              "from-purple-400 to-pink-400",
-            ]
-            return (
-              <div key={goal} className={`p-5 rounded-2xl bg-gradient-to-br ${gradients[index]} text-white shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex items-center gap-3`}>
-                <Award className="h-6 w-6" />
-                <span className="font-bold text-lg">{goal}</span>
-              </div>
-            )
-          })}
         </div>
       </div>
 

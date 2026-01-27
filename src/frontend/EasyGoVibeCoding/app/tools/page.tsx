@@ -89,9 +89,29 @@ export default function ToolsPage() {
         </div>
       </div>
 
-      {/* Tool Categories */}
+      {/* Learning Goals */}
       <div className="mb-12">
-        <h2 className="text-xl font-bold text-gray-900 mb-6">工具分类</h2>
+        <h2 className="text-xl font-bold text-gray-900 mb-4">学习目标</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {["工具选型决策", "高级特性掌握", "企业级集成"].map((goal, index) => {
+            const gradients = [
+              "from-orange-400 to-amber-400",
+              "from-purple-400 to-pink-400",
+              "from-blue-400 to-cyan-400",
+            ]
+            return (
+              <div key={goal} className={`p-5 rounded-2xl bg-gradient-to-br ${gradients[index]} text-white shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex items-center gap-3`}>
+                <Settings className="h-6 w-6" />
+                <span className="font-bold text-lg">{goal}</span>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+
+      {/* Course Overview */}
+      <div className="mb-12">
+        <h2 className="text-xl font-bold text-gray-900 mb-6">课程大纲</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {toolCategories.map((category) => {
             const Icon = category.icon
@@ -119,26 +139,6 @@ export default function ToolsPage() {
                   ))}
                 </div>
               </Link>
-            )
-          })}
-        </div>
-      </div>
-
-      {/* Learning Goals */}
-      <div className="mb-12">
-        <h2 className="text-xl font-bold text-gray-900 mb-4">学习目标</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          {["工具选型决策", "高级特性掌握", "企业级集成"].map((goal, index) => {
-            const gradients = [
-              "from-orange-400 to-amber-400",
-              "from-purple-400 to-pink-400",
-              "from-blue-400 to-cyan-400",
-            ]
-            return (
-              <div key={goal} className={`p-5 rounded-2xl bg-gradient-to-br ${gradients[index]} text-white shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex items-center gap-3`}>
-                <Settings className="h-6 w-6" />
-                <span className="font-bold text-lg">{goal}</span>
-              </div>
             )
           })}
         </div>

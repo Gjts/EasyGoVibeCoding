@@ -76,21 +76,23 @@ export default function PracticePage() {
     >
       {/* Hero */}
       <div className="mb-12">
-        <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm text-primary mb-4">
+        <div className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-pink-500 to-purple-500 text-white px-6 py-2 text-sm font-semibold mb-4 shadow-lg">
           <Code className="h-4 w-4" />
           实践篇 · 项目实战
         </div>
-        <h1 className="text-4xl font-bold text-foreground mb-4">
-          项目实战
+        <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-4">
+          <span className="bg-gradient-to-r from-pink-600 via-purple-600 to-blue-600 bg-clip-text text-transparent">
+            项目实战
+          </span>
         </h1>
-        <p className="text-lg text-muted-foreground">
+        <p className="text-lg text-gray-700 font-medium leading-relaxed">
           通过真实项目掌握 AI 编程工具，积累从需求到交付的完整实战经验。
         </p>
       </div>
 
       {/* Audience */}
-      <div className="mb-12 p-6 rounded-2xl border border-border bg-card">
-        <h2 className="text-xl font-semibold text-foreground mb-4">适合人群</h2>
+      <div className="mb-12 p-6 rounded-3xl bg-white/70 backdrop-blur-xl border-2 border-white/50 shadow-[0_8px_32px_0_rgba(0,0,0,0.1)]">
+        <h2 className="text-xl font-bold text-gray-900 mb-4">适合人群</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {[
             "想通过实际项目掌握 AI 编程工具的开发者",
@@ -98,110 +100,108 @@ export default function PracticePage() {
             "想提升工作效率的职场人士",
             "想积累实战经验的技术人员",
           ].map((item) => (
-            <div key={item} className="flex items-center gap-2 text-muted-foreground">
-              <div className="h-1.5 w-1.5 rounded-full bg-primary" />
-              {item}
+            <div key={item} className="flex items-center gap-3 p-3 rounded-xl bg-gradient-to-r from-pink-50 to-purple-50 border border-pink-200/50">
+              <div className="h-2 w-2 rounded-full bg-gradient-to-r from-pink-500 to-purple-500" />
+              <span className="text-gray-700 font-medium">{item}</span>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Project Categories */}
+      {/* Learning Goals */}
       <div className="mb-12">
-        <h2 className="text-xl font-semibold text-foreground mb-6">项目分类</h2>
-        <div className="space-y-6">
+        <h2 className="text-xl font-bold text-gray-900 mb-4">学习目标</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {["完成真实项目", "掌握全栈开发", "积累实战经验"].map((goal, index) => {
+            const gradients = [
+              "from-pink-400 to-purple-400",
+              "from-purple-400 to-blue-400",
+              "from-orange-400 to-amber-400",
+            ]
+            return (
+              <div key={goal} className={`p-5 rounded-2xl bg-gradient-to-br ${gradients[index]} text-white text-center shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200`}>
+                <span className="font-bold text-lg">{goal}</span>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+
+      {/* Course Overview */}
+      <div className="mb-12">
+        <h2 className="text-xl font-bold text-gray-900 mb-6">课程大纲</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {projectCategories.map((category) => {
             const Icon = category.icon
             return (
               <Link
                 key={category.title}
                 href={category.href}
-                className="block p-6 rounded-xl border border-border bg-card hover:border-primary/50 transition-colors group"
+                className="p-6 rounded-2xl bg-white/70 backdrop-blur-xl border-2 border-white/50 shadow-[0_8px_32px_0_rgba(0,0,0,0.1)] hover:shadow-[0_12px_48px_0_rgba(0,0,0,0.15)] hover:-translate-y-1 transition-all duration-200 group"
               >
-                <div className="flex items-start gap-4">
-                  <div className="h-12 w-12 rounded-lg bg-secondary flex items-center justify-center shrink-0">
-                    <Icon className="h-6 w-6 text-foreground" />
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-pink-400 to-purple-400 flex items-center justify-center shadow-lg">
+                    <Icon className="h-6 w-6 text-white" />
                   </div>
-                  <div className="flex-1">
-                    <div className="flex items-center justify-between mb-2">
-                      <h3 className="font-semibold text-foreground">{category.title}</h3>
-                      <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
+                  <h3 className="font-bold text-gray-900 text-lg">{category.title}</h3>
+                </div>
+                <p className="text-sm text-gray-700 mb-4 leading-relaxed">{category.description}</p>
+                <div className="space-y-2">
+                  {category.projects.map((project) => (
+                    <div key={project.name} className="flex items-center justify-between p-2 rounded-lg bg-gradient-to-r from-pink-50 to-purple-50 border border-pink-200/50">
+                      <span className="text-sm text-gray-900 font-medium">{project.name}</span>
+                      <span className="text-xs text-gray-600">{project.tools}</span>
                     </div>
-                    <p className="text-sm text-muted-foreground mb-4">{category.description}</p>
-                    <div className="space-y-2">
-                      {category.projects.map((project) => (
-                        <div key={project.name} className="flex items-center justify-between p-2 rounded-lg bg-secondary/50">
-                          <span className="text-sm text-foreground">{project.name}</span>
-                          <span className="text-xs text-muted-foreground">{project.tools}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </Link>
             )
           })}
-        </div>
-      </div>
-
-      {/* Advanced Scenarios */}
-      <div className="mb-12">
-        <h2 className="text-xl font-semibold text-foreground mb-6">高级实战场景</h2>
-        <Link
-          href="/practice/advanced"
-          className="block p-6 rounded-xl border border-border bg-card hover:border-primary/50 transition-colors group"
-        >
-          <div className="flex items-start gap-4">
-            <div className="h-12 w-12 rounded-lg bg-secondary flex items-center justify-center shrink-0">
-              <Zap className="h-6 w-6 text-foreground" />
-            </div>
-            <div className="flex-1">
-              <div className="flex items-center justify-between mb-2">
-                <h3 className="font-semibold text-foreground">高级实战场景</h3>
-                <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
+          <Link
+            href="/practice/advanced"
+            className="p-6 rounded-2xl bg-white/70 backdrop-blur-xl border-2 border-white/50 shadow-[0_8px_32px_0_rgba(0,0,0,0.1)] hover:shadow-[0_12px_48px_0_rgba(0,0,0,0.15)] hover:-translate-y-1 transition-all duration-200 group"
+          >
+            <div className="flex items-center gap-3 mb-3">
+              <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-orange-400 to-amber-400 flex items-center justify-center shadow-lg">
+                <Zap className="h-6 w-6 text-white" />
               </div>
-              <p className="text-sm text-muted-foreground mb-4">
-                面向所有开发者的高级实战场景，涵盖项目启动、快速上手、业务切换等职场常见挑战
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                {[
-                  { name: "场景1：从零开始创建新项目", desc: "架构设计、技术选型、项目初始化" },
-                  { name: "场景2：快速熟悉新公司项目", desc: "代码阅读、理解、快速上手" },
-                  { name: "场景3：业务线切换实战", desc: "业务理解、技术栈迁移、知识迁移" },
-                ].map((scenario) => (
-                  <div key={scenario.name} className="p-3 rounded-lg bg-secondary/50">
-                    <div className="text-sm font-medium text-foreground mb-1">{scenario.name}</div>
-                    <div className="text-xs text-muted-foreground">{scenario.desc}</div>
-                  </div>
-                ))}
-              </div>
+              <h3 className="font-bold text-gray-900 text-lg">高级实战场景</h3>
             </div>
-          </div>
-        </Link>
-      </div>
-
-      {/* Core Skills */}
-      <div className="mb-12">
-        <h2 className="text-xl font-semibold text-foreground mb-6">核心技能</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <p className="text-sm text-gray-700 mb-4 leading-relaxed">
+              面向所有开发者的高级实战场景，涵盖项目启动、快速上手、业务切换等职场常见挑战
+            </p>
+            <div className="space-y-2">
+              {[
+                { name: "场景1：从零开始创建新项目", tools: "架构设计、技术选型" },
+                { name: "场景2：快速熟悉新公司项目", tools: "代码阅读、理解" },
+                { name: "场景3：业务线切换实战", tools: "业务理解、技术栈迁移" },
+              ].map((scenario) => (
+                <div key={scenario.name} className="flex items-center justify-between p-2 rounded-lg bg-gradient-to-r from-orange-50 to-amber-50 border border-orange-200/50">
+                  <span className="text-sm text-gray-900 font-medium">{scenario.name}</span>
+                  <span className="text-xs text-gray-600">{scenario.tools}</span>
+                </div>
+              ))}
+            </div>
+          </Link>
           {coreSkills.map((skill) => {
             const Icon = skill.icon
             return (
               <Link
                 key={skill.title}
                 href={skill.href}
-                className="p-5 rounded-xl border border-border bg-card hover:border-primary/50 transition-colors group"
+                className="p-6 rounded-2xl bg-white/70 backdrop-blur-xl border-2 border-white/50 shadow-[0_8px_32px_0_rgba(0,0,0,0.1)] hover:shadow-[0_12px_48px_0_rgba(0,0,0,0.15)] hover:-translate-y-1 transition-all duration-200 group"
               >
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="h-10 w-10 rounded-lg bg-secondary flex items-center justify-center">
-                    <Icon className="h-5 w-5 text-foreground" />
+                  <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-blue-400 to-cyan-400 flex items-center justify-center shadow-lg">
+                    <Icon className="h-6 w-6 text-white" />
                   </div>
-                  <h3 className="font-semibold text-foreground">{skill.title}</h3>
+                  <h3 className="font-bold text-gray-900 text-lg">{skill.title}</h3>
                 </div>
-                <ul className="space-y-1">
+                <p className="text-sm text-gray-700 mb-4 leading-relaxed">核心技能模块</p>
+                <ul className="space-y-2">
                   {skill.topics.map((topic) => (
-                    <li key={topic} className="text-sm text-muted-foreground flex items-center gap-2">
-                      <div className="h-1 w-1 rounded-full bg-muted-foreground" />
+                    <li key={topic} className="text-sm text-gray-700 flex items-center gap-2">
+                      <div className="h-1.5 w-1.5 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500" />
                       {topic}
                     </li>
                   ))}
@@ -212,21 +212,22 @@ export default function PracticePage() {
         </div>
       </div>
 
+
       {/* Chapter list */}
       <div>
-        <h2 className="text-xl font-semibold text-foreground mb-6">章节目录</h2>
+        <h2 className="text-xl font-bold text-gray-900 mb-6">章节目录</h2>
         <div className="space-y-3">
           {chapters.slice(1).map((chapter, index) => (
             <Link
               key={chapter.title}
               href={chapter.href}
-              className="flex items-center gap-4 p-4 rounded-xl border border-border bg-card hover:border-primary/50 hover:bg-secondary/30 transition-colors group"
+              className="flex items-center gap-4 p-5 rounded-2xl bg-white/70 backdrop-blur-xl border-2 border-white/50 shadow-[0_8px_32px_0_rgba(0,0,0,0.1)] hover:shadow-[0_12px_48px_0_rgba(0,0,0,0.15)] hover:-translate-y-1 transition-all duration-200 group"
             >
-              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-secondary text-sm font-medium text-foreground">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-pink-500 to-purple-500 text-white text-sm font-bold shadow-lg">
                 {String(index + 1).padStart(2, "0")}
               </span>
-              <span className="flex-1 font-medium text-foreground">{chapter.title}</span>
-              <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
+              <span className="flex-1 font-semibold text-gray-900">{chapter.title}</span>
+              <ArrowRight className="h-5 w-5 text-gray-400 group-hover:text-purple-600 group-hover:translate-x-1 transition-all duration-200" />
             </Link>
           ))}
         </div>

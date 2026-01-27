@@ -91,9 +91,29 @@ export default function ArchitecturePage() {
         </div>
       </div>
 
-      {/* Architecture Overview */}
+      {/* Learning Goals */}
       <div className="mb-12">
-        <h2 className="text-xl font-bold text-gray-900 mb-6">主要架构概览</h2>
+        <h2 className="text-xl font-bold text-gray-900 mb-4">学习目标</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {["理解 Transformer 架构", "了解新兴架构范式", "架构选型思维"].map((goal, index) => {
+            const gradients = [
+              "from-indigo-400 to-purple-400",
+              "from-purple-400 to-pink-400",
+              "from-blue-400 to-cyan-400",
+            ]
+            return (
+              <div key={goal} className={`p-5 rounded-2xl bg-gradient-to-br ${gradients[index]} text-white shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex items-center gap-3`}>
+                <TrendingUp className="h-6 w-6" />
+                <span className="font-bold text-lg">{goal}</span>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+
+      {/* Course Overview */}
+      <div className="mb-12">
+        <h2 className="text-xl font-bold text-gray-900 mb-6">课程大纲</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {architectures.map((arch) => {
             const Icon = arch.icon
@@ -120,26 +140,6 @@ export default function ArchitecturePage() {
                     <span className="text-gray-700">{arch.weakness}</span>
                   </div>
                 </div>
-              </div>
-            )
-          })}
-        </div>
-      </div>
-
-      {/* Learning Goals */}
-      <div className="mb-12">
-        <h2 className="text-xl font-bold text-gray-900 mb-4">学习目标</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          {["理解 Transformer 架构", "了解新兴架构范式", "架构选型思维"].map((goal, index) => {
-            const gradients = [
-              "from-indigo-400 to-purple-400",
-              "from-purple-400 to-pink-400",
-              "from-blue-400 to-cyan-400",
-            ]
-            return (
-              <div key={goal} className={`p-5 rounded-2xl bg-gradient-to-br ${gradients[index]} text-white shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex items-center gap-3`}>
-                <TrendingUp className="h-6 w-6" />
-                <span className="font-bold text-lg">{goal}</span>
               </div>
             )
           })}

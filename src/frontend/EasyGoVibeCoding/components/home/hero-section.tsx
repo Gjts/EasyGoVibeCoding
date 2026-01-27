@@ -54,7 +54,7 @@ export function HeroSection() {
           {/* Stats */}
           <div className="mt-16 grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-8">
             {[
-              { label: "课程模块", value: "7+", icon: Code2 },
+              { label: "课程模块", value: "6+", icon: Code2 },
               { label: "实战项目", value: "10+", icon: Sparkles },
               { label: "工具覆盖", value: "20+", icon: Code2 },
               { label: "企业案例", value: "6+", icon: Users },

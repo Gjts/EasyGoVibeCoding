@@ -85,32 +85,29 @@ export default function AdvancedPage() {
         </div>
       </div>
 
-      {/* Timeline */}
+      {/* Course Overview */}
       <div className="mb-12">
-        <h2 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-          <Clock className="h-6 w-6 text-purple-600" />
-          学习路线图
-        </h2>
-        <div className="relative">
-          <div className="absolute left-6 top-0 bottom-0 w-1 bg-gradient-to-b from-emerald-400 via-purple-400 to-red-400 rounded-full" />
-          <div className="space-y-6">
-            {milestones.map((milestone, index) => (
-              <div key={milestone.hours} className="relative pl-16">
-                <div className={`absolute left-0 w-12 h-12 rounded-2xl bg-gradient-to-br ${milestone.gradient} flex items-center justify-center text-sm font-bold text-white shadow-xl`}>
-                  {index + 1}
-                </div>
-                <div className="p-5 rounded-2xl bg-white/70 backdrop-blur-xl border-2 border-white/50 shadow-[0_8px_32px_0_rgba(0,0,0,0.1)] hover:shadow-[0_12px_48px_0_rgba(0,0,0,0.15)] transition-all duration-200">
-                  <div className="flex items-center gap-3 mb-2">
-                    <span className={`text-sm font-bold bg-gradient-to-r ${milestone.gradient} bg-clip-text text-transparent`}>
+        <h2 className="text-xl font-bold text-gray-900 mb-6">课程大纲</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {milestones.map((milestone, index) => {
+            const Icon = Clock
+            return (
+              <div key={milestone.hours} className="p-5 rounded-2xl bg-white/70 backdrop-blur-xl border-2 border-white/50 shadow-[0_8px_32px_0_rgba(0,0,0,0.1)] hover:shadow-[0_12px_48px_0_rgba(0,0,0,0.15)] hover:-translate-y-1 transition-all duration-200">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className={`h-10 w-10 rounded-xl bg-gradient-to-br ${milestone.gradient} flex items-center justify-center shadow-md`}>
+                    <Icon className="h-5 w-5 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-gray-900">{milestone.title}</h3>
+                    <span className={`text-xs font-semibold bg-gradient-to-r ${milestone.gradient} bg-clip-text text-transparent`}>
                       {milestone.hours} 小时
                     </span>
-                    <span className="text-gray-900 font-bold text-lg">{milestone.title}</span>
                   </div>
-                  <p className="text-sm text-gray-700">{milestone.desc}</p>
                 </div>
+                <p className="text-sm text-gray-700 leading-relaxed">{milestone.desc}</p>
               </div>
-            ))}
-          </div>
+            )
+          })}
         </div>
       </div>
 

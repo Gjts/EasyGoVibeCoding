@@ -102,9 +102,12 @@ export function Header() {
           </Button>
           <Button 
             size="sm"
+            asChild
             className="bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 font-semibold"
           >
-            开始学习
+            <Link href="/basics">
+              开始学习
+            </Link>
           </Button>
         </div>
       </nav>
@@ -175,9 +178,12 @@ export function Header() {
                     登录
                   </Button>
                   <Button 
+                    asChild
                     className="w-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white shadow-lg font-semibold"
                   >
-                    开始学习
+                    <Link href="/basics" onClick={() => setMobileMenuOpen(false)}>
+                      开始学习
+                    </Link>
                   </Button>
                 </div>
               </div>
