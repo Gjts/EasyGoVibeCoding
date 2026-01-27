@@ -1,21 +1,21 @@
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { HeroSection } from "@/components/home/hero-section"
-import { LearningPathSection } from "@/components/home/learning-path-section"
-import { FeaturesSection } from "@/components/home/features-section"
-import { AudienceSection } from "@/components/home/audience-section"
-import { ToolsPreviewSection } from "@/components/home/tools-preview-section"
+import { PlayfulHeroSection } from "@/components/home/playful-hero-section"
+import { ClaymorphismCatalog } from "@/components/home/claymorphism-catalog"
+import { ProgressDemo } from "@/components/home/progress-demo"
+import { TestimonialsSection } from "@/components/home/testimonials-section"
+import { EnrollmentCTA } from "@/components/home/enrollment-cta"
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50">
       <Header />
       <main>
-        <HeroSection />
-        <LearningPathSection />
-        <FeaturesSection />
-        <AudienceSection />
-        <ToolsPreviewSection />
+        <PlayfulHeroSection />
+        <ClaymorphismCatalog />
+        <ProgressDemo />
+        <TestimonialsSection />
+        <EnrollmentCTA />
       </main>
       <Footer />
     </div>

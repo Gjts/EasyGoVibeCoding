@@ -126,4 +126,94 @@
     left: unset !important;
     top: unset !important;
   }
+  
+  /* 确保在明亮背景下文字清晰可见 */
+  /* 文档内容区域文字颜色覆盖 - 针对 CourseLayout 中的内容 */
+  [class*="bg-gradient-to-br"] .text-foreground,
+  [class*="bg-gradient-to-br"] [class*="prose"] .text-foreground,
+  [class*="bg-gradient-to-br"] h1.text-foreground,
+  [class*="bg-gradient-to-br"] h2.text-foreground,
+  [class*="bg-gradient-to-br"] h3.text-foreground,
+  [class*="bg-gradient-to-br"] h4.text-foreground,
+  [class*="bg-gradient-to-br"] span.text-foreground,
+  [class*="bg-gradient-to-br"] p.text-foreground,
+  [class*="bg-gradient-to-br"] div.text-foreground {
+    color: rgb(17 24 39) !important; /* gray-900 */
+  }
+  
+  [class*="bg-gradient-to-br"] .text-muted-foreground,
+  [class*="bg-gradient-to-br"] [class*="prose"] .text-muted-foreground,
+  [class*="bg-gradient-to-br"] span.text-muted-foreground,
+  [class*="bg-gradient-to-br"] p.text-muted-foreground,
+  [class*="bg-gradient-to-br"] li.text-muted-foreground,
+  [class*="bg-gradient-to-br"] div.text-muted-foreground {
+    color: rgb(55 65 81) !important; /* gray-700 */
+  }
+  
+  /* 确保 prose 内容在明亮背景下可见 */
+  [class*="bg-gradient-to-br"] [class*="prose"] p,
+  [class*="bg-gradient-to-br"] [class*="prose"] li,
+  [class*="bg-gradient-to-br"] [class*="prose"] span:not([class*="text-"]),
+  [class*="bg-gradient-to-br"] [class*="prose"] div:not([class*="text-"]) {
+    color: rgb(31 41 55) !important; /* gray-800 */
+  }
+  
+  [class*="bg-gradient-to-br"] [class*="prose"] h1,
+  [class*="bg-gradient-to-br"] [class*="prose"] h2,
+  [class*="bg-gradient-to-br"] [class*="prose"] h3,
+  [class*="bg-gradient-to-br"] [class*="prose"] h4,
+  [class*="bg-gradient-to-br"] [class*="prose"] h5,
+  [class*="bg-gradient-to-br"] [class*="prose"] h6 {
+    color: rgb(17 24 39) !important; /* gray-900 */
+  }
+  
+  /* 卡片背景在明亮主题下使用白色半透明 */
+  [class*="bg-gradient-to-br"] .bg-card {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    backdrop-filter: blur(8px);
+  }
+  
+  /* 确保边框在明亮背景下可见 */
+  [class*="bg-gradient-to-br"] .border-border {
+    border-color: rgb(229 231 235) !important; /* gray-200 */
+  }
+  
+  /* 修复 bg-secondary 背景下的文字颜色 */
+  [class*="bg-gradient-to-br"] .bg-secondary,
+  [class*="bg-gradient-to-br"] [class*="bg-secondary"] {
+    background-color: rgba(243, 244, 246, 0.8) !important; /* gray-100 with opacity */
+  }
+  
+  [class*="bg-gradient-to-br"] .bg-secondary .text-muted-foreground,
+  [class*="bg-gradient-to-br"] .bg-secondary span.text-muted-foreground,
+  [class*="bg-gradient-to-br"] [class*="bg-secondary"] .text-muted-foreground,
+  [class*="bg-gradient-to-br"] [class*="bg-secondary"] span.text-muted-foreground {
+    color: rgb(55 65 81) !important; /* gray-700 */
+  }
+  
+  [class*="bg-gradient-to-br"] .bg-secondary .text-foreground,
+  [class*="bg-gradient-to-br"] .bg-secondary span.text-foreground,
+  [class*="bg-gradient-to-br"] [class*="bg-secondary"] .text-foreground,
+  [class*="bg-gradient-to-br"] [class*="bg-secondary"] span.text-foreground {
+    color: rgb(17 24 39) !important; /* gray-900 */
+  }
+}
+
+@layer utilities {
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+  
+  .animate-shimmer {
+    animation: shimmer 2s infinite;
+  }
+  
+  .delay-1000 {
+    animation-delay: 1s;
+  }
 }

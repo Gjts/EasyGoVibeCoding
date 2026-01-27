@@ -75,27 +75,29 @@ export default function BasicsPage() {
     >
       {/* Hero */}
       <div className="mb-12">
-        <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm text-primary mb-4">
+        <div className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-6 py-2 text-sm font-semibold mb-4 shadow-lg">
           <BookOpen className="h-4 w-4" />
           基础篇 · 零基础入门
         </div>
-        <h1 className="text-4xl font-bold text-foreground mb-4">
-          欢迎来到 AI 编程时代
+        <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-4">
+          <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+            欢迎来到 AI 编程时代
+          </span>
         </h1>
-        <p className="text-lg text-muted-foreground">
+        <p className="text-lg text-gray-700 font-medium leading-relaxed">
           从未写过代码？没关系。这是一个全新的时代，AI 编程工具让每个人都能成为创造者。
           你只需要想法，AI 负责实现。
         </p>
       </div>
 
       {/* Audience */}
-      <div className="mb-12 p-6 rounded-2xl border border-border bg-card">
-        <h2 className="text-xl font-semibold text-foreground mb-4">适合人群</h2>
+      <div className="mb-12 p-6 rounded-3xl bg-white/70 backdrop-blur-xl border-2 border-white/50 shadow-[0_8px_32px_0_rgba(0,0,0,0.1)]">
+        <h2 className="text-xl font-bold text-gray-900 mb-4">适合人群</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {["从未写过代码的小白", "文科生 / 设计师", "产品经理", "想快速验证想法的人"].map((item) => (
-            <div key={item} className="flex items-center gap-2 text-muted-foreground">
-              <div className="h-1.5 w-1.5 rounded-full bg-primary" />
-              {item}
+            <div key={item} className="flex items-center gap-3 p-3 rounded-xl bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200/50">
+              <div className="h-2 w-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-500" />
+              <span className="text-gray-700 font-medium">{item}</span>
             </div>
           ))}
         </div>
@@ -103,31 +105,46 @@ export default function BasicsPage() {
 
       {/* Learning Goals */}
       <div className="mb-12">
-        <h2 className="text-xl font-semibold text-foreground mb-4">学习目标</h2>
+        <h2 className="text-xl font-bold text-gray-900 mb-4">学习目标</h2>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          {["理解 AI 编程工具", "掌握基础使用", "做出第一个作品"].map((goal) => (
-            <div key={goal} className="p-4 rounded-xl border border-border bg-card text-center">
-              <span className="text-foreground font-medium">{goal}</span>
-            </div>
-          ))}
+          {["理解 AI 编程工具", "掌握基础使用", "做出第一个作品"].map((goal, index) => {
+            const gradients = [
+              "from-blue-400 to-cyan-400",
+              "from-purple-400 to-pink-400",
+              "from-orange-400 to-amber-400",
+            ]
+            return (
+              <div key={goal} className={`p-5 rounded-2xl bg-gradient-to-br ${gradients[index]} text-white text-center shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200`}>
+                <span className="font-bold text-lg">{goal}</span>
+              </div>
+            )
+          })}
         </div>
       </div>
 
       {/* Course Overview */}
       <div className="mb-12">
-        <h2 className="text-xl font-semibold text-foreground mb-6">课程大纲</h2>
+        <h2 className="text-xl font-bold text-gray-900 mb-6">课程大纲</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {overview.map((item) => {
+          {overview.map((item, index) => {
             const Icon = item.icon
+            const gradients = [
+              "from-blue-400 to-cyan-400",
+              "from-purple-400 to-pink-400",
+              "from-orange-400 to-amber-400",
+              "from-green-400 to-emerald-400",
+              "from-red-400 to-rose-400",
+              "from-indigo-400 to-purple-400",
+            ]
             return (
-              <div key={item.title} className="p-4 rounded-xl border border-border bg-card hover:border-primary/50 transition-colors">
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="h-8 w-8 rounded-lg bg-secondary flex items-center justify-center">
-                    <Icon className="h-4 w-4 text-foreground" />
+              <div key={item.title} className="p-5 rounded-2xl bg-white/70 backdrop-blur-xl border-2 border-white/50 shadow-[0_8px_32px_0_rgba(0,0,0,0.1)] hover:shadow-[0_12px_48px_0_rgba(0,0,0,0.15)] hover:-translate-y-1 transition-all duration-200">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className={`h-10 w-10 rounded-xl bg-gradient-to-br ${gradients[index]} flex items-center justify-center shadow-md`}>
+                    <Icon className="h-5 w-5 text-white" />
                   </div>
-                  <h3 className="font-medium text-foreground">{item.title}</h3>
+                  <h3 className="font-bold text-gray-900">{item.title}</h3>
                 </div>
-                <p className="text-sm text-muted-foreground">{item.description}</p>
+                <p className="text-sm text-gray-700 leading-relaxed">{item.description}</p>
               </div>
             )
           })}
@@ -136,19 +153,19 @@ export default function BasicsPage() {
 
       {/* Chapter list */}
       <div>
-        <h2 className="text-xl font-semibold text-foreground mb-6">章节目录</h2>
+        <h2 className="text-xl font-bold text-gray-900 mb-6">章节目录</h2>
         <div className="space-y-3">
           {chapters.slice(1).map((chapter, index) => (
             <Link
               key={chapter.title}
               href={chapter.href}
-              className="flex items-center gap-4 p-4 rounded-xl border border-border bg-card hover:border-primary/50 hover:bg-secondary/30 transition-colors group"
+              className="flex items-center gap-4 p-5 rounded-2xl bg-white/70 backdrop-blur-xl border-2 border-white/50 shadow-[0_8px_32px_0_rgba(0,0,0,0.1)] hover:shadow-[0_12px_48px_0_rgba(0,0,0,0.15)] hover:-translate-y-1 transition-all duration-200 group"
             >
-              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-secondary text-sm font-medium text-foreground">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-purple-500 text-white text-sm font-bold shadow-lg">
                 {index + 1}
               </span>
-              <span className="flex-1 font-medium text-foreground">{chapter.title}</span>
-              <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
+              <span className="flex-1 font-semibold text-gray-900">{chapter.title}</span>
+              <ArrowRight className="h-5 w-5 text-gray-400 group-hover:text-purple-600 group-hover:translate-x-1 transition-all duration-200" />
             </Link>
           ))}
         </div>

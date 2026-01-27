@@ -8,7 +8,7 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'AI 编程工具综合培训 | 企业级 AI 编程培训平台',
+  title: 'EasyGoVibeCoding | 企业级 AI 编程工具与架构培训平台',
   description: 'AI 编程工具不是魔法，是工程。理解机制才能驾驭工具。企业级 AI 编程工具与架构培训平台。',
   generator: 'v0.app',
   icons: {

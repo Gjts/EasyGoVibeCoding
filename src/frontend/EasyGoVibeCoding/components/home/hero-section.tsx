@@ -17,7 +17,7 @@ export function HeroSection() {
           <div className="mb-8 flex justify-center">
             <div className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary/50 px-4 py-1.5 text-sm text-muted-foreground backdrop-blur-sm">
               <Sparkles className="h-4 w-4 text-primary" />
-              <span>企业级 AI 编程培训平台</span>
+              <span>EasyGoVibeCoding</span>
             </div>
           </div>
 
