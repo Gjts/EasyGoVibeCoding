@@ -5,6 +5,7 @@ import { ClaymorphismCatalog } from "@/components/home/claymorphism-catalog"
 import { ProgressDemo } from "@/components/home/progress-demo"
 import { TestimonialsSection } from "@/components/home/testimonials-section"
 import { EnrollmentCTA } from "@/components/home/enrollment-cta"
+import { ContactSection } from "@/components/contact-section"
 
 export default function HomePage() {
   return (
@@ -16,6 +17,7 @@ export default function HomePage() {
         <ProgressDemo />
         <TestimonialsSection />
         <EnrollmentCTA />
+        <ContactSection />
       </main>
       <Footer />
     </div>
