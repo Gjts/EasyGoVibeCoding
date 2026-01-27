@@ -368,8 +368,11 @@ content/
 │   ├── 00-preface.mdx          # 序
 │   ├── 01-environment.mdx      # 环境搭建
 │   ├── 02-ai-manual.mdx        # AI使用说明书
-│   ├── 03-prd.mdx              # PRD与文档驱动
-│   ├── 04-16-...mdx            # 其他章节
+│   ├── 03-meta-prompt.mdx      # 元提示词工程
+│   ├── 04-prd.mdx              # PRD与文档驱动
+│   ├── 05-native-patterns.mdx  # AI原生开发模式(TDD/DDD)
+│   ├── 06-arch-patterns.mdx    # AI适配架构范式
+│   ├── 07-16-...mdx            # 其他章节
 │   └── ...
 ├── tools/                      # 工具篇：AI编程工具深度解析
 │   ├── 01-ide-tools.mdx        # IDE类工具详解
@@ -614,7 +617,15 @@ function recommendArchitecture(answers: QuestionAnswers): SelectionResult {
     return {
       recommendation: 'RAG + Transformer',
       reason: '知识库需要检索增强，Transformer保证理解能力',
-      alternatives: ['RAG + Mamba (更快推理)']
+      alternatives: ['RAG + Mamba (更快推理)', 'Spec-First + RAG-DD (知识库驱动开发)']
+    };
+  }
+  // 增加开发模式推荐逻辑
+  if (answers.goal === '高质量交付' && answers.resource === '充足') {
+    return {
+      recommendation: 'TDD 2.0 + Clean Architecture',
+      reason: '利用AI生成测试用例保证质量，整洁架构解耦便于AI维护',
+      details: '建议配备 Micro-Agent 辅助代码审查'
     };
   }
   // ...更多规则

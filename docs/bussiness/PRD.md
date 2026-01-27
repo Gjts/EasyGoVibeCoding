@@ -181,9 +181,11 @@
 - AI 编程工具全景图（IDE/网页编辑/命令行）
 - 工具市场格局（Copilot、Cursor、Windsurf、Claude Code等）
 
-**2. 心法：像产品经理一样思考**
+**2. 心法：像产品经理一样思考（道·法哲学）**
+- 「道」的核心原则：凡是AI能做的就不要人工做、目的主导、上下文是第一性要素、先结构后代码
+- 「法」的实操方法：一句话目标+非目标、能抄不写不重复造轮子、接口先行实现后补、文档即上下文
 - MVP思维：最小可行产品理念
-- 不加功能的艺术：避免功能蔓延
+- 不加功能的艺术：避免功能蔓延（奥卡姆剃刀定理）
 - Spec驱动开发：把需求写成"可交付"
 - 错误示范 vs 正确示范（Garbage In, Garbage Out）
 
@@ -242,16 +244,55 @@
 **02. AI使用说明书**
 - 大模型生态详解（Claude、GPT、Gemini、SWE、Zeta）
 - Token、Context、Attention深度解析
-- Prompt工程高级技巧
+- Prompt工程高级技巧（CoT、Few-Shot、System Prompts）
 - 模型选择策略（成本 vs 质量 vs 速度）
 
-**03. PRD与文档驱动**
+**03. 元提示词工程 (Meta-Prompt Engineering)**
+- 递归自优化系统：构建能够自我进化的AI系统
+- 核心角色：α-提示词 (生成器) vs Ω-提示词 (优化器)
+- 递归生命周期：创生(Bootstrap) → 自省进化(Self-Correction) → 创造(Generation)
+- 提示词维护：将Prompt视为代码进行版本控制
+- 实战：构建自己的Prompt优化工作流
+
+**04. PRD与文档驱动**
 - PRD（Product Requirements Document）编写
 - Spec驱动开发（Spec-Driven Development）
 - WBS（工作分解结构）
 - DoD（完成的定义）
 
-**04-16. 其他核心主题**
+**05. AI 原生开发模式 (AI-Native Development Patterns)**
+- **TDD (Test-Driven Development) 2.0**：
+  - AI 生成测试用例 (Given-When-Then)
+  - 红-绿-重构循环的 AI 加速机制
+  - **实战**：让 AI 先写测试，再写实现
+- **DDD (Domain-Driven Design) with AI**：
+  - 用 AI 提炼统一语言 (Ubiquitous Language)
+  - AI 辅助划分限界上下文 (Bounded Contexts)
+  - 实体/值对象/聚合根的代码生成策略
+- **ADD (Agent-Driven Development)**：
+  - Plan-Execute-Evaluate 循环
+  - 多 Agent 协作模式（架构师 Agent + 编码 Agent + 测试 Agent）
+- **RAG-DD (RAG-Driven Development)**：
+  - 基于私有知识库的代码生成
+  - 架构文档即上下文
+
+**06. AI 适配架构范式 (AI-Optimized Architecture Patterns)**
+- **Clean Architecture with AI**：
+  - AI 生成各层接口与实现（Entities, Use Cases, Interfaces）
+  - 依赖规则的 AI 检查
+  - **优势**：各层解耦，适合 AI 分块生成与维护
+- **CDD (Component-Driven Development)**：
+  - AI 辅助设计原子组件 (Atomic Design)
+  - 自动生成 Storybook 文档与测试
+  - **优势**：上下文隔离，AI 专注单一组件实现
+- **Spec-First Development**：
+  - PRD -> OpenAPI Spec -> Code 生成流
+  - **优势**：利用 Spec 作为 AI 的"真理之源"
+- **Micro-Agent Pattern**：
+  - 将复杂功能拆解为多 Agent 协作网络
+  - 架构师 Agent + 领域专家 Agent + 审查 Agent
+
+**07-20. 其他核心主题**
 - 开发常识、界面交互、数据持久化
 - 测试、部署、运维等
 （具体章节根据大纲补充）
@@ -283,7 +324,15 @@
 - Cursor：Skill系统、Agent模式、MCP配置、企业级实践
 - Windsurf：Fast Context技术、Cascade Agent、大型代码库分析
 - GitHub Copilot：代码补全技巧、相关文件上下文、团队协作
-- 其他IDE工具：Kiro、Antigravity、Zed、Devin等对比
+- Kiro实战：
+  - 安装与配置（Steering Files）
+  - 免费各个Claude Opus 4.5使用指南
+  - CLI与IDE联动工作流
+- Antigravity实战：
+  - Google Agentic Coding环境搭建
+  - Claude Opus 4.5 + Gemini 混合调用技巧
+  - 任务视图与Artifacts使用
+- 其他IDE工具：Zed、Devin、LazyVim + AI、Neovim + Copilot等对比
 
 **02. 网页编辑类工具详解**
 - v0（Vercel）：自然语言生成UI、Figma集成、一键部署
@@ -291,13 +340,30 @@
 - 其他工具：Lovable、AnyCoder、Agent 3 (Replit)等
 
 **03. 命令行类工具详解**
-- Claude Code：终端集成、MCP配置、GitHub工作流自动化
-- Continue.dev：多模型支持、背景代理工作流、企业自部署
-- Goose：开源Agent、命令行接口、自动化脚本
+- Claude Code实战：
+  - 终端集成与鉴权
+  - MCP Server配置与调用
+  - GitHub工作流自动化案例
+- Codex CLI实战：
+  - GPT-5.1 Codex 模型调用
+  - 大型项目（Monorepo）分析技巧
+  - /init 命令与规则生成
+- Gemini CLI & Droid：
+  - 脚本批量执行
+  - 文档自动化整理
+  - 多模型切换（Claude/Gemini/GPT）技巧
+- Warp终端：
+  - AI命令纠错
+  - 自然语言转Shell实战
+- Continue.dev：
+  - 本地模型配置（Ollama集成）
+  - 企业私有知识库连接
+- Goose：开源Agent自动化脚本编写
+
 
 **04. 核心技术深度解析**
 - MCP（Model Context Protocol）：架构、配置、自定义Server
-- Skill系统：Cursor Skill、Kiro Steering Files、Claude Code Skills
+- Skill系统：Cursor Skill、Kiro Steering Files、Claude Code Skills、元技能（Meta-Skills）
 - Agent系统：类型、工作流程、多Agent编排、Plan系统
 - LSP（Language Server Protocol）：架构、AI IDE关系
 
@@ -308,16 +374,41 @@
 - 多AI提供商配置
 - REST API与企业集成
 
-**06. 工具选型决策**
+**06. 模型性能分级参考**
+- 第一梯队（复杂任务首选）：Claude Opus 4.5-xhigh、GPT-5.1 Codex-max-xhigh、GPT-5.2-xhigh
+- 第二梯队（日常开发）：Claude Sonnet 4.5、Kimi K2-thinking、MiniMax M2、GLM-4.6、Gemini 3.0 Pro
+- 第三梯队（轻量任务）：Qwen3、SWE、Grok4
+- 选型建议：复杂任务只用第一梯队，日常开发用第二梯队，成本敏感用第三梯队
+
+**07. 辅助开发工具实战**
+- Augment：
+  - 上下文引擎配置
+  - 提示词优化实战
+- Zread：
+  - GitHub仓库快速分析
+  - 源码阅读辅助工作流
+- NotebookLM：
+  - 资料导入与索引
+  - 生成音频概览与思维导图
+- Mermaid Chart：
+  - 文本描述转时序图/类图技巧
+- Ollama：
+  - 模型拉取与管理
+  - API服务开启与调用
+- DBeaver：
+  - AI SQL助手使用
+
+**08. 工具选型决策**
 - 选型维度（类型/角色/团队规模/场景）
 - 工具对比总表（功能/定价/适用场景）
 - 实战案例（小团队/中大型企业/混合方案）
 
-**07. 企业级实践**
+**09. 企业级实践**
 - 企业环境配置（网络/代理/权限/安全）
 - 团队协作（共享配置/团队库/版本控制）
 - 成本优化（模型选择/Token优化/使用监控）
 - 安全与合规（代码上传策略/本地化部署）
+
 
 **功能要求**：
 - 工具对比矩阵（动态筛选）
@@ -533,11 +624,12 @@
 - 工具对比矩阵（按类型/功能/定价/场景筛选）
 
 **02. 大模型提供商导航**
-- Anthropic（Claude系列）：Opus 4.5、Sonnet 4.5、Haiku 4.5
-- OpenAI（GPT系列）：GPT-4.1、GPT-4 Turbo、GPT-3.5
-- Google（Gemini系列）：Gemini 3 Pro、Gemini 3
-- 其他提供商：DeepSeek、Mistral、Groq、Together AI、Perplexity
-- 模型选择指南、模型对比表
+- Anthropic（Claude系列）：Claude Opus 4.5、Claude Sonnet 4.5、Claude Haiku 4.5
+- OpenAI（GPT系列）：GPT-5.2、GPT-5.1 Codex、GPT-4 Turbo
+- Google（Gemini系列）：Gemini 3.0 Pro、Gemini 2.5 Pro
+- 国产模型：Kimi K2（月之暗面）、GLM-4.6（智谱AI）、Qwen3（通义千问）、DeepSeek、MiniMax M2
+- 其他提供商：Mistral、Groq、Together AI、Perplexity、Grok4
+- 模型选择指南、模型对比表、模型性能分级参考
 
 **03. MCP Servers导航**
 - 官方MCP Servers（文件系统、GitHub、数据库）
@@ -548,8 +640,16 @@
 **04. Skill/Patterns库导航**
 - Cursor Skills库（官方、社区）
 - Fabric Patterns库（官方、社区）
+- 元技能（Meta-Skill）：用于生成Skills的Skill
+- [Skills制作器](https://github.com/yusufkaraaslan/Skill_Seekers)：将任何资料转化为Agent可用技能
 - 其他Skill/Pattern系统
 - 创建指南和分享平台
+
+**04.5 提示词资源库**
+- [在线提示词数据库](https://docs.google.com/spreadsheets/d/1ngoQOhJqdguwNAilCl1joNwTje7FWWN9WiI2bo5VhpU/)：数百个各场景提示词
+- [第三方系统提示词库](https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools)：多种AI工具的系统提示词
+- 元提示词（Meta-Prompts）：用于生成提示词的高级提示词
+- RTCC框架模板（Role/Task/Context/Constraint）
 
 **05. 社区与资源导航**
 - 开发者社区（GitHub项目、技术论坛、学习社区）
