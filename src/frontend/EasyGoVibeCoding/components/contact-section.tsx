@@ -16,6 +16,7 @@ export function ContactSection() {
   })
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle")
+  const [errorMessage, setErrorMessage] = useState<string>("")
   const [isHovered, setIsHovered] = useState<string | null>(null)
 
   const validateForm = () => {
@@ -43,6 +44,7 @@ export function ContactSection() {
     if (!validateForm()) return
 
     setStatus("sending")
+    setErrorMessage("")
 
     try {
       const response = await fetch("/api/send-email", {
@@ -53,14 +55,33 @@ export function ContactSection() {
         body: JSON.stringify(formState),
       })
 
+      const responseData = await response.json().catch(() => null)
+
       if (!response.ok) {
-        throw new Error("Failed to send email")
+        // 尝试解析服务器返回的错误信息
+        const errorMsg = responseData?.error || "发送失败"
+        const errorDetails = responseData?.details || ""
+        const fullErrorMsg = errorDetails ? `${errorMsg}: ${errorDetails}` : errorMsg
+        
+        console.error("Email send error:", {
+          status: response.status,
+          error: errorMsg,
+          details: errorDetails,
+          fullResponse: responseData
+        })
+        
+        setErrorMessage(fullErrorMsg)
+        setStatus("error")
+        return
       }
 
       setStatus("success")
       setFormState({ name: "", email: "", message: "" })
+      setErrorMessage("")
     } catch (error) {
       console.error("Email send error:", error)
+      const errorMsg = error instanceof Error ? error.message : "网络错误，请检查网络连接后重试"
+      setErrorMessage(errorMsg)
       setStatus("error")
     }
   }
@@ -273,15 +294,23 @@ export function ContactSection() {
               )}
 
               {status === "error" && (
-                <div className="flex items-center gap-3 p-4 bg-gradient-to-r from-red-50 to-pink-50 border-2 border-red-300 rounded-2xl animate-in fade-in slide-in-from-top-2 duration-500" role="alert">
+                <div className="flex items-start gap-3 p-4 bg-gradient-to-r from-red-50 to-pink-50 border-2 border-red-300 rounded-2xl animate-in fade-in slide-in-from-top-2 duration-500" role="alert">
                   <div className="flex-shrink-0">
                     <div className="h-10 w-10 rounded-xl bg-red-500 flex items-center justify-center">
                       <AlertCircle className="h-6 w-6 text-white" />
                     </div>
                   </div>
-                  <div>
-                    <p className="font-bold text-red-700">发送失败</p>
-                    <p className="text-sm text-red-600">请稍后重试或直接发送邮件联系我。</p>
+                  <div className="flex-1">
+                    <p className="font-bold text-red-700 mb-1">发送失败</p>
+                    {errorMessage ? (
+                      <p className="text-sm text-red-600 mb-2">{errorMessage}</p>
+                    ) : null}
+                    <p className="text-sm text-red-600">
+                      请稍后重试或直接发送邮件至{" "}
+                      <a href="mailto:1301385382gjts@gmail.com" className="underline font-semibold">
+                        1301385382gjts@gmail.com
+                      </a>
+                    </p>
                   </div>
                 </div>
               )}
