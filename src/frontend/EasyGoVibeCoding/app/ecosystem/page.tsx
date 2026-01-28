@@ -5,7 +5,7 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Compass, Search, Monitor, Globe, Terminal, Cpu, ExternalLink, Filter } from "lucide-react"
+import { Compass, Search, Monitor, Globe, Terminal, Cpu, ExternalLink, Filter, Palette } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const categories = [
@@ -13,6 +13,7 @@ const categories = [
   { id: "ide", name: "IDE 类", icon: Monitor, gradient: "from-blue-400 to-cyan-400" },
   { id: "web", name: "网页编辑", icon: Globe, gradient: "from-purple-400 to-pink-400" },
   { id: "cli", name: "命令行", icon: Terminal, gradient: "from-orange-400 to-amber-400" },
+  { id: "design", name: "设计工具", icon: Palette, gradient: "from-rose-400 to-pink-400" },
   { id: "model", name: "大模型", icon: Cpu, gradient: "from-green-400 to-emerald-400" },
 ]
 
@@ -38,12 +39,21 @@ const tools = [
   { name: "Fabric", category: "cli", description: "Patterns 系统，工作流自动化", tags: ["Patterns", "自动化"], url: "https://github.com/danielmiessler/fabric" },
   { name: "Aider", category: "cli", description: "AI pair programming in terminal", tags: ["终端", "Git"], url: "https://aider.chat" },
   
+  // Design Tools
+  { name: "Figma", category: "design", description: "协作式 UI 设计工具，AI 功能增强", tags: ["UI设计", "协作", "原型"], url: "https://www.figma.com" },
+  { name: "Stitch", category: "design", description: "Google AI 设计工具，文本/图像转 UI 和代码", tags: ["AI设计", "Google", "代码生成"], url: "https://stitch.withgoogle.com" },
+  { name: "Pencil", category: "design", description: "AI 辅助设计工具，IDE 集成，自动生成代码", tags: ["原型", "代码集成", "AI辅助"], url: "https://pencil.dev" },
+  { name: "Lovart", category: "design", description: "AI 驱动设计平台，智能布局和配色建议", tags: ["AI设计", "智能建议", "资源库"], url: "https://www.lovart.info" },
+  { name: "Pencil Project", category: "design", description: "开源原型工具，支持桌面/移动/Web UI", tags: ["开源", "原型", "跨平台"], url: "https://pencil.evolus.vn" },
+  
   // Models
-  { name: "Claude", category: "model", description: "Anthropic 出品，长上下文，安全性高", tags: ["Anthropic", "长上下文"], url: "https://claude.ai" },
-  { name: "GPT-4", category: "model", description: "OpenAI 最新模型，生态成熟", tags: ["OpenAI", "通用"], url: "https://openai.com" },
-  { name: "Gemini", category: "model", description: "Google 多模态模型，搜索集成", tags: ["Google", "多模态"], url: "https://gemini.google.com" },
-  { name: "DeepSeek", category: "model", description: "开源友好，成本低", tags: ["开源", "低成本"], url: "https://deepseek.com" },
-  { name: "Llama", category: "model", description: "Meta 开源模型，本地部署", tags: ["Meta", "开源"], url: "https://llama.meta.com" },
+  { name: "Claude Opus 4.5", category: "model", description: "Anthropic 旗舰模型，编程能力最强（SWE-bench 80.9%）", tags: ["Anthropic", "编程", "200K上下文"], url: "https://claude.ai" },
+  { name: "Claude Sonnet 4.5", category: "model", description: "Anthropic 平衡模型，日常开发首选", tags: ["Anthropic", "平衡", "200K上下文"], url: "https://claude.ai" },
+  { name: "GPT-5", category: "model", description: "OpenAI 最新模型，数学推理最强（AIME 94.6%）", tags: ["OpenAI", "数学", "100万上下文"], url: "https://openai.com" },
+  { name: "GPT-4.1", category: "model", description: "OpenAI 编程增强模型，SWE-bench 54.6%", tags: ["OpenAI", "编程", "100万上下文"], url: "https://openai.com" },
+  { name: "Gemini 3 Pro", category: "model", description: "Google 最新模型，多模态最强，1M-3M tokens", tags: ["Google", "多模态", "超长上下文"], url: "https://gemini.google.com" },
+  { name: "DeepSeek", category: "model", description: "开源友好，成本低，代码能力强", tags: ["开源", "低成本", "代码"], url: "https://deepseek.com" },
+  { name: "Llama", category: "model", description: "Meta 开源模型，本地部署", tags: ["Meta", "开源", "本地"], url: "https://llama.meta.com" },
 ]
 
 export default function EcosystemPage() {

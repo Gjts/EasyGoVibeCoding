@@ -1,15 +1,16 @@
 "use client"
 
 import Link from "next/link"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
-import { Menu, X, ChevronDown } from "lucide-react"
+import { Menu, X, ChevronDown, Search } from "lucide-react"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { SearchDialog } from "@/components/search-dialog"
 
 const navigation = [
   { name: "首页", href: "/" },
@@ -31,6 +32,19 @@ const navigation = [
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [searchOpen, setSearchOpen] = useState(false)
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault()
+        setSearchOpen(true)
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [])
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b-2 border-white/50 shadow-[0_4px_16px_0_rgba(0,0,0,0.1)]">
@@ -93,6 +107,18 @@ export function Header() {
         </div>
         
         <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-3">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setSearchOpen(true)}
+            className="text-gray-700 hover:text-purple-600 hover:bg-purple-50 font-semibold gap-2"
+          >
+            <Search className="h-4 w-4" />
+            <span>搜索</span>
+            <kbd className="hidden xl:inline-flex h-5 items-center gap-0.5 rounded bg-gray-100 px-1.5 font-mono text-xs text-gray-600 border border-gray-300">
+              <span className="text-xs">⌘</span>K
+            </kbd>
+          </Button>
           <Button 
             variant="ghost" 
             size="sm"
@@ -171,6 +197,17 @@ export function Header() {
                   )}
                 </div>
                 <div className="py-6 space-y-3">
+                  <Button
+                    variant="ghost"
+                    onClick={() => {
+                      setMobileMenuOpen(false)
+                      setSearchOpen(true)
+                    }}
+                    className="w-full justify-start text-gray-700 hover:text-purple-600 hover:bg-purple-50 font-semibold gap-2"
+                  >
+                    <Search className="h-4 w-4" />
+                    搜索
+                  </Button>
                   <Button 
                     variant="ghost" 
                     className="w-full justify-start text-gray-700 hover:text-purple-600 hover:bg-purple-50 font-semibold"
@@ -191,6 +228,8 @@ export function Header() {
           </div>
         </div>
       )}
+
+      <SearchDialog open={searchOpen} onOpenChange={setSearchOpen} />
     </header>
   )
 }

@@ -184,9 +184,9 @@ export default function SelectionPage() {
                 适合复杂推理、架构设计、大型代码库分析等任务：
               </p>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>• Claude Opus 4.5-xhigh</li>
-                <li>• GPT-5.1 Codex-max-xhigh</li>
-                <li>• GPT-5.2-xhigh</li>
+                <li>• <strong>Claude Opus 4.5</strong>：编程能力最强（SWE-bench 80.9%），200K上下文</li>
+                <li>• <strong>GPT-5</strong>：数学推理最强（AIME 94.6%），100万上下文</li>
+                <li>• <strong>Gemini 3 Pro</strong>：多模态最强，1M-3M tokens超长上下文</li>
                 <li>• <strong>使用建议</strong>：只在复杂任务时使用，避免成本浪费</li>
               </ul>
             </div>
@@ -197,11 +197,11 @@ export default function SelectionPage() {
                 适合日常代码编写、代码审查、文档生成等任务：
               </p>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>• Claude Sonnet 4.5</li>
-                <li>• Kimi K2-thinking</li>
-                <li>• MiniMax M2</li>
-                <li>• GLM-4.6</li>
-                <li>• Gemini 3.0 Pro</li>
+                <li>• <strong>Claude Sonnet 4.5</strong>：平衡性能，200K上下文</li>
+                <li>• <strong>GPT-4.1</strong>：编程增强（SWE-bench 54.6%），100万上下文</li>
+                <li>• <strong>Gemini 3</strong>：多模态支持，长上下文</li>
+                <li>• <strong>Kimi K2-thinking</strong>：国产模型，思考能力强</li>
+                <li>• <strong>GLM-4.6</strong>：智谱AI，中文优化</li>
                 <li>• <strong>使用建议</strong>：日常开发的主力模型</li>
               </ul>
             </div>

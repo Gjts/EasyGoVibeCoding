@@ -375,9 +375,9 @@
 - REST API与企业集成
 
 **06. 模型性能分级参考**
-- 第一梯队（复杂任务首选）：Claude Opus 4.5-xhigh、GPT-5.1 Codex-max-xhigh、GPT-5.2-xhigh
-- 第二梯队（日常开发）：Claude Sonnet 4.5、Kimi K2-thinking、MiniMax M2、GLM-4.6、Gemini 3.0 Pro
-- 第三梯队（轻量任务）：Qwen3、SWE、Grok4
+- 第一梯队（复杂任务首选）：Claude Opus 4.5（编程最强，SWE-bench 80.9%）、GPT-5（数学最强，AIME 94.6%）、Gemini 3 Pro（多模态最强，1M-3M tokens）
+- 第二梯队（日常开发）：Claude Sonnet 4.5、GPT-4.1（编程增强，SWE-bench 54.6%）、Gemini 3、Kimi K2-thinking、GLM-4.6
+- 第三梯队（轻量任务）：Qwen3、SWE、Grok4、Claude Haiku 4.5
 - 选型建议：复杂任务只用第一梯队，日常开发用第二梯队，成本敏感用第三梯队
 
 **07. 辅助开发工具实战**
@@ -629,12 +629,12 @@
 - 工具对比矩阵（按类型/功能/定价/场景筛选）
 
 **02. 大模型提供商导航**
-- Anthropic（Claude系列）：Claude Opus 4.5、Claude Sonnet 4.5、Claude Haiku 4.5
-- OpenAI（GPT系列）：GPT-5.2、GPT-5.1 Codex、GPT-4 Turbo
-- Google（Gemini系列）：Gemini 3.0 Pro、Gemini 2.5 Pro
+- Anthropic（Claude系列）：Claude Opus 4.5（2025年11月，编程最强）、Claude Sonnet 4.5、Claude Haiku 4.5
+- OpenAI（GPT系列）：GPT-5（2025年8月，数学最强）、GPT-4.1（编程增强）、GPT-4 Turbo
+- Google（Gemini系列）：Gemini 3 Pro（2025年11月，多模态最强，1M-3M tokens）、Gemini 3、Gemini 2.5 Pro
 - 国产模型：Kimi K2（月之暗面）、GLM-4.6（智谱AI）、Qwen3（通义千问）、DeepSeek、MiniMax M2
 - 其他提供商：Mistral、Groq、Together AI、Perplexity、Grok4
-- 模型选择指南、模型对比表、模型性能分级参考
+- 模型选择指南、模型对比表、模型性能分级参考（第一梯队：Claude Opus 4.5、GPT-5、Gemini 3 Pro）
 
 **03. MCP Servers导航**
 - 官方MCP Servers（文件系统、GitHub、数据库）
