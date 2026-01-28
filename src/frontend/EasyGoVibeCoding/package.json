@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "build": "next build",
+    "postbuild": "node scripts/copy-functions.js",
     "dev": "next dev",
     "lint": "eslint .",
     "start": "next start",
-    "pages:deploy": "next build && wrangler pages deploy out --project-name=easy-go-vibe-coding"
+    "pages:deploy": "npm run build && wrangler pages deploy out --project-name=easy-go-vibe-coding"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
