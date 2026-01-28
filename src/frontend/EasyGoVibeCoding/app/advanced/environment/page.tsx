@@ -1146,7 +1146,7 @@ export default function EnvironmentPage() {
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {/* 安装步骤 */}
-                    <div className="p-4 rounded-lg border border-border bg-muted/50">
+                    <div className="p-4 rounded-xl bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900 border-2 border-blue-200/50 dark:border-gray-700/50 shadow-sm">
                       <h4 className="font-medium text-foreground mb-3 flex items-center gap-2">
                         <Terminal className="h-4 w-4" />
                         安装步骤
@@ -1159,14 +1159,14 @@ export default function EnvironmentPage() {
                     </div>
 
                     {/* 版本管理 */}
-                    <div className="p-4 rounded-lg border border-border bg-muted/50">
+                    <div className="p-4 rounded-xl bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900 border-2 border-blue-200/50 dark:border-gray-700/50 shadow-sm">
                       <h4 className="font-medium text-foreground mb-3 flex items-center gap-2">
                         <Settings className="h-4 w-4" />
                         版本管理 ({lang.versionManager.name})
                       </h4>
                       <div className="space-y-2 text-sm text-muted-foreground">
                         <p className="font-medium text-foreground">安装:</p>
-                        <p className="text-xs font-mono bg-background p-2 rounded">{lang.versionManager.install}</p>
+                        <p className="text-xs font-mono bg-gray-100 dark:bg-gray-700 p-3 rounded-lg border border-gray-300 dark:border-gray-600">{lang.versionManager.install}</p>
                         <p className="font-medium text-foreground mt-2">常用命令:</p>
                         <ul className="space-y-1">
                           {lang.versionManager.usage.map((cmd, idx) => (
@@ -1177,7 +1177,7 @@ export default function EnvironmentPage() {
                     </div>
 
                     {/* 包管理器 */}
-                    <div className="p-4 rounded-lg border border-border bg-muted/50">
+                    <div className="p-4 rounded-xl bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900 border-2 border-blue-200/50 dark:border-gray-700/50 shadow-sm">
                       <h4 className="font-medium text-foreground mb-3 flex items-center gap-2">
                         <Package className="h-4 w-4" />
                         包管理器 ({lang.packageManager.name})
@@ -1195,7 +1195,7 @@ export default function EnvironmentPage() {
                     </div>
 
                     {/* 镜像源配置 */}
-                    <div className="p-4 rounded-lg border border-border bg-muted/50">
+                    <div className="p-4 rounded-xl bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900 border-2 border-blue-200/50 dark:border-gray-700/50 shadow-sm">
                       <h4 className="font-medium text-foreground mb-3 flex items-center gap-2">
                         <FileCode className="h-4 w-4" />
                         镜像源配置 ({lang.mirror.name})
@@ -1220,7 +1220,7 @@ export default function EnvironmentPage() {
                       {lang.ide.map((ide, idx) => (
                         <span
                           key={idx}
-                          className="inline-flex items-center rounded-md bg-background px-2.5 py-0.5 text-xs font-medium text-foreground border border-border"
+                          className="inline-flex items-center rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 px-3 py-1 text-xs font-semibold text-white shadow-md hover:shadow-lg transition-all duration-200"
                         >
                           {ide}
                         </span>
@@ -1302,7 +1302,7 @@ export default function EnvironmentPage() {
                         <p className="text-sm text-muted-foreground mb-2">
                           将源代码分解为一系列 Token（标记），如关键字、标识符、操作符、字面量等。
                         </p>
-                        <div className="mt-3 p-3 rounded bg-background border border-border">
+                        <div className="mt-3 p-4 rounded-lg bg-white dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 shadow-sm">
                           <p className="text-xs font-mono text-muted-foreground mb-1">示例：</p>
                           <p className="text-xs font-mono text-foreground">let x = 10;</p>
                           <p className="text-xs text-muted-foreground mt-2">→ Token: [let] [x] [=] [10] [;]</p>
@@ -1319,7 +1319,7 @@ export default function EnvironmentPage() {
                         <p className="text-sm text-muted-foreground mb-2">
                           将 Token 序列组织成抽象语法树（AST - Abstract Syntax Tree），表示代码的语法结构。
                         </p>
-                        <div className="mt-3 p-3 rounded bg-background border border-border">
+                        <div className="mt-3 p-4 rounded-lg bg-white dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 shadow-sm">
                           <p className="text-xs font-mono text-muted-foreground mb-1">AST 结构：</p>
                           <pre className="text-xs font-mono text-foreground whitespace-pre-wrap">
 {`VariableDeclaration
@@ -1357,15 +1357,15 @@ export default function EnvironmentPage() {
                           将 AST 转换为目标代码：机器码（编译型）、字节码（JVM、.NET）、中间表示（LLVM IR）等。
                         </p>
                         <div className="mt-3 grid grid-cols-1 md:grid-cols-3 gap-2 text-xs">
-                          <div className="p-2 rounded bg-background border border-border">
+                          <div className="p-3 rounded-lg bg-white dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 shadow-sm">
                             <p className="font-medium text-foreground mb-1">编译型</p>
                             <p className="text-muted-foreground">AST → 机器码</p>
                           </div>
-                          <div className="p-2 rounded bg-background border border-border">
+                          <div className="p-3 rounded-lg bg-white dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 shadow-sm">
                             <p className="font-medium text-foreground mb-1">字节码</p>
                             <p className="text-muted-foreground">AST → 字节码</p>
                           </div>
-                          <div className="p-2 rounded bg-background border border-border">
+                          <div className="p-3 rounded-lg bg-white dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 shadow-sm">
                             <p className="font-medium text-foreground mb-1">解释型</p>
                             <p className="text-muted-foreground">AST → 直接执行</p>
                           </div>
@@ -1398,7 +1398,7 @@ export default function EnvironmentPage() {
                         <p className="text-sm text-muted-foreground mb-2">
                           在运行时环境中执行代码：CPU 执行机器码、虚拟机执行字节码、解释器执行 AST。
                         </p>
-                        <div className="mt-3 p-3 rounded bg-background border border-border">
+                        <div className="mt-3 p-4 rounded-lg bg-white dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 shadow-sm">
                           <p className="text-xs text-muted-foreground mb-2">执行环境：</p>
                           <ul className="text-xs text-muted-foreground space-y-1">
                             <li>• CPU：直接执行机器码（C、C++、Rust、Go）</li>
@@ -1411,24 +1411,24 @@ export default function EnvironmentPage() {
                   </div>
                 </div>
 
-                <div className="mt-6 p-4 rounded-lg border border-border bg-muted/50">
+                <div className="mt-6 p-5 rounded-xl bg-gradient-to-br from-purple-50 to-pink-50 dark:from-gray-800 dark:to-gray-900 border-2 border-purple-200/50 dark:border-gray-700/50 shadow-md">
                   <h4 className="font-medium text-foreground mb-3">完整流程图</h4>
                   <div className="flex flex-wrap items-center gap-2 text-sm font-mono">
-                    <span className="px-3 py-1.5 rounded bg-background border border-border">源代码</span>
+                    <span className="px-3 py-1.5 rounded-lg bg-white dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 shadow-sm font-semibold text-gray-900 dark:text-gray-100">源代码</span>
                     <span className="text-muted-foreground">→</span>
-                    <span className="px-3 py-1.5 rounded bg-background border border-border">词法分析</span>
+                    <span className="px-3 py-1.5 rounded-lg bg-white dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 shadow-sm font-semibold text-gray-900 dark:text-gray-100">词法分析</span>
                     <span className="text-muted-foreground">→</span>
-                    <span className="px-3 py-1.5 rounded bg-background border border-border">语法分析</span>
+                    <span className="px-3 py-1.5 rounded-lg bg-white dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 shadow-sm font-semibold text-gray-900 dark:text-gray-100">语法分析</span>
                     <span className="text-muted-foreground">→</span>
-                    <span className="px-3 py-1.5 rounded bg-background border border-border">AST</span>
+                    <span className="px-3 py-1.5 rounded-lg bg-white dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 shadow-sm font-semibold text-gray-900 dark:text-gray-100">AST</span>
                     <span className="text-muted-foreground">→</span>
-                    <span className="px-3 py-1.5 rounded bg-background border border-border">语义分析</span>
+                    <span className="px-3 py-1.5 rounded-lg bg-white dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 shadow-sm font-semibold text-gray-900 dark:text-gray-100">语义分析</span>
                     <span className="text-muted-foreground">→</span>
-                    <span className="px-3 py-1.5 rounded bg-background border border-border">代码生成</span>
+                    <span className="px-3 py-1.5 rounded-lg bg-white dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 shadow-sm font-semibold text-gray-900 dark:text-gray-100">代码生成</span>
                     <span className="text-muted-foreground">→</span>
-                    <span className="px-3 py-1.5 rounded bg-background border border-border">优化</span>
+                    <span className="px-3 py-1.5 rounded-lg bg-white dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 shadow-sm font-semibold text-gray-900 dark:text-gray-100">优化</span>
                     <span className="text-muted-foreground">→</span>
-                    <span className="px-3 py-1.5 rounded bg-background border border-border">执行</span>
+                    <span className="px-3 py-1.5 rounded-lg bg-white dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 shadow-sm font-semibold text-gray-900 dark:text-gray-100">执行</span>
                   </div>
                 </div>
               </div>
