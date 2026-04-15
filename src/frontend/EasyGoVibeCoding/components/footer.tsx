@@ -85,6 +85,26 @@ export function Footer() {
     let cancelled = false;
 
     const fetchSiteStats = async () => {
+      const loadFromGet = async () => {
+        const response = await fetch("/api/site-stats", {
+          method: "GET",
+          cache: "no-store",
+          headers: {
+            Accept: "application/json",
+          },
+        });
+
+        if (!response.ok) return null;
+
+        return (await response.json()) as {
+          success?: boolean;
+          data?: {
+            pageViews?: number;
+            visitors?: number;
+          };
+        };
+      };
+
       try {
         setStatsLoading(true);
 
@@ -116,24 +136,14 @@ export function Footer() {
               visitors?: number;
             };
           };
-        } else if (trackResponse.status !== 404) {
-          const response = await fetch("/api/site-stats", {
-            method: "GET",
-            cache: "no-store",
-            headers: {
-              Accept: "application/json",
-            },
-          });
+        }
 
-          if (response.ok) {
-            result = (await response.json()) as {
-              success?: boolean;
-              data?: {
-                pageViews?: number;
-                visitors?: number;
-              };
-            };
-          }
+        const hasValidNumbers =
+          typeof result?.data?.pageViews === "number" &&
+          typeof result?.data?.visitors === "number";
+
+        if (!hasValidNumbers) {
+          result = await loadFromGet();
         }
 
         if (!cancelled) {
