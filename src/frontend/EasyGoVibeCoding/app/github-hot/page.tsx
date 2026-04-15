@@ -66,12 +66,12 @@ const tracks = [
 
 const featuredRepos = [
   {
-    title: "TradingAgents",
-    subtitle: "宏观环境金融交易智能体",
-    desc: "多智能体协作 + 辩论/反思 + 风控闭环，做更稳健的交易决策。",
-    url: "https://github.com/tauricresearch/tradingagents",
-    tags: ["Multi-Agent", "Debate", "Reflection", "Risk"],
-    gradient: "from-slate-700 to-slate-500",
+    title: "everything-claude-code",
+    subtitle: "ECC 代码优化巨灵",
+    desc: "超大规模 agents/rules/skills/hook 体系：性能优化、规则绑定、安全审查与持续进化。",
+    url: "https://github.com/affaan-m/everything-claude-code",
+    tags: ["Agents", "Rules", "Hooks", "Security"],
+    gradient: "from-purple-600 to-pink-600",
   },
   {
     title: "superpowers",
@@ -80,22 +80,6 @@ const featuredRepos = [
     url: "https://github.com/obra/superpowers",
     tags: ["TDD", "Worktree", "Review", "Discipline"],
     gradient: "from-emerald-600 to-teal-500",
-  },
-  {
-    title: "skills",
-    subtitle: "Minimalist Entrepreneur 技能库",
-    desc: "基于《The Minimalist Entrepreneur》的 10 个创业陪伴技能：验证优先，反对先造后卖。",
-    url: "https://github.com/slavingia/skills",
-    tags: ["Entrepreneur", "Validation", "Playbook", "Decision"],
-    gradient: "from-amber-600 to-orange-500",
-  },
-  {
-    title: "everything-claude-code",
-    subtitle: "ECC 代码优化巨灵",
-    desc: "超大规模 agents/rules/skills/hook 体系：性能优化、规则绑定、安全审查与持续进化。",
-    url: "https://github.com/affaan-m/everything-claude-code",
-    tags: ["Agents", "Rules", "Hooks", "Security"],
-    gradient: "from-purple-600 to-pink-600",
   },
   {
     title: "agency-agents",
@@ -112,6 +96,22 @@ const featuredRepos = [
     url: "https://github.com/gsd-build/get-shit-done",
     tags: ["Context", "Plan", "Execute", "Verify"],
     gradient: "from-rose-600 to-red-500",
+  },
+  {
+    title: "TradingAgents",
+    subtitle: "宏观环境金融交易智能体",
+    desc: "多智能体协作 + 辩论/反思 + 风控闭环，做更稳健的交易决策。",
+    url: "https://github.com/tauricresearch/tradingagents",
+    tags: ["Multi-Agent", "Debate", "Reflection", "Risk"],
+    gradient: "from-slate-700 to-slate-500",
+  },
+  {
+    title: "skills",
+    subtitle: "Minimalist Entrepreneur 技能库",
+    desc: "基于《The Minimalist Entrepreneur》的 10 个创业陪伴技能：验证优先，反对先造后卖。",
+    url: "https://github.com/slavingia/skills",
+    tags: ["Entrepreneur", "Validation", "Playbook", "Decision"],
+    gradient: "from-amber-600 to-orange-500",
   },
   {
     title: "follow-builders",
