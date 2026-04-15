@@ -1,20 +1,7 @@
 import { CourseLayout } from "@/components/course/course-layout"
+import { advancedChapters } from "@/components/course/chapters"
 import Link from "next/link"
 import { ArrowRight, Rocket, Clock, Target } from "lucide-react"
-
-const chapters = [
-  { title: "序：从工具到架构的 100 小时", href: "/advanced" },
-  { title: "环境搭建与代码运行基础", href: "/advanced/environment" },
-  { title: "AI 使用说明书", href: "/advanced/ai-guide" },
-  { title: "PRD 与文档驱动", href: "/advanced/prd" },
-  { title: "AI 原生开发模式", href: "/advanced/ai-native-patterns" },
-  { title: "AI 适配架构范式", href: "/advanced/ai-architecture-patterns" },
-  { title: "开发常识", href: "/advanced/dev-basics" },
-  { title: "界面交互", href: "/advanced/ui" },
-  { title: "数据持久化", href: "/advanced/data" },
-  { title: "测试与质量", href: "/advanced/testing" },
-  { title: "部署与运维", href: "/advanced/deployment" },
-]
 
 const milestones = [
   { hours: "0-20", title: "环境与基础", desc: "开发环境配置、代码运行原理", gradient: "from-emerald-400 to-green-400" },
@@ -29,7 +16,7 @@ export default function AdvancedPage() {
     <CourseLayout
       title="进阶篇"
       description="从工具到架构"
-      chapters={chapters}
+      chapters={advancedChapters}
     >
       {/* Hero */}
       <div className="mb-12">
@@ -115,7 +102,7 @@ export default function AdvancedPage() {
       <div>
         <h2 className="text-xl font-bold text-gray-900 mb-6">章节目录</h2>
         <div className="space-y-3">
-          {chapters.slice(1).map((chapter, index) => (
+          {advancedChapters.slice(1).map((chapter, index) => (
             <Link
               key={chapter.title}
               href={chapter.href}

@@ -6,6 +6,19 @@
 
 主要原因是：**Cloudflare Pages Functions 需要放在构建输出目录（`out`）中才能生效**。
 
+**为什么本地会出现 `Failed to fetch site stats: 404`？**
+
+这是因为站点统计接口 ` /api/site-stats ` 也是通过 **Cloudflare Pages Functions** 提供的。  
+在本地使用 Next.js 开发模式、静态导出预览，或尚未部署到 Cloudflare Pages 时，这个接口并不存在，所以会返回 `404`。  
+这属于预期现象，不代表统计功能代码本身有问题。
+
+只有在以下条件满足后，站点统计接口才会正常工作：
+
+1. 项目已经构建完成
+2. `functions` 已复制到 `out/functions`
+3. 已部署到 **Cloudflare Pages**
+4. Pages 项目中已绑定 `SITE_STATS_KV`
+
 ## 解决方案
 
 ### 1. 构建脚本已更新
@@ -60,6 +73,13 @@ npm run build
 npm run pages:deploy
 ```
 
+**注意：**
+
+- 本地可以测试页面渲染和普通前端逻辑
+- 本地不一定能直接测试 `Cloudflare Pages Functions`
+- ` /api/site-stats ` 真实统计接口需要部署到 Cloudflare Pages 后才可访问
+- 如果你在本地控制台看到 `404`，通常是因为统计接口还没有部署，不是页面本身报错
+
 ## 常见问题
 
 ### Q: 为什么需要复制 functions 目录？
@@ -83,6 +103,25 @@ A: 检查以下几点：
 3. ✅ 检查 Cloudflare Pages Functions 日志中的错误信息
 4. ✅ 确认 Resend API Key 是否有效（可以在 Resend 控制台查看使用情况）
 
+### Q: 为什么站点统计接口返回 404？
+
+A: 通常是以下原因之一：
+1. ✅ 当前还在本地开发环境，不是在 Cloudflare Pages 上访问
+2. ✅ `out/functions/api/site-stats.ts` 没有被复制到构建输出目录
+3. ✅ Cloudflare Pages 项目尚未重新部署
+4. ✅ `SITE_STATS_KV` 绑定尚未在 Pages 项目中正确配置
+5. ✅ 访问的是静态导出内容，但对应 Functions 还未生效
+
+### Q: 如何验证站点统计是否部署成功？
+
+A: 检查以下几点：
+1. ✅ `out/functions/api/site-stats.ts` 文件是否存在
+2. ✅ Cloudflare Pages 项目中已绑定 `SITE_STATS_KV`
+3. ✅ 重新部署后，在 Pages 的 Functions 列表中可以看到 `api/site-stats`
+4. ✅ 首次访问线上站点后，KV 中会自动出现：
+   - `site-stats:totals`
+   - `site-stats:visitor:...`
+
 ## 文件结构
 
 部署后的文件结构应该是：
@@ -94,7 +133,8 @@ out/
 ├── ...
 └── functions/          ← 这个目录必须存在
     └── api/
-        └── send-email.ts
+        ├── send-email.ts
+        └── site-stats.ts
 ```
 
 ## 参考

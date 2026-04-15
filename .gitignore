@@ -78,6 +78,9 @@ web_modules/
 .next
 out
 
+# Local agent/runtime artifacts
+.opc/
+
 # Nuxt.js build / generate output
 .nuxt
 dist

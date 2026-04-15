@@ -1,25 +1,7 @@
 import { CourseLayout } from "@/components/course/course-layout"
+import { practiceChapters } from "@/components/course/chapters"
 import Link from "next/link"
 import { ArrowRight, Rocket, BookOpen, RefreshCw, Target, Zap, Code, Users, Lightbulb } from "lucide-react"
-
-const chapters = [
-  { title: "实践篇概述", href: "/practice" },
-  { title: "文科生 / 商科生项目", href: "/practice/humanities" },
-  { title: "理工科学生项目", href: "/practice/engineering" },
-  { title: "职场人士项目", href: "/practice/professional" },
-  { 
-    title: "高级实战场景", 
-    href: "/practice/advanced",
-    sections: [
-      { title: "场景1：从零开始创建新项目", href: "/practice/advanced/new-project" },
-      { title: "场景2：快速熟悉新公司项目", href: "/practice/advanced/onboarding" },
-      { title: "场景3：业务线切换实战", href: "/practice/advanced/transition" },
-    ]
-  },
-  { title: "核心技能：AI Agent 开发", href: "/practice/agent" },
-  { title: "核心技能：全栈项目实战", href: "/practice/fullstack" },
-  { title: "核心技能：工具与效率", href: "/practice/efficiency" },
-]
 
 const scenarios = [
   {
@@ -80,7 +62,7 @@ export default function AdvancedPage() {
     <CourseLayout
       title="实践篇"
       description="项目实战"
-      chapters={chapters}
+      chapters={practiceChapters}
       currentChapter="高级实战场景"
     >
       {/* Header */}

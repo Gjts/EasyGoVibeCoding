@@ -24,9 +24,11 @@ const navigation = [
       { name: "架构篇", href: "/architecture", description: "AI 大模型架构解析", gradient: "from-indigo-400 to-purple-400" },
       { name: "实践篇", href: "/practice", description: "项目实战", gradient: "from-red-400 to-rose-400" },
       { name: "团队篇", href: "/team", description: "从零打造 AI 团队", gradient: "from-green-400 to-emerald-400" },
+      { name: "超级个体篇", href: "/super-individual", description: "把个人能力产品化与规模化", gradient: "from-violet-400 to-fuchsia-400" },
     ],
   },
   { name: "生态导航", href: "/ecosystem" },
+  { name: "GitHub 热门项目", href: "/github-hot" },
   { name: "资源", href: "/resources" },
 ]
 

@@ -32,11 +32,11 @@ pnpm install
 # Start development server (runs on http://localhost:3000)
 pnpm dev
 
-# Build for production
+# Build static output for production
 pnpm build
 
-# Start production server
-pnpm start
+# Deploy to Cloudflare Pages
+pnpm pages:deploy
 
 # Run linting
 pnpm lint
@@ -205,29 +205,27 @@ const mdxComponents = {
 **App Router Structure**:
 - `/` - Homepage
 - `/basics/*` - Basics module chapters
-- `/advanced` - Advanced module (placeholder)
-- `/tools` - Tools module (placeholder)
-- `/architecture` - Architecture module (placeholder)
-- `/practice` - Practice module (placeholder)
-- `/team` - Team module (placeholder)
-- `/ecosystem` - Ecosystem navigation (placeholder)
-- `/resources` - Resources module (placeholder)
+- `/advanced/*` - Advanced module landing page and subpages
+- `/tools/*` - Tools module landing page and subpages
+- `/architecture/*` - Architecture module landing page and subpages
+- `/practice/*` - Practice module landing page and subpages
+- `/team/*` - Team module landing page and subpages
+- `/ecosystem` - Ecosystem navigation page
+- `/resources` - Resources module page
 
 ## Search Functionality
 
-**Status**: To be implemented
+**Status**: 已实现站内搜索对话框（本地静态数据检索）
 
-**Planned Approach**:
-- **MVP**: Local search using flexsearch or fuse.js
-- Build-time index generation from MDX content
-- Client-side search for fast response times
-- **Future**: Potentially upgrade to Algolia for advanced features
+**Current Approach**:
+- 通过 `components/search-dialog.tsx` 提供客户端搜索对话框
+- 使用内置静态条目数据进行标题、描述、分类和关键词匹配
+- 支持 `Ctrl/Cmd + K` 快捷键唤起搜索
 
 **Implementation Notes**:
-- Index files should be generated during build
-- Search index should include: title, description, content, tags, tools
-- Implement debounced search input for performance
-- Cache search index in localStorage for faster subsequent searches
+- 当前搜索索引为组件内维护的静态数据
+- 结果覆盖主要课程、导航与资源入口
+- 尚未接入构建期 MDX 索引、localStorage 缓存或 Algolia
 
 ## State Management
 
@@ -308,20 +306,20 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000
 **File Structure**:
 - `.env.local` - Local environment variables (gitignored, for development)
 - `.env.production` - Production environment variables (if needed)
-- Environment variables in Vercel dashboard for deployment
+- Environment variables configured in Cloudflare Pages / Cloudflare dashboard for deployment
 
 **Note**: Only variables prefixed with `NEXT_PUBLIC_` are exposed to the browser. Keep sensitive keys server-side only.
 
 ## Deployment
 
-**Primary Platform**: Vercel (recommended)
-- Automatic deployments on push to `main`
-- Zero-config setup
-- Environment variables configured in Vercel dashboard
+**Primary Platform**: Cloudflare Pages
+- Static export via `next build` with `output: 'export'`
+- `postbuild` copies `functions/` into `out/functions`
+- `pnpm pages:deploy` deploys `out` to the `easy-go-vibe-coding` Pages project
+- Cloudflare Pages Functions are used for APIs such as `api/send-email` and `api/site-stats`
 
-**Alternative**: GitHub Pages
-- Requires manual GitHub Actions workflow setup
-- Static export only
+**Alternative**: Vercel
+- Not the current primary deployment path in this repository
 
 ## Git Workflow
 
@@ -340,22 +338,22 @@ Example: `feat(content): add awakening chapter to basics module`
 
 ## Current Project Status
 
-**Phase**: MVP Development (Month 1-3)
+**Phase**: 持续迭代中
 **Completed**:
 - Project initialization
 - Basic layout and navigation
 - Homepage with core sections
-- Basic module chapter pages (Basics section partially implemented)
+- Multi-module course pages across basics, advanced, tools, architecture, practice, team, ecosystem, and resources
+- Search dialog entry in the header with keyboard shortcut support
+- Cloudflare Pages deployment pipeline with Pages Functions support
 
 **In Progress**:
-- Content creation for all 8 modules
-- Interactive components (ToolComparison, SelectionAssistant, LearningPathRecommender)
-- Search functionality
+- Content refinement across existing modules
+- Interactive capability expansion beyond the current search experience
 
 **Pending**:
 - Learning progress tracking
 - Community features (comments, Q&A)
-- Complete content for all modules
 
 ## Development Notes
 
@@ -515,9 +513,9 @@ Current technical limitations that should be addressed:
    - MDX integration needs to be completed
    - Content loading utilities need to be developed
 
-5. **Search Not Implemented**
-   - Search functionality is planned but not yet built
-   - Index generation scripts need to be created
+5. **Search Experience Uses Static Data**
+   - The current search dialog is implemented in `components/search-dialog.tsx`
+   - **Action Required**: Decide whether to keep the static index or upgrade to build-time/generated search later
 
 ## Common Issues & Troubleshooting
 

@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { ArrowRight, BookOpen, Rocket, Wrench, Layers, Code, Users, Sparkles } from "lucide-react"
+import { ArrowRight, BookOpen, Rocket, Wrench, Layers, Code, Users, Sparkles, Target } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const courses = [
@@ -70,6 +70,17 @@ const courses = [
     bgColor: "bg-green-50",
     chapters: 6,
     duration: "12小时",
+  },
+  {
+    title: "超级个体篇",
+    subtitle: "个人能力规模化",
+    description: "把你的能力变成可交付、可复制、可复利的系统：定位 → 产品化 → 自动化 → 增长 → 复盘。",
+    icon: Target,
+    href: "/super-individual",
+    gradient: "from-violet-400 via-fuchsia-400 to-pink-400",
+    bgColor: "bg-violet-50",
+    chapters: 6,
+    duration: "10小时",
   },
 ]
 

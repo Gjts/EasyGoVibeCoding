@@ -1,24 +1,15 @@
 import { CourseLayout } from "@/components/course/course-layout"
+import { practiceChapters } from "@/components/course/chapters"
 import Link from "next/link"
 import { ArrowLeft, ArrowRight, Code, Server, Globe, CheckCircle2, AlertTriangle, Zap, Settings, Database } from "lucide-react"
 import { Button } from "@/components/ui/button"
-
-const chapters = [
-  { title: "实践篇概述", href: "/practice" },
-  { title: "文科生 / 商科生项目", href: "/practice/humanities" },
-  { title: "理工科学生项目", href: "/practice/engineering" },
-  { title: "职场人士项目", href: "/practice/professional" },
-  { title: "核心技能：AI Agent 开发", href: "/practice/agent" },
-  { title: "核心技能：全栈项目实战", href: "/practice/fullstack" },
-  { title: "核心技能：工具与效率", href: "/practice/efficiency" },
-]
 
 export default function EngineeringPage() {
   return (
     <CourseLayout
       title="实践篇"
       description="项目实战"
-      chapters={chapters}
+      chapters={practiceChapters}
       currentChapter="理工科学生项目"
     >
       {/* Header */}

@@ -1,17 +1,7 @@
 import { CourseLayout } from "@/components/course/course-layout"
+import { practiceChapters } from "@/components/course/chapters"
 import Link from "next/link"
 import { ArrowRight, Code, GraduationCap, Briefcase, Lightbulb, BookOpen, Wrench, Zap } from "lucide-react"
-
-const chapters = [
-  { title: "实践篇概述", href: "/practice" },
-  { title: "文科生 / 商科生项目", href: "/practice/humanities" },
-  { title: "理工科学生项目", href: "/practice/engineering" },
-  { title: "职场人士项目", href: "/practice/professional" },
-  { title: "高级实战场景", href: "/practice/advanced" },
-  { title: "核心技能：AI Agent 开发", href: "/practice/agent" },
-  { title: "核心技能：全栈项目实战", href: "/practice/fullstack" },
-  { title: "核心技能：工具与效率", href: "/practice/efficiency" },
-]
 
 const projectCategories = [
   {
@@ -72,7 +62,7 @@ export default function PracticePage() {
     <CourseLayout
       title="实践篇"
       description="项目实战"
-      chapters={chapters}
+      chapters={practiceChapters}
     >
       {/* Hero */}
       <div className="mb-12">
@@ -217,7 +207,7 @@ export default function PracticePage() {
       <div>
         <h2 className="text-xl font-bold text-gray-900 mb-6">章节目录</h2>
         <div className="space-y-3">
-          {chapters.slice(1).map((chapter, index) => (
+          {practiceChapters.slice(1).map((chapter, index) => (
             <Link
               key={chapter.title}
               href={chapter.href}
