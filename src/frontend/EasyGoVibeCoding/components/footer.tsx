@@ -4,6 +4,21 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { Clock3, Eye, LoaderCircle, Users } from "lucide-react";
 
+const LAST_UPDATED_ISO = process.env.NEXT_PUBLIC_LAST_UPDATED;
+
+function formatLastUpdated(iso?: string) {
+  if (!iso) return "--";
+  const date = new Date(iso);
+  if (Number.isNaN(date.getTime())) return "--";
+
+  const yyyy = date.getFullYear();
+  const mm = String(date.getMonth() + 1).padStart(2, "0");
+  const dd = String(date.getDate()).padStart(2, "0");
+  const hh = String(date.getHours()).padStart(2, "0");
+  const min = String(date.getMinutes()).padStart(2, "0");
+  return `${yyyy}-${mm}-${dd} ${hh}:${min}`;
+}
+
 const navigation = {
   courses: [
     { name: "基础篇", href: "/basics", gradient: "from-blue-400 to-cyan-400" },
@@ -232,7 +247,7 @@ export function Footer() {
               AI 编程工具不是魔法，是工程。理解机制才能驾驭工具。
             </p>
             <p className="text-xs text-gray-600 font-medium">
-              版本 v1.0 | 最后更新：2025-01-26
+              版本 v1.0 | 最后更新：{formatLastUpdated(LAST_UPDATED_ISO)}
             </p>
           </div>
 
