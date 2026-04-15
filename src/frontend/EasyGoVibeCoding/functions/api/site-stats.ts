@@ -59,7 +59,7 @@ function serverError(message: string, details?: unknown) {
 }
 
 async function readStats(kv: KVNamespace): Promise<StatsData> {
-  const raw = await kv.get(STATS_KEY, "json<StatsData>");
+  const raw = (await kv.get(STATS_KEY, { type: "json" })) as StatsData | null;
   if (
     raw &&
     typeof raw.pageViews === "number" &&
@@ -122,7 +122,9 @@ async function trackVisit(request: Request, kv: KVNamespace) {
 
   const stats = await readStats(kv);
   const visitorKey = await getVisitorKey(request, path);
-  const existingVisitor = await kv.get(visitorKey, "json<VisitorRecord>");
+  const existingVisitor = (await kv.get(visitorKey, { type: "json" })) as
+    | VisitorRecord
+    | null;
   const now = new Date().toISOString();
 
   const nextStats: StatsData = {

@@ -57,7 +57,6 @@ export function Footer() {
     visitors: null,
   });
   const [statsLoading, setStatsLoading] = useState(true);
-  const [statsHint, setStatsHint] = useState<string | null>(null);
 
   useEffect(() => {
     const updateRunningTime = () => {
@@ -94,35 +93,20 @@ export function Footer() {
             Accept: "application/json",
           },
         });
-        const text = await response.text();
-        const parsed = (() => {
-          try {
-            return JSON.parse(text) as unknown;
-          } catch {
-            return null;
-          }
-        })();
 
-        return {
-          ok: response.ok,
-          status: response.status,
-          json: parsed as
-            | {
-                success?: boolean;
-                data?: {
-                  pageViews?: number;
-                  visitors?: number;
-                };
-                error?: string;
-                details?: unknown;
-              }
-            | null,
+        if (!response.ok) return null;
+
+        return (await response.json()) as {
+          success?: boolean;
+          data?: {
+            pageViews?: number;
+            visitors?: number;
+          };
         };
       };
 
       try {
         setStatsLoading(true);
-        setStatsHint(null);
 
         const path = window.location.pathname || "/";
 
@@ -159,18 +143,7 @@ export function Footer() {
           typeof result?.data?.visitors === "number";
 
         if (!hasValidNumbers) {
-          const fallback = await loadFromGet();
-          if (fallback.ok) {
-            result = (fallback.json ?? null) as typeof result;
-          } else {
-            const hint =
-              trackResponse.status === 404 || fallback.status === 404
-                ? "统计接口未部署（/api/site-stats 返回 404）。请确认已部署 Cloudflare Pages Functions。"
-                : typeof fallback.json?.error === "string"
-                  ? `站点统计不可用：${fallback.json.error}`
-                  : "站点统计暂不可用（接口请求失败）。";
-            if (!cancelled) setStatsHint(hint);
-          }
+          result = await loadFromGet();
         }
 
         if (!cancelled) {
@@ -191,7 +164,6 @@ export function Footer() {
             pageViews: null,
             visitors: null,
           });
-          setStatsHint("站点统计暂不可用（网络或接口异常）。");
         }
       } finally {
         if (!cancelled) {
@@ -341,11 +313,6 @@ export function Footer() {
                 );
               })}
             </div>
-            {statsHint ? (
-              <div className="mt-3 text-xs text-gray-600 text-center font-medium">
-                {statsHint}
-              </div>
-            ) : null}
           </div>
 
           <p className="text-xs text-gray-600 text-center font-medium">
