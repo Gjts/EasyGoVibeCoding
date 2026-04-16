@@ -158,13 +158,15 @@ export default function PracticePage() {
               <h3 className="font-bold text-gray-900 text-lg">高级实战场景</h3>
             </div>
             <p className="text-sm text-gray-700 mb-4 leading-relaxed">
-              面向所有开发者的高级实战场景，涵盖项目启动、快速上手、业务切换等职场常见挑战
+              面向所有开发者的高级实战场景，涵盖项目启动、快速上手、业务切换、RAG 落地与多 Agent 协作等高阶挑战
             </p>
             <div className="space-y-2">
               {[
                 { name: "场景1：从零开始创建新项目", tools: "架构设计、技术选型" },
                 { name: "场景2：快速熟悉新公司项目", tools: "代码阅读、理解" },
                 { name: "场景3：业务线切换实战", tools: "业务理解、技术栈迁移" },
+                { name: "场景4：RAG 实战", tools: "知识库、检索增强、评估" },
+                { name: "场景5：Agent 实战", tools: "多Agent协作、编排、治理" },
               ].map((scenario) => (
                 <div key={scenario.name} className="flex items-center justify-between p-2 rounded-lg bg-gradient-to-r from-orange-50 to-amber-50 border border-orange-200/50">
                   <span className="text-sm text-gray-900 font-medium">{scenario.name}</span>

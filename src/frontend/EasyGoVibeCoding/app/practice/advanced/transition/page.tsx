@@ -455,9 +455,9 @@ export default function TransitionPage() {
               上一场景：快速熟悉新公司项目
             </Button>
           </Link>
-          <Link href="/practice/advanced">
+          <Link href="/practice/advanced/rag">
             <Button>
-              返回高级实战场景
+              下一场景：RAG 实战
               <ArrowRight className="h-4 w-4 ml-2" />
             </Button>
           </Link>

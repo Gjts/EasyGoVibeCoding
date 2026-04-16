@@ -10,6 +10,8 @@ export const practiceChapters = [
       { title: "场景1：从零开始创建新项目", href: "/practice/advanced/new-project" },
       { title: "场景2：快速熟悉新公司项目", href: "/practice/advanced/onboarding" },
       { title: "场景3：业务线切换实战", href: "/practice/advanced/transition" },
+      { title: "场景4：RAG 实战", href: "/practice/advanced/rag" },
+      { title: "场景5：Agent 实战", href: "/practice/advanced/agent" },
     ],
   },
   { title: "核心技能：AI Agent 开发", href: "/practice/agent" },

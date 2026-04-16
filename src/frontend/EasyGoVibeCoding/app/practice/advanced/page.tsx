@@ -1,7 +1,7 @@
 import { CourseLayout } from "@/components/course/course-layout"
 import { practiceChapters } from "@/components/course/chapters"
 import Link from "next/link"
-import { ArrowRight, Rocket, BookOpen, RefreshCw, Target, Zap, Code, Users, Lightbulb } from "lucide-react"
+import { ArrowRight, Rocket, BookOpen, RefreshCw, Database, Network, Target, Zap, Code, Users, Lightbulb } from "lucide-react"
 
 const scenarios = [
   {
@@ -55,6 +55,40 @@ const scenarios = [
     ],
     tools: ["Cursor Agent", "Spec驱动", "Fabric", "代码迁移工具"],
   },
+  {
+    title: "场景4：RAG 实战",
+    icon: Database,
+    description: "面向企业知识库与长代码分析的 RAG 落地实践，掌握从检索设计到效果评估的完整闭环",
+    href: "/practice/advanced/rag",
+    topics: [
+      "RAG-DD 工作流（需求 → 语料 → 检索 → 评估 → 迭代）",
+      "知识库建设（分块策略、元数据、更新机制、权限边界）",
+      "检索链路设计（向量检索、混合检索、重排序、上下文组装）",
+      "效果优化（召回率、命中率、幻觉控制、失败案例复盘）",
+    ],
+    cases: [
+      { name: "案例1：企业内部知识库问答", stack: "文档中心 + 向量数据库 + Claude" },
+      { name: "案例2：大型代码仓库检索增强助手", stack: "代码索引 + 检索重排 + 架构文档上下文" },
+    ],
+    tools: ["Claude", "向量数据库", "Embedding", "重排序模型"],
+  },
+  {
+    title: "场景5：Agent 实战",
+    icon: Network,
+    description: "以 ADD 和多 Agent 协作为核心，掌握从任务拆解到工程治理的智能体实战方法",
+    href: "/practice/advanced/agent",
+    topics: [
+      "ADD 工作流（目标拆解 → 角色分工 → 上下文契约 → 审核交付）",
+      "多 Agent 协作模式（Planner / Executor / Reviewer / Specialist）",
+      "工程治理（可观测性、重试策略、审批门禁、成本与延迟控制）",
+      "失败模式治理（上下文漂移、重复劳动、职责不清、过度拆分）",
+    ],
+    cases: [
+      { name: "案例1：多 Agent 代码评审流水线", stack: "架构评审 + 安全检查 + 性能分析 + 报告汇总" },
+      { name: "案例2：需求到交付的 Agent 开发流程", stack: "Planner + Coding Agent + QA Agent + Release Gate" },
+    ],
+    tools: ["Claude Code", "Cursor Agent", "任务编排", "结构化日志"],
+  },
 ]
 
 export default function AdvancedPage() {
@@ -75,7 +109,7 @@ export default function AdvancedPage() {
           高级实战场景
         </h1>
         <p className="text-lg text-muted-foreground mb-6">
-          面向所有开发者的高级实战场景，涵盖项目启动、快速上手、业务切换等职场常见挑战。每个场景都包含完整的方法论和实战案例，内容深度与"全栈项目实战"相当。
+          面向所有开发者的高级实战场景，涵盖项目启动、快速上手、业务切换、RAG 落地与多 Agent 协作等职场常见挑战。每个场景都包含完整的方法论和实战案例，内容深度与《全栈项目实战》相当。
         </p>
       </div>
 
@@ -90,7 +124,7 @@ export default function AdvancedPage() {
             "需要从零开始创建新项目的开发者",
             "刚入职需要快速熟悉新公司项目的开发者",
             "需要切换业务线或技术栈的开发者",
-            "想提升职场适应能力的技术人员",
+            "想落地企业知识库或 Agent 工作流的技术人员",
           ].map((item) => (
             <div key={item} className="flex items-center gap-2 text-muted-foreground">
               <div className="h-1.5 w-1.5 rounded-full bg-primary" />
@@ -104,7 +138,7 @@ export default function AdvancedPage() {
       <div className="mb-12">
         <h2 className="text-xl font-semibold text-foreground mb-6">实战场景</h2>
         <div className="space-y-8">
-          {scenarios.map((scenario, index) => {
+          {scenarios.map((scenario) => {
             const Icon = scenario.icon
             return (
               <Link
@@ -127,7 +161,6 @@ export default function AdvancedPage() {
                   </div>
                 </div>
 
-                {/* Topics */}
                 <div className="mb-4">
                   <h4 className="text-sm font-medium text-foreground mb-3 flex items-center gap-2">
                     <Target className="h-4 w-4 text-primary" />
@@ -143,7 +176,6 @@ export default function AdvancedPage() {
                   </div>
                 </div>
 
-                {/* Cases */}
                 <div className="mb-4">
                   <h4 className="text-sm font-medium text-foreground mb-3 flex items-center gap-2">
                     <Code className="h-4 w-4 text-primary" />
@@ -159,7 +191,6 @@ export default function AdvancedPage() {
                   </div>
                 </div>
 
-                {/* Tools */}
                 <div>
                   <h4 className="text-sm font-medium text-foreground mb-2 flex items-center gap-2">
                     <Lightbulb className="h-4 w-4 text-primary" />
@@ -189,19 +220,19 @@ export default function AdvancedPage() {
           <div className="flex items-start gap-3">
             <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-medium text-primary-foreground">1</span>
             <div>
-              <strong className="text-foreground">建议顺序</strong>：场景1（项目启动）→ 场景2（快速上手）→ 场景3（业务切换）
+              <strong className="text-foreground">建议顺序</strong>：场景1（项目启动）→ 场景2（快速上手）→ 场景3（业务切换）→ 场景4（RAG 实战）→ 场景5（Agent 实战）
             </div>
           </div>
           <div className="flex items-start gap-3">
             <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-medium text-primary-foreground">2</span>
             <div>
-              <strong className="text-foreground">前置知识</strong>：建议先完成"全栈项目实战"和"职场人士项目"，掌握基础的项目管理和开发流程
+              <strong className="text-foreground">前置知识</strong>：建议先完成《全栈项目实战》和《职场人士项目》，掌握基础的项目管理、文档驱动和工程协作流程
             </div>
           </div>
           <div className="flex items-start gap-3">
             <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-medium text-primary-foreground">3</span>
             <div>
-              <strong className="text-foreground">学习方式</strong>：每个场景包含完整的方法论和实战案例，建议先理解方法论，再跟随实战案例动手实践
+              <strong className="text-foreground">学习方式</strong>：每个场景包含完整的方法论和实战案例，建议先理解方法论，再结合案例设计自己的落地方案
             </div>
           </div>
         </div>

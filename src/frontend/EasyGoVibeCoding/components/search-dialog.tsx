@@ -72,6 +72,8 @@ const searchData: SearchItem[] = [
   { id: "practice-engineering", title: "工程化实践", description: "AI 工程化实践", href: "/practice/engineering", category: "实践篇", icon: <Code className="h-4 w-4" />, gradient: "from-red-400 to-rose-400", keywords: ["工程化", "最佳实践"] },
   { id: "practice-efficiency", title: "效率提升", description: "提升开发效率", href: "/practice/efficiency", category: "实践篇", icon: <Code className="h-4 w-4" />, gradient: "from-red-400 to-rose-400", keywords: ["效率", "提升", "优化"] },
   { id: "practice-agent", title: "Agent 实践", description: "AI Agent 实践", href: "/practice/agent", category: "实践篇", icon: <Code className="h-4 w-4" />, gradient: "from-red-400 to-rose-400", keywords: ["Agent", "智能体", "自动化"] },
+  { id: "practice-advanced-rag", title: "RAG 实战", description: "企业知识库与检索增强实战", href: "/practice/advanced/rag", category: "高级实战场景", icon: <Code className="h-4 w-4" />, gradient: "from-red-400 to-rose-400", keywords: ["RAG", "检索增强", "知识库", "向量数据库", "长代码分析", "RAG-DD"] },
+  { id: "practice-advanced-agent", title: "Agent 实战", description: "多 Agent 协作与工程编排实战", href: "/practice/advanced/agent", category: "高级实战场景", icon: <Code className="h-4 w-4" />, gradient: "from-red-400 to-rose-400", keywords: ["Agent", "智能体", "多Agent", "编排", "工作流", "ADD", "Micro-Agent"] },
   
   // 团队篇
   { id: "team", title: "团队篇", description: "从零打造 AI 团队", href: "/team", category: "课程", icon: <Users className="h-4 w-4" />, gradient: "from-green-400 to-emerald-400", keywords: ["团队", "协作", "管理"] },
@@ -92,6 +94,17 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
   const [selectedIndex, setSelectedIndex] = useState(0)
   const router = useRouter()
 
+  const handleOpenChange = useCallback(
+    (nextOpen: boolean) => {
+      onOpenChange(nextOpen)
+      if (!nextOpen) {
+        setQuery("")
+        setSelectedIndex(0)
+      }
+    },
+    [onOpenChange]
+  )
+
   const filteredResults = query
     ? searchData.filter(
         (item) => {
@@ -108,24 +121,11 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
 
   const handleSelect = useCallback(
     (href: string) => {
-      onOpenChange(false)
+      handleOpenChange(false)
       router.push(href)
-      setQuery("")
-      setSelectedIndex(0)
     },
-    [onOpenChange, router]
+    [handleOpenChange, router]
   )
-
-  useEffect(() => {
-    if (!open) {
-      setQuery("")
-      setSelectedIndex(0)
-    }
-  }, [open])
-
-  useEffect(() => {
-    setSelectedIndex(0)
-  }, [query])
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -148,7 +148,7 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
   }, [open, filteredResults, selectedIndex, handleSelect])
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent className="max-w-2xl p-0 gap-0 bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-700 shadow-2xl">
         <DialogHeader className="px-4 pt-4 pb-0 sr-only">
           <DialogTitle>搜索</DialogTitle>
@@ -159,7 +159,10 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
           <Search className="h-5 w-5 text-gray-400 mr-3" />
           <Input
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={(e) => {
+              setQuery(e.target.value)
+              setSelectedIndex(0)
+            }}
             placeholder="搜索课程、文档和资源..."
             className="border-0 focus-visible:ring-0 focus-visible:ring-offset-0 text-base bg-transparent shadow-none px-0"
             autoFocus
