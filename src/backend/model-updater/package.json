@@ -1,0 +1,22 @@
+{
+  "name": "model-updater",
+  "version": "0.1.0",
+  "description": "Cloudflare Worker 定时抓取 LLM 最新模型发布动态并写入 KV",
+  "private": true,
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "wrangler dev --local",
+    "deploy": "wrangler deploy",
+    "tail": "wrangler tail",
+    "typecheck": "tsc --noEmit",
+    "trigger": "curl -s -X POST http://127.0.0.1:8787/__run | jq"
+  },
+  "dependencies": {
+    "zod": "3.25.76"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250927.0",
+    "typescript": "^5.6.0",
+    "wrangler": "^4.51.0"
+  }
+}

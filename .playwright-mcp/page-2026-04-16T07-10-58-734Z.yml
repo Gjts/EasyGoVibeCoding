@@ -1,0 +1,403 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - navigation [ref=e4]:
+        - link "AI EasyGoVibeCoding" [ref=e6] [cursor=pointer]:
+          - /url: /
+          - generic [ref=e8]: AI
+          - generic [ref=e9]: EasyGoVibeCoding
+        - generic [ref=e10]:
+          - link "首页" [ref=e11] [cursor=pointer]:
+            - /url: /
+          - button "课程" [ref=e12]:
+            - text: 课程
+            - img [ref=e13]
+          - link "生态导航" [ref=e15] [cursor=pointer]:
+            - /url: /ecosystem
+          - link "GitHub 热门项目" [ref=e16] [cursor=pointer]:
+            - /url: /github-hot
+          - link "资源" [ref=e17] [cursor=pointer]:
+            - /url: /resources
+        - generic [ref=e18]:
+          - button "搜索" [ref=e19]:
+            - img
+            - generic [ref=e20]: 搜索
+          - button "登录" [ref=e21]
+          - link "开始学习" [ref=e22] [cursor=pointer]:
+            - /url: /basics
+    - generic [ref=e23]:
+      - complementary [ref=e24]:
+        - generic [ref=e25]:
+          - generic [ref=e26]:
+            - heading "实践篇" [level=2] [ref=e27]
+            - paragraph [ref=e28]: 项目实战
+          - navigation [ref=e29]:
+            - link "01 实践篇概述" [ref=e32] [cursor=pointer]:
+              - /url: /practice
+              - generic [ref=e33]: "01"
+              - generic [ref=e34]: 实践篇概述
+            - link "02 文科生 / 商科生项目" [ref=e37] [cursor=pointer]:
+              - /url: /practice/humanities
+              - generic [ref=e38]: "02"
+              - generic [ref=e39]: 文科生 / 商科生项目
+            - link "03 理工科学生项目" [ref=e42] [cursor=pointer]:
+              - /url: /practice/engineering
+              - generic [ref=e43]: "03"
+              - generic [ref=e44]: 理工科学生项目
+            - link "04 职场人士项目" [ref=e47] [cursor=pointer]:
+              - /url: /practice/professional
+              - generic [ref=e48]: "04"
+              - generic [ref=e49]: 职场人士项目
+            - generic [ref=e50]:
+              - generic [ref=e51]:
+                - link "05 高级实战场景" [ref=e52] [cursor=pointer]:
+                  - /url: /practice/advanced
+                  - generic [ref=e53]: "05"
+                  - generic [ref=e54]: 高级实战场景
+                - button "收起高级实战场景" [expanded] [ref=e55]:
+                  - img [ref=e56]
+              - generic [ref=e58]:
+                - link "场景1：从零开始创建新项目" [ref=e59] [cursor=pointer]:
+                  - /url: /practice/advanced/new-project
+                - link "场景2：快速熟悉新公司项目" [ref=e60] [cursor=pointer]:
+                  - /url: /practice/advanced/onboarding
+                - link "场景3：业务线切换实战" [ref=e61] [cursor=pointer]:
+                  - /url: /practice/advanced/transition
+                - link "场景4：RAG 实战" [ref=e62] [cursor=pointer]:
+                  - /url: /practice/advanced/rag
+                - link "场景5：Agent 实战" [ref=e63] [cursor=pointer]:
+                  - /url: /practice/advanced/agent
+            - link "06 核心技能：AI Agent 开发" [ref=e66] [cursor=pointer]:
+              - /url: /practice/agent
+              - generic [ref=e67]: "06"
+              - generic [ref=e68]: 核心技能：AI Agent 开发
+            - link "07 核心技能：全栈项目实战" [ref=e71] [cursor=pointer]:
+              - /url: /practice/fullstack
+              - generic [ref=e72]: "07"
+              - generic [ref=e73]: 核心技能：全栈项目实战
+            - link "08 核心技能：工具与效率" [ref=e76] [cursor=pointer]:
+              - /url: /practice/efficiency
+              - generic [ref=e77]: "08"
+              - generic [ref=e78]: 核心技能：工具与效率
+      - main [ref=e79]:
+        - navigation [ref=e82]:
+          - link "首页" [ref=e83] [cursor=pointer]:
+            - /url: /
+          - img [ref=e84]
+          - link "实践篇" [ref=e86] [cursor=pointer]:
+            - /url: /practice
+          - img [ref=e87]
+          - generic [ref=e89]: 高级实战场景
+        - generic [ref=e91]:
+          - generic [ref=e92]:
+            - generic [ref=e93]:
+              - img [ref=e94]
+              - text: 高级实战场景
+            - heading "高级实战场景" [level=1] [ref=e96]
+            - paragraph [ref=e97]: 面向所有开发者的高级实战场景，涵盖项目启动、快速上手、业务切换、RAG 落地与多 Agent 协作等职场常见挑战。每个场景都包含完整的方法论和实战案例，内容深度与"全栈项目实战"相当。
+          - generic [ref=e98]:
+            - heading "适合人群" [level=2] [ref=e99]:
+              - img [ref=e100]
+              - text: 适合人群
+            - generic [ref=e105]:
+              - generic [ref=e106]: 需要从零开始创建新项目的开发者
+              - generic [ref=e108]: 刚入职需要快速熟悉新公司项目的开发者
+              - generic [ref=e110]: 需要切换业务线或技术栈的开发者
+              - generic [ref=e112]: 想落地企业知识库或 Agent 工作流的技术人员
+          - generic [ref=e114]:
+            - heading "实战场景" [level=2] [ref=e115]
+            - generic [ref=e116]:
+              - link "场景1：从零开始创建新项目 掌握项目启动的完整流程，具备技术选型和架构设计能力 核心内容 项目启动流程（需求分析 → 技术选型 → 架构设计 → 项目初始化） 技术选型决策框架（性能/成本/团队能力/生态） 架构设计原则（Clean Architecture、DDD、微服务 vs 单体） 项目初始化最佳实践（目录结构、工具链配置、CI/CD） 实战案例 案例1：从零开始搭建SaaS应用 Next.js + Prisma + Vercel 案例2：从零开始搭建微服务架构 Docker + Kubernetes + 服务网格 AI工具应用 Cursor Agent Spec驱动 Windsurf Fabric" [ref=e117] [cursor=pointer]:
+                - /url: /practice/advanced/new-project
+                - generic [ref=e118]:
+                  - img [ref=e120]
+                  - generic [ref=e125]:
+                    - generic [ref=e126]:
+                      - heading "场景1：从零开始创建新项目" [level=3] [ref=e127]
+                      - img [ref=e128]
+                    - paragraph [ref=e130]: 掌握项目启动的完整流程，具备技术选型和架构设计能力
+                - generic [ref=e131]:
+                  - heading "核心内容" [level=4] [ref=e132]:
+                    - img [ref=e133]
+                    - text: 核心内容
+                  - generic [ref=e137]:
+                    - generic [ref=e140]: 项目启动流程（需求分析 → 技术选型 → 架构设计 → 项目初始化）
+                    - generic [ref=e143]: 技术选型决策框架（性能/成本/团队能力/生态）
+                    - generic [ref=e146]: 架构设计原则（Clean Architecture、DDD、微服务 vs 单体）
+                    - generic [ref=e149]: 项目初始化最佳实践（目录结构、工具链配置、CI/CD）
+                - generic [ref=e150]:
+                  - heading "实战案例" [level=4] [ref=e151]:
+                    - img [ref=e152]
+                    - text: 实战案例
+                  - generic [ref=e155]:
+                    - generic [ref=e156]:
+                      - generic [ref=e157]: 案例1：从零开始搭建SaaS应用
+                      - generic [ref=e158]: Next.js + Prisma + Vercel
+                    - generic [ref=e159]:
+                      - generic [ref=e160]: 案例2：从零开始搭建微服务架构
+                      - generic [ref=e161]: Docker + Kubernetes + 服务网格
+                - generic [ref=e162]:
+                  - heading "AI工具应用" [level=4] [ref=e163]:
+                    - img [ref=e164]
+                    - text: AI工具应用
+                  - generic [ref=e166]:
+                    - generic [ref=e167]: Cursor Agent
+                    - generic [ref=e168]: Spec驱动
+                    - generic [ref=e169]: Windsurf
+                    - generic [ref=e170]: Fabric
+              - link "场景2：快速熟悉新公司项目 掌握快速理解新项目的系统方法，能够使用AI工具加速代码阅读和理解 核心内容 代码阅读策略（自顶向下 vs 自底向上） 项目理解框架（业务理解 → 架构理解 → 代码理解） 快速上手工作流（文档阅读 → 代码探索 → 小功能开发 → 重构优化） 知识沉淀方法（笔记、文档、Skill/Pattern创建） 实战案例 案例1：快速熟悉Monorepo项目 Windsurf + Cursor 案例2：快速熟悉遗留系统 Zread + Cursor Agent AI工具应用 Windsurf Fast Context Cursor Agent Zread NotebookLM Fabric" [ref=e171] [cursor=pointer]:
+                - /url: /practice/advanced/onboarding
+                - generic [ref=e172]:
+                  - img [ref=e174]
+                  - generic [ref=e176]:
+                    - generic [ref=e177]:
+                      - heading "场景2：快速熟悉新公司项目" [level=3] [ref=e178]
+                      - img [ref=e179]
+                    - paragraph [ref=e181]: 掌握快速理解新项目的系统方法，能够使用AI工具加速代码阅读和理解
+                - generic [ref=e182]:
+                  - heading "核心内容" [level=4] [ref=e183]:
+                    - img [ref=e184]
+                    - text: 核心内容
+                  - generic [ref=e188]:
+                    - generic [ref=e191]: 代码阅读策略（自顶向下 vs 自底向上）
+                    - generic [ref=e194]: 项目理解框架（业务理解 → 架构理解 → 代码理解）
+                    - generic [ref=e197]: 快速上手工作流（文档阅读 → 代码探索 → 小功能开发 → 重构优化）
+                    - generic [ref=e200]: 知识沉淀方法（笔记、文档、Skill/Pattern创建）
+                - generic [ref=e201]:
+                  - heading "实战案例" [level=4] [ref=e202]:
+                    - img [ref=e203]
+                    - text: 实战案例
+                  - generic [ref=e206]:
+                    - generic [ref=e207]:
+                      - generic [ref=e208]: 案例1：快速熟悉Monorepo项目
+                      - generic [ref=e209]: Windsurf + Cursor
+                    - generic [ref=e210]:
+                      - generic [ref=e211]: 案例2：快速熟悉遗留系统
+                      - generic [ref=e212]: Zread + Cursor Agent
+                - generic [ref=e213]:
+                  - heading "AI工具应用" [level=4] [ref=e214]:
+                    - img [ref=e215]
+                    - text: AI工具应用
+                  - generic [ref=e217]:
+                    - generic [ref=e218]: Windsurf Fast Context
+                    - generic [ref=e219]: Cursor Agent
+                    - generic [ref=e220]: Zread
+                    - generic [ref=e221]: NotebookLM
+                    - generic [ref=e222]: Fabric
+              - link "场景3：业务线切换实战 掌握业务切换的系统方法，具备快速适应新业务的能力 核心内容 业务切换流程（业务理解 → 技术栈迁移 → 知识迁移 → 工作流适配） 业务理解框架（业务模型 → 业务流程 → 业务规则） 技术栈迁移策略（相似技术栈 vs 不同技术栈） 知识迁移方法（文档、代码、最佳实践） 实战案例 案例1：从电商切换到金融业务 业务模型差异、技术栈相似 案例2：从Web切换到移动开发 技术栈差异、业务逻辑相似 AI工具应用 Cursor Agent Spec驱动 Fabric 代码迁移工具" [ref=e223] [cursor=pointer]:
+                - /url: /practice/advanced/transition
+                - generic [ref=e224]:
+                  - img [ref=e226]
+                  - generic [ref=e231]:
+                    - generic [ref=e232]:
+                      - heading "场景3：业务线切换实战" [level=3] [ref=e233]
+                      - img [ref=e234]
+                    - paragraph [ref=e236]: 掌握业务切换的系统方法，具备快速适应新业务的能力
+                - generic [ref=e237]:
+                  - heading "核心内容" [level=4] [ref=e238]:
+                    - img [ref=e239]
+                    - text: 核心内容
+                  - generic [ref=e243]:
+                    - generic [ref=e246]: 业务切换流程（业务理解 → 技术栈迁移 → 知识迁移 → 工作流适配）
+                    - generic [ref=e249]: 业务理解框架（业务模型 → 业务流程 → 业务规则）
+                    - generic [ref=e252]: 技术栈迁移策略（相似技术栈 vs 不同技术栈）
+                    - generic [ref=e255]: 知识迁移方法（文档、代码、最佳实践）
+                - generic [ref=e256]:
+                  - heading "实战案例" [level=4] [ref=e257]:
+                    - img [ref=e258]
+                    - text: 实战案例
+                  - generic [ref=e261]:
+                    - generic [ref=e262]:
+                      - generic [ref=e263]: 案例1：从电商切换到金融业务
+                      - generic [ref=e264]: 业务模型差异、技术栈相似
+                    - generic [ref=e265]:
+                      - generic [ref=e266]: 案例2：从Web切换到移动开发
+                      - generic [ref=e267]: 技术栈差异、业务逻辑相似
+                - generic [ref=e268]:
+                  - heading "AI工具应用" [level=4] [ref=e269]:
+                    - img [ref=e270]
+                    - text: AI工具应用
+                  - generic [ref=e272]:
+                    - generic [ref=e273]: Cursor Agent
+                    - generic [ref=e274]: Spec驱动
+                    - generic [ref=e275]: Fabric
+                    - generic [ref=e276]: 代码迁移工具
+              - link "场景4：RAG 实战 面向企业知识库与长代码分析的 RAG 落地实践，掌握从检索设计到效果评估的完整闭环 核心内容 RAG-DD 工作流（需求 → 语料 → 检索 → 评估 → 迭代） 知识库建设（分块策略、元数据、更新机制、权限边界） 检索链路设计（向量检索、混合检索、重排序、上下文组装） 效果优化（召回率、命中率、幻觉控制、失败案例复盘） 实战案例 案例1：企业内部知识库问答 文档中心 + 向量数据库 + Claude 案例2：大型代码仓库检索增强助手 代码索引 + 检索重排 + 架构文档上下文 AI工具应用 Claude 向量数据库 Embedding 重排序模型" [ref=e277] [cursor=pointer]:
+                - /url: /practice/advanced/rag
+                - generic [ref=e278]:
+                  - img [ref=e280]
+                  - generic [ref=e284]:
+                    - generic [ref=e285]:
+                      - heading "场景4：RAG 实战" [level=3] [ref=e286]
+                      - img [ref=e287]
+                    - paragraph [ref=e289]: 面向企业知识库与长代码分析的 RAG 落地实践，掌握从检索设计到效果评估的完整闭环
+                - generic [ref=e290]:
+                  - heading "核心内容" [level=4] [ref=e291]:
+                    - img [ref=e292]
+                    - text: 核心内容
+                  - generic [ref=e296]:
+                    - generic [ref=e299]: RAG-DD 工作流（需求 → 语料 → 检索 → 评估 → 迭代）
+                    - generic [ref=e302]: 知识库建设（分块策略、元数据、更新机制、权限边界）
+                    - generic [ref=e305]: 检索链路设计（向量检索、混合检索、重排序、上下文组装）
+                    - generic [ref=e308]: 效果优化（召回率、命中率、幻觉控制、失败案例复盘）
+                - generic [ref=e309]:
+                  - heading "实战案例" [level=4] [ref=e310]:
+                    - img [ref=e311]
+                    - text: 实战案例
+                  - generic [ref=e314]:
+                    - generic [ref=e315]:
+                      - generic [ref=e316]: 案例1：企业内部知识库问答
+                      - generic [ref=e317]: 文档中心 + 向量数据库 + Claude
+                    - generic [ref=e318]:
+                      - generic [ref=e319]: 案例2：大型代码仓库检索增强助手
+                      - generic [ref=e320]: 代码索引 + 检索重排 + 架构文档上下文
+                - generic [ref=e321]:
+                  - heading "AI工具应用" [level=4] [ref=e322]:
+                    - img [ref=e323]
+                    - text: AI工具应用
+                  - generic [ref=e325]:
+                    - generic [ref=e326]: Claude
+                    - generic [ref=e327]: 向量数据库
+                    - generic [ref=e328]: Embedding
+                    - generic [ref=e329]: 重排序模型
+              - link "场景5：Agent 实战 以 ADD 和多 Agent 协作为核心，掌握从任务拆解到工程治理的智能体实战方法 核心内容 ADD 工作流（目标拆解 → 角色分工 → 上下文契约 → 审核交付） 多 Agent 协作模式（Planner / Executor / Reviewer / Specialist） 工程治理（可观测性、重试策略、审批门禁、成本与延迟控制） 失败模式治理（上下文漂移、重复劳动、职责不清、过度拆分） 实战案例 案例1：多 Agent 代码评审流水线 架构评审 + 安全检查 + 性能分析 + 报告汇总 案例2：需求到交付的 Agent 开发流程 Planner + Coding Agent + QA Agent + Release Gate AI工具应用 Claude Code Cursor Agent 任务编排 结构化日志" [ref=e330] [cursor=pointer]:
+                - /url: /practice/advanced/agent
+                - generic [ref=e331]:
+                  - img [ref=e333]
+                  - generic [ref=e338]:
+                    - generic [ref=e339]:
+                      - heading "场景5：Agent 实战" [level=3] [ref=e340]
+                      - img [ref=e341]
+                    - paragraph [ref=e343]: 以 ADD 和多 Agent 协作为核心，掌握从任务拆解到工程治理的智能体实战方法
+                - generic [ref=e344]:
+                  - heading "核心内容" [level=4] [ref=e345]:
+                    - img [ref=e346]
+                    - text: 核心内容
+                  - generic [ref=e350]:
+                    - generic [ref=e353]: ADD 工作流（目标拆解 → 角色分工 → 上下文契约 → 审核交付）
+                    - generic [ref=e356]: 多 Agent 协作模式（Planner / Executor / Reviewer / Specialist）
+                    - generic [ref=e359]: 工程治理（可观测性、重试策略、审批门禁、成本与延迟控制）
+                    - generic [ref=e362]: 失败模式治理（上下文漂移、重复劳动、职责不清、过度拆分）
+                - generic [ref=e363]:
+                  - heading "实战案例" [level=4] [ref=e364]:
+                    - img [ref=e365]
+                    - text: 实战案例
+                  - generic [ref=e368]:
+                    - generic [ref=e369]:
+                      - generic [ref=e370]: 案例1：多 Agent 代码评审流水线
+                      - generic [ref=e371]: 架构评审 + 安全检查 + 性能分析 + 报告汇总
+                    - generic [ref=e372]:
+                      - generic [ref=e373]: 案例2：需求到交付的 Agent 开发流程
+                      - generic [ref=e374]: Planner + Coding Agent + QA Agent + Release Gate
+                - generic [ref=e375]:
+                  - heading "AI工具应用" [level=4] [ref=e376]:
+                    - img [ref=e377]
+                    - text: AI工具应用
+                  - generic [ref=e379]:
+                    - generic [ref=e380]: Claude Code
+                    - generic [ref=e381]: Cursor Agent
+                    - generic [ref=e382]: 任务编排
+                    - generic [ref=e383]: 结构化日志
+          - generic [ref=e384]:
+            - heading "学习路径建议" [level=2] [ref=e385]
+            - generic [ref=e386]:
+              - generic [ref=e387]:
+                - generic [ref=e388]: "1"
+                - generic [ref=e389]:
+                  - strong [ref=e390]: 建议顺序
+                  - text: ：场景1（项目启动）→ 场景2（快速上手）→ 场景3（业务切换）→ 场景4（RAG 实战）→ 场景5（Agent 实战）
+              - generic [ref=e391]:
+                - generic [ref=e392]: "2"
+                - generic [ref=e393]:
+                  - strong [ref=e394]: 前置知识
+                  - text: ：建议先完成"全栈项目实战"和"职场人士项目"，掌握基础的项目管理、文档驱动和工程协作流程
+              - generic [ref=e395]:
+                - generic [ref=e396]: "3"
+                - generic [ref=e397]:
+                  - strong [ref=e398]: 学习方式
+                  - text: ：每个场景包含完整的方法论和实战案例，建议先理解方法论，再结合案例设计自己的落地方案
+    - contentinfo [ref=e399]:
+      - generic [ref=e400]:
+        - generic [ref=e401]:
+          - generic [ref=e402]:
+            - generic [ref=e403]:
+              - generic [ref=e405]: AI
+              - generic [ref=e406]: EasyGoVibeCoding
+            - paragraph [ref=e407]: AI 编程工具不是魔法，是工程。理解机制才能驾驭工具。
+            - paragraph [ref=e408]: 版本 v1.0 | 最后更新：--
+          - generic [ref=e409]:
+            - generic [ref=e410]:
+              - heading "课程" [level=3] [ref=e411]
+              - list [ref=e412]:
+                - listitem [ref=e413]:
+                  - link "基础篇" [ref=e414] [cursor=pointer]:
+                    - /url: /basics
+                    - text: 基础篇
+                - listitem [ref=e416]:
+                  - link "进阶篇" [ref=e417] [cursor=pointer]:
+                    - /url: /advanced
+                    - text: 进阶篇
+                - listitem [ref=e419]:
+                  - link "工具篇" [ref=e420] [cursor=pointer]:
+                    - /url: /tools
+                    - text: 工具篇
+                - listitem [ref=e422]:
+                  - link "架构篇" [ref=e423] [cursor=pointer]:
+                    - /url: /architecture
+                    - text: 架构篇
+                - listitem [ref=e425]:
+                  - link "实践篇" [ref=e426] [cursor=pointer]:
+                    - /url: /practice
+                    - text: 实践篇
+                - listitem [ref=e428]:
+                  - link "团队篇" [ref=e429] [cursor=pointer]:
+                    - /url: /team
+                    - text: 团队篇
+            - generic [ref=e431]:
+              - heading "资源" [level=3] [ref=e432]
+              - list [ref=e433]:
+                - listitem [ref=e434]:
+                  - link "生态导航" [ref=e435] [cursor=pointer]:
+                    - /url: /ecosystem
+                - listitem [ref=e436]:
+                  - link "优质资源" [ref=e437] [cursor=pointer]:
+                    - /url: /resources
+                - listitem [ref=e438]:
+                  - link "更新日志" [ref=e439] [cursor=pointer]:
+                    - /url: "#"
+                - listitem [ref=e440]:
+                  - link "关于我们" [ref=e441] [cursor=pointer]:
+                    - /url: "#"
+            - generic [ref=e442]:
+              - heading "工具" [level=3] [ref=e443]
+              - list [ref=e444]:
+                - listitem [ref=e445]:
+                  - link "Cursor" [ref=e446] [cursor=pointer]:
+                    - /url: "#"
+                - listitem [ref=e447]:
+                  - link "GitHub Copilot" [ref=e448] [cursor=pointer]:
+                    - /url: "#"
+                - listitem [ref=e449]:
+                  - link "Claude Code" [ref=e450] [cursor=pointer]:
+                    - /url: "#"
+                - listitem [ref=e451]:
+                  - link "Fabric" [ref=e452] [cursor=pointer]:
+                    - /url: "#"
+        - generic [ref=e453]:
+          - generic [ref=e455]:
+            - generic [ref=e456]:
+              - img [ref=e457]
+              - generic [ref=e460]: 总访问量：
+              - generic [ref=e461]: "--"
+            - generic [ref=e464]:
+              - img [ref=e465]
+              - generic [ref=e470]: 访客数：
+              - generic [ref=e471]: "--"
+            - generic [ref=e474]:
+              - img [ref=e475]
+              - generic [ref=e478]: 已运行：
+              - generic [ref=e479]: 90 天 16 小时 23 分 3 秒
+          - paragraph [ref=e480]: © 2026 EasyGoVibeCoding. All rights reserved.
+  - button "Open Next.js Dev Tools" [ref=e486] [cursor=pointer]:
+    - img [ref=e487]
+  - alert [ref=e490]

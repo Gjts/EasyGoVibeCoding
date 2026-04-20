@@ -1,0 +1,184 @@
+{
+  "updatedAt": "2026-04-20T00:00:00.000Z",
+  "source": "seed",
+  "models": [
+    {
+      "provider": "Anthropic",
+      "name": "Claude Opus 4.7",
+      "releaseDate": "2026-04-15",
+      "contextWindow": "200K",
+      "highlights": [
+        "编程能力持续领先（SWE-bench 82.3%）",
+        "复杂推理与架构设计首选",
+        "Skill / Agent / MCP 生态完善"
+      ],
+      "tier": 1,
+      "url": "https://www.anthropic.com/news",
+      "category": "model",
+      "tags": ["Anthropic", "编程", "200K上下文"],
+      "description": "Anthropic 最新旗舰模型，编程能力与长上下文稳定性最佳"
+    },
+    {
+      "provider": "Anthropic",
+      "name": "Claude Sonnet 4.7",
+      "releaseDate": "2026-04-15",
+      "contextWindow": "200K",
+      "highlights": ["平衡性能", "日常开发首选", "成本友好"],
+      "tier": 2,
+      "url": "https://www.anthropic.com/news",
+      "category": "model",
+      "tags": ["Anthropic", "平衡", "200K上下文"],
+      "description": "Anthropic 平衡模型，日常开发主力"
+    },
+    {
+      "provider": "Anthropic",
+      "name": "Claude Haiku 4.5",
+      "releaseDate": "2025-11-24",
+      "contextWindow": "200K",
+      "highlights": ["快速响应", "成本优化", "轻量任务"],
+      "tier": 3,
+      "url": "https://www.anthropic.com/news",
+      "category": "model",
+      "tags": ["Anthropic", "轻量", "低成本"],
+      "description": "Anthropic 轻量模型，简单任务首选"
+    },
+    {
+      "provider": "OpenAI",
+      "name": "GPT-5",
+      "releaseDate": "2025-08-07",
+      "contextWindow": "1M",
+      "highlights": [
+        "数学推理最强（AIME 2025 94.6%）",
+        "SWE-bench 74.9%",
+        "Aider-Polyglot 88%"
+      ],
+      "tier": 1,
+      "url": "https://openai.com",
+      "category": "model",
+      "tags": ["OpenAI", "数学", "100万上下文"],
+      "description": "OpenAI 最新旗舰，数学与通用推理最强"
+    },
+    {
+      "provider": "OpenAI",
+      "name": "GPT-4.1",
+      "releaseDate": "2025-04-15",
+      "contextWindow": "1M",
+      "highlights": [
+        "编程增强（SWE-bench 54.6%）",
+        "比 GPT-4o 便宜 26%",
+        "百万上下文无额外费用"
+      ],
+      "tier": 2,
+      "url": "https://openai.com",
+      "category": "model",
+      "tags": ["OpenAI", "编程", "100万上下文"],
+      "description": "OpenAI 编程增强模型，性价比高"
+    },
+    {
+      "provider": "Google",
+      "name": "Gemini 3 Pro",
+      "releaseDate": "2025-11-18",
+      "contextWindow": "1M-3M",
+      "highlights": [
+        "多模态最强（中文 98.5%，视频 87.6%）",
+        "超长上下文（最高 3M tokens）",
+        "比 Claude 便宜约 60%"
+      ],
+      "tier": 1,
+      "url": "https://gemini.google.com",
+      "category": "model",
+      "tags": ["Google", "多模态", "超长上下文"],
+      "description": "Google 最新旗舰，多模态与长上下文最强"
+    },
+    {
+      "provider": "Google",
+      "name": "Gemini 3",
+      "releaseDate": "2025-11-18",
+      "contextWindow": "1M",
+      "highlights": ["多模态支持", "长上下文", "性价比高"],
+      "tier": 2,
+      "url": "https://gemini.google.com",
+      "category": "model",
+      "tags": ["Google", "多模态", "长上下文"],
+      "description": "Google 平衡模型，多模态日常开发"
+    },
+    {
+      "provider": "Moonshot",
+      "name": "Kimi K2-thinking",
+      "releaseDate": "2025-10-20",
+      "contextWindow": "256K",
+      "highlights": ["国产推理模型", "深度思考能力强", "中文场景优化"],
+      "tier": 2,
+      "url": "https://kimi.moonshot.cn",
+      "category": "model",
+      "tags": ["Moonshot", "推理", "中文优化"],
+      "description": "Moonshot 推理旗舰，国产模型代表"
+    },
+    {
+      "provider": "Zhipu",
+      "name": "GLM-4.6",
+      "releaseDate": "2025-09-15",
+      "contextWindow": "128K",
+      "highlights": ["中文优化", "代码能力强", "国产合规"],
+      "tier": 2,
+      "url": "https://open.bigmodel.cn",
+      "category": "model",
+      "tags": ["Zhipu", "中文", "国产合规"],
+      "description": "智谱 AI 平衡模型，国产合规首选"
+    },
+    {
+      "provider": "Alibaba",
+      "name": "Qwen3",
+      "releaseDate": "2025-08-01",
+      "contextWindow": "128K",
+      "highlights": ["开源友好", "成本极低", "中文优化"],
+      "tier": 3,
+      "url": "https://qwen.alibaba.com",
+      "category": "model",
+      "tags": ["Alibaba", "开源", "低成本"],
+      "description": "阿里开源模型，本地部署与低成本首选"
+    },
+    {
+      "provider": "DeepSeek",
+      "name": "DeepSeek V3",
+      "releaseDate": "2025-07-10",
+      "contextWindow": "128K",
+      "highlights": ["开源友好", "成本低", "代码能力强"],
+      "tier": 3,
+      "url": "https://deepseek.com",
+      "category": "model",
+      "tags": ["开源", "低成本", "代码"],
+      "description": "DeepSeek 开源模型，代码能力强且成本低"
+    }
+  ],
+  "news": [
+    {
+      "date": "2026-04-15",
+      "provider": "Anthropic",
+      "title": "Claude Opus 4.7 正式发布",
+      "summary": "Anthropic 发布 Claude Opus 4.7，编程能力进一步提升，SWE-bench 达 82.3%，同步升级 Sonnet 4.7。",
+      "url": "https://www.anthropic.com/news"
+    },
+    {
+      "date": "2025-11-24",
+      "provider": "Anthropic",
+      "title": "Claude Opus 4.5 与 Haiku 4.5 发布",
+      "summary": "Opus 4.5 刷新 SWE-bench 记录（80.9%），Haiku 4.5 聚焦成本优化。",
+      "url": "https://www.anthropic.com/news"
+    },
+    {
+      "date": "2025-11-18",
+      "provider": "Google",
+      "title": "Gemini 3 / Gemini 3 Pro 发布",
+      "summary": "Gemini 3 Pro 上下文窗口扩至 3M，多模态与中文能力显著提升，成本持续下降。",
+      "url": "https://gemini.google.com"
+    },
+    {
+      "date": "2025-08-07",
+      "provider": "OpenAI",
+      "title": "GPT-5 发布",
+      "summary": "GPT-5 聚焦数学与科学推理，AIME 2025 94.6%，SWE-bench 74.9%。",
+      "url": "https://openai.com"
+    }
+  ]
+}

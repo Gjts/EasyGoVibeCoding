@@ -3,6 +3,7 @@ import { Footer } from "@/components/footer"
 import { PlayfulHeroSection } from "@/components/home/playful-hero-section"
 import { ClaymorphismCatalog } from "@/components/home/claymorphism-catalog"
 import { ProgressDemo } from "@/components/home/progress-demo"
+import { LatestModelsPanel } from "@/components/home/latest-models-panel"
 import { TestimonialsSection } from "@/components/home/testimonials-section"
 import { EnrollmentCTA } from "@/components/home/enrollment-cta"
 import { ContactSection } from "@/components/contact-section"
@@ -15,6 +16,7 @@ export default function HomePage() {
         <PlayfulHeroSection />
         <ClaymorphismCatalog />
         <ProgressDemo />
+        <LatestModelsPanel />
         <TestimonialsSection />
         <EnrollmentCTA />
         <ContactSection />

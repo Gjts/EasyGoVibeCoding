@@ -1,12 +1,14 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Compass, Search, Monitor, Globe, Terminal, Cpu, ExternalLink, Filter, Palette } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { formatUpdatedAt, getLatestModels, seedPayload } from "@/lib/models"
+import type { ModelsPayload } from "@/lib/model-schema"
 
 const categories = [
   { id: "all", name: "全部", icon: Compass, gradient: "from-pink-400 to-purple-400" },
@@ -17,7 +19,15 @@ const categories = [
   { id: "model", name: "大模型", icon: Cpu, gradient: "from-green-400 to-emerald-400" },
 ]
 
-const tools = [
+type EcosystemItem = {
+  name: string
+  category: string
+  description: string
+  tags: string[]
+  url: string
+}
+
+const nonModelTools: EcosystemItem[] = [
   // IDE Tools
   { name: "Cursor", category: "ide", description: "AI-first IDE，Skill/Agent/MCP 支持", tags: ["AI IDE", "Skill", "Agent"], url: "https://cursor.sh" },
   { name: "Windsurf", category: "ide", description: "Fast Context 技术，1M Token 上下文", tags: ["AI IDE", "大上下文"], url: "https://codeium.com/windsurf" },
@@ -25,40 +35,57 @@ const tools = [
   { name: "Kiro", category: "ide", description: "AWS 出品，Steering Files", tags: ["AWS", "Steering"], url: "#" },
   { name: "Zed", category: "ide", description: "高性能编辑器 + AI 集成", tags: ["高性能", "Rust"], url: "https://zed.dev" },
   { name: "Continue.dev", category: "ide", description: "开源 AI 编程助手", tags: ["开源", "多模型"], url: "https://continue.dev" },
-  
+
   // Web Tools
   { name: "v0", category: "web", description: "自然语言生成 UI，Figma 集成", tags: ["UI 生成", "Vercel"], url: "https://v0.dev" },
   { name: "bolt.new", category: "web", description: "浏览器内全栈开发", tags: ["全栈", "WebContainer"], url: "https://bolt.new" },
   { name: "Lovable", category: "web", description: "聊天界面生成 Web 应用", tags: ["对话式", "Web 应用"], url: "https://lovable.dev" },
   { name: "Replit Agent", category: "web", description: "全生命周期 AI 开发", tags: ["云 IDE", "部署"], url: "https://replit.com" },
   { name: "Same", category: "web", description: "UI 复制和代码生成", tags: ["UI 克隆", "快速"], url: "#" },
-  
+
   // CLI Tools
   { name: "Claude Code", category: "cli", description: "终端集成 AI 助手，MCP 配置", tags: ["终端", "Anthropic"], url: "https://claude.ai" },
   { name: "Goose", category: "cli", description: "开源 AI 代理，命令行接口", tags: ["开源", "Agent"], url: "https://github.com/block/goose" },
   { name: "Fabric", category: "cli", description: "Patterns 系统，工作流自动化", tags: ["Patterns", "自动化"], url: "https://github.com/danielmiessler/fabric" },
   { name: "Aider", category: "cli", description: "AI pair programming in terminal", tags: ["终端", "Git"], url: "https://aider.chat" },
-  
+
   // Design Tools
   { name: "Figma", category: "design", description: "协作式 UI 设计工具，AI 功能增强", tags: ["UI设计", "协作", "原型"], url: "https://www.figma.com" },
   { name: "Stitch", category: "design", description: "Google AI 设计工具，文本/图像转 UI 和代码", tags: ["AI设计", "Google", "代码生成"], url: "https://stitch.withgoogle.com" },
   { name: "Pencil", category: "design", description: "AI 辅助设计工具，IDE 集成，自动生成代码", tags: ["原型", "代码集成", "AI辅助"], url: "https://pencil.dev" },
   { name: "Lovart", category: "design", description: "AI 驱动设计平台，智能布局和配色建议", tags: ["AI设计", "智能建议", "资源库"], url: "https://www.lovart.info" },
   { name: "Pencil Project", category: "design", description: "开源原型工具，支持桌面/移动/Web UI", tags: ["开源", "原型", "跨平台"], url: "https://pencil.evolus.vn" },
-  
-  // Models
-  { name: "Claude Opus 4.5", category: "model", description: "Anthropic 旗舰模型，编程能力最强（SWE-bench 80.9%）", tags: ["Anthropic", "编程", "200K上下文"], url: "https://claude.ai" },
-  { name: "Claude Sonnet 4.5", category: "model", description: "Anthropic 平衡模型，日常开发首选", tags: ["Anthropic", "平衡", "200K上下文"], url: "https://claude.ai" },
-  { name: "GPT-5", category: "model", description: "OpenAI 最新模型，数学推理最强（AIME 94.6%）", tags: ["OpenAI", "数学", "100万上下文"], url: "https://openai.com" },
-  { name: "GPT-4.1", category: "model", description: "OpenAI 编程增强模型，SWE-bench 54.6%", tags: ["OpenAI", "编程", "100万上下文"], url: "https://openai.com" },
-  { name: "Gemini 3 Pro", category: "model", description: "Google 最新模型，多模态最强，1M-3M tokens", tags: ["Google", "多模态", "超长上下文"], url: "https://gemini.google.com" },
-  { name: "DeepSeek", category: "model", description: "开源友好，成本低，代码能力强", tags: ["开源", "低成本", "代码"], url: "https://deepseek.com" },
-  { name: "Llama", category: "model", description: "Meta 开源模型，本地部署", tags: ["Meta", "开源", "本地"], url: "https://llama.meta.com" },
 ]
+
+function buildModelItems(payload: ModelsPayload): EcosystemItem[] {
+  return payload.models.map((m) => ({
+    name: m.name,
+    category: "model",
+    description: m.description || m.highlights[0] || `${m.provider} 模型`,
+    tags: m.tags.length > 0 ? m.tags : [m.provider, m.contextWindow],
+    url: m.url,
+  }))
+}
 
 export default function EcosystemPage() {
   const [activeCategory, setActiveCategory] = useState("all")
   const [searchQuery, setSearchQuery] = useState("")
+  const [modelsPayload, setModelsPayload] = useState<ModelsPayload>(seedPayload)
+  const [modelsFrom, setModelsFrom] = useState<"api" | "seed">("seed")
+
+  useEffect(() => {
+    const controller = new AbortController()
+    getLatestModels(controller.signal).then((result) => {
+      setModelsPayload(result.payload)
+      setModelsFrom(result.from)
+    })
+    return () => controller.abort()
+  }, [])
+
+  const tools = useMemo<EcosystemItem[]>(
+    () => [...nonModelTools, ...buildModelItems(modelsPayload)],
+    [modelsPayload],
+  )
 
   const filteredTools = tools.filter((tool) => {
     const matchesCategory = activeCategory === "all" || tool.category === activeCategory
@@ -87,6 +114,22 @@ export default function EcosystemPage() {
             </h1>
             <p className="text-lg text-gray-700 font-medium max-w-2xl mx-auto">
               快速找到所需工具，了解生态全貌，发现新资源
+            </p>
+            <p className="mt-3 text-xs text-gray-600">
+              模型数据更新：
+              <span className="font-mono ml-1">{formatUpdatedAt(modelsPayload.updatedAt)}</span>
+              <span className="mx-1">·</span>
+              <span>
+                来源：
+                <span className={cn(
+                  "ml-1 px-2 py-0.5 rounded-full text-[10px] font-semibold",
+                  modelsFrom === "api"
+                    ? "bg-green-500/15 text-green-700"
+                    : "bg-amber-500/15 text-amber-700",
+                )}>
+                  {modelsFrom === "api" ? "实时 API" : "静态种子"}
+                </span>
+              </span>
             </p>
           </div>
 

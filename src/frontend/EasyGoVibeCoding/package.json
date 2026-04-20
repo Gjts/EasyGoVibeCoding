@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "prebuild": "node scripts/validate-models-json.mjs",
     "build": "node scripts/build-with-meta.js",
     "postbuild": "node scripts/copy-functions.js",
     "dev": "next dev",
     "lint": "eslint .",
     "start": "next start",
+    "validate:models": "node scripts/validate-models-json.mjs",
     "pages:deploy": "npm run build && wrangler pages deploy out --project-name=easy-go-vibe-coding"
   },
   "dependencies": {
