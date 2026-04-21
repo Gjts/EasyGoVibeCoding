@@ -15,14 +15,14 @@ import { useIsMobile } from "@/hooks/use-mobile";
 interface Chapter {
   title: string;
   href: string;
-  sections?: { title: string; href: string }[];
+  sections?: readonly { title: string; href: string }[];
 }
 
 interface CourseLayoutProps {
   children: React.ReactNode;
   title: string;
   description: string;
-  chapters: Chapter[];
+  chapters: readonly Chapter[];
   currentChapter?: string;
 }
 

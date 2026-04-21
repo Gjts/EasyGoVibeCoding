@@ -1,10 +1,8 @@
 "use client"
 
 import { useCallback, useEffect, useState } from "react"
-import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import {
-  ArrowRight,
   ExternalLink,
   RefreshCw,
   Sparkles,
@@ -107,7 +105,7 @@ export function LatestModelsPanel() {
   const topModels = state.payload.models.filter((m) => m.tier === 1).slice(0, 3)
 
   return (
-    <section className="relative overflow-hidden py-24 sm:py-28 bg-gradient-to-br from-sky-50 via-cyan-50 to-indigo-50">
+    <section className="relative overflow-hidden py-16 sm:py-20 bg-gradient-to-br from-sky-50 via-cyan-50 to-indigo-50">
       {/* Decorative blobs */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute -top-24 -left-20 h-72 w-72 rounded-full bg-cyan-300/30 blur-3xl" />
@@ -117,20 +115,19 @@ export function LatestModelsPanel() {
 
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-12 flex flex-col items-start gap-6 md:flex-row md:items-end md:justify-between">
+        <div className="mb-8 flex flex-col items-start gap-5 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
             <div className="mb-4 inline-flex items-center gap-2 rounded-full border-2 border-cyan-200 bg-white/80 px-4 py-1.5 text-sm font-semibold text-cyan-700 shadow-sm backdrop-blur-md">
               <Sparkles className="h-4 w-4 text-cyan-500" />
               模型动态 · 每 6 小时自动更新
             </div>
-            <h2 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
+            <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
               <span className="bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-500 bg-clip-text text-transparent">
                 最新模型发布追踪
               </span>
             </h2>
-            <p className="mt-4 text-base leading-7 text-gray-700 sm:text-lg">
-              自动汇总 Anthropic / OpenAI / Google / 国产厂商 最新旗舰模型与发布动态，
-              帮你随时掌握选型依据。
+            <p className="mt-3 text-sm leading-7 text-gray-700 sm:text-base">
+              自动汇总 Anthropic / OpenAI / Google / 国产厂商 最新旗舰模型与发布动态，帮你随时掌握选型依据。
             </p>
           </div>
           <div className="flex items-center gap-3">
@@ -278,28 +275,15 @@ export function LatestModelsPanel() {
         </div>
 
         {/* Footer */}
-        <div className="mt-10 flex flex-col items-start justify-between gap-3 text-xs text-gray-600 sm:flex-row sm:items-center">
-          <div>
-            数据更新时间：
-            <span className="ml-1 font-mono font-semibold text-gray-900">
-              {formatUpdatedAt(state.payload.updatedAt)}
-            </span>
-            <span className="ml-2">· 数据源：{state.payload.source}</span>
-            {error ? (
-              <span className="ml-2 text-rose-600">（刷新失败：{error}）</span>
-            ) : null}
-          </div>
-          <Button
-            asChild
-            variant="ghost"
-            size="sm"
-            className="rounded-full font-semibold text-blue-700 hover:bg-white/60 hover:text-blue-800"
-          >
-            <Link href="/ecosystem">
-              查看完整生态
-              <ArrowRight className="ml-1 h-4 w-4" />
-            </Link>
-          </Button>
+        <div className="mt-6 text-xs text-gray-600">
+          数据更新时间：
+          <span className="ml-1 font-mono font-semibold text-gray-900">
+            {formatUpdatedAt(state.payload.updatedAt)}
+          </span>
+          <span className="ml-2">· 数据源：{state.payload.source}</span>
+          {error ? (
+            <span className="ml-2 text-rose-600">（刷新失败：{error}）</span>
+          ) : null}
         </div>
       </div>
     </section>

@@ -1,7 +1,7 @@
 import { CourseLayout } from "@/components/course/course-layout";
 import { superIndividualChapters } from "@/components/course/chapters";
 import Link from "next/link";
-import { ArrowRight, Sparkles, Target, Workflow, TrendingUp, BookOpen } from "lucide-react";
+import { ArrowRight, Sparkles, Target, Workflow, TrendingUp, BookOpen, Award } from "lucide-react";
 
 const modules = [
   {
@@ -62,6 +62,46 @@ export default function SuperIndividualPage() {
         <p className="text-lg text-gray-700 font-medium leading-relaxed">
           目标是把你的能力变成可交付、可复制、可复利的系统：定位 → 产品化 → 自动化 → 增长 → 复盘。
         </p>
+      </div>
+
+      {/* Audience */}
+      <div className="mb-12 p-6 rounded-3xl bg-white/70 backdrop-blur-xl border-2 border-white/50 shadow-[0_8px_32px_0_rgba(0,0,0,0.1)]">
+        <h2 className="text-xl font-bold text-gray-900 mb-4">适合人群</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {["独立开发者 / 自由职业者", "想做副业的工程师", "独立咨询与顾问", "内容创作者 / 独立创业者"].map((item) => (
+            <div key={item} className="flex items-center gap-3 p-3 rounded-xl bg-gradient-to-r from-violet-50 to-fuchsia-50 border border-violet-200/50">
+              <div className="h-2 w-2 rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-500" />
+              <span className="text-gray-700 font-medium">{item}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Learning Goals */}
+      <div className="mb-12">
+        <h2 className="text-xl font-bold text-gray-900 mb-4">学习目标</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {[
+            "定位差异化的个人价值",
+            "把能力打包成可交付产品",
+            "建立自动化与复利系统",
+          ].map((goal, index) => {
+            const gradients = [
+              "from-violet-400 to-fuchsia-400",
+              "from-amber-400 to-orange-400",
+              "from-emerald-400 to-cyan-400",
+            ];
+            return (
+              <div
+                key={goal}
+                className={`p-5 rounded-2xl bg-gradient-to-br ${gradients[index]} text-white shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex items-center gap-3`}
+              >
+                <Award className="h-6 w-6" />
+                <span className="font-bold text-lg">{goal}</span>
+              </div>
+            );
+          })}
+        </div>
       </div>
 
       {/* Modules */}
