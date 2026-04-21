@@ -477,8 +477,8 @@ export default function AIArchitecturePatternsPage() {
           </Link>
         </Button>
         <Button asChild>
-          <Link href="/advanced/dev-basics" className="flex items-center gap-2">
-            下一章：开发常识
+          <Link href="/advanced/ai-frameworks" className="flex items-center gap-2">
+            下一章：AI 应用框架全景
             <ArrowRight className="h-4 w-4" />
           </Link>
         </Button>

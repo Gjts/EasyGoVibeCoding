@@ -1,0 +1,330 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - navigation [ref=e4]:
+        - link "AI EasyGoVibeCoding" [ref=e6] [cursor=pointer]:
+          - /url: /
+          - generic [ref=e8]: AI
+          - generic [ref=e9]: EasyGoVibeCoding
+        - generic [ref=e10]:
+          - link "首页" [ref=e11] [cursor=pointer]:
+            - /url: /
+          - button "课程" [ref=e12]:
+            - text: 课程
+            - img [ref=e13]
+          - link "生态导航" [ref=e15] [cursor=pointer]:
+            - /url: /ecosystem
+          - link "GitHub 热门项目" [ref=e16] [cursor=pointer]:
+            - /url: /github-hot
+          - link "资源" [ref=e17] [cursor=pointer]:
+            - /url: /resources
+        - generic [ref=e18]:
+          - button "搜索" [ref=e19]:
+            - img
+            - generic [ref=e20]: 搜索
+          - button "登录" [ref=e21]
+          - link "开始学习" [ref=e22] [cursor=pointer]:
+            - /url: /basics
+    - generic [ref=e23]:
+      - complementary [ref=e24]:
+        - generic [ref=e25]:
+          - generic [ref=e26]:
+            - heading "实践篇" [level=2] [ref=e27]
+            - paragraph [ref=e28]: 项目实战
+          - navigation [ref=e29]:
+            - link "01 实践篇概述" [ref=e32] [cursor=pointer]:
+              - /url: /practice
+              - generic [ref=e33]: "01"
+              - generic [ref=e34]: 实践篇概述
+            - link "02 文科生 / 商科生项目" [ref=e37] [cursor=pointer]:
+              - /url: /practice/humanities
+              - generic [ref=e38]: "02"
+              - generic [ref=e39]: 文科生 / 商科生项目
+            - link "03 理工科学生项目" [ref=e42] [cursor=pointer]:
+              - /url: /practice/engineering
+              - generic [ref=e43]: "03"
+              - generic [ref=e44]: 理工科学生项目
+            - link "04 职场人士项目" [ref=e47] [cursor=pointer]:
+              - /url: /practice/professional
+              - generic [ref=e48]: "04"
+              - generic [ref=e49]: 职场人士项目
+            - generic [ref=e50]:
+              - generic [ref=e51]:
+                - link "05 高级实战场景" [ref=e52] [cursor=pointer]:
+                  - /url: /practice/advanced
+                  - generic [ref=e53]: "05"
+                  - generic [ref=e54]: 高级实战场景
+                - button "收起高级实战场景" [expanded] [ref=e55]:
+                  - img [ref=e56]
+              - generic [ref=e58]:
+                - link "场景1：从零开始创建新项目" [ref=e59] [cursor=pointer]:
+                  - /url: /practice/advanced/new-project
+                - link "场景2：快速熟悉新公司项目" [ref=e60] [cursor=pointer]:
+                  - /url: /practice/advanced/onboarding
+                - link "场景3：业务线切换实战" [ref=e61] [cursor=pointer]:
+                  - /url: /practice/advanced/transition
+                - link "场景4：RAG 实战" [ref=e62] [cursor=pointer]:
+                  - /url: /practice/advanced/rag
+                - link "场景5：Agent 实战" [ref=e63] [cursor=pointer]:
+                  - /url: /practice/advanced/agent
+            - link "06 核心技能：AI Agent 开发" [ref=e66] [cursor=pointer]:
+              - /url: /practice/agent
+              - generic [ref=e67]: "06"
+              - generic [ref=e68]: 核心技能：AI Agent 开发
+            - link "07 核心技能：全栈项目实战" [ref=e71] [cursor=pointer]:
+              - /url: /practice/fullstack
+              - generic [ref=e72]: "07"
+              - generic [ref=e73]: 核心技能：全栈项目实战
+            - link "08 核心技能：工具与效率" [ref=e76] [cursor=pointer]:
+              - /url: /practice/efficiency
+              - generic [ref=e77]: "08"
+              - generic [ref=e78]: 核心技能：工具与效率
+      - main [ref=e79]:
+        - navigation [ref=e82]:
+          - link "首页" [ref=e83] [cursor=pointer]:
+            - /url: /
+          - img [ref=e84]
+          - link "实践篇" [ref=e86] [cursor=pointer]:
+            - /url: /practice
+          - img [ref=e87]
+          - generic [ref=e89]: 场景5：Agent 实战
+        - generic [ref=e91]:
+          - generic [ref=e92]:
+            - generic [ref=e93]:
+              - img [ref=e94]
+              - text: 高级实战场景 · 场景5
+            - heading "Agent 实战" [level=1] [ref=e99]
+            - paragraph [ref=e100]: 以 ADD、多 Agent 协作和 Micro-Agent Pattern 为核心，掌握从任务拆解、角色分工到工程治理与交付验收的完整 Agent 落地方法。
+          - generic [ref=e101]:
+            - generic [ref=e103]:
+              - heading "学习目标" [level=2] [ref=e104]:
+                - img [ref=e105]
+                - text: 学习目标
+              - generic [ref=e109]:
+                - generic [ref=e110]:
+                  - img [ref=e111]
+                  - generic [ref=e114]: 掌握 ADD 从目标拆解到交付验收的完整流程
+                - generic [ref=e115]:
+                  - img [ref=e116]
+                  - generic [ref=e119]: 能够设计 Planner / Executor / Reviewer 等角色协作关系
+                - generic [ref=e120]:
+                  - img [ref=e121]
+                  - generic [ref=e124]: 理解多 Agent 系统中的上下文契约与边界控制
+                - generic [ref=e125]:
+                  - img [ref=e126]
+                  - generic [ref=e129]: 能够识别并治理上下文漂移、重复劳动和职责不清等问题
+            - generic [ref=e130]:
+              - heading "方法论" [level=2] [ref=e131]:
+                - img [ref=e132]
+                - text: 方法论
+              - generic [ref=e136]:
+                - heading "ADD 工作流" [level=3] [ref=e137]
+                - generic [ref=e138]:
+                  - generic [ref=e139]:
+                    - generic [ref=e140]: "1"
+                    - generic [ref=e141]:
+                      - strong [ref=e142]: 目标拆解
+                      - text: ：先把目标拆成可验证、可交付的任务单元，而不是直接把模糊需求交给一个大 Agent。
+                  - generic [ref=e143]:
+                    - generic [ref=e144]: "2"
+                    - generic [ref=e145]:
+                      - strong [ref=e146]: 角色分工
+                      - text: ：为不同角色定义输入、输出和责任边界，例如 Planner、Coding Agent、QA Agent、Reviewer。
+                  - generic [ref=e147]:
+                    - generic [ref=e148]: "3"
+                    - generic [ref=e149]:
+                      - strong [ref=e150]: 上下文契约
+                      - text: ：明确共享什么上下文、何时同步、哪些事实必须引用代码或文档验证。
+                  - generic [ref=e151]:
+                    - generic [ref=e152]: "4"
+                    - generic [ref=e153]:
+                      - strong [ref=e154]: 验收闭环
+                      - text: ：用测试、构建、人工检查和审阅意见形成交付闭环，而不是只看 Agent 是否“说完成了”。
+              - generic [ref=e155]:
+                - heading "多 Agent 协作模式" [level=3] [ref=e156]:
+                  - img [ref=e157]
+                  - text: 多 Agent 协作模式
+                - generic [ref=e162]:
+                  - generic [ref=e163]:
+                    - generic [ref=e164]: Planner / Executor / Reviewer
+                    - paragraph [ref=e165]: 适合交付链路清晰的任务，由 Planner 拆解，Executor 实现，Reviewer 负责质量门禁。
+                  - generic [ref=e166]:
+                    - generic [ref=e167]: Specialist Swarm
+                    - paragraph [ref=e168]: 适合跨领域问题，如安全、性能、UI、架构各自给出独立判断，再由主控汇总。
+                  - generic [ref=e169]:
+                    - generic [ref=e170]: Micro-Agent Network
+                    - paragraph [ref=e171]: 将复杂任务拆到最小职责单元，提升可替换性，但需要更严格的上下文管理。
+                  - generic [ref=e172]:
+                    - generic [ref=e173]: Human-in-the-loop
+                    - paragraph [ref=e174]: 在人类审批、发布、外部系统写入等关键节点强制人工确认，控制高风险动作。
+              - generic [ref=e175]:
+                - heading "工程治理重点" [level=3] [ref=e176]:
+                  - img [ref=e177]
+                  - text: 工程治理重点
+                - list [ref=e180]:
+                  - listitem [ref=e181]:
+                    - text: •
+                    - strong [ref=e182]: 可观测性
+                    - text: ：记录每个 Agent 的输入、决策摘要、产出和失败原因
+                  - listitem [ref=e183]:
+                    - text: •
+                    - strong [ref=e184]: 边界控制
+                    - text: ：规定哪些 Agent 只能读，哪些 Agent 可以写，哪些动作必须审批
+                  - listitem [ref=e185]:
+                    - text: •
+                    - strong [ref=e186]: 去重机制
+                    - text: ：通过任务列表、owner 和依赖关系避免多个 Agent 做同一件事
+                  - listitem [ref=e187]:
+                    - text: •
+                    - strong [ref=e188]: 成本控制
+                    - text: ：先用轻量角色做筛选，再调用高成本模型做关键决策
+            - generic [ref=e189]:
+              - heading "AI工具应用" [level=2] [ref=e190]:
+                - img [ref=e191]
+                - text: AI工具应用
+              - generic [ref=e193]:
+                - generic [ref=e194]:
+                  - heading "用 Claude Code 组织协作链路" [level=3] [ref=e195]:
+                    - img [ref=e196]
+                    - text: 用 Claude Code 组织协作链路
+                  - list [ref=e198]:
+                    - listitem [ref=e199]: • 用任务拆解和子代理分工，先明确谁负责探索、谁负责实现、谁负责评审
+                    - listitem [ref=e200]: • 用共享任务状态记录 owner、依赖和完成情况，降低上下文漂移
+                    - listitem [ref=e201]: • 对高风险动作设置人工确认，避免“自动化误伤”
+                - generic [ref=e202]:
+                  - heading "用结构化日志做失败复盘" [level=3] [ref=e203]:
+                    - img [ref=e204]
+                    - text: 用结构化日志做失败复盘
+                  - paragraph [ref=e206]: 记录任务输入、关键判断、调用链路和失败原因，能帮助你区分问题来自需求拆解、上下文不足，还是执行阶段的实现错误。
+            - generic [ref=e207]:
+              - heading "实战案例" [level=2] [ref=e208]:
+                - img [ref=e209]
+                - text: 实战案例
+              - generic [ref=e213]:
+                - heading "案例1：多 Agent 代码评审流水线" [level=3] [ref=e214]
+                - list [ref=e215]:
+                  - listitem [ref=e216]: • 主控 Agent 负责读取变更范围并分配给安全、性能、可维护性专员
+                  - listitem [ref=e217]: • 各专员输出独立意见，避免“一个 Agent 包打天下”的盲区
+                  - listitem [ref=e218]: • Reviewer 汇总冲突意见，并给出是否允许合并的结论
+              - generic [ref=e219]:
+                - heading "案例2：需求到交付的 Agent 开发流程" [level=3] [ref=e220]
+                - list [ref=e221]:
+                  - listitem [ref=e222]: • Planner 读取 PRD 和代码结构，输出可执行任务清单
+                  - listitem [ref=e223]: • Coding Agent 按任务实现改动，QA Agent 运行验证，Reviewer 做最终把关
+                  - listitem [ref=e224]: • 在发布、数据库变更、外部系统写入等节点保留人工审批
+            - generic [ref=e226]:
+              - heading "学习成果检查清单" [level=2] [ref=e227]:
+                - img [ref=e228]
+                - text: 学习成果检查清单
+              - generic [ref=e231]:
+                - generic [ref=e232]:
+                  - img [ref=e233]
+                  - generic [ref=e236]: 能够把复杂目标拆成适合 Agent 执行的独立任务
+                - generic [ref=e237]:
+                  - img [ref=e238]
+                  - generic [ref=e241]: 能够为不同 Agent 定义清晰输入、输出和权限边界
+                - generic [ref=e242]:
+                  - img [ref=e243]
+                  - generic [ref=e246]: 理解多 Agent 协作中的同步、复核和升级机制
+                - generic [ref=e247]:
+                  - img [ref=e248]
+                  - generic [ref=e251]: 知道如何用日志、任务状态和评审门禁治理失败模式
+                - generic [ref=e252]:
+                  - img [ref=e253]
+                  - generic [ref=e256]: 能够区分“核心技能页”和“高级实战页”的不同教学目标
+            - generic [ref=e257]:
+              - link "上一场景：RAG 实战" [ref=e258] [cursor=pointer]:
+                - /url: /practice/advanced/rag
+                - button "上一场景：RAG 实战" [ref=e259]:
+                  - img
+                  - text: 上一场景：RAG 实战
+              - link "返回高级实战场景" [ref=e260] [cursor=pointer]:
+                - /url: /practice/advanced
+                - button "返回高级实战场景" [ref=e261]:
+                  - text: 返回高级实战场景
+                  - img
+    - contentinfo [ref=e262]:
+      - generic [ref=e263]:
+        - generic [ref=e264]:
+          - generic [ref=e265]:
+            - generic [ref=e266]:
+              - generic [ref=e268]: AI
+              - generic [ref=e269]: EasyGoVibeCoding
+            - paragraph [ref=e270]: AI 编程工具不是魔法，是工程。理解机制才能驾驭工具。
+            - paragraph [ref=e271]: 版本 v1.0 | 最后更新：--
+          - generic [ref=e272]:
+            - generic [ref=e273]:
+              - heading "课程" [level=3] [ref=e274]
+              - list [ref=e275]:
+                - listitem [ref=e276]:
+                  - link "基础篇" [ref=e277] [cursor=pointer]:
+                    - /url: /basics
+                    - text: 基础篇
+                - listitem [ref=e279]:
+                  - link "进阶篇" [ref=e280] [cursor=pointer]:
+                    - /url: /advanced
+                    - text: 进阶篇
+                - listitem [ref=e282]:
+                  - link "工具篇" [ref=e283] [cursor=pointer]:
+                    - /url: /tools
+                    - text: 工具篇
+                - listitem [ref=e285]:
+                  - link "架构篇" [ref=e286] [cursor=pointer]:
+                    - /url: /architecture
+                    - text: 架构篇
+                - listitem [ref=e288]:
+                  - link "实践篇" [ref=e289] [cursor=pointer]:
+                    - /url: /practice
+                    - text: 实践篇
+                - listitem [ref=e291]:
+                  - link "团队篇" [ref=e292] [cursor=pointer]:
+                    - /url: /team
+                    - text: 团队篇
+            - generic [ref=e294]:
+              - heading "资源" [level=3] [ref=e295]
+              - list [ref=e296]:
+                - listitem [ref=e297]:
+                  - link "生态导航" [ref=e298] [cursor=pointer]:
+                    - /url: /ecosystem
+                - listitem [ref=e299]:
+                  - link "优质资源" [ref=e300] [cursor=pointer]:
+                    - /url: /resources
+                - listitem [ref=e301]:
+                  - link "更新日志" [ref=e302] [cursor=pointer]:
+                    - /url: "#"
+                - listitem [ref=e303]:
+                  - link "关于我们" [ref=e304] [cursor=pointer]:
+                    - /url: "#"
+            - generic [ref=e305]:
+              - heading "工具" [level=3] [ref=e306]
+              - list [ref=e307]:
+                - listitem [ref=e308]:
+                  - link "Cursor" [ref=e309] [cursor=pointer]:
+                    - /url: "#"
+                - listitem [ref=e310]:
+                  - link "GitHub Copilot" [ref=e311] [cursor=pointer]:
+                    - /url: "#"
+                - listitem [ref=e312]:
+                  - link "Claude Code" [ref=e313] [cursor=pointer]:
+                    - /url: "#"
+                - listitem [ref=e314]:
+                  - link "Fabric" [ref=e315] [cursor=pointer]:
+                    - /url: "#"
+        - generic [ref=e316]:
+          - generic [ref=e318]:
+            - generic [ref=e319]:
+              - img [ref=e320]
+              - generic [ref=e323]: 总访问量：
+              - generic [ref=e324]: "--"
+            - generic [ref=e327]:
+              - img [ref=e328]
+              - generic [ref=e333]: 访客数：
+              - generic [ref=e334]: "--"
+            - generic [ref=e337]:
+              - img [ref=e338]
+              - generic [ref=e341]: 已运行：
+              - generic [ref=e342]: 90 天 16 小时 23 分 39 秒
+          - paragraph [ref=e343]: © 2026 EasyGoVibeCoding. All rights reserved.
+  - button "Open Next.js Dev Tools" [ref=e349] [cursor=pointer]:
+    - img [ref=e350]
+  - alert [ref=e353]

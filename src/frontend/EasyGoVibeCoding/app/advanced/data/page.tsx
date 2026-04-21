@@ -16,7 +16,7 @@ export default function DataPage() {
       {/* Header */}
       <div className="mb-12">
         <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm text-primary mb-4">
-          第 8 章
+          第 9 章
         </div>
         <h1 className="text-4xl font-bold text-foreground mb-4">
           数据持久化

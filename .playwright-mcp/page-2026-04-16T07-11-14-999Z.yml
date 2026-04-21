@@ -1,0 +1,339 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - navigation [ref=e4]:
+        - link "AI EasyGoVibeCoding" [ref=e6] [cursor=pointer]:
+          - /url: /
+          - generic [ref=e8]: AI
+          - generic [ref=e9]: EasyGoVibeCoding
+        - generic [ref=e10]:
+          - link "首页" [ref=e11] [cursor=pointer]:
+            - /url: /
+          - button "课程" [ref=e12]:
+            - text: 课程
+            - img [ref=e13]
+          - link "生态导航" [ref=e15] [cursor=pointer]:
+            - /url: /ecosystem
+          - link "GitHub 热门项目" [ref=e16] [cursor=pointer]:
+            - /url: /github-hot
+          - link "资源" [ref=e17] [cursor=pointer]:
+            - /url: /resources
+        - generic [ref=e18]:
+          - button "搜索" [ref=e19]:
+            - img
+            - generic [ref=e20]: 搜索
+          - button "登录" [ref=e21]
+          - link "开始学习" [ref=e22] [cursor=pointer]:
+            - /url: /basics
+    - generic [ref=e23]:
+      - complementary [ref=e24]:
+        - generic [ref=e25]:
+          - generic [ref=e26]:
+            - heading "实践篇" [level=2] [ref=e27]
+            - paragraph [ref=e28]: 项目实战
+          - navigation [ref=e29]:
+            - link "01 实践篇概述" [ref=e32] [cursor=pointer]:
+              - /url: /practice
+              - generic [ref=e33]: "01"
+              - generic [ref=e34]: 实践篇概述
+            - link "02 文科生 / 商科生项目" [ref=e37] [cursor=pointer]:
+              - /url: /practice/humanities
+              - generic [ref=e38]: "02"
+              - generic [ref=e39]: 文科生 / 商科生项目
+            - link "03 理工科学生项目" [ref=e42] [cursor=pointer]:
+              - /url: /practice/engineering
+              - generic [ref=e43]: "03"
+              - generic [ref=e44]: 理工科学生项目
+            - link "04 职场人士项目" [ref=e47] [cursor=pointer]:
+              - /url: /practice/professional
+              - generic [ref=e48]: "04"
+              - generic [ref=e49]: 职场人士项目
+            - generic [ref=e50]:
+              - generic [ref=e51]:
+                - link "05 高级实战场景" [ref=e52] [cursor=pointer]:
+                  - /url: /practice/advanced
+                  - generic [ref=e53]: "05"
+                  - generic [ref=e54]: 高级实战场景
+                - button "收起高级实战场景" [expanded] [ref=e55]:
+                  - img [ref=e56]
+              - generic [ref=e58]:
+                - link "场景1：从零开始创建新项目" [ref=e59] [cursor=pointer]:
+                  - /url: /practice/advanced/new-project
+                - link "场景2：快速熟悉新公司项目" [ref=e60] [cursor=pointer]:
+                  - /url: /practice/advanced/onboarding
+                - link "场景3：业务线切换实战" [ref=e61] [cursor=pointer]:
+                  - /url: /practice/advanced/transition
+                - link "场景4：RAG 实战" [ref=e62] [cursor=pointer]:
+                  - /url: /practice/advanced/rag
+                - link "场景5：Agent 实战" [ref=e63] [cursor=pointer]:
+                  - /url: /practice/advanced/agent
+            - link "06 核心技能：AI Agent 开发" [ref=e66] [cursor=pointer]:
+              - /url: /practice/agent
+              - generic [ref=e67]: "06"
+              - generic [ref=e68]: 核心技能：AI Agent 开发
+            - link "07 核心技能：全栈项目实战" [ref=e71] [cursor=pointer]:
+              - /url: /practice/fullstack
+              - generic [ref=e72]: "07"
+              - generic [ref=e73]: 核心技能：全栈项目实战
+            - link "08 核心技能：工具与效率" [ref=e76] [cursor=pointer]:
+              - /url: /practice/efficiency
+              - generic [ref=e77]: "08"
+              - generic [ref=e78]: 核心技能：工具与效率
+      - main [ref=e79]:
+        - navigation [ref=e82]:
+          - link "首页" [ref=e83] [cursor=pointer]:
+            - /url: /
+          - img [ref=e84]
+          - link "实践篇" [ref=e86] [cursor=pointer]:
+            - /url: /practice
+          - img [ref=e87]
+          - generic [ref=e89]: 场景4：RAG 实战
+        - generic [ref=e91]:
+          - generic [ref=e92]:
+            - generic [ref=e93]:
+              - img [ref=e94]
+              - text: 高级实战场景 · 场景4
+            - heading "RAG 实战" [level=1] [ref=e98]
+            - paragraph [ref=e99]: 面向企业知识库、私有文档助手和长代码分析场景，掌握从语料准备、检索链路设计到效果评估与持续优化的完整 RAG 落地流程。
+          - generic [ref=e100]:
+            - generic [ref=e102]:
+              - heading "学习目标" [level=2] [ref=e103]:
+                - img [ref=e104]
+                - text: 学习目标
+              - generic [ref=e108]:
+                - generic [ref=e109]:
+                  - img [ref=e110]
+                  - generic [ref=e113]: 理解 RAG-DD 的端到端落地流程
+                - generic [ref=e114]:
+                  - img [ref=e115]
+                  - generic [ref=e118]: 能够设计知识库分块、元数据和更新机制
+                - generic [ref=e119]:
+                  - img [ref=e120]
+                  - generic [ref=e123]: 掌握检索、重排序、上下文组装的关键权衡
+                - generic [ref=e124]:
+                  - img [ref=e125]
+                  - generic [ref=e128]: 能够通过评估与复盘持续优化 RAG 效果
+            - generic [ref=e129]:
+              - heading "方法论" [level=2] [ref=e130]:
+                - img [ref=e131]
+                - text: 方法论
+              - generic [ref=e136]:
+                - heading "RAG-DD 工作流" [level=3] [ref=e137]
+                - generic [ref=e138]:
+                  - generic [ref=e139]:
+                    - generic [ref=e140]: "1"
+                    - generic [ref=e141]:
+                      - strong [ref=e142]: 问题定义
+                      - text: ：明确用户问题类型、可接受延迟、回答可信度要求，以及是否需要引用来源。
+                  - generic [ref=e143]:
+                    - generic [ref=e144]: "2"
+                    - generic [ref=e145]:
+                      - strong [ref=e146]: 语料治理
+                      - text: ：清理文档、去重、打标签、建立更新时间和权限边界，避免把脏数据直接送进知识库。
+                  - generic [ref=e147]:
+                    - generic [ref=e148]: "3"
+                    - generic [ref=e149]:
+                      - strong [ref=e150]: 检索设计
+                      - text: ：决定分块策略、向量检索或混合检索、是否需要重排序，以及最终注入模型的上下文结构。
+                  - generic [ref=e151]:
+                    - generic [ref=e152]: "4"
+                    - generic [ref=e153]:
+                      - strong [ref=e154]: 评估迭代
+                      - text: ：通过命中率、召回率、答案准确率与失败样本复盘，持续优化分块、召回和 Prompt。
+              - generic [ref=e155]:
+                - heading "检索链路设计" [level=3] [ref=e156]:
+                  - img [ref=e157]
+                  - text: 检索链路设计
+                - generic [ref=e161]:
+                  - generic [ref=e162]:
+                    - heading "知识分块" [level=4] [ref=e163]
+                    - list [ref=e164]:
+                      - listitem [ref=e165]: • 以语义完整性优先，不要只按固定字数粗暴切片
+                      - listitem [ref=e166]: • 为每个 chunk 增加来源、时间、业务域、权限等元数据
+                      - listitem [ref=e167]: • 对架构文档、接口文档、代码说明书使用不同的分块策略
+                  - generic [ref=e168]:
+                    - heading "检索与重排序" [level=4] [ref=e169]
+                    - list [ref=e170]:
+                      - listitem [ref=e171]: • 通用问答优先考虑混合检索，兼顾语义召回与关键词精确匹配
+                      - listitem [ref=e172]: • 对长代码分析场景，重排序通常比单纯增加 top-k 更有效
+                      - listitem [ref=e173]: • 上下文组装时要保留来源和层级，避免片段脱离原语境
+                  - paragraph [ref=e175]:
+                    - strong [ref=e176]: 实践原则
+                    - text: ：先做“能解释为什么答成这样”的 RAG，再追求“看起来更聪明”的回答质量。
+              - generic [ref=e177]:
+                - heading "评估与治理" [level=3] [ref=e178]:
+                  - img [ref=e179]
+                  - text: 评估与治理
+                - list [ref=e182]:
+                  - listitem [ref=e183]:
+                    - text: •
+                    - strong [ref=e184]: 召回评估
+                    - text: ：问题对应的正确文档是否被检索出来
+                  - listitem [ref=e185]:
+                    - text: •
+                    - strong [ref=e186]: 答案评估
+                    - text: ：回答是否准确、完整、是否引用了正确来源
+                  - listitem [ref=e187]:
+                    - text: •
+                    - strong [ref=e188]: 失败复盘
+                    - text: ：区分是检索失败、上下文污染还是生成阶段幻觉
+                  - listitem [ref=e189]:
+                    - text: •
+                    - strong [ref=e190]: 权限治理
+                    - text: ：按知识域和用户身份隔离文档，避免越权召回
+            - generic [ref=e191]:
+              - heading "AI工具应用" [level=2] [ref=e192]:
+                - img [ref=e193]
+                - text: AI工具应用
+              - generic [ref=e195]:
+                - generic [ref=e196]:
+                  - heading "用 Claude 设计评估集" [level=3] [ref=e197]:
+                    - img [ref=e198]
+                    - text: 用 Claude 设计评估集
+                  - generic [ref=e200]:
+                    - paragraph [ref=e201]: 让 AI 从历史 FAQ、工单、文档目录中生成评估问题集，覆盖查询改写、模糊问法和长尾场景。
+                    - paragraph [ref=e202]: 重点不是“让 AI 评自己”，而是让 AI 帮你快速构造覆盖面更广的测试样本。
+                - generic [ref=e203]:
+                  - heading "用向量数据库和重排序模型优化召回" [level=3] [ref=e204]:
+                    - img [ref=e205]
+                    - text: 用向量数据库和重排序模型优化召回
+                  - list [ref=e207]:
+                    - listitem [ref=e208]: • 向量数据库负责初步召回，尽量保证“找得到”
+                    - listitem [ref=e209]: • 重排序模型负责把最相关的文档排到前面，保证“送得准”
+                    - listitem [ref=e210]: • 对失败样本做 Top-K 对比，比盲目调 Prompt 更有价值
+            - generic [ref=e211]:
+              - heading "实战案例" [level=2] [ref=e212]:
+                - img [ref=e213]
+                - text: 实战案例
+              - generic [ref=e216]:
+                - heading "案例1：企业内部知识库问答" [level=3] [ref=e217]
+                - generic [ref=e218]:
+                  - paragraph [ref=e219]: 目标：让员工用自然语言查询制度、流程、FAQ 和架构文档，并返回带出处的答案。
+                  - list [ref=e220]:
+                    - listitem [ref=e221]: • 语料来源：制度文档、Wiki、FAQ、SOP
+                    - listitem [ref=e222]: • 关键设计：文档分域、权限控制、版本更新时间
+                    - listitem [ref=e223]: • 核心指标：命中率、引用正确率、问题解决率
+              - generic [ref=e224]:
+                - heading "案例2：大型代码仓库检索增强助手" [level=3] [ref=e225]
+                - generic [ref=e226]:
+                  - paragraph [ref=e227]: 目标：结合代码注释、README、架构设计文档和模块边界信息，辅助开发者快速定位实现逻辑。
+                  - list [ref=e228]:
+                    - listitem [ref=e229]: • 语料来源：代码说明、架构文档、接口契约、变更记录
+                    - listitem [ref=e230]: • 关键设计：按模块和上下游关系组织上下文，而不是只塞代码片段
+                    - listitem [ref=e231]: • 失败重点：召回到过期文档、缺失模块边界、片段脱离语义上下文
+            - generic [ref=e233]:
+              - heading "学习成果检查清单" [level=2] [ref=e234]:
+                - img [ref=e235]
+                - text: 学习成果检查清单
+              - generic [ref=e238]:
+                - generic [ref=e239]:
+                  - img [ref=e240]
+                  - generic [ref=e243]: 能够根据场景设计 RAG 的语料、分块和检索链路
+                - generic [ref=e244]:
+                  - img [ref=e245]
+                  - generic [ref=e248]: 理解向量检索、混合检索和重排序的适用边界
+                - generic [ref=e249]:
+                  - img [ref=e250]
+                  - generic [ref=e253]: 能够建立最小可用的 RAG 评估集与失败复盘机制
+                - generic [ref=e254]:
+                  - img [ref=e255]
+                  - generic [ref=e258]: 知道如何处理来源引用、权限隔离和知识更新问题
+                - generic [ref=e259]:
+                  - img [ref=e260]
+                  - generic [ref=e263]: 能把 RAG 作为工程系统而不是单次 Prompt 技巧来设计
+            - generic [ref=e264]:
+              - link "上一场景：业务线切换实战" [ref=e265] [cursor=pointer]:
+                - /url: /practice/advanced/transition
+                - button "上一场景：业务线切换实战" [ref=e266]:
+                  - img
+                  - text: 上一场景：业务线切换实战
+              - link "下一场景：Agent 实战" [ref=e267] [cursor=pointer]:
+                - /url: /practice/advanced/agent
+                - button "下一场景：Agent 实战" [ref=e268]:
+                  - text: 下一场景：Agent 实战
+                  - img
+    - contentinfo [ref=e269]:
+      - generic [ref=e270]:
+        - generic [ref=e271]:
+          - generic [ref=e272]:
+            - generic [ref=e273]:
+              - generic [ref=e275]: AI
+              - generic [ref=e276]: EasyGoVibeCoding
+            - paragraph [ref=e277]: AI 编程工具不是魔法，是工程。理解机制才能驾驭工具。
+            - paragraph [ref=e278]: 版本 v1.0 | 最后更新：--
+          - generic [ref=e279]:
+            - generic [ref=e280]:
+              - heading "课程" [level=3] [ref=e281]
+              - list [ref=e282]:
+                - listitem [ref=e283]:
+                  - link "基础篇" [ref=e284] [cursor=pointer]:
+                    - /url: /basics
+                    - text: 基础篇
+                - listitem [ref=e286]:
+                  - link "进阶篇" [ref=e287] [cursor=pointer]:
+                    - /url: /advanced
+                    - text: 进阶篇
+                - listitem [ref=e289]:
+                  - link "工具篇" [ref=e290] [cursor=pointer]:
+                    - /url: /tools
+                    - text: 工具篇
+                - listitem [ref=e292]:
+                  - link "架构篇" [ref=e293] [cursor=pointer]:
+                    - /url: /architecture
+                    - text: 架构篇
+                - listitem [ref=e295]:
+                  - link "实践篇" [ref=e296] [cursor=pointer]:
+                    - /url: /practice
+                    - text: 实践篇
+                - listitem [ref=e298]:
+                  - link "团队篇" [ref=e299] [cursor=pointer]:
+                    - /url: /team
+                    - text: 团队篇
+            - generic [ref=e301]:
+              - heading "资源" [level=3] [ref=e302]
+              - list [ref=e303]:
+                - listitem [ref=e304]:
+                  - link "生态导航" [ref=e305] [cursor=pointer]:
+                    - /url: /ecosystem
+                - listitem [ref=e306]:
+                  - link "优质资源" [ref=e307] [cursor=pointer]:
+                    - /url: /resources
+                - listitem [ref=e308]:
+                  - link "更新日志" [ref=e309] [cursor=pointer]:
+                    - /url: "#"
+                - listitem [ref=e310]:
+                  - link "关于我们" [ref=e311] [cursor=pointer]:
+                    - /url: "#"
+            - generic [ref=e312]:
+              - heading "工具" [level=3] [ref=e313]
+              - list [ref=e314]:
+                - listitem [ref=e315]:
+                  - link "Cursor" [ref=e316] [cursor=pointer]:
+                    - /url: "#"
+                - listitem [ref=e317]:
+                  - link "GitHub Copilot" [ref=e318] [cursor=pointer]:
+                    - /url: "#"
+                - listitem [ref=e319]:
+                  - link "Claude Code" [ref=e320] [cursor=pointer]:
+                    - /url: "#"
+                - listitem [ref=e321]:
+                  - link "Fabric" [ref=e322] [cursor=pointer]:
+                    - /url: "#"
+        - generic [ref=e323]:
+          - generic [ref=e325]:
+            - generic [ref=e326]:
+              - img [ref=e327]
+              - generic [ref=e330]: 总访问量：
+              - generic [ref=e331]: "--"
+            - generic [ref=e334]:
+              - img [ref=e335]
+              - generic [ref=e340]: 访客数：
+              - generic [ref=e341]: "--"
+            - generic [ref=e344]:
+              - img [ref=e345]
+              - generic [ref=e348]: 已运行：
+              - generic [ref=e349]: 90 天 16 小时 23 分 19 秒
+          - paragraph [ref=e350]: © 2026 EasyGoVibeCoding. All rights reserved.
+  - button "Open Next.js Dev Tools" [ref=e356] [cursor=pointer]:
+    - img [ref=e357]
+  - alert [ref=e360]

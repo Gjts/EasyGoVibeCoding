@@ -1,0 +1,28 @@
+#:schema node_modules/wrangler/config-schema.json
+
+name = "model-updater"
+main = "src/index.ts"
+compatibility_date = "2026-04-20"
+compatibility_flags = ["nodejs_compat"]
+
+# 与 Pages 站点 (easy-go-vibe-coding) 复用同一个 KV namespace，
+# 以便 Pages Function 能直接读到 Worker 写入的 models:latest
+[[kv_namespaces]]
+binding = "SITE_STATS_KV"
+id = "04e02c1e72b44bee95ad85eb96c6da07"
+preview_id = "04e02c1e72b44bee95ad85eb96c6da07"
+
+# 每 6 小时触发一次（UTC 0/6/12/18 点整）
+[triggers]
+crons = ["0 */6 * * *"]
+
+[observability]
+enabled = true
+
+# 可切换的 LLM provider，默认 perplexity
+# 运行期密钥通过 `wrangler secret put <NAME>` 注入，不落库
+[vars]
+LLM_PROVIDER = "perplexity"
+LLM_MODEL = "sonar-pro"
+# 历史条目保留月数（超过则自动清理）
+HISTORY_MONTHS_TO_KEEP = "6"

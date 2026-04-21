@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react"
 import { useRouter } from "next/navigation"
-import { Search, FileText, BookOpen, Layers, Code, Users, Sparkles } from "lucide-react"
+import { Search, FileText, BookOpen, Layers, Code, Users, Sparkles, GitBranch, Link2, Bot } from "lucide-react"
 import {
   Dialog,
   DialogContent,
@@ -46,7 +46,13 @@ const searchData: SearchItem[] = [
   { id: "advanced-deployment", title: "部署", description: "应用部署与运维", href: "/advanced/deployment", category: "进阶篇", icon: <Code className="h-4 w-4" />, gradient: "from-emerald-400 to-green-400" },
   { id: "advanced-ai-native", title: "AI Native 模式", description: "AI Native 架构模式", href: "/advanced/ai-native-patterns", category: "进阶篇", icon: <Code className="h-4 w-4" />, gradient: "from-emerald-400 to-green-400" },
   { id: "advanced-ai-arch", title: "AI 架构模式", description: "AI 架构设计模式", href: "/advanced/ai-architecture-patterns", category: "进阶篇", icon: <Code className="h-4 w-4" />, gradient: "from-emerald-400 to-green-400" },
-  
+  { id: "advanced-ai-frameworks", title: "AI 应用框架全景", description: "LangChain · LlamaIndex · LangGraph · AutoGPT · MetaGPT 五大框架总览", href: "/advanced/ai-frameworks", category: "进阶篇", icon: <Layers className="h-4 w-4" />, gradient: "from-emerald-400 to-green-400", keywords: ["AI框架", "LangChain", "LlamaIndex", "LangGraph", "AutoGPT", "MetaGPT", "Agent", "RAG", "框架对比", "Code Map"] },
+  { id: "advanced-ai-frameworks-langchain", title: "LangChain 详解", description: "AI 应用编排框架：Chain + Agent + Tools + Memory", href: "/advanced/ai-frameworks/langchain", category: "AI 应用框架", icon: <Link2 className="h-4 w-4" />, gradient: "from-rose-400 to-pink-400", keywords: ["LangChain", "Chain", "链式调用", "Agent", "ReAct", "工具调用", "Prompt", "编排"] },
+  { id: "advanced-ai-frameworks-llamaindex", title: "LlamaIndex 详解", description: "数据连接与 RAG 引擎：Data → Index → Retrieve → Generate", href: "/advanced/ai-frameworks/llamaindex", category: "AI 应用框架", icon: <BookOpen className="h-4 w-4" />, gradient: "from-sky-400 to-blue-400", keywords: ["LlamaIndex", "RAG", "向量检索", "Embedding", "知识库", "Index", "Retriever", "Query Engine"] },
+  { id: "advanced-ai-frameworks-langgraph", title: "LangGraph 详解", description: "基于图的 Agent 编排：状态 · 节点 · 边 · 检查点", href: "/advanced/ai-frameworks/langgraph", category: "AI 应用框架", icon: <GitBranch className="h-4 w-4" />, gradient: "from-violet-400 to-purple-400", keywords: ["LangGraph", "StateGraph", "Node", "Edge", "State", "Checkpoint", "多智能体", "循环", "条件分支", "Human-in-the-loop"] },
+  { id: "advanced-ai-frameworks-autogpt", title: "AutoGPT 详解", description: "自主执行智能体：Goal → Plan → Execute → Reflect", href: "/advanced/ai-frameworks/autogpt", category: "AI 应用框架", icon: <Bot className="h-4 w-4" />, gradient: "from-amber-400 to-orange-400", keywords: ["AutoGPT", "自主Agent", "自动执行", "目标驱动", "反思", "循环", "工具使用"] },
+  { id: "advanced-ai-frameworks-metagpt", title: "MetaGPT 详解", description: "多智能体协作框架：Roles + SOP + 团队模拟", href: "/advanced/ai-frameworks/metagpt", category: "AI 应用框架", icon: <Users className="h-4 w-4" />, gradient: "from-emerald-400 to-teal-400", keywords: ["MetaGPT", "多智能体", "Multi-Agent", "SOP", "角色", "PM", "Architect", "Engineer", "QA", "协作"] },
+
   // 架构篇
   { id: "architecture", title: "架构篇", description: "AI 大模型架构解析", href: "/architecture", category: "课程", icon: <Layers className="h-4 w-4" />, gradient: "from-indigo-400 to-purple-400" },
   { id: "arch-transformer-core", title: "Transformer 核心", description: "Transformer 架构核心", href: "/architecture/transformer-core", category: "架构篇", icon: <Layers className="h-4 w-4" />, gradient: "from-indigo-400 to-purple-400" },

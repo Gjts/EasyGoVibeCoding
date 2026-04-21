@@ -2,6 +2,7 @@ import { CourseLayout } from "@/components/course/course-layout"
 import Link from "next/link"
 import { ArrowLeft, ArrowRight, Target, Table, TrendingUp, Briefcase, Zap } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { ModelTierList } from "@/components/interactive/model-tier-list"
 
 const chapters = [
   { title: "工具篇概述", href: "/tools" },
@@ -177,48 +178,8 @@ export default function SelectionPage() {
             根据任务复杂度选择合适的模型，平衡成本和质量。
           </p>
 
-          <div className="space-y-4 mb-6">
-            <div className="p-6 rounded-xl border border-primary/50 bg-primary/5">
-              <h3 className="font-semibold text-foreground mb-3">第一梯队（复杂任务首选）</h3>
-              <p className="text-sm text-muted-foreground mb-3">
-                适合复杂推理、架构设计、大型代码库分析等任务：
-              </p>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>• <strong>Claude Opus 4.5</strong>：编程能力最强（SWE-bench 80.9%），200K上下文</li>
-                <li>• <strong>GPT-5</strong>：数学推理最强（AIME 94.6%），100万上下文</li>
-                <li>• <strong>Gemini 3 Pro</strong>：多模态最强，1M-3M tokens超长上下文</li>
-                <li>• <strong>使用建议</strong>：只在复杂任务时使用，避免成本浪费</li>
-              </ul>
-            </div>
+          <ModelTierList />
 
-            <div className="p-6 rounded-xl border border-border bg-card">
-              <h3 className="font-semibold text-foreground mb-3">第二梯队（日常开发）</h3>
-              <p className="text-sm text-muted-foreground mb-3">
-                适合日常代码编写、代码审查、文档生成等任务：
-              </p>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>• <strong>Claude Sonnet 4.5</strong>：平衡性能，200K上下文</li>
-                <li>• <strong>GPT-4.1</strong>：编程增强（SWE-bench 54.6%），100万上下文</li>
-                <li>• <strong>Gemini 3</strong>：多模态支持，长上下文</li>
-                <li>• <strong>Kimi K2-thinking</strong>：国产模型，思考能力强</li>
-                <li>• <strong>GLM-4.6</strong>：智谱AI，中文优化</li>
-                <li>• <strong>使用建议</strong>：日常开发的主力模型</li>
-              </ul>
-            </div>
-
-            <div className="p-6 rounded-xl border border-border bg-card">
-              <h3 className="font-semibold text-foreground mb-3">第三梯队（轻量任务）</h3>
-              <p className="text-sm text-muted-foreground mb-3">
-                适合简单补全、格式化、基础问答等任务：
-              </p>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>• Qwen3</li>
-                <li>• SWE</li>
-                <li>• Grok4</li>
-                <li>• <strong>使用建议</strong>：成本敏感场景，简单任务</li>
-              </ul>
-            </div>
-          </div>
 
           <div className="p-6 rounded-xl border border-border bg-card">
             <h3 className="font-semibold text-foreground mb-3">选型建议</h3>

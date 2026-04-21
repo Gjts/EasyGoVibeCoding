@@ -16,7 +16,7 @@ export default function DevBasicsPage() {
       {/* Header */}
       <div className="mb-12">
         <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm text-primary mb-4">
-          第 6 章
+          第 7 章
         </div>
         <h1 className="text-4xl font-bold text-foreground mb-4">
           开发常识
@@ -1270,9 +1270,9 @@ jobs:
       {/* Navigation */}
       <div className="flex items-center justify-between pt-8 border-t border-border mt-12">
         <Button variant="ghost" asChild>
-          <Link href="/advanced/ai-architecture-patterns" className="flex items-center gap-2">
+          <Link href="/advanced/ai-frameworks" className="flex items-center gap-2">
             <ArrowLeft className="h-4 w-4" />
-            上一章：AI 适配架构范式
+            上一章：AI 应用框架全景
           </Link>
         </Button>
         <Button asChild>
