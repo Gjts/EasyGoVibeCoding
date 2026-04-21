@@ -2,6 +2,7 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { PlayfulHeroSection } from "@/components/home/playful-hero-section"
 import { ClaymorphismCatalog } from "@/components/home/claymorphism-catalog"
+import { AIFrameworksSpotlight } from "@/components/home/ai-frameworks-spotlight"
 import { ProgressDemo } from "@/components/home/progress-demo"
 import { LatestModelsPanel } from "@/components/home/latest-models-panel"
 import { TestimonialsSection } from "@/components/home/testimonials-section"
@@ -15,6 +16,7 @@ export default function HomePage() {
       <main>
         <PlayfulHeroSection />
         <ClaymorphismCatalog />
+        <AIFrameworksSpotlight />
         <ProgressDemo />
         <LatestModelsPanel />
         <TestimonialsSection />

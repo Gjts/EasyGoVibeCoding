@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-20T00:00:00.000Z",
+  "updatedAt": "2026-04-21T00:00:00.000Z",
   "source": "seed",
   "models": [
     {
@@ -19,6 +19,38 @@
       "description": "Anthropic 最新旗舰模型，编程能力与长上下文稳定性最佳"
     },
     {
+      "provider": "OpenAI",
+      "name": "GPT-5.4",
+      "releaseDate": "2026-03-18",
+      "contextWindow": "1M",
+      "highlights": [
+        "数学与科学推理刷新 SOTA（AIME 2026 96.8%）",
+        "SWE-bench Verified 79.1%",
+        "原生多模态 + 工具调用成本下降 30%"
+      ],
+      "tier": 1,
+      "url": "https://openai.com",
+      "category": "model",
+      "tags": ["OpenAI", "推理", "100万上下文"],
+      "description": "OpenAI 2026 旗舰迭代，推理与多模态全面升级"
+    },
+    {
+      "provider": "Google",
+      "name": "Gemini 3.1 Pro",
+      "releaseDate": "2026-02-12",
+      "contextWindow": "2M-3M",
+      "highlights": [
+        "多模态理解全面领先（中文 99.1%，视频 90.2%）",
+        "原生 3M tokens 超长上下文",
+        "相比 Gemini 3 Pro 再降价 25%"
+      ],
+      "tier": 1,
+      "url": "https://gemini.google.com",
+      "category": "model",
+      "tags": ["Google", "多模态", "超长上下文"],
+      "description": "Google 2026 旗舰，多模态与长上下文的最强组合"
+    },
+    {
       "provider": "Anthropic",
       "name": "Claude Sonnet 4.7",
       "releaseDate": "2026-04-15",
@@ -29,6 +61,38 @@
       "category": "model",
       "tags": ["Anthropic", "平衡", "200K上下文"],
       "description": "Anthropic 平衡模型，日常开发主力"
+    },
+    {
+      "provider": "OpenAI",
+      "name": "GPT-5",
+      "releaseDate": "2025-08-07",
+      "contextWindow": "1M",
+      "highlights": [
+        "数学推理标杆（AIME 2025 94.6%）",
+        "SWE-bench 74.9%",
+        "Aider-Polyglot 88%"
+      ],
+      "tier": 2,
+      "url": "https://openai.com",
+      "category": "model",
+      "tags": ["OpenAI", "数学", "100万上下文"],
+      "description": "OpenAI 2025 旗舰，仍是性价比推理首选"
+    },
+    {
+      "provider": "Google",
+      "name": "Gemini 3 Pro",
+      "releaseDate": "2025-11-18",
+      "contextWindow": "1M-3M",
+      "highlights": [
+        "多模态能力成熟（中文 98.5%，视频 87.6%）",
+        "最高 3M tokens 上下文",
+        "成本低于 Claude 约 60%"
+      ],
+      "tier": 2,
+      "url": "https://gemini.google.com",
+      "category": "model",
+      "tags": ["Google", "多模态", "长上下文"],
+      "description": "Google 2025 旗舰，多模态日常开发仍是首选"
     },
     {
       "provider": "Anthropic",
@@ -43,112 +107,52 @@
       "description": "Anthropic 轻量模型，简单任务首选"
     },
     {
-      "provider": "OpenAI",
-      "name": "GPT-5",
-      "releaseDate": "2025-08-07",
-      "contextWindow": "1M",
-      "highlights": [
-        "数学推理最强（AIME 2025 94.6%）",
-        "SWE-bench 74.9%",
-        "Aider-Polyglot 88%"
-      ],
-      "tier": 1,
-      "url": "https://openai.com",
-      "category": "model",
-      "tags": ["OpenAI", "数学", "100万上下文"],
-      "description": "OpenAI 最新旗舰，数学与通用推理最强"
-    },
-    {
-      "provider": "OpenAI",
-      "name": "GPT-4.1",
-      "releaseDate": "2025-04-15",
-      "contextWindow": "1M",
-      "highlights": [
-        "编程增强（SWE-bench 54.6%）",
-        "比 GPT-4o 便宜 26%",
-        "百万上下文无额外费用"
-      ],
-      "tier": 2,
-      "url": "https://openai.com",
-      "category": "model",
-      "tags": ["OpenAI", "编程", "100万上下文"],
-      "description": "OpenAI 编程增强模型，性价比高"
-    },
-    {
-      "provider": "Google",
-      "name": "Gemini 3 Pro",
-      "releaseDate": "2025-11-18",
-      "contextWindow": "1M-3M",
-      "highlights": [
-        "多模态最强（中文 98.5%，视频 87.6%）",
-        "超长上下文（最高 3M tokens）",
-        "比 Claude 便宜约 60%"
-      ],
-      "tier": 1,
-      "url": "https://gemini.google.com",
-      "category": "model",
-      "tags": ["Google", "多模态", "超长上下文"],
-      "description": "Google 最新旗舰，多模态与长上下文最强"
-    },
-    {
-      "provider": "Google",
-      "name": "Gemini 3",
-      "releaseDate": "2025-11-18",
-      "contextWindow": "1M",
-      "highlights": ["多模态支持", "长上下文", "性价比高"],
-      "tier": 2,
-      "url": "https://gemini.google.com",
-      "category": "model",
-      "tags": ["Google", "多模态", "长上下文"],
-      "description": "Google 平衡模型，多模态日常开发"
-    },
-    {
       "provider": "Moonshot",
-      "name": "Kimi K2-thinking",
-      "releaseDate": "2025-10-20",
-      "contextWindow": "256K",
-      "highlights": ["国产推理模型", "深度思考能力强", "中文场景优化"],
+      "name": "Kimi K2.5-thinking",
+      "releaseDate": "2026-02-28",
+      "contextWindow": "512K",
+      "highlights": ["国产推理旗舰", "深度思考链路更稳", "中文 Agent 场景优化"],
       "tier": 2,
       "url": "https://kimi.moonshot.cn",
       "category": "model",
       "tags": ["Moonshot", "推理", "中文优化"],
-      "description": "Moonshot 推理旗舰，国产模型代表"
+      "description": "Moonshot 2026 推理迭代，国产长思考代表"
     },
     {
       "provider": "Zhipu",
-      "name": "GLM-4.6",
-      "releaseDate": "2025-09-15",
-      "contextWindow": "128K",
-      "highlights": ["中文优化", "代码能力强", "国产合规"],
+      "name": "GLM-5",
+      "releaseDate": "2026-01-22",
+      "contextWindow": "256K",
+      "highlights": ["中文对齐升级", "代码能力显著增强", "国产合规首选"],
       "tier": 2,
       "url": "https://open.bigmodel.cn",
       "category": "model",
       "tags": ["Zhipu", "中文", "国产合规"],
-      "description": "智谱 AI 平衡模型，国产合规首选"
+      "description": "智谱 AI 2026 旗舰，国产合规主力"
     },
     {
       "provider": "Alibaba",
-      "name": "Qwen3",
-      "releaseDate": "2025-08-01",
-      "contextWindow": "128K",
-      "highlights": ["开源友好", "成本极低", "中文优化"],
+      "name": "Qwen3.5",
+      "releaseDate": "2026-03-05",
+      "contextWindow": "256K",
+      "highlights": ["开源友好", "部署成本极低", "中文与推理双提升"],
       "tier": 3,
       "url": "https://qwen.alibaba.com",
       "category": "model",
       "tags": ["Alibaba", "开源", "低成本"],
-      "description": "阿里开源模型，本地部署与低成本首选"
+      "description": "阿里 2026 开源旗舰，本地部署首选"
     },
     {
       "provider": "DeepSeek",
-      "name": "DeepSeek V3",
-      "releaseDate": "2025-07-10",
-      "contextWindow": "128K",
-      "highlights": ["开源友好", "成本低", "代码能力强"],
+      "name": "DeepSeek V3.2",
+      "releaseDate": "2026-01-10",
+      "contextWindow": "256K",
+      "highlights": ["开源领先", "代码能力对标 GPT-5", "推理成本极低"],
       "tier": 3,
       "url": "https://deepseek.com",
       "category": "model",
       "tags": ["开源", "低成本", "代码"],
-      "description": "DeepSeek 开源模型，代码能力强且成本低"
+      "description": "DeepSeek 2026 开源旗舰，代码能力对标闭源 SOTA"
     }
   ],
   "news": [
@@ -160,25 +164,53 @@
       "url": "https://www.anthropic.com/news"
     },
     {
+      "date": "2026-03-18",
+      "provider": "OpenAI",
+      "title": "GPT-5.4 发布",
+      "summary": "GPT-5.4 刷新 AIME 2026（96.8%）与 SWE-bench Verified（79.1%），多模态与工具调用成本下降约 30%。",
+      "url": "https://openai.com"
+    },
+    {
+      "date": "2026-03-05",
+      "provider": "Alibaba",
+      "title": "Qwen3.5 开源版发布",
+      "summary": "阿里发布 Qwen3.5 开源模型，中文与推理能力双提升，继续刷新本地部署性价比。",
+      "url": "https://qwen.alibaba.com"
+    },
+    {
+      "date": "2026-02-28",
+      "provider": "Moonshot",
+      "title": "Kimi K2.5-thinking 上线",
+      "summary": "Moonshot 发布 K2.5-thinking，长思考链路更稳定，面向中文 Agent 场景做了针对性优化。",
+      "url": "https://kimi.moonshot.cn"
+    },
+    {
+      "date": "2026-02-12",
+      "provider": "Google",
+      "title": "Gemini 3.1 Pro 正式发布",
+      "summary": "Gemini 3.1 Pro 在多模态与超长上下文上继续领先（中文 99.1%，视频 90.2%），相比 3 Pro 再降价 25%。",
+      "url": "https://gemini.google.com"
+    },
+    {
+      "date": "2026-01-22",
+      "provider": "Zhipu",
+      "title": "GLM-5 发布",
+      "summary": "智谱 AI 发布 GLM-5，中文对齐与代码能力双升级，持续领跑国产合规场景。",
+      "url": "https://open.bigmodel.cn"
+    },
+    {
+      "date": "2026-01-10",
+      "provider": "DeepSeek",
+      "title": "DeepSeek V3.2 开源",
+      "summary": "DeepSeek 开源 V3.2，代码能力对标 GPT-5，推理成本继续下探。",
+      "url": "https://deepseek.com"
+    },
+    {
       "date": "2025-11-24",
       "provider": "Anthropic",
       "title": "Claude Opus 4.5 与 Haiku 4.5 发布",
       "summary": "Opus 4.5 刷新 SWE-bench 记录（80.9%），Haiku 4.5 聚焦成本优化。",
       "url": "https://www.anthropic.com/news"
-    },
-    {
-      "date": "2025-11-18",
-      "provider": "Google",
-      "title": "Gemini 3 / Gemini 3 Pro 发布",
-      "summary": "Gemini 3 Pro 上下文窗口扩至 3M，多模态与中文能力显著提升，成本持续下降。",
-      "url": "https://gemini.google.com"
-    },
-    {
-      "date": "2025-08-07",
-      "provider": "OpenAI",
-      "title": "GPT-5 发布",
-      "summary": "GPT-5 聚焦数学与科学推理，AIME 2025 94.6%，SWE-bench 74.9%。",
-      "url": "https://openai.com"
     }
   ]
 }
