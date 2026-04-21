@@ -149,13 +149,13 @@ export function AIFrameworksSpotlight() {
   return (
     <section
       ref={sectionRef}
-      className="py-24 sm:py-32 bg-gradient-to-br from-violet-50 via-rose-50 to-amber-50"
+      className="py-16 sm:py-20 bg-gradient-to-br from-violet-50 via-rose-50 to-amber-50"
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Section header */}
         <div
           className={cn(
-            "mx-auto max-w-3xl text-center mb-16 transition-all duration-700 ease-out",
+            "mx-auto max-w-3xl text-center mb-10 transition-all duration-700 ease-out",
             visible
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-4",
@@ -267,6 +267,9 @@ export function AIFrameworksSpotlight() {
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]"
+                      // OCR 系など一部ブラウザ拡張が img に data-* を注入して
+                      // hydration mismatch を起こすため、画像だけ警告を抑制
+                      suppressHydrationWarning
                     />
                     <div
                       className={cn(
