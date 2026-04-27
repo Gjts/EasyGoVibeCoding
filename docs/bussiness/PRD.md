@@ -326,11 +326,11 @@
 - GitHub Copilot：代码补全技巧、相关文件上下文、团队协作
 - Kiro实战：
   - 安装与配置（Steering Files）
-  - 免费各个Claude Opus 4.5使用指南
+  - 免费各个Claude Opus 4.7使用指南
   - CLI与IDE联动工作流
 - Antigravity实战：
   - Google Agentic Coding环境搭建
-  - Claude Opus 4.5 + Gemini 混合调用技巧
+  - Claude Opus 4.7 + Gemini 3.1 混合调用技巧
   - 任务视图与Artifacts使用
 - 其他IDE工具：Zed、Devin、LazyVim + AI、Neovim + Copilot等对比
 
@@ -375,9 +375,9 @@
 - REST API与企业集成
 
 **06. 模型性能分级参考**
-- 第一梯队（复杂任务首选）：Claude Opus 4.5（编程最强，SWE-bench 80.9%）、GPT-5（数学最强，AIME 94.6%）、Gemini 3 Pro（多模态最强，1M-3M tokens）
-- 第二梯队（日常开发）：Claude Sonnet 4.5、GPT-4.1（编程增强，SWE-bench 54.6%）、Gemini 3、Kimi K2-thinking、GLM-4.6
-- 第三梯队（轻量任务）：Qwen3、SWE、Grok4、Claude Haiku 4.5
+- 第一梯队（复杂任务首选）：GPT-5.5（真实工作、Agentic Coding、电脑使用和知识工作增强）、Claude Opus 4.7（编码、Agent、视觉和复杂多步骤任务增强）、Gemini 3.1 Pro（复杂推理与多模态预览）
+- 第二梯队（日常开发）：Claude Sonnet 4.6、Grok 4.20 Reasoning、DeepSeek V4-Pro、GLM-5.1、Kimi K2.6、Qwen 3.6 Plus、Muse Spark
+- 第三梯队（轻量任务）：DeepSeek V4-Flash、Gemini 3.1 Flash-Lite、Grok 4.1 Fast Reasoning、Claude Haiku 4.5
 - 选型建议：复杂任务只用第一梯队，日常开发用第二梯队，成本敏感用第三梯队
 
 **07. 辅助开发工具实战**
@@ -629,12 +629,12 @@
 - 工具对比矩阵（按类型/功能/定价/场景筛选）
 
 **02. 大模型提供商导航**
-- Anthropic（Claude系列）：Claude Opus 4.5（2025年11月，编程最强）、Claude Sonnet 4.5、Claude Haiku 4.5
-- OpenAI（GPT系列）：GPT-5（2025年8月，数学最强）、GPT-4.1（编程增强）、GPT-4 Turbo
-- Google（Gemini系列）：Gemini 3 Pro（2025年11月，多模态最强，1M-3M tokens）、Gemini 3、Gemini 2.5 Pro
-- 国产模型：Kimi K2（月之暗面）、GLM-4.6（智谱AI）、Qwen3（通义千问）、DeepSeek、MiniMax M2
-- 其他提供商：Mistral、Groq、Together AI、Perplexity、Grok4
-- 模型选择指南、模型对比表、模型性能分级参考（第一梯队：Claude Opus 4.5、GPT-5、Gemini 3 Pro）
+- Anthropic（Claude系列）：Claude Opus 4.7（2026年4月，最新 GA 旗舰）、Claude Sonnet 4.6、Claude Haiku 4.5
+- OpenAI（GPT系列）：GPT-5.5（2026年4月，最新旗舰，强化 Agentic Coding、电脑使用和知识工作）、GPT-5.5 Pro、GPT-5.4（上一代主线）、GPT-5.3-Codex
+- Google（Gemini系列）：Gemini 3.1 Pro（2026年2月，复杂推理预览）、Gemini 3.1 Flash-Lite、Gemini 3 Flash
+- 国产模型：Kimi K2.6（月之暗面）、GLM-5.1（智谱AI）、Qwen 3.6 Plus（通义千问）、DeepSeek V4-Pro / V4-Flash、MiniMax M2
+- 其他提供商：xAI Grok 4.20 / Grok Voice Think Fast、Mistral、Groq、Together AI、Perplexity、Meta Muse Spark
+- 模型选择指南、模型对比表、模型性能分级参考（第一梯队：GPT-5.5、Claude Opus 4.7、Gemini 3.1 Pro）
 
 **03. MCP Servers导航**
 - 官方MCP Servers（文件系统、GitHub、数据库）

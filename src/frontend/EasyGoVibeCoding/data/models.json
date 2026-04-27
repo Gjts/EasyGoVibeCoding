@@ -1,216 +1,300 @@
 {
-  "updatedAt": "2026-04-21T00:00:00.000Z",
-  "source": "seed",
+  "updatedAt": "2026-04-27T00:00:00.000Z",
+  "source": "seed-official-2026-04-27-gpt-5-5",
   "models": [
     {
       "provider": "Anthropic",
       "name": "Claude Opus 4.7",
-      "releaseDate": "2026-04-15",
-      "contextWindow": "200K",
+      "releaseDate": "2026-04-16",
+      "contextWindow": "1M",
       "highlights": [
-        "编程能力持续领先（SWE-bench 82.3%）",
-        "复杂推理与架构设计首选",
-        "Skill / Agent / MCP 生态完善"
+        "官方 GA，面向编码、Agent 与复杂多步骤任务",
+        "高分辨率视觉理解升级",
+        "API 型号：claude-opus-4-7"
       ],
       "tier": 1,
-      "url": "https://www.anthropic.com/news",
+      "url": "https://www.anthropic.com/claude/opus",
       "category": "model",
-      "tags": ["Anthropic", "编程", "200K上下文"],
-      "description": "Anthropic 最新旗舰模型，编程能力与长上下文稳定性最佳"
+      "tags": ["Anthropic", "编程", "Agent", "1M上下文"],
+      "description": "Anthropic 最新 GA 旗舰，适合复杂软件工程、长程 Agent 与专业知识工作"
     },
     {
       "provider": "OpenAI",
-      "name": "GPT-5.4",
-      "releaseDate": "2026-03-18",
-      "contextWindow": "1M",
+      "name": "GPT-5.5",
+      "releaseDate": "2026-04-23",
+      "contextWindow": "未公开",
       "highlights": [
-        "数学与科学推理刷新 SOTA（AIME 2026 96.8%）",
-        "SWE-bench Verified 79.1%",
-        "原生多模态 + 工具调用成本下降 30%"
+        "OpenAI 最新旗舰，面向真实工作和长程 Agent",
+        "编码、在线研究、数据分析、文档表格和软件操作增强",
+        "发布页 2026-04-24 更新称 GPT-5.5 / Pro 已支持 API"
       ],
       "tier": 1,
-      "url": "https://openai.com",
+      "url": "https://openai.com/index/introducing-gpt-5-5/",
       "category": "model",
-      "tags": ["OpenAI", "推理", "100万上下文"],
-      "description": "OpenAI 2026 旗舰迭代，推理与多模态全面升级"
+      "tags": ["OpenAI", "推理", "Codex", "Agent"],
+      "description": "OpenAI 最新主线旗舰，适合复杂软件工程、电脑使用、知识工作和科研分析"
     },
     {
       "provider": "Google",
       "name": "Gemini 3.1 Pro",
-      "releaseDate": "2026-02-12",
-      "contextWindow": "2M-3M",
+      "releaseDate": "2026-02-19",
+      "contextWindow": "1M级",
       "highlights": [
-        "多模态理解全面领先（中文 99.1%，视频 90.2%）",
-        "原生 3M tokens 超长上下文",
-        "相比 Gemini 3 Pro 再降价 25%"
+        "3.1 Pro preview，强化复杂推理",
+        "面向 Gemini API、Vertex AI 与 Gemini 产品滚动",
+        "适合综合数据、复杂解释与创意编码"
       ],
       "tier": 1,
-      "url": "https://gemini.google.com",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-1-pro/",
       "category": "model",
-      "tags": ["Google", "多模态", "超长上下文"],
-      "description": "Google 2026 旗舰，多模态与长上下文的最强组合"
+      "tags": ["Google", "多模态", "推理", "预览"],
+      "description": "Google Gemini 3 系列的 Pro 级推理升级，适合复杂多模态与 Agent 原型"
     },
     {
       "provider": "Anthropic",
-      "name": "Claude Sonnet 4.7",
-      "releaseDate": "2026-04-15",
-      "contextWindow": "200K",
-      "highlights": ["平衡性能", "日常开发首选", "成本友好"],
-      "tier": 2,
-      "url": "https://www.anthropic.com/news",
-      "category": "model",
-      "tags": ["Anthropic", "平衡", "200K上下文"],
-      "description": "Anthropic 平衡模型，日常开发主力"
-    },
-    {
-      "provider": "OpenAI",
-      "name": "GPT-5",
-      "releaseDate": "2025-08-07",
-      "contextWindow": "1M",
+      "name": "Claude Sonnet 4.6",
+      "releaseDate": "2026-02-17",
+      "contextWindow": "1M beta",
       "highlights": [
-        "数学推理标杆（AIME 2025 94.6%）",
-        "SWE-bench 74.9%",
-        "Aider-Polyglot 88%"
+        "日常开发与生产 Agent 的主力平衡模型",
+        "编码、电脑使用、长上下文推理全面升级",
+        "API 型号：claude-sonnet-4-6"
       ],
       "tier": 2,
-      "url": "https://openai.com",
+      "url": "https://www.anthropic.com/claude/sonnet",
       "category": "model",
-      "tags": ["OpenAI", "数学", "100万上下文"],
-      "description": "OpenAI 2025 旗舰，仍是性价比推理首选"
+      "tags": ["Anthropic", "平衡", "Agent", "1M上下文"],
+      "description": "Anthropic 最新 Sonnet，面向大规模日常开发、Agent 与企业工作流"
     },
     {
-      "provider": "Google",
-      "name": "Gemini 3 Pro",
-      "releaseDate": "2025-11-18",
-      "contextWindow": "1M-3M",
+      "provider": "xAI",
+      "name": "Grok 4.20 Reasoning",
+      "releaseDate": "2026-03-10",
+      "contextWindow": "2M",
       "highlights": [
-        "多模态能力成熟（中文 98.5%，视频 87.6%）",
-        "最高 3M tokens 上下文",
-        "成本低于 Claude 约 60%"
+        "xAI API 最新旗舰推理模型",
+        "强调 Agent 工具调用、速度与严格指令遵循",
+        "2M 上下文窗口"
       ],
       "tier": 2,
-      "url": "https://gemini.google.com",
+      "url": "https://x.ai/api",
       "category": "model",
-      "tags": ["Google", "多模态", "长上下文"],
-      "description": "Google 2025 旗舰，多模态日常开发仍是首选"
-    },
-    {
-      "provider": "Anthropic",
-      "name": "Claude Haiku 4.5",
-      "releaseDate": "2025-11-24",
-      "contextWindow": "200K",
-      "highlights": ["快速响应", "成本优化", "轻量任务"],
-      "tier": 3,
-      "url": "https://www.anthropic.com/news",
-      "category": "model",
-      "tags": ["Anthropic", "轻量", "低成本"],
-      "description": "Anthropic 轻量模型，简单任务首选"
-    },
-    {
-      "provider": "Moonshot",
-      "name": "Kimi K2.5-thinking",
-      "releaseDate": "2026-02-28",
-      "contextWindow": "512K",
-      "highlights": ["国产推理旗舰", "深度思考链路更稳", "中文 Agent 场景优化"],
-      "tier": 2,
-      "url": "https://kimi.moonshot.cn",
-      "category": "model",
-      "tags": ["Moonshot", "推理", "中文优化"],
-      "description": "Moonshot 2026 推理迭代，国产长思考代表"
-    },
-    {
-      "provider": "Zhipu",
-      "name": "GLM-5",
-      "releaseDate": "2026-01-22",
-      "contextWindow": "256K",
-      "highlights": ["中文对齐升级", "代码能力显著增强", "国产合规首选"],
-      "tier": 2,
-      "url": "https://open.bigmodel.cn",
-      "category": "model",
-      "tags": ["Zhipu", "中文", "国产合规"],
-      "description": "智谱 AI 2026 旗舰，国产合规主力"
-    },
-    {
-      "provider": "Alibaba",
-      "name": "Qwen3.5",
-      "releaseDate": "2026-03-05",
-      "contextWindow": "256K",
-      "highlights": ["开源友好", "部署成本极低", "中文与推理双提升"],
-      "tier": 3,
-      "url": "https://qwen.alibaba.com",
-      "category": "model",
-      "tags": ["Alibaba", "开源", "低成本"],
-      "description": "阿里 2026 开源旗舰，本地部署首选"
+      "tags": ["xAI", "推理", "工具调用", "2M上下文"],
+      "description": "xAI API 旗舰推理模型，适合企业级工具调用和长上下文任务"
     },
     {
       "provider": "DeepSeek",
-      "name": "DeepSeek V3.2",
-      "releaseDate": "2026-01-10",
-      "contextWindow": "256K",
-      "highlights": ["开源领先", "代码能力对标 GPT-5", "推理成本极低"],
-      "tier": 3,
-      "url": "https://deepseek.com",
+      "name": "DeepSeek V4-Pro",
+      "releaseDate": "2026-04-24",
+      "contextWindow": "1M",
+      "highlights": [
+        "V4 预览版同步上线 API 并开源",
+        "Agent、世界知识与推理性能增强",
+        "官方服务进入 1M 上下文阶段"
+      ],
+      "tier": 2,
+      "url": "https://api-docs.deepseek.com/zh-cn/news/news260424",
       "category": "model",
-      "tags": ["开源", "低成本", "代码"],
-      "description": "DeepSeek 2026 开源旗舰，代码能力对标闭源 SOTA"
+      "tags": ["DeepSeek", "开源", "Agent", "1M上下文"],
+      "description": "DeepSeek V4 预览旗舰，主打开源、长上下文与 Agentic Coding"
+    },
+    {
+      "provider": "Zhipu",
+      "name": "GLM-5.1",
+      "releaseDate": "2026-04-07",
+      "contextWindow": "未公开",
+      "highlights": [
+        "新一代旗舰模型上线",
+        "Coding 与长程任务能力显著增强",
+        "强化自主规划、持续执行与 tool use"
+      ],
+      "tier": 2,
+      "url": "https://docs.bigmodel.cn/cn/update/new-releases",
+      "category": "model",
+      "tags": ["Zhipu", "中文", "Coding", "Agent"],
+      "description": "智谱新一代旗舰，面向长程工程任务、中文场景与国产合规选型"
+    },
+    {
+      "provider": "Moonshot",
+      "name": "Kimi K2.6",
+      "releaseDate": "2026-04-20",
+      "contextWindow": "未公开",
+      "highlights": [
+        "Moonshot 官网展示的最新旗舰模型",
+        "原生多模态、代码能力与 Agent 性能增强",
+        "面向分析、表格、幻灯片和自主编程"
+      ],
+      "tier": 2,
+      "url": "https://www.moonshot.cn/en/",
+      "category": "model",
+      "tags": ["Moonshot", "中文", "多模态", "Agent"],
+      "description": "Moonshot 最新 Kimi 旗舰，聚焦复杂工作流、代码与 Agent 场景"
+    },
+    {
+      "provider": "Alibaba",
+      "name": "Qwen 3.6 Plus",
+      "releaseDate": "2026-04-08",
+      "contextWindow": "1M",
+      "highlights": [
+        "Qwen Code 中正式可用",
+        "中文编程场景与长上下文处理优化",
+        "每日 1000 次免费调用额度"
+      ],
+      "tier": 2,
+      "url": "https://qwenlm.github.io/qwen-code-docs/en/blog/weekly-update-2026-04-09/",
+      "category": "model",
+      "tags": ["Alibaba", "中文", "编程", "1M上下文"],
+      "description": "Qwen Code 主力模型，适合中文编程、长上下文与日常 Agent 开发"
+    },
+    {
+      "provider": "Meta",
+      "name": "Muse Spark",
+      "releaseDate": "2026-04-08",
+      "contextWindow": "未公开",
+      "highlights": [
+        "Meta Superintelligence Labs 首个 Muse 系列模型",
+        "驱动 Meta AI app 与 meta.ai",
+        "私有 API 预览面向部分合作伙伴开放"
+      ],
+      "tier": 2,
+      "url": "https://about.fb.com/news/2026/04/introducing-muse-spark-meta-superintelligence-labs/",
+      "category": "model",
+      "tags": ["Meta", "多模态", "私有预览"],
+      "description": "Meta 最新产品模型，面向多模态理解、个人助手和社交内容场景"
+    },
+    {
+      "provider": "DeepSeek",
+      "name": "DeepSeek V4-Flash",
+      "releaseDate": "2026-04-24",
+      "contextWindow": "1M",
+      "highlights": [
+        "V4 系列的快捷经济版本",
+        "简单 Agent 任务接近 V4-Pro",
+        "API 同步上线"
+      ],
+      "tier": 3,
+      "url": "https://api-docs.deepseek.com/zh-cn/news/news260424",
+      "category": "model",
+      "tags": ["DeepSeek", "低成本", "1M上下文"],
+      "description": "DeepSeek V4 轻量经济款，适合成本敏感的长上下文与日常任务"
+    },
+    {
+      "provider": "Google",
+      "name": "Gemini 3.1 Flash-Lite",
+      "releaseDate": "2026-03-03",
+      "contextWindow": "未公开",
+      "highlights": [
+        "Gemini 3.1 系列的低成本高吞吐模型",
+        "面向高频开发者工作负载",
+        "$0.25/1M input 与 $1.50/1M output"
+      ],
+      "tier": 3,
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-1-flash-lite/",
+      "category": "model",
+      "tags": ["Google", "低成本", "高吞吐"],
+      "description": "Google 面向规模化调用的轻量模型，适合翻译、审核、批量 UI 和模拟生成"
+    },
+    {
+      "provider": "xAI",
+      "name": "Grok 4.1 Fast Reasoning",
+      "releaseDate": "2025-11-19",
+      "contextWindow": "2M",
+      "highlights": [
+        "低成本工具调用模型",
+        "适合延迟和预算敏感场景",
+        "2M 上下文窗口"
+      ],
+      "tier": 3,
+      "url": "https://x.ai/api",
+      "category": "model",
+      "tags": ["xAI", "低成本", "工具调用", "2M上下文"],
+      "description": "xAI 轻量推理模型，适合高频工具调用和成本敏感任务"
     }
   ],
   "news": [
     {
-      "date": "2026-04-15",
-      "provider": "Anthropic",
-      "title": "Claude Opus 4.7 正式发布",
-      "summary": "Anthropic 发布 Claude Opus 4.7，编程能力进一步提升，SWE-bench 达 82.3%，同步升级 Sonnet 4.7。",
-      "url": "https://www.anthropic.com/news"
+      "date": "2026-04-24",
+      "provider": "DeepSeek",
+      "title": "DeepSeek-V4 预览版上线",
+      "summary": "DeepSeek 发布 V4 预览版并开源，V4-Pro/V4-Flash 同步上线 API，官方服务进入 1M 上下文阶段。",
+      "url": "https://api-docs.deepseek.com/zh-cn/news/news260424"
     },
     {
-      "date": "2026-03-18",
+      "date": "2026-04-23",
       "provider": "OpenAI",
-      "title": "GPT-5.4 发布",
-      "summary": "GPT-5.4 刷新 AIME 2026（96.8%）与 SWE-bench Verified（79.1%），多模态与工具调用成本下降约 30%。",
-      "url": "https://openai.com"
+      "title": "GPT-5.5 发布",
+      "summary": "OpenAI 发布 GPT-5.5，强化 Agentic Coding、电脑使用、知识工作和早期科研；发布页 4 月 24 日更新称 GPT-5.5 / Pro 已支持 API。",
+      "url": "https://openai.com/index/introducing-gpt-5-5/"
+    },
+    {
+      "date": "2026-04-23",
+      "provider": "xAI",
+      "title": "Grok Voice Think Fast 1.0 发布",
+      "summary": "xAI 发布 grok-voice-think-fast-1.0，定位为新的旗舰语音模型，面向复杂多轮语音工作流与高频工具调用。",
+      "url": "https://x.ai/news/grok-voice-think-fast-1"
+    },
+    {
+      "date": "2026-04-20",
+      "provider": "Moonshot",
+      "title": "Kimi K2.6 成为 Moonshot 最新旗舰",
+      "summary": "Moonshot 官网展示 Kimi K2.6 为最新旗舰，强调原生多模态、代码能力与 Agent 性能。",
+      "url": "https://www.moonshot.cn/en/"
+    },
+    {
+      "date": "2026-04-16",
+      "provider": "Anthropic",
+      "title": "Claude Opus 4.7 正式发布",
+      "summary": "Anthropic 发布 Claude Opus 4.7，面向编码、Agent、视觉和复杂多步骤任务增强，API 型号为 claude-opus-4-7。",
+      "url": "https://www.anthropic.com/news/claude-opus-4-7"
+    },
+    {
+      "date": "2026-04-08",
+      "provider": "Meta",
+      "title": "Meta 发布 Muse Spark",
+      "summary": "Meta 发布 Muse Spark，作为 Meta Superintelligence Labs 的首个 Muse 系列模型，已驱动 Meta AI app 与 meta.ai，并开放私有 API 预览。",
+      "url": "https://about.fb.com/news/2026/04/introducing-muse-spark-meta-superintelligence-labs/"
+    },
+    {
+      "date": "2026-04-08",
+      "provider": "Alibaba",
+      "title": "Qwen 3.6 Plus 在 Qwen Code 上线",
+      "summary": "Qwen Code 发布 Qwen 3.6 Plus 可用，提供 1M 上下文和中文编程场景优化。",
+      "url": "https://qwenlm.github.io/qwen-code-docs/en/blog/weekly-update-2026-04-09/"
+    },
+    {
+      "date": "2026-04-07",
+      "provider": "Zhipu",
+      "title": "GLM-5.1 新一代旗舰模型上线",
+      "summary": "智谱发布 GLM-5.1，强化 Coding、长程任务、自主规划、持续执行与 tool use 能力。",
+      "url": "https://docs.bigmodel.cn/cn/update/new-releases"
     },
     {
       "date": "2026-03-05",
-      "provider": "Alibaba",
-      "title": "Qwen3.5 开源版发布",
-      "summary": "阿里发布 Qwen3.5 开源模型，中文与推理能力双提升，继续刷新本地部署性价比。",
-      "url": "https://qwen.alibaba.com"
+      "provider": "OpenAI",
+      "title": "GPT-5.4 发布",
+      "summary": "OpenAI 发布 GPT-5.4，ChatGPT、API 与 Codex 同步可用，融合 GPT-5.3-Codex 编程能力并支持 Codex 1M 上下文实验。",
+      "url": "https://openai.com/index/introducing-gpt-5-4/"
     },
     {
-      "date": "2026-02-28",
-      "provider": "Moonshot",
-      "title": "Kimi K2.5-thinking 上线",
-      "summary": "Moonshot 发布 K2.5-thinking，长思考链路更稳定，面向中文 Agent 场景做了针对性优化。",
-      "url": "https://kimi.moonshot.cn"
-    },
-    {
-      "date": "2026-02-12",
+      "date": "2026-03-03",
       "provider": "Google",
-      "title": "Gemini 3.1 Pro 正式发布",
-      "summary": "Gemini 3.1 Pro 在多模态与超长上下文上继续领先（中文 99.1%，视频 90.2%），相比 3 Pro 再降价 25%。",
-      "url": "https://gemini.google.com"
+      "title": "Gemini 3.1 Flash-Lite 发布",
+      "summary": "Google 发布 Gemini 3.1 Flash-Lite preview，面向高吞吐开发者工作负载，主打低成本、低延迟和可控思考级别。",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-1-flash-lite/"
     },
     {
-      "date": "2026-01-22",
-      "provider": "Zhipu",
-      "title": "GLM-5 发布",
-      "summary": "智谱 AI 发布 GLM-5，中文对齐与代码能力双升级，持续领跑国产合规场景。",
-      "url": "https://open.bigmodel.cn"
+      "date": "2026-02-19",
+      "provider": "Google",
+      "title": "Gemini 3.1 Pro 发布预览",
+      "summary": "Google 发布 Gemini 3.1 Pro preview，强化复杂推理，并面向 Gemini API、Vertex AI、Gemini Enterprise、Gemini CLI 等渠道开放。",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-1-pro/"
     },
     {
-      "date": "2026-01-10",
-      "provider": "DeepSeek",
-      "title": "DeepSeek V3.2 开源",
-      "summary": "DeepSeek 开源 V3.2，代码能力对标 GPT-5，推理成本继续下探。",
-      "url": "https://deepseek.com"
-    },
-    {
-      "date": "2025-11-24",
+      "date": "2026-02-17",
       "provider": "Anthropic",
-      "title": "Claude Opus 4.5 与 Haiku 4.5 发布",
-      "summary": "Opus 4.5 刷新 SWE-bench 记录（80.9%），Haiku 4.5 聚焦成本优化。",
-      "url": "https://www.anthropic.com/news"
+      "title": "Claude Sonnet 4.6 发布",
+      "summary": "Anthropic 发布 Sonnet 4.6，升级编码、电脑使用、长上下文推理、Agent 规划、知识工作和设计能力。",
+      "url": "https://www.anthropic.com/claude/sonnet"
     }
   ]
 }

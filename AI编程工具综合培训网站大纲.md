@@ -1478,32 +1478,36 @@
 
 **Anthropic（Claude 系列）**
 
-- Claude Opus 4.5（2025年11月发布）：最强模型，编程能力领先（SWE-bench 80.9%），200K tokens上下文
-- Claude Sonnet 4.5：平衡模型，日常开发首选，200K tokens上下文
+- Claude Opus 4.7（2026年4月发布）：最新 GA 旗舰，编码、Agent、视觉与复杂多步骤任务增强，1M 上下文
+- Claude Sonnet 4.6（2026年2月发布）：日常开发与生产 Agent 主力，1M 上下文 beta
 - Claude Haiku 4.5：快速模型，简单任务，成本优化
 - 特点：长上下文、安全性高、企业级支持、编程能力强
 - 适用场景：代码生成、文档编写、分析任务、复杂推理
 
 **OpenAI（GPT 系列）**
 
-- GPT-5（2025年8月发布）：最新旗舰模型，数学推理最强（AIME 94.6%），100万tokens上下文
-- GPT-4.1（2025年4月发布）：编程增强模型，SWE-bench 54.6%，100万tokens上下文
-- GPT-4 Turbo：快速版本，平衡性能
+- GPT-5.5（2026年4月发布）：OpenAI 最新旗舰，面向真实工作、Agentic Coding、电脑使用、知识工作与早期科研
+- GPT-5.5 Pro：更高测试时计算版本，适合高难度专业工作流、科研分析和长程任务
+- GPT-5.4：上一代主线模型，专业工作与 Codex 编程能力融合
 - GPT-3.5：经济版本，简单任务
 - 特点：生态成熟、API 稳定、工具丰富、数学推理强
 - 适用场景：通用任务、代码补全、内容生成、数学与科学推理
 
 **Google（Gemini 系列）**
 
-- Gemini 3 Pro（2025年11月发布）：最新旗舰模型，多模态最强，1M-3M tokens超长上下文
-- Gemini 3：平衡模型，多模态支持
-- Gemini 2.5 Pro：200万tokens处理能力
-- 特点：多模态支持、搜索集成、超长上下文、成本优势（比Claude便宜60%）
+- Gemini 3.1 Pro（2026年2月发布）：Pro 级推理升级，面向复杂问题、数据综合与创意编码
+- Gemini 3.1 Flash-Lite（2026年3月发布）：高吞吐低成本模型，适合规模化开发者工作负载
+- Gemini 3 Flash：速度优先的平衡模型，多模态支持
+- 特点：多模态支持、搜索集成、长上下文、低成本高吞吐选项
 - 适用场景：多模态任务、搜索增强、内容生成、长文档分析
 
 **其他提供商**
 
-- DeepSeek：开源友好，成本低
+- DeepSeek：V4-Pro / V4-Flash 预览版已上线，1M 上下文，开源友好，成本低
+- Moonshot：Kimi K2.6 最新旗舰，强化多模态、代码和 Agent 能力
+- 智谱：GLM-5.1 新一代旗舰，强化长程工程任务和 tool use
+- Qwen：Qwen 3.6 Plus 面向中文编程和 1M 长上下文
+- xAI：Grok 4.20 与 Grok Voice Think Fast 1.0，覆盖长上下文推理和语音 Agent
 - Mistral：欧洲模型，数据合规
 - Groq：超快推理速度
 - Together AI：开源模型托管

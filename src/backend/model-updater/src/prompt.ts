@@ -13,29 +13,29 @@ const CURRENT_KNOWN_PROVIDERS = [
 ]
 
 const JSON_SHAPE_EXAMPLE = `{
-  "updatedAt": "2026-04-20T12:00:00.000Z",
+  "updatedAt": "2026-04-27T00:00:00.000Z",
   "source": "perplexity-sonar",
   "models": [
     {
-      "provider": "Anthropic",
-      "name": "Claude Opus 4.7",
-      "releaseDate": "2026-04-15",
-      "contextWindow": "200K",
-      "highlights": ["SWE-bench 82.3%", "更强推理"],
+      "provider": "OpenAI",
+      "name": "GPT-5.5",
+      "releaseDate": "2026-04-23",
+      "contextWindow": "未公开",
+      "highlights": ["真实工作和长程 Agent 增强", "Agentic Coding、电脑使用与知识工作升级"],
       "tier": 1,
-      "url": "https://www.anthropic.com/news/claude-opus-4-7",
+      "url": "https://openai.com/index/introducing-gpt-5-5/",
       "category": "model",
-      "tags": ["Anthropic", "编程", "200K上下文"],
-      "description": "最新旗舰模型，编程能力领先"
+      "tags": ["OpenAI", "编程", "Agent", "Codex"],
+      "description": "OpenAI 最新旗舰模型，适合复杂软件工程、电脑使用和专业知识工作"
     }
   ],
   "news": [
     {
-      "date": "2026-04-15",
-      "provider": "Anthropic",
-      "title": "Claude Opus 4.7 正式发布",
-      "summary": "Anthropic 发布 Claude Opus 4.7，SWE-bench 提升至 82.3%。",
-      "url": "https://www.anthropic.com/news/claude-opus-4-7"
+      "date": "2026-04-23",
+      "provider": "OpenAI",
+      "title": "GPT-5.5 发布",
+      "summary": "OpenAI 发布 GPT-5.5，强化 Agentic Coding、电脑使用、知识工作和早期科研。",
+      "url": "https://openai.com/index/introducing-gpt-5-5/"
     }
   ]
 }`
