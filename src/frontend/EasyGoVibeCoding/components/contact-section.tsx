@@ -13,11 +13,14 @@ export function ContactSection() {
     name: "",
     email: "",
     message: "",
+    allowPublicDisplay: false,
   })
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle")
   const [errorMessage, setErrorMessage] = useState<string>("")
-  const [isHovered, setIsHovered] = useState<string | null>(null)
+  const [successMessage, setSuccessMessage] = useState(
+    "我会尽快阅读并回复。",
+  )
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {}
@@ -45,6 +48,7 @@ export function ContactSection() {
 
     setStatus("sending")
     setErrorMessage("")
+    setSuccessMessage("我会尽快阅读并回复。")
 
     try {
       const response = await fetch("/api/send-email", {
@@ -75,8 +79,20 @@ export function ContactSection() {
         return
       }
 
+      const publicDisplayStatus = responseData?.publicDisplayStatus
+      setSuccessMessage(
+        formState.allowPublicDisplay &&
+          publicDisplayStatus === "confirmation_required"
+          ? "请查收确认邮件，点击确认链接后才会进入网站滚动展示。"
+          : "我会尽快阅读并回复。",
+      )
       setStatus("success")
-      setFormState({ name: "", email: "", message: "" })
+      setFormState({
+        name: "",
+        email: "",
+        message: "",
+        allowPublicDisplay: false,
+      })
       setErrorMessage("")
     } catch (error) {
       console.error("Email send error:", error)
@@ -94,6 +110,13 @@ export function ContactSection() {
     }
   }
 
+  const handlePublicDisplayChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormState((prev) => ({
+      ...prev,
+      allowPublicDisplay: e.target.checked,
+    }))
+  }
+
   return (
     <section id="contact" className="relative py-24 sm:py-32 px-4 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 overflow-hidden" aria-labelledby="contact-heading">
       {/* Background decorative elements */}
@@ -107,15 +130,15 @@ export function ContactSection() {
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 backdrop-blur-md border-2 border-purple-200 shadow-lg mb-4">
             <Mail className="h-4 w-4 text-purple-600" />
-            <span className="text-sm font-semibold text-purple-600">联系我</span>
+            <span className="text-sm font-semibold text-purple-600">邮箱反馈</span>
           </div>
           <h2 id="contact-heading" className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl mb-4">
             <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-              与我取得联系
+              把你的反馈发给我
             </span>
           </h2>
           <p className="mt-4 text-xl text-gray-700 font-medium max-w-2xl mx-auto">
-            有任何问题、合作意向或技术咨询？欢迎随时联系我，我会尽快回复。
+            你可以告诉我哪里看不懂、想补哪些案例、当前学习卡在哪里。我会优先根据真实反馈调整内容。
           </p>
         </div>
 
@@ -127,17 +150,15 @@ export function ContactSection() {
                 <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
                   <Mail className="h-5 w-5 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900">联系方式</h3>
+              <h3 className="text-2xl font-bold text-gray-900">联系方式</h3>
               </div>
               <p className="text-gray-600 mb-8 leading-relaxed">
-                无论是技术问题、项目合作还是职业机会，都欢迎与我交流。
+                反馈会直接发到我的邮箱。只有在你明确授权后，我才会把反馈整理成公开案例或页面展示内容。
               </p>
               
               <div className="space-y-4">
                 <a
                   href="mailto:1301385382gjts@gmail.com"
-                  onMouseEnter={() => setIsHovered('email')}
-                  onMouseLeave={() => setIsHovered(null)}
                   className="group flex items-center gap-4 p-5 rounded-2xl bg-gradient-to-br from-blue-50 to-purple-50 border-2 border-blue-200/50 hover:border-blue-400 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
                 >
                   <div className="relative">
@@ -157,8 +178,6 @@ export function ContactSection() {
                   href="https://github.com/Gjts/CSharpDesignPattern"
                   target="_blank"
                   rel="noopener noreferrer"
-                  onMouseEnter={() => setIsHovered('github')}
-                  onMouseLeave={() => setIsHovered(null)}
                   className="group flex items-center gap-4 p-5 rounded-2xl bg-gradient-to-br from-purple-50 to-pink-50 border-2 border-purple-200/50 hover:border-purple-400 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
                 >
                   <div className="relative">
@@ -185,7 +204,7 @@ export function ContactSection() {
                 </div>
                 <p className="text-sm font-semibold text-gray-700">
                   <span className="text-green-600 font-bold">通常在 24 小时内回复</span>
-                  <span className="ml-2">⚡</span>
+                  <span className="ml-2">，复杂建议会进入后续迭代清单</span>
                 </p>
               </div>
             </div>
@@ -197,7 +216,7 @@ export function ContactSection() {
               <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center">
                 <Send className="h-5 w-5 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-gray-900">发送消息</h3>
+              <h3 className="text-2xl font-bold text-gray-900">发送反馈</h3>
             </div>
             
             <form onSubmit={handleSubmit} className="space-y-6" noValidate>
@@ -209,7 +228,7 @@ export function ContactSection() {
                   type="text"
                   value={formState.name}
                   onChange={handleChange}
-                  placeholder="请输入您的姓名"
+                  placeholder="请输入你的称呼"
                   aria-invalid={!!errors.name}
                   aria-describedby={errors.name ? "name-error" : undefined}
                   className={errors.name ? "border-destructive" : ""}
@@ -229,7 +248,7 @@ export function ContactSection() {
                   type="email"
                   value={formState.email}
                   onChange={handleChange}
-                  placeholder="请输入您的邮箱"
+                  placeholder="请输入你的邮箱，方便我回复"
                   aria-invalid={!!errors.email}
                   aria-describedby={errors.email ? "email-error" : undefined}
                   className={errors.email ? "border-destructive" : ""}
@@ -249,7 +268,7 @@ export function ContactSection() {
                   rows={5}
                   value={formState.message}
                   onChange={handleChange}
-                  placeholder="请输入您的留言内容..."
+                  placeholder="例如：你的角色、正在学习哪一部分、哪里不清楚、希望增加什么案例..."
                   aria-invalid={!!errors.message}
                   aria-describedby={errors.message ? "message-error" : undefined}
                   className={errors.message ? "border-destructive" : ""}
@@ -260,6 +279,18 @@ export function ContactSection() {
                   </p>
                 )}
               </div>
+
+              <label className="flex items-start gap-3 rounded-2xl border-2 border-blue-100 bg-blue-50/70 p-4">
+                <input
+                  type="checkbox"
+                  checked={formState.allowPublicDisplay}
+                  className="mt-1 h-4 w-4 rounded border-gray-300 text-blue-600"
+                  onChange={handlePublicDisplayChange}
+                />
+                <span className="text-sm leading-6 text-gray-700">
+                  允许我将这条反馈脱敏后滚动展示在网站上。提交后会向该邮箱发送确认链接，点击确认后才会公开；不会公开邮箱。
+                </span>
+              </label>
 
               <Button 
                 type="submit" 
@@ -274,7 +305,7 @@ export function ContactSection() {
                 ) : (
                   <>
                     <Send className="h-5 w-5" />
-                    发送消息
+                    发送反馈
                   </>
                 )}
               </Button>
@@ -288,7 +319,7 @@ export function ContactSection() {
                   </div>
                   <div>
                     <p className="font-bold text-green-700">发送成功！</p>
-                    <p className="text-sm text-green-600">我会尽快回复您。</p>
+                    <p className="text-sm text-green-600">{successMessage}</p>
                   </div>
                 </div>
               )}

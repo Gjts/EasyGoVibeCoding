@@ -21,6 +21,7 @@ import {
   useFrameworksRecommendation,
   useLearningProgress,
 } from "@/lib/use-learning-progress"
+import { useLocalLearnerProfile } from "@/lib/use-local-learner-profile"
 import {
   countCompletedByCategory,
   countByCategory,
@@ -130,6 +131,7 @@ function prettifyPath(path: string): string {
 export function LearningDashboard() {
   const progress = useLearningProgress()
   const recommendation = useFrameworksRecommendation()
+  const profile = useLocalLearnerProfile()
 
   const counts = useMemo(() => countByCategory(progress), [progress])
   const completionCounts = useMemo(
@@ -181,12 +183,20 @@ export function LearningDashboard() {
           </div>
           <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
             <span className="bg-gradient-to-r from-orange-500 via-pink-500 to-red-500 bg-clip-text text-transparent">
-              {isFirstVisit ? "准备好开始你的学习旅程了吗？" : "继续你的学习旅程"}
+              {isFirstVisit
+                ? profile
+                  ? `${profile.name}，开始记录你的学习旅程`
+                  : "准备好开始你的学习旅程了吗？"
+                : profile
+                  ? `${profile.name}，继续你的学习旅程`
+                  : "继续你的学习旅程"}
             </span>
           </h2>
           <p className="mt-3 text-sm font-medium text-gray-700 sm:text-base">
             {isFirstVisit
-              ? "随机选一个入口先逛一下，我们只在你本地记录访问过的页面，不上传任何信息。"
+              ? profile
+                ? "你的学习档案已保存在当前浏览器。开始访问课程后，这里会记录真实学习进度。"
+                : "随机选一个入口先逛一下，我们只在你本地记录访问过的页面，不上传任何信息。"
               : `已访问 ${stats.totalVisited} 个页面 · 已完成 ${stats.totalCompleted} 个章节 · 总进度 ${stats.completionPercent}%`}
           </p>
         </div>

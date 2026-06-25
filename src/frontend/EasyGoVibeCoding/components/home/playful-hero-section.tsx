@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button"
 import { ArrowRight, Sparkles, Star } from "lucide-react"
 import Link from "next/link"
 import { HomeLiveStrip } from "./home-live-strip"
+import { LocalProfilePrompt } from "./local-profile-prompt"
 
 export function PlayfulHeroSection() {
   return (
@@ -37,6 +38,8 @@ export function PlayfulHeroSection() {
             理解机制才能驾驭工具。从零基础入门到企业级实践，
             系统掌握 Cursor、Copilot、Claude Code 等主流 AI 编程工具。
           </p>
+
+          <LocalProfilePrompt />
 
           {/* CTA buttons */}
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">

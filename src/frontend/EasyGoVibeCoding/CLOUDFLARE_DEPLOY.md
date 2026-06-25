@@ -18,7 +18,8 @@
 2. `functions` 已复制到 `out/functions`
 3. 已部署到 **Cloudflare Pages**
 4. Pages 项目中已绑定 `SITE_STATS_KV`
-5. `model-updater` Worker 已成功写入 `models:latest`（否则 `/api/models` 会提示回退到静态 `data/models.json`）
+5. 如需真实邮箱反馈滚动展示，Pages 项目中已绑定 `FEEDBACK_KV`
+6. `model-updater` Worker 已成功写入 `models:latest`（否则 `/api/models` 会提示回退到静态 `data/models.json`）
 
 ## 解决方案
 
@@ -43,23 +44,25 @@ KV 绑定：
 
 ```text
 SITE_STATS_KV = 与 Worker 共享的 KV namespace
+FEEDBACK_KV = 用于存储待确认和已确认的邮箱反馈
 ```
 
 **重要**：
 - 确保在 **Production**、**Preview** 和 **Branch deployments** 中都添加了环境变量
 - 环境变量名称必须完全匹配：`RESEND_API_KEY`（区分大小写）
 - `SITE_STATS_KV` 同时服务站点统计和模型动态读取；Pages 与 `src/backend/model-updater` Worker 必须指向同一个 KV namespace
+- `FEEDBACK_KV` 用于双重确认反馈展示；当前 `wrangler.toml` 复用同一 KV namespace，并通过 `email-feedback:*` 前缀隔离
 
 ### 3. 验证部署
 
 部署后，检查以下内容：
 
 1. **检查 Functions 是否部署**：
-   - 在 Cloudflare Pages 控制台的 **Functions** 标签页中，应该能看到 `api/send-email`、`api/site-stats`、`api/models` 函数
+   - 在 Cloudflare Pages 控制台的 **Functions** 标签页中，应该能看到 `api/send-email`、`api/site-stats`、`api/models`、`api/feedback`、`api/feedback/confirm` 函数
 
 2. **检查环境变量**：
    - 在 **Settings** → **Environment variables** 中确认 `RESEND_API_KEY` 已配置
-   - 在 **Settings** → **Functions** 或绑定区域确认 `SITE_STATS_KV` 已绑定
+   - 在 **Settings** → **Functions** 或绑定区域确认 `SITE_STATS_KV` 和 `FEEDBACK_KV` 已绑定
 
 3. **测试邮件发送**：
    - 访问网站的联系表单
@@ -88,6 +91,7 @@ pnpm pages:deploy
 - 本地不一定能直接测试 `Cloudflare Pages Functions`
 - ` /api/site-stats ` 真实统计接口需要部署到 Cloudflare Pages 后才可访问
 - ` /api/models ` 真实模型接口需要部署到 Cloudflare Pages 且 KV 中存在 `models:latest` 后才可返回实时数据
+- ` /api/feedback ` 真实反馈接口需要部署到 Cloudflare Pages 且绑定 `FEEDBACK_KV` 后才会返回已确认反馈
 - 如果你在本地控制台看到 `404`，通常是因为统计接口还没有部署，不是页面本身报错
 
 ## 常见问题
@@ -112,6 +116,15 @@ A: 检查以下几点：
 2. ✅ Cloudflare Pages 环境变量 `RESEND_API_KEY` 是否配置正确
 3. ✅ 检查 Cloudflare Pages Functions 日志中的错误信息
 4. ✅ 确认 Resend API Key 是否有效（可以在 Resend 控制台查看使用情况）
+
+### Q: 如何验证真实反馈双重授权？
+
+A: 按以下链路检查：
+1. ✅ 用户提交反馈时勾选公开展示授权
+2. ✅ 站点向用户邮箱发送确认邮件
+3. ✅ 用户点击 `/api/feedback/confirm?token=...` 确认链接
+4. ✅ KV 中出现 `email-feedback:confirmed:index` 和 `email-feedback:confirmed:...`
+5. ✅ 首页反馈滚动区通过 `/api/feedback` 读取已确认、已脱敏的反馈
 
 ### Q: 为什么站点统计接口返回 404？
 
@@ -151,6 +164,9 @@ out/
 ├── ...
 └── functions/          ← 这个目录必须存在
     └── api/
+        ├── feedback/
+        │   ├── confirm.ts
+        │   └── index.ts
         ├── models.ts
         ├── send-email.ts
         └── site-stats.ts

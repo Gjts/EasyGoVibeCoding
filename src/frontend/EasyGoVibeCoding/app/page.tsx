@@ -9,7 +9,7 @@ import { EcosystemTeaser } from "@/components/home/ecosystem-teaser"
 import { GithubHotTeaser } from "@/components/home/github-hot-teaser"
 import { ResourcesTeaser } from "@/components/home/resources-teaser"
 import { LearningDashboard } from "@/components/home/learning-dashboard"
-import { TestimonialsSection } from "@/components/home/testimonials-section"
+import { ProjectTrustSection } from "@/components/home/project-trust-section"
 import { EnrollmentCTA } from "@/components/home/enrollment-cta"
 import { ContactSection } from "@/components/contact-section"
 
@@ -39,8 +39,8 @@ export default function HomePage() {
         {/* 个性化：基于 localStorage 的真实学习仪表盘 */}
         <LearningDashboard />
 
-        {/* 营销区：口碑 + CTA + 联系表单 */}
-        <TestimonialsSection />
+        {/* 信任区：真实进度 + 适用人群 + 邮箱反馈征集 */}
+        <ProjectTrustSection />
         <EnrollmentCTA />
         <ContactSection />
       </main>

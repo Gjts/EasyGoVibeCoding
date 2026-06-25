@@ -9,6 +9,7 @@
     "dev": "next dev",
     "lint": "eslint .",
     "start": "next start",
+    "typecheck:functions": "tsc --project tsconfig.functions.json",
     "validate:models": "node scripts/validate-models-json.mjs",
     "pages:deploy": "npm run build && wrangler pages deploy out --project-name=easy-go-vibe-coding"
   },

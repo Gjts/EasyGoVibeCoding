@@ -3,13 +3,15 @@
 import Link from "next/link"
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
-import { Menu, X, ChevronDown, Search } from "lucide-react"
+import { Menu, X, ChevronDown, Search, UserRound } from "lucide-react"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { SearchDialog } from "@/components/search-dialog"
+import { LocalLearnerProfileDialog } from "@/components/learning/local-learner-profile-dialog"
+import { useLocalLearnerProfile } from "@/lib/use-local-learner-profile"
 
 interface CourseLink {
   name: string
@@ -66,6 +68,8 @@ const simpleLinks = [
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
+  const [profileOpen, setProfileOpen] = useState(false)
+  const profile = useLocalLearnerProfile()
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -190,9 +194,11 @@ export function Header() {
           <Button
             variant="ghost"
             size="sm"
+            onClick={() => setProfileOpen(true)}
             className="text-gray-700 hover:text-purple-600 hover:bg-purple-50 font-semibold"
           >
-            登录
+            <UserRound className="mr-1 h-4 w-4" />
+            {profile ? profile.name : "本地登录"}
           </Button>
           <Button
             size="sm"
@@ -302,9 +308,14 @@ export function Header() {
                   </Button>
                   <Button
                     variant="ghost"
+                    onClick={() => {
+                      setMobileMenuOpen(false)
+                      setProfileOpen(true)
+                    }}
                     className="w-full justify-start text-gray-700 hover:text-purple-600 hover:bg-purple-50 font-semibold"
                   >
-                    登录
+                    <UserRound className="h-4 w-4" />
+                    {profile ? profile.name : "本地登录"}
                   </Button>
                   <Button
                     asChild
@@ -322,6 +333,10 @@ export function Header() {
       )}
 
       <SearchDialog open={searchOpen} onOpenChange={setSearchOpen} />
+      <LocalLearnerProfileDialog
+        open={profileOpen}
+        onOpenChange={setProfileOpen}
+      />
     </header>
   )
 }

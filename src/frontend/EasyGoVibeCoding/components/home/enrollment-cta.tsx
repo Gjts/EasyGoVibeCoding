@@ -1,16 +1,16 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Sparkles, CheckCircle2, Rocket, Gift, Users } from "lucide-react"
+import { ArrowRight, BookOpen, CheckCircle2, Mail, RefreshCcw, ShieldCheck, Sparkles } from "lucide-react"
 import Link from "next/link"
 
 const benefits = [
-  "6+ 完整课程模块",
-  "10+ 实战项目案例",
-  "20+ AI 工具深度解析",
-  "企业级最佳实践",
-  "终身学习支持",
-  "社区交流与答疑",
+  "免费开放学习",
+  "浏览器本地记录进度",
+  "持续更新模型和工具信息",
+  "覆盖个人、团队和项目实践",
+  "欢迎通过邮箱提出反馈",
+  "只展示经过授权的真实反馈",
 ]
 
 export function EnrollmentCTA() {
@@ -40,8 +40,8 @@ export function EnrollmentCTA() {
               {/* Header */}
               <div className="text-center mb-8">
                 <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg">
-                  <Gift className="h-4 w-4" />
-                  <span className="text-sm font-semibold">限时优惠</span>
+                  <Sparkles className="h-4 w-4" />
+                  <span className="text-sm font-semibold">免费学习 · 持续维护</span>
                 </div>
                 <h2 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-4">
                   <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
@@ -49,7 +49,7 @@ export function EnrollmentCTA() {
                   </span>
                 </h2>
                 <p className="text-xl text-gray-700 font-medium">
-                  加入数千名开发者，一起掌握 AI 编程工具
+                  先从真实学习进度开始，按自己的节奏掌握 AI 编程工具
                 </p>
               </div>
 
@@ -74,9 +74,9 @@ export function EnrollmentCTA() {
               {/* Stats */}
               <div className="grid grid-cols-3 gap-4 mb-8">
                 {[
-                  { icon: Users, value: "5000+", label: "学员", color: "from-blue-400 to-cyan-400" },
-                  { icon: Rocket, value: "98%", label: "满意度", color: "from-purple-400 to-pink-400" },
-                  { icon: Sparkles, value: "24/7", label: "支持", color: "from-orange-400 to-amber-400" },
+                  { icon: BookOpen, value: "免费", label: "开放学习", color: "from-blue-400 to-cyan-400" },
+                  { icon: ShieldCheck, value: "本地", label: "记录进度", color: "from-purple-400 to-pink-400" },
+                  { icon: Mail, value: "邮箱", label: "反馈入口", color: "from-orange-400 to-amber-400" },
                 ].map((stat, index) => {
                   const Icon = stat.icon
                   return (
@@ -116,7 +116,7 @@ export function EnrollmentCTA() {
                   className="w-full sm:w-auto bg-white/80 backdrop-blur-md border-2 border-purple-300 text-purple-600 hover:bg-purple-50 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 text-lg px-10 py-7 rounded-2xl font-semibold"
                 >
                   <Link href="/ecosystem">
-                    了解更多
+                    看生态导航
                   </Link>
                 </Button>
               </div>
@@ -124,17 +124,17 @@ export function EnrollmentCTA() {
               {/* Trust indicators */}
               <div className="mt-8 text-center">
                 <p className="text-sm text-gray-600 mb-2">
-                  <span className="font-semibold">30 天无理由退款</span> · 支持分期付款 · 企业团购优惠
+                  <span className="font-semibold">当前全部免费学习</span> · 不虚构学员数量 · 不展示未授权反馈
                 </p>
                 <div className="flex items-center justify-center gap-2 text-xs text-gray-500">
                   <CheckCircle2 className="h-4 w-4 text-green-500" />
-                  <span>安全支付</span>
+                  <span>本地进度</span>
                   <span>·</span>
                   <CheckCircle2 className="h-4 w-4 text-green-500" />
-                  <span>即时开通</span>
+                  <span>持续维护</span>
                   <span>·</span>
-                  <CheckCircle2 className="h-4 w-4 text-green-500" />
-                  <span>永久访问</span>
+                  <RefreshCcw className="h-4 w-4 text-green-500" />
+                  <span>按反馈迭代</span>
                 </div>
               </div>
             </div>

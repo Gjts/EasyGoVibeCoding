@@ -13,5 +13,12 @@ binding = "SITE_STATS_KV"
 id = "04e02c1e72b44bee95ad85eb96c6da07"
 preview_id = "04e02c1e72b44bee95ad85eb96c6da07"
 
+# 真实邮箱反馈双重授权存储。当前复用同一个 KV namespace，
+# 通过 email-feedback:* key 前缀隔离；后续可替换为独立 namespace。
+[[kv_namespaces]]
+binding = "FEEDBACK_KV"
+id = "04e02c1e72b44bee95ad85eb96c6da07"
+preview_id = "04e02c1e72b44bee95ad85eb96c6da07"
+
 [observability]
 enabled = true

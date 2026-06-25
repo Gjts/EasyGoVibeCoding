@@ -239,8 +239,55 @@
   .animate-shimmer {
     animation: shimmer 2s infinite;
   }
-  
+
   .delay-1000 {
     animation-delay: 1s;
+  }
+}
+
+@keyframes feedback-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.feedback-marquee-mask {
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    black 7%,
+    black 93%,
+    transparent
+  );
+}
+
+.feedback-marquee-row {
+  --feedback-marquee-duration: 42s;
+  animation: feedback-marquee var(--feedback-marquee-duration) linear infinite;
+}
+
+.feedback-marquee-row-fast {
+  --feedback-marquee-duration: 34s;
+}
+
+.feedback-marquee-row-slow {
+  --feedback-marquee-duration: 50s;
+}
+
+.feedback-marquee-row-reverse {
+  animation-direction: reverse;
+}
+
+.feedback-marquee-mask:hover .feedback-marquee-row {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .feedback-marquee-row {
+    animation: none;
+    transform: none;
   }
 }
