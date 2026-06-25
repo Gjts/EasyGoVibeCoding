@@ -1,16 +1,17 @@
 "use client";
 
-import React from "react";
+import React, { useMemo, useState } from "react";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { cn } from "@/lib/utils";
-import { ChevronDown, ChevronRight, Menu, X } from "lucide-react";
-import { useState } from "react";
+import { CheckCircle2, ChevronDown, ChevronRight, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useLearningProgress } from "@/lib/use-learning-progress";
+import { isPathCompleted } from "@/lib/learning-progress";
 
 interface Chapter {
   title: string;
@@ -35,10 +36,29 @@ export function CourseLayout({
 }: CourseLayoutProps) {
   const pathname = usePathname();
   const isMobile = useIsMobile();
+  const progress = useLearningProgress();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [expandedChapters, setExpandedChapters] = useState<
     Record<string, boolean>
   >({});
+  const trackableItems = useMemo(
+    () =>
+      chapters.flatMap((chapter) => [
+        { title: chapter.title, href: chapter.href },
+        ...(chapter.sections ?? []),
+      ]),
+    [chapters],
+  );
+  const completedCount = useMemo(
+    () =>
+      trackableItems.filter((item) => isPathCompleted(progress, item.href))
+        .length,
+    [progress, trackableItems],
+  );
+  const completionPercent =
+    trackableItems.length === 0
+      ? 0
+      : Math.min(100, Math.round((completedCount / trackableItems.length) * 100));
 
   const isChapterExpanded = (chapter: Chapter, isActive: boolean) => {
     if (!chapter.sections) return false;
@@ -62,7 +82,8 @@ export function CourseLayout({
         <Button
           variant="ghost"
           size="icon"
-          className="fixed bottom-4 right-4 z-50 lg:hidden rounded-full bg-gradient-to-r from-pink-500 to-purple-500 text-white shadow-xl hover:shadow-2xl transform hover:scale-110 transition-all duration-200"
+          aria-label={sidebarOpen ? "关闭课程目录" : "打开课程目录"}
+          className="fixed bottom-64 right-4 z-50 lg:hidden rounded-full bg-gradient-to-r from-pink-500 to-purple-500 text-white shadow-xl hover:shadow-2xl transform hover:scale-110 transition-all duration-200"
           onClick={() => setSidebarOpen(!sidebarOpen)}
         >
           {sidebarOpen ? (
@@ -86,6 +107,20 @@ export function CourseLayout({
               <p className="text-sm text-gray-700 mt-1 font-medium">
                 {description}
               </p>
+              <div className="mt-4">
+                <div className="mb-2 flex items-center justify-between text-xs font-bold text-gray-600">
+                  <span>课程进度</span>
+                  <span>
+                    {completedCount}/{trackableItems.length} 完成
+                  </span>
+                </div>
+                <div className="h-2 overflow-hidden rounded-full bg-white/80">
+                  <div
+                    className="h-full rounded-full bg-gradient-to-r from-emerald-400 via-cyan-400 to-purple-500 transition-all duration-500"
+                    style={{ width: `${completionPercent}%` }}
+                  />
+                </div>
+              </div>
             </div>
 
             {/* Chapters navigation */}
@@ -105,6 +140,7 @@ export function CourseLayout({
                   chapter,
                   isActive,
                 );
+                const isCompleted = isPathCompleted(progress, chapter.href);
                 return (
                   <div key={chapter.title}>
                     <div className="flex items-center gap-2">
@@ -130,7 +166,12 @@ export function CourseLayout({
                         >
                           {String(index + 1).padStart(2, "0")}
                         </span>
-                        <span className="truncate">{chapter.title}</span>
+                        <span className="min-w-0 flex-1 truncate">
+                          {chapter.title}
+                        </span>
+                        {isCompleted && (
+                          <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-500" />
+                        )}
                       </Link>
                       {chapter.sections && (
                         <button
@@ -161,12 +202,16 @@ export function CourseLayout({
                           const isSectionActive =
                             pathname === section.href ||
                             pathname.startsWith(section.href + "/");
+                          const isSectionCompleted = isPathCompleted(
+                            progress,
+                            section.href,
+                          );
                           return (
                             <Link
                               key={section.title}
                               href={section.href}
                               className={cn(
-                                "block rounded-md px-2 py-1.5 text-sm transition-colors",
+                                "flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors",
                                 isSectionActive
                                   ? "text-primary font-medium"
                                   : "text-muted-foreground hover:text-foreground",
@@ -175,7 +220,14 @@ export function CourseLayout({
                                 if (isMobile) setSidebarOpen(false);
                               }}
                             >
-                              {section.title}
+                              {isSectionCompleted ? (
+                                <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-emerald-500" />
+                              ) : (
+                                <span className="h-3.5 w-3.5 shrink-0 rounded-full border border-gray-300" />
+                              )}
+                              <span className="min-w-0 truncate">
+                                {section.title}
+                              </span>
                             </Link>
                           );
                         })}

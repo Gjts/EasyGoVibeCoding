@@ -2,13 +2,19 @@
 
 import { useSyncExternalStore } from "react"
 import {
+  LEARNING_PROGRESS_EVENT,
   loadProgress,
   recommendAIFrameworks,
   type FrameworksRecommendation,
   type LearningProgress,
 } from "./learning-progress"
 
-const EMPTY_PROGRESS: LearningProgress = { visits: {}, updatedAt: 0 }
+const EMPTY_PROGRESS: LearningProgress = {
+  version: 2,
+  visits: {},
+  completed: {},
+  updatedAt: 0,
+}
 const EMPTY_RECOMMENDATION: FrameworksRecommendation = {
   recommend: false,
   reason: null,
@@ -33,14 +39,24 @@ function getProgressServerSnapshot(): LearningProgress {
 
 function subscribeProgress(onChange: () => void): () => void {
   if (typeof window === "undefined") return () => {}
+  const notify = () => {
+    cachedProgress = null
+    cachedRecommendation = null
+    onChange()
+  }
   const handler = (event: StorageEvent) => {
     if (!event.key || event.key.startsWith("egvc:learning-progress")) {
-      cachedProgress = null
-      onChange()
+      notify()
     }
   }
+  const hydrationRefresh = window.setTimeout(notify, 0)
   window.addEventListener("storage", handler)
-  return () => window.removeEventListener("storage", handler)
+  window.addEventListener(LEARNING_PROGRESS_EVENT, notify)
+  return () => {
+    window.clearTimeout(hydrationRefresh)
+    window.removeEventListener("storage", handler)
+    window.removeEventListener(LEARNING_PROGRESS_EVENT, notify)
+  }
 }
 
 /**

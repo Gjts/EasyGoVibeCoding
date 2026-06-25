@@ -5,11 +5,13 @@ import { useMemo } from "react"
 import {
   ArrowRight,
   BookOpen,
+  CheckCircle2,
   Clock,
   Compass,
   GaugeCircle,
   History,
   Lightbulb,
+  PlayCircle,
   Rocket,
   Sparkles,
   Target,
@@ -20,25 +22,17 @@ import {
   useLearningProgress,
 } from "@/lib/use-learning-progress"
 import {
+  countCompletedByCategory,
   countByCategory,
+  getCategoryTotal,
+  getLearningStats,
+  getLearningTitle,
+  getNextLearningRoute,
+  getResumeTarget,
+  isPathCompleted,
   type LearningCategory,
   type VisitRecord,
 } from "@/lib/learning-progress"
-
-/**
- * 每个篇章的"页数基准"，用于进度条估算。
- * 不要求精确，用于给用户一个"已走多远"的视觉反馈。
- */
-const CATEGORY_TOTALS: Partial<Record<LearningCategory, number>> = {
-  basics: 7,
-  advanced: 15,
-  tools: 8,
-  architecture: 10,
-  practice: 13,
-  team: 11,
-  "super-individual": 6,
-  "ai-frameworks": 6,
-}
 
 const CATEGORY_META: Record<
   LearningCategory,
@@ -130,12 +124,7 @@ function formatRelative(ts: number): string {
 }
 
 function prettifyPath(path: string): string {
-  if (path === "/") return "首页"
-  const trimmed = path.replace(/^\//, "").replace(/\/$/, "")
-  return trimmed
-    .split("/")
-    .map((s) => s.replace(/-/g, " "))
-    .join(" · ")
+  return getLearningTitle(path)
 }
 
 export function LearningDashboard() {
@@ -143,9 +132,19 @@ export function LearningDashboard() {
   const recommendation = useFrameworksRecommendation()
 
   const counts = useMemo(() => countByCategory(progress), [progress])
-  const totalPages = useMemo(
-    () => Object.keys(progress.visits).length,
-    [progress.visits],
+  const completionCounts = useMemo(
+    () => countCompletedByCategory(progress),
+    [progress],
+  )
+  const stats = useMemo(() => getLearningStats(progress), [progress])
+  const totalPages = stats.totalVisited
+  const resumeTarget = useMemo(() => getResumeTarget(progress), [progress])
+  const resumeCompleted = resumeTarget
+    ? isPathCompleted(progress, resumeTarget.path)
+    : false
+  const nextTarget = useMemo(
+    () => getNextLearningRoute(progress, resumeTarget?.path),
+    [progress, resumeTarget?.path],
   )
 
   const recentVisits: VisitRecord[] = useMemo(() => {
@@ -159,12 +158,13 @@ export function LearningDashboard() {
       .filter((k) => CATEGORY_META[k].showOnDashboard)
       .map((k) => {
         const visited = counts[k] ?? 0
-        const total = CATEGORY_TOTALS[k] ?? 1
-        const pct = Math.min(100, Math.round((visited / total) * 100))
-        return { category: k, visited, total, pct, ...CATEGORY_META[k] }
+        const completed = completionCounts[k] ?? 0
+        const total = getCategoryTotal(k) || 1
+        const pct = Math.min(100, Math.round((completed / total) * 100))
+        return { category: k, visited, completed, total, pct, ...CATEGORY_META[k] }
       })
-      .sort((a, b) => b.visited - a.visited)
-  }, [counts])
+      .sort((a, b) => b.completed - a.completed || b.visited - a.visited)
+  }, [completionCounts, counts])
 
   const isFirstVisit = totalPages === 0
 
@@ -187,7 +187,7 @@ export function LearningDashboard() {
           <p className="mt-3 text-sm font-medium text-gray-700 sm:text-base">
             {isFirstVisit
               ? "随机选一个入口先逛一下，我们只在你本地记录访问过的页面，不上传任何信息。"
-              : `已访问 ${totalPages} 个页面 · 每一页都只记录在你的浏览器`}
+              : `已访问 ${stats.totalVisited} 个页面 · 已完成 ${stats.totalCompleted} 个章节 · 总进度 ${stats.completionPercent}%`}
           </p>
         </div>
 
@@ -210,7 +210,7 @@ export function LearningDashboard() {
                       {item.label}
                     </span>
                     <span className="text-xs font-semibold text-gray-600">
-                      {item.visited} / {item.total}
+                      {item.completed} / {item.total}
                     </span>
                   </div>
                   <div className="relative h-2 overflow-hidden rounded-full bg-gray-100">
@@ -221,6 +221,10 @@ export function LearningDashboard() {
                       )}
                       style={{ width: `${item.pct}%` }}
                     />
+                  </div>
+                  <div className="mt-2 flex items-center justify-between text-[11px] font-semibold text-gray-500">
+                    <span>访问 {item.visited} 页</span>
+                    <span>{item.pct}% 完成</span>
                   </div>
                 </Link>
               ))}
@@ -260,6 +264,47 @@ export function LearningDashboard() {
                       工具篇
                     </Link>
                   </div>
+                </>
+              ) : resumeTarget ? (
+                <>
+                  <p className="mb-3 text-sm leading-6 opacity-95">
+                    {resumeCompleted ? "最近完成" : "上次停在"}
+                    <span className="mx-1 font-extrabold">
+                      {resumeTarget.title}
+                    </span>
+                    ，可以继续推进你的学习路径。
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    <Link
+                      href={resumeTarget.path}
+                      className="inline-flex items-center gap-2 rounded-full bg-white/25 px-4 py-2 text-sm font-bold backdrop-blur transition-all hover:bg-white/40"
+                    >
+                      <PlayCircle className="h-4 w-4" />
+                      {resumeCompleted ? "复习章节" : "继续学习"}
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                    {recommendation.recommend && !recommendation.visitedFrameworks ? (
+                      <Link
+                        href="/advanced/ai-frameworks"
+                        className="inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-2 text-sm font-bold backdrop-blur transition-all hover:bg-white/30"
+                      >
+                        <Sparkles className="h-4 w-4" />
+                        框架专题
+                      </Link>
+                    ) : nextTarget && nextTarget.path !== resumeTarget.path ? (
+                      <Link
+                        href={nextTarget.path}
+                        className="inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-2 text-sm font-bold backdrop-blur transition-all hover:bg-white/30"
+                      >
+                        下一章
+                      </Link>
+                    ) : null}
+                  </div>
+                  {recommendation.recommend && !recommendation.visitedFrameworks ? (
+                    <p className="mt-3 text-xs leading-5 opacity-85">
+                      {recommendation.reason}
+                    </p>
+                  ) : null}
                 </>
               ) : recommendation.recommend ? (
                 <>
@@ -327,9 +372,17 @@ export function LearningDashboard() {
                         <span className="min-w-0 truncate text-sm font-semibold text-gray-800 group-hover:text-orange-600">
                           {prettifyPath(v.path)}
                         </span>
-                        <span className="inline-flex shrink-0 items-center gap-1 text-xs text-gray-500">
-                          <Clock className="h-3 w-3" />
-                          {formatRelative(v.lastSeen)}
+                        <span className="inline-flex shrink-0 items-center gap-2 text-xs text-gray-500">
+                          {isPathCompleted(progress, v.path) ? (
+                            <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 font-bold text-emerald-600">
+                              <CheckCircle2 className="h-3 w-3" />
+                              已完成
+                            </span>
+                          ) : null}
+                          <span className="inline-flex items-center gap-1">
+                            <Clock className="h-3 w-3" />
+                            {formatRelative(v.lastSeen)}
+                          </span>
                         </span>
                       </Link>
                     </li>
