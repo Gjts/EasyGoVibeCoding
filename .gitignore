@@ -80,6 +80,7 @@ out
 
 # Local agent/runtime artifacts
 .opc/
+.omx/
 
 # Nuxt.js build / generate output
 .nuxt

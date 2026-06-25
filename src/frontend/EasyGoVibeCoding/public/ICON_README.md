@@ -4,6 +4,8 @@
 
 已创建新的 EasyGoVibeCoding SVG 图标 (`icon.svg`)，使用渐变背景（粉色→紫色→蓝色）和白色字母 "E"。
 
+当前 `app/layout.tsx` 直接使用 `/icon.svg` 作为 favicon 和 Apple icon。下面的 PNG 生成步骤是可选增强，不是当前运行必需步骤。
+
 ## 生成 PNG 图标的方法
 
 ### 方法 1: 使用在线工具（推荐）
@@ -22,7 +24,7 @@
 
 ```bash
 cd src/frontend/EasyGoVibeCoding
-npm install sharp --save-dev
+pnpm add -D sharp
 node scripts/generate-icons.js
 ```
 
@@ -39,7 +41,7 @@ magick public/icon.svg -resize 180x180 public/apple-icon.png
 
 ## 更新 layout.tsx
 
-生成 PNG 文件后，需要更新 `app/layout.tsx` 中的图标配置：
+如果决定生成 PNG 文件，再更新 `app/layout.tsx` 中的图标配置：
 
 ```typescript
 icons: {

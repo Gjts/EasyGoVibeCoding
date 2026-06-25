@@ -90,6 +90,8 @@ pnpm deploy   # 等价于 npx wrangler deploy
 
 ### 5. 手动触发一次（用于首次填充 KV）
 
+当前 `/__run` 手动触发端点用于部署后的人工填充和排错。代码里尚未强制 token 鉴权，公开环境应优先通过 Cloudflare Worker 路由/访问策略限制，或在上线前补充 `RUN_TOKEN` 校验。
+
 ```bash
 # 部署环境
 curl -X POST https://model-updater.<your-account>.workers.dev/__run
@@ -104,7 +106,7 @@ curl -X POST http://127.0.0.1:8787/__run
 ```json
 {
   "status": "updated",
-  "nowISO": "2026-04-20T12:00:00.000Z",
+  "nowISO": "2026-05-11T00:00:00.000Z",
   "source": "perplexity-sonar-pro",
   "modelsCount": 8,
   "newsCount": 5
@@ -145,6 +147,13 @@ Worker 在写入前会做三层防护：
 1. `extractJsonString` 剥离 markdown 包裹
 2. `ModelsPayloadSchema.parse` 严格字段校验
 3. 校验失败自动重试一次，仍失败则保留旧 `models:latest` 不动
+
+## 内容口径
+
+- 模型 ID、上下文窗口、价格、稳定性和工具能力以官方模型页/API 文档为准。
+- 新闻稿可作为背景材料，但不应覆盖官方模型页/API 文档。
+- 对无法由官方来源确认的条目，Worker 应省略或降级描述，不能写成“最新旗舰”或“已开放 API”。
+- 前端 `data/models.json` 只是构建时 fallback，线上真实数据优先来自 KV 的 `models:latest`。
 
 ## 工程规则符合性
 

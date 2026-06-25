@@ -1,44 +1,69 @@
 # AI 编程工具综合培训网站 - 架构设计文档 (Architecture Design)
 
-> **文档版本**：v1.1
-> **最后更新**：2025-01-27
-> **文档状态**：已更新-待评审
+> **文档版本**：v1.2
+> **最后更新**：2026-05-11
+> **文档状态**：当前实现校准
 > **基于大纲**：AI编程工具综合培训网站大纲 v1.0
 
 ---
+
+## 2026-05-11 当前实现校准
+
+本文档早期章节保留了“MDX 内容站 + Vercel/GitHub Pages + 可选后端”的规划口径。当前代码已经演进，后续开发应以本节为准：
+
+- 前端实际入口：`src/frontend/EasyGoVibeCoding/`
+- 当前页面形态：Next.js App Router 下的 `app/**/page.tsx` 静态页面为主，尚未落地 `content/` MDX 内容系统。
+- 部署平台：Cloudflare Pages，静态输出目录为 `out/`。
+- API 形态：Cloudflare Pages Functions，当前有 `/api/send-email`、`/api/site-stats`、`/api/models`。
+- 后端任务：`src/backend/model-updater/` Cloudflare Worker，定时抓取/校验模型动态并写入 KV。
+- 数据流：Worker 写入 `SITE_STATS_KV` 的 `models:latest`，Pages Function `/api/models` 读取，前端失败时回退到 `data/models.json`。
+- 当前新增模块：`/super-individual/*`、`/github-hot`、`/ja/*`、首页最新模型面板和本地学习访问仪表盘。
+- 技术栈现状：Next.js 16、React 19、Tailwind CSS 4、TypeScript 5。
+- 验证现状：`pnpm build` 与 `pnpm exec tsc --noEmit --incremental false` 可通过；`pnpm lint` 仍有大量问题；测试框架、CI/CD、sitemap/robots 尚未补齐。
+- 风险项：`next.config.mjs` 当前仍设置 `typescript.ignoreBuildErrors: true`，生产前应移除并保持类型错误阻断构建。
+
+下文凡涉及 Vercel/GitHub Pages、React 18、Tailwind 3、MDX/content、`lib/mdx.ts`、`lib/content.ts`、`generate-sitemap.ts`、`sync-algolia.ts`、`.github` CI 的内容，均视为历史规划或待办，而非当前实现。
 
 ## 一、架构概述
 
 ### 1.1 系统架构
 
-**架构类型**：前后端分离架构（前端为主，后端可选）
+**架构类型**：静态前端 + Cloudflare Pages Functions + Cloudflare Worker/KV
 
 **技术栈**：
-- **前端框架**：Next.js 16（React 框架）
+- **前端框架**：Next.js 16（App Router）
+- **UI 框架**：React 19
 - **开发语言**：TypeScript
 - **样式框架**：Tailwind CSS
 - **UI 组件库**：shadcn/ui
-- **内容管理**：MDX（Markdown + React 组件）
-- **部署平台**：Vercel（推荐）或 GitHub Pages
+- **内容形态**：当前以 `app/**/page.tsx` 静态页面为主，MDX 为未来可选
+- **部署平台**：Cloudflare Pages
+- **API**：Cloudflare Pages Functions
+- **后台任务**：Cloudflare Worker (`src/backend/model-updater`)
+- **共享存储**：Cloudflare KV (`SITE_STATS_KV`)
 
 **架构特点**：
 - 静态站点生成（SSG）为主，提升性能和 SEO
-- 服务端渲染（SSR）为辅，支持动态内容
+- Cloudflare Pages Functions 为静态站点补充轻量 API
+- Worker 定时更新模型动态，前端通过 `/api/models` 读取并支持静态种子回退
 - 内容版本控制，使用 Git 管理
-- 无状态架构，易于扩展和部署
+- 前端无状态，动态数据集中在 KV 与 Pages Functions
 
 ### 1.2 系统边界
 
 **系统范围**：
 - 前端 Web 应用
-- 内容管理系统（基于 Git）
-- 搜索功能（本地搜索或 Algolia）
-- 社区功能（可选：Giscus/Utterances 或自建）
+- TSX 页面内容与 Git 版本管理
+- 本地静态站内搜索
+- 本地访问式学习仪表盘
+- Pages Functions：邮件、站点统计、模型动态读取
+- Worker：模型动态抓取、校验、写入 KV
+- 日本站 MVP 与法务页面
 
 **系统外边界**：
-- 第三方服务（Vercel、Algolia、评论服务）
+- 第三方服务（Cloudflare Pages、Cloudflare Workers/KV、Resend、联网 LLM provider）
 - 代码仓库（GitHub）
-- CDN 服务（Vercel 内置）
+- CDN 服务（Cloudflare）
 
 ---
 
@@ -62,14 +87,14 @@
 - Remix：类似功能，但生态相对较小
 - Astro：更适合内容站点，但灵活性较低
 
-#### 2.1.2 React 18
+#### 2.1.2 React 19
 
 **选型理由**：
 - **组件化开发**：组件化架构，易于维护
 - **生态丰富**：组件库和工具丰富
-- **性能优化**：React 18 性能优化（并发渲染、Suspense）
+- **性能优化**：React 19 与 Next.js 16 配套，支持现代并发渲染与 Server/Client Component 组合
 
-**版本要求**：React 18.0+
+**版本要求**：React 19.0+
 
 ### 2.2 开发语言
 
@@ -98,7 +123,7 @@
 - **性能优化**：生产环境自动移除未使用的样式
 - **可定制性**：高度可定制的设计系统
 
-**版本要求**：Tailwind CSS 3.0+
+**版本要求**：Tailwind CSS 4.0+
 
 **配置要求**：
 - 自定义主题配置
@@ -1026,88 +1051,45 @@ const debouncedSearch = useMemo(
 
 ### 6.1 部署方案
 
-#### 6.1.1 Vercel 部署（推荐）
+#### 6.1.1 Cloudflare Pages 部署（当前主方案）
 
 **方案描述**：
-- 使用 Vercel 平台部署
-- 自动 CI/CD 集成
-- 全球 CDN 加速
-- 自动 HTTPS
+- Next.js 使用 `output: 'export'` 生成静态站点到 `out/`
+- `postbuild` 通过 `scripts/copy-functions.js` 将 `functions/` 复制到 `out/functions`
+- Cloudflare Pages 托管静态资源并运行 Pages Functions
+- `SITE_STATS_KV` 同时服务站点统计和模型动态读取
 
 **配置步骤**：
-1. 连接 GitHub 仓库
-2. 配置构建命令：`npm run build`
-3. 配置环境变量
-4. 自动部署
+1. 在 `src/frontend/EasyGoVibeCoding` 运行 `pnpm build`
+2. 确认 `out/functions/api/models.ts`、`send-email.ts`、`site-stats.ts` 已存在
+3. Cloudflare Pages 绑定 `SITE_STATS_KV`
+4. 配置 `RESEND_API_KEY`
+5. 运行 `pnpm pages:deploy`
 
-**优点**：
-- 零配置部署
-- 自动优化
-- 全球 CDN
-- 免费额度充足
-
-#### 6.1.2 GitHub Pages 部署
+#### 6.1.2 Cloudflare Worker（模型动态）
 
 **方案描述**：
-- 使用 GitHub Actions 构建
-- 部署到 GitHub Pages
-- 静态文件托管
+- `src/backend/model-updater` 每 6 小时通过 Cron Trigger 抓取官方模型动态
+- 输出必须通过共享 `ModelsPayloadSchema` 校验
+- 成功后写入 `models:latest`、`models:previous` 和历史归档 key
 
-**配置步骤**：
-1. 配置 GitHub Actions workflow
-2. 构建静态文件
-3. 部署到 gh-pages 分支
+**注意事项**：
+- `/__run` 手动触发端点当前未强制 token 鉴权，公开环境应限制访问或补 `RUN_TOKEN`
+- `openai` / `gemini` provider 仍是占位实现，未扩展前会回退到 Perplexity
 
-**优点**：
-- 完全免费
-- 与 GitHub 集成
+#### 6.1.3 其他部署方案（历史/可选）
 
-**缺点**：
-- 需要手动配置
-- 功能相对简单
-
-#### 6.1.3 Docker 部署（可选）
-
-**方案描述**：
-- 容器化应用
-- 部署到云服务器
-- 使用 Docker Compose 管理
-
-**适用场景**：
-- 需要完全控制部署环境
-- 企业内网部署
+Vercel、GitHub Pages、Docker 可作为未来替代方案讨论，但不是当前主部署路径。
 
 ### 6.2 CI/CD 流程
 
-#### 6.2.1 GitHub Actions Workflow
+当前仓库未见 `.github` workflow。建议后续新增 CI 时至少包含：
 
-**流程**：
-1. **代码推送**：推送到 main 分支
-2. **自动构建**：运行 `npm run build`
-3. **运行测试**：运行 `npm test`（如有）
-4. **部署**：自动部署到 Vercel/GitHub Pages
-
-**配置文件**：`.github/workflows/deploy.yml`
-
-```yaml
-name: Deploy
-
-on:
-  push:
-    branches: [main]
-
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-      - run: npm ci
-      - run: npm run build
-      - run: npm run deploy
-```
+1. `pnpm validate:models`
+2. `pnpm exec tsc --noEmit --incremental false`
+3. `pnpm build`
+4. `pnpm lint`（需先清理现有 lint 问题）
+5. Worker `npm run typecheck`
 
 ### 6.3 环境配置
 
@@ -1123,20 +1105,21 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000
 ```env
 NODE_ENV=production
 NEXT_PUBLIC_SITE_URL=https://your-domain.com
-ALGOLIA_APP_ID=your-app-id
-ALGOLIA_API_KEY=your-api-key
+RESEND_API_KEY=your-resend-api-key
+```
+
+Cloudflare 绑定：
+
+```text
+SITE_STATS_KV = shared KV namespace for site stats and models
 ```
 
 #### 6.3.2 域名和 SSL
 
-**Vercel**：
-- 自动配置 SSL 证书
+**Cloudflare Pages**：
 - 支持自定义域名
-- 自动 HTTPS 重定向
-
-**GitHub Pages**：
-- 支持自定义域名
-- 需要手动配置 SSL（使用 Cloudflare 等）
+- 自动 HTTPS
+- Functions 与静态资源在同一 Pages 项目下运行
 
 ---
 
@@ -1147,14 +1130,15 @@ ALGOLIA_API_KEY=your-api-key
 #### 7.1.1 XSS 防护
 
 **策略**：
-- MDX 内容自动转义
+- 当前 TSX/React 内容默认转义
+- 未来接入 MDX 时需要对 MDX 组件和外链策略单独审查
 - 用户输入验证和转义
 - 使用 React 的自动转义
 
 **实现**：
 ```typescript
-// MDX 组件自动转义
-<MDXRemote source={content} />
+// React 文本插值默认转义；不要对用户输入使用 dangerouslySetInnerHTML
+<p>{userInput}</p>
 ```
 
 #### 7.1.2 内容审核
@@ -1510,9 +1494,9 @@ docs(readme): 更新部署文档
 ### 12.1 技术栈版本
 
 - Next.js: 16.0+
-- React: 18.0+
+- React: 19.0+
 - TypeScript: 5.0+
-- Tailwind CSS: 3.0+
+- Tailwind CSS: 4.0+
 - Node.js: 18.0+
 
 ### 12.2 参考资源
@@ -1524,8 +1508,8 @@ docs(readme): 更新部署文档
 
 ---
 
-**文档版本**：v1.1
-**最后更新**：2025-01-27
-**文档状态**：已更新-待评审
+**文档版本**：v1.2
+**最后更新**：2026-05-11
+**文档状态**：当前实现校准
 **基于大纲**：AI编程工具综合培训网站大纲 v1.0
-**新增内容**：内容目录详细结构、三个交互式组件架构设计（ToolComparison、SelectionAssistant、LearningPathRecommender）
+**新增内容**：当前实现校准、Cloudflare Pages/Functions/Worker 架构、模型动态数据链路

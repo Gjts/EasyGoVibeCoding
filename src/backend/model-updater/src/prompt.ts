@@ -13,29 +13,29 @@ const CURRENT_KNOWN_PROVIDERS = [
 ]
 
 const JSON_SHAPE_EXAMPLE = `{
-  "updatedAt": "2026-04-27T00:00:00.000Z",
+  "updatedAt": "2026-06-24T00:00:00.000Z",
   "source": "perplexity-sonar",
   "models": [
     {
-      "provider": "OpenAI",
-      "name": "GPT-5.5",
-      "releaseDate": "2026-04-23",
-      "contextWindow": "未公开",
-      "highlights": ["真实工作和长程 Agent 增强", "Agentic Coding、电脑使用与知识工作升级"],
+      "provider": "Anthropic",
+      "name": "Claude Fable 5",
+      "releaseDate": "2026-06-09",
+      "contextWindow": "1M",
+      "highlights": ["官方模型页列为最强公开模型", "模型 ID：claude-fable-5", "1M 上下文，面向高难度推理和长程 Agent"],
       "tier": 1,
-      "url": "https://openai.com/index/introducing-gpt-5-5/",
+      "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
       "category": "model",
-      "tags": ["OpenAI", "编程", "Agent", "Codex"],
-      "description": "OpenAI 最新旗舰模型，适合复杂软件工程、电脑使用和专业知识工作"
+      "tags": ["Anthropic", "推理", "Agent", "1M上下文"],
+      "description": "Anthropic 当前最高能力公开模型，适合复杂软件工程、深度研究和高自治 Agent"
     }
   ],
   "news": [
     {
-      "date": "2026-04-23",
-      "provider": "OpenAI",
-      "title": "GPT-5.5 发布",
-      "summary": "OpenAI 发布 GPT-5.5，强化 Agentic Coding、电脑使用、知识工作和早期科研。",
-      "url": "https://openai.com/index/introducing-gpt-5-5/"
+      "date": "2026-06-09",
+      "provider": "Anthropic",
+      "title": "Claude Fable 5 正式 GA",
+      "summary": "Anthropic 文档列出 Claude Fable 5 为最强公开模型，面向最高难度推理和长程 Agent 工作，1M 上下文并在主要云平台可用。",
+      "url": "https://platform.claude.com/docs/en/about-claude/models/overview"
     }
   ]
 }`
@@ -50,10 +50,10 @@ export function buildSystemPrompt(): string {
   return [
     "你是一位严谨的 AI 模型情报分析师，负责从官方渠道收集主流大模型的最新发布信息。",
     "你必须：",
-    "1. 仅依据可验证的官方来源（Anthropic / OpenAI / Google DeepMind / Alibaba / Zhipu / Moonshot / DeepSeek / xAI / Meta 等官方博客或发布页）",
+    "1. 仅依据可验证的官方来源（Anthropic / OpenAI / Google DeepMind / Alibaba / Zhipu / Moonshot / DeepSeek / xAI / Meta 等官方文档、模型页、博客或发布页）",
     "2. 输出严格合法的 JSON，不得输出 markdown 代码块包裹、不得输出注释、不得输出多余文字",
     "3. 所有字段必须齐全，releaseDate 使用 YYYY-MM-DD 格式",
-    "4. 不确定或无可靠来源的信息必须省略，不得编造",
+    "4. 不确定或无可靠来源的信息必须省略，不得编造；如果官方模型页与新闻稿冲突，以官方模型页/API 文档为准",
   ].join("\n")
 }
 
@@ -86,6 +86,7 @@ export function buildUserPrompt(input: PromptInput): string {
     "- news 数组按 date 倒序排列，至多 10 条，覆盖最近 6 个月内的重大发布",
     "- source 字段请填写 " + `"${input.providerSource}"`,
     "- updatedAt 使用 ISO8601 UTC 时间戳",
+    "- 示例只用于说明 JSON 形状，不要沿用示例模型名；必须按当前日期重新核验官方来源",
     "",
     "JSON 形状示例（仅示例，请用真实最新数据）：",
     JSON_SHAPE_EXAMPLE,

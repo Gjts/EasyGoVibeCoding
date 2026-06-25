@@ -1,62 +1,37 @@
 # EasyGoVibeCoding
 
-<div align="center">
-
 **AI 编程工具综合培训网站**
 
-*AI 编程工具不是魔法，是工程。理解机制才能驾驭工具。*
+AI 编程工具不是魔法，是工程。理解机制才能驾驭工具。
 
-[![Next.js](https://img.shields.io/badge/Next.js-16.0-black?style=flat-square&logo=next.js)](https://nextjs.org/)
-[![React](https://img.shields.io/badge/React-19.0-61DAFB?style=flat-square&logo=react)](https://react.dev/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.0-06B6D4?style=flat-square&logo=tailwindcss)](https://tailwindcss.com/)
-[![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
+## 项目简介
 
-</div>
+EasyGoVibeCoding 是一个面向开发者、团队和企业的 AI 编程工具与架构培训平台。当前实现已经从早期“纯内容规划站”演进为：
 
----
+- Next.js 16 + React 19 + Tailwind CSS 4 的静态导出前端
+- Cloudflare Pages 承载静态页面与 Pages Functions
+- Cloudflare Worker 定时更新模型动态并写入 KV
+- 多模块课程页面、站内搜索、学习访问仪表盘、GitHub 热门项目、日本站 MVP 和最新模型面板
 
-## 📖 项目简介
+## 快速开始
 
-EasyGoVibeCoding 是一个面向企业级 AI 编程工具与架构培训的综合平台。本项目旨在帮助开发者、团队和企业系统掌握 AI 编程工具，提升开发效率，构建 AI 驱动的开发团队。
-
-### ✨ 核心特色
-
-- 🎯 **系统化课程体系** - 涵盖基础篇、进阶篇、工具篇、架构篇、实践篇、团队篇
-- 🔧 **工具深度解析** - Cursor、Windsurf、GitHub Copilot、Claude Code 等主流工具
-- 🏗️ **架构原理讲解** - Transformer、Mamba、MoE、RAG 等 AI 架构深度解析
-- 👥 **团队建设指南** - 从零打造 AI 团队的完整方法论
-- 🌐 **生态导航** - AI 编程工具生态全景，快速找到所需资源
-
----
-
-## 🚀 快速开始
-
-### 环境要求
-
-- **Node.js**: 18.0+
-- **pnpm**: 8.0+ (推荐) 或 npm / yarn
-
-### 安装与运行
+前端项目位于：
 
 ```bash
-# 克隆项目
-git clone https://github.com/HardieBao/EasyGoVibeCoding.git
-cd EasyGoVibeCoding
+src/frontend/EasyGoVibeCoding
+```
 
-# 进入前端项目目录
+常用命令：
+
+```bash
 cd src/frontend/EasyGoVibeCoding
-
-# 安装依赖
 pnpm install
-
-# 启动开发服务器
 pnpm dev
 ```
 
-访问 [http://localhost:3000](http://localhost:3000) 查看网站。
+访问 `http://localhost:3000`。
 
-### 构建与部署到 Cloudflare Pages
+构建与部署：
 
 ```bash
 pnpm build
@@ -64,145 +39,134 @@ pnpm pages:deploy
 ```
 
 说明：
-- `pnpm build` 会静态导出站点到 `out/`
-- `postbuild` 会自动复制 `functions/` 到 `out/functions`
-- `pnpm pages:deploy` 会将 `out/` 部署到 Cloudflare Pages
 
----
+- `pnpm build` 通过 `scripts/build-with-meta.js` 执行静态构建。
+- `postbuild` 会复制 `functions/` 到 `out/functions`。
+- Cloudflare Pages 使用 `out/` 作为部署目录。
+- Pages Functions 当前包含 `/api/send-email`、`/api/site-stats`、`/api/models`。
 
-## 📁 项目结构
+## 项目结构
 
-```
+```text
 EasyGoVibeCoding/
-├── docs/                           # 项目文档
-│   ├── bussiness/                  # 业务文档
-│   │   ├── PRD.md                  # 产品需求文档
-│   │   └── Task_Details.md         # 任务详情文档
-│   ├── develop/                    # 开发文档
-│   │   └── Architecture_Design.md  # 架构设计文档
-│   └── DECOMPOSITION_LOG.md        # 大纲分解日志
+├── docs/
+│   ├── bussiness/
+│   │   ├── PRD.md
+│   │   └── Task_Details.md
+│   └── develop/
+│       └── Architecture_Design.md
 ├── src/
-│   └── frontend/
-│       └── EasyGoVibeCoding/       # Next.js 前端项目
-│           ├── app/                # App Router 路由
-│           ├── components/         # React 组件
-│           │   └── ui/             # shadcn/ui 组件
-│           ├── hooks/              # React Hooks
-│           ├── lib/                # 工具函数
-│           ├── public/             # 静态资源
-│           └── styles/             # 样式文件
-├── deploy/                         # 部署配置
-├── AI编程工具综合培训网站大纲.md     # 原始大纲文档
-├── LICENSE                         # 开源协议
-└── README.md                       # 项目说明
+│   ├── frontend/
+│   │   └── EasyGoVibeCoding/
+│   │       ├── app/                 # Next.js App Router 页面
+│   │       ├── components/          # React 组件
+│   │       ├── data/                # 静态种子数据
+│   │       ├── functions/           # Cloudflare Pages Functions
+│   │       ├── hooks/
+│   │       ├── lib/
+│   │       ├── public/
+│   │       └── scripts/
+│   └── backend/
+│       └── model-updater/           # Cloudflare Worker：模型动态更新
+├── AI编程工具综合培训网站大纲.md
+├── 模型信息更新记录.md
+├── AGENTS.md
+├── CLAUDE.md
+└── README.md
 ```
 
----
+## 当前内容模块
 
-## 🛠️ 技术栈
+| 模块 | 路由 | 状态 |
+| --- | --- | --- |
+| 首页 | `/` | 已实现，含日本市场横幅、最新模型、GitHub 热门、学习仪表盘 |
+| 基础篇 | `/basics/*` | 已实现多页 |
+| 进阶篇 | `/advanced/*` | 已实现多页，含 AI 框架、上下文工程、部署、测试等 |
+| 工具篇 | `/tools/*` | 已实现多页，含工具选型页 |
+| 架构篇 | `/architecture/*` | 已实现多页 |
+| 实践篇 | `/practice/*` | 已实现多页 |
+| 团队篇 | `/team/*` | 已实现多页 |
+| 生态导航 | `/ecosystem` | 已实现 |
+| 优质资源 | `/resources` | 已实现 |
+| 超级个体篇 | `/super-individual/*` | 已实现多页 |
+| GitHub 热门项目 | `/github-hot` | 已实现 |
+| 日本站 MVP | `/ja/*` | 已实现 landing、等待名单和法务页面 |
 
-| 类别 | 技术 | 版本 |
-|------|------|------|
-| **框架** | Next.js | 16.0 |
-| **UI 库** | React | 19.0 |
-| **语言** | TypeScript | 5.0+ |
-| **样式** | Tailwind CSS | 4.0 |
-| **组件库** | shadcn/ui + Radix UI | 最新版 |
-| **图标** | Lucide React | 0.454 |
-| **图表** | Recharts | 2.15 |
-| **表单** | React Hook Form + Zod | 最新版 |
+## 技术栈
 
----
+| 类别 | 技术 |
+| --- | --- |
+| 前端框架 | Next.js 16 |
+| UI 框架 | React 19 |
+| 语言 | TypeScript 5 |
+| 样式 | Tailwind CSS 4 |
+| 组件 | shadcn/ui、Radix UI |
+| 图标 | Lucide React |
+| 图表 | Recharts |
+| 表单 | React Hook Form + Zod |
+| 部署 | Cloudflare Pages |
+| API | Cloudflare Pages Functions |
+| 定时任务 | Cloudflare Worker |
 
-## 📚 内容模块
+## 当前功能状态
 
-| 模块 | 描述 | 目标用户 |
-|------|------|---------|
-| **基础篇** | 零基础入门，从觉醒到实战 | 小白、文科生、设计师、产品经理 |
-| **进阶篇** | 从工具到架构的 100 小时修炼 | 有编程基础的开发者 |
-| **工具篇** | AI 编程工具深度解析 | 开发者、架构师 |
-| **架构篇** | AI 大模型架构深度解析 | 产品经理、技术管理者、架构师 |
-| **实践篇** | 6 个真实项目实战 | 所有想动手实践的用户 |
-| **团队篇** | 从零打造 AI 团队 | 技术负责人、团队 Leader、HR、CTO |
-| **生态导航** | AI 编程工具生态全景 | 所有用户 |
-| **优质资源** | 精选博客、播客、Newsletter | 所有用户 |
+已实现：
 
----
+- 静态站点构建与 Cloudflare Pages 部署链路
+- 多模块课程页面
+- Header 搜索对话框与快捷键入口
+- 首页最新模型动态面板
+- `/api/models` KV 数据读取与静态种子回退
+- `/api/site-stats` 访问统计
+- `/api/send-email` 邮件发送
+- 本地访问式学习仪表盘
+- 日本站 MVP 页面
 
-## 📋 项目文档
+部分完成：
 
-| 文档 | 描述 | 路径 |
-|------|------|------|
-| **PRD** | 产品需求文档，定义 WHAT 和 WHO | [docs/bussiness/PRD.md](docs/bussiness/PRD.md) |
-| **Task Details** | 任务详情文档，定义 HOW（可执行任务） | [docs/bussiness/Task_Details.md](docs/bussiness/Task_Details.md) |
-| **Architecture** | 架构设计文档，定义 HOW（技术结构） | [docs/develop/Architecture_Design.md](docs/develop/Architecture_Design.md) |
-| **分解日志** | 大纲分解过程记录 | [docs/DECOMPOSITION_LOG.md](docs/DECOMPOSITION_LOG.md) |
+- 学习进度：当前主要是本地访问追踪，不是完整账号体系。
+- 工具选型：已有页面内容，但不是完整问答式决策助手。
+- 主题能力：`ThemeProvider` 组件存在，但根布局尚未接入完整主题切换体验。
+- 模型动态：已接入 Worker/KV 机制，但仍需要定期人工抽查官方来源。
 
----
+未完成或待补：
 
-## 🎯 开发计划
+- 测试框架
+- CI/CD 工作流
+- 社区评论/Q&A
+- 构建期 MDX 内容系统
+- sitemap/robots 生成
+- 邮件表单防滥用与更严格的错误返回策略
 
-### 第一阶段（MVP - 持续迭代）
-- [x] 项目初始化与基础配置
-- [x] 基础布局与导航
-- [x] 多模块内容页面框架
-- [x] 站内搜索入口（搜索对话框）
-- [ ] 内容持续完善
+## 验证现状
 
-### 第二阶段（完整功能）
-- [ ] 学习进度追踪
-- [ ] 社区功能（评论、问答）
-- [ ] 工具对比矩阵
-- [ ] 选型决策助手
-- [ ] 搜索能力升级（如生成式索引或更完整的数据源）
-- [ ] 内容持续完善
+最近一次深查记录：
 
-### 第三阶段（优化扩展 - 12 个月）
-- [ ] 在线 IDE（预告）
-- [ ] 移动端 App（可选）
-- [ ] 企业版功能（可选）
+- `pnpm build` 通过，静态导出 87 个页面。
+- `pnpm exec tsc --noEmit --incremental false` 通过。
+- `pnpm validate:models` 通过。
+- `pnpm lint` 尚未通过，当前存在较多 lint 问题。
+- `next.config.mjs` 当前仍设置 `typescript.ignoreBuildErrors: true`，生产前应移除并保持构建类型校验开启。
 
----
+## 关键文档
 
-## 🤝 参与贡献
+| 文档 | 说明 |
+| --- | --- |
+| `docs/bussiness/PRD.md` | 产品需求与当前实现状态 |
+| `docs/bussiness/Task_Details.md` | 任务拆解与状态口径 |
+| `docs/develop/Architecture_Design.md` | 当前技术架构与历史规划差异 |
+| `AI编程工具综合培训网站大纲.md` | 课程与内容结构大纲 |
+| `模型信息更新记录.md` | 最新模型数据维护规则 |
+| `src/frontend/EasyGoVibeCoding/CLOUDFLARE_DEPLOY.md` | Cloudflare Pages 部署说明 |
+| `src/backend/model-updater/README.md` | 模型更新 Worker 说明 |
 
-欢迎参与项目贡献！
+## 维护原则
 
-1. Fork 本仓库
-2. 创建功能分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交更改 (`git commit -m 'feat: Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 提交 Pull Request
+- 新内容优先沿用当前 `app/**/page.tsx` 页面结构；不要默认新建 MDX/content 流程。
+- 动态模型内容必须有官方模型页、API 文档或官方发布页支撑。
+- 新增 API 时同步更新 Cloudflare Pages Functions、部署文档和环境变量说明。
+- 生产前必须解决 lint、测试、CI、sitemap/robots 和 `ignoreBuildErrors` 问题。
 
-### 提交规范
+## License
 
-- `feat`: 新功能
-- `fix`: 修复 Bug
-- `docs`: 文档更新
-- `style`: 代码格式
-- `refactor`: 重构
-- `test`: 测试
-- `chore`: 构建/工具
-
----
-
-## 📄 开源协议
-
-本项目采用 [MIT License](LICENSE) 开源协议。
-
----
-
-## 📞 联系我们
-
-- **GitHub**: [HardieBao/EasyGoVibeCoding](https://github.com/HardieBao/EasyGoVibeCoding)
-- **Issues**: [提交问题](https://github.com/HardieBao/EasyGoVibeCoding/issues)
-
----
-
-<div align="center">
-
-**⭐ 如果这个项目对你有帮助，请给我们一个 Star！**
-
-*Made with ❤️ by EasyGoVibeCoding Team*
-
-</div>
+MIT

@@ -1,11 +1,23 @@
 # AI 编程工具综合培训网站 - 产品需求文档 (PRD)
 
-> **文档版本**：v1.1
-> **最后更新**：2025-01-27
-> **文档状态**：已更新-待评审
+> **文档版本**：v1.2
+> **最后更新**：2026-05-11
+> **文档状态**：当前实现校准
 > **基于大纲**：AI编程工具综合培训网站大纲 v1.0
 
 ---
+
+## 2026-05-11 当前实现状态
+
+本 PRD 同时包含产品愿景和历史规划。当前线上/代码实现应按以下状态理解：
+
+- 已实现：多模块课程页面、站内搜索对话框、Cloudflare Pages 静态部署、Pages Functions、最新模型面板、GitHub 热门项目页、超级个体篇、日本站 MVP、本地访问式学习仪表盘。
+- 部分实现：学习进度追踪目前是 localStorage/访问记录型仪表盘，不是账号体系；工具选型已有页面内容，但不是完整问答式决策助手；模型动态有 Worker/KV 管线，但仍需要人工抽查官方来源。
+- 未实现：注册/登录、完整社区评论/Q&A、积分/成就、测试框架、CI/CD、构建期 MDX 内容系统、sitemap/robots。
+- 技术口径：当前不是 Vercel/GitHub Pages 主部署，也不是 MDX/content 驱动；实际是 Next.js 静态导出 + Cloudflare Pages + Pages Functions + Cloudflare Worker。
+- 动态模型内容规则：模型 ID、上下文窗口、工具能力、稳定性状态以官方模型页/API 文档为准；新闻稿仅作背景材料。
+
+后续验收本 PRD 时，应先区分“当前能力”“部分完成”“规划目标”，避免把规划项当作已上线能力。
 
 ## 一、产品概述
 
@@ -330,7 +342,7 @@
   - CLI与IDE联动工作流
 - Antigravity实战：
   - Google Agentic Coding环境搭建
-  - Claude Opus 4.7 + Gemini 3.1 混合调用技巧
+  - Claude Opus 4.7 + Gemini 3.1 Pro Preview 混合调用技巧
   - 任务视图与Artifacts使用
 - 其他IDE工具：Zed、Devin、LazyVim + AI、Neovim + Copilot等对比
 
@@ -375,9 +387,9 @@
 - REST API与企业集成
 
 **06. 模型性能分级参考**
-- 第一梯队（复杂任务首选）：GPT-5.5（真实工作、Agentic Coding、电脑使用和知识工作增强）、Claude Opus 4.7（编码、Agent、视觉和复杂多步骤任务增强）、Gemini 3.1 Pro（复杂推理与多模态预览）
-- 第二梯队（日常开发）：Claude Sonnet 4.6、Grok 4.20 Reasoning、DeepSeek V4-Pro、GLM-5.1、Kimi K2.6、Qwen 3.6 Plus、Muse Spark
-- 第三梯队（轻量任务）：DeepSeek V4-Flash、Gemini 3.1 Flash-Lite、Grok 4.1 Fast Reasoning、Claude Haiku 4.5
+- 第一梯队（复杂任务首选）：GPT-5.5（官方模型页推荐用于复杂推理与编码，1M 上下文）、Claude Opus 4.7（GA，1M context window，128k max output）、Gemini 3.1 Pro Preview（软件工程、Agentic workflow 和复杂多步骤执行）
+- 第二梯队（日常开发）：Claude Sonnet 4.6、GPT-5.4、Gemini 3 Flash，以及需定期复核官方来源的 Grok / DeepSeek / GLM / Kimi / Qwen 等条目
+- 第三梯队（轻量任务）：Gemini 3.1 Flash-Lite（Stable，低延迟低成本）、GPT-5.4 mini / nano、Grok 轻量模型、Claude Haiku 系列
 - 选型建议：复杂任务只用第一梯队，日常开发用第二梯队，成本敏感用第三梯队
 
 **07. 辅助开发工具实战**
@@ -629,12 +641,12 @@
 - 工具对比矩阵（按类型/功能/定价/场景筛选）
 
 **02. 大模型提供商导航**
-- Anthropic（Claude系列）：Claude Opus 4.7（2026年4月，最新 GA 旗舰）、Claude Sonnet 4.6、Claude Haiku 4.5
-- OpenAI（GPT系列）：GPT-5.5（2026年4月，最新旗舰，强化 Agentic Coding、电脑使用和知识工作）、GPT-5.5 Pro、GPT-5.4（上一代主线）、GPT-5.3-Codex
-- Google（Gemini系列）：Gemini 3.1 Pro（2026年2月，复杂推理预览）、Gemini 3.1 Flash-Lite、Gemini 3 Flash
-- 国产模型：Kimi K2.6（月之暗面）、GLM-5.1（智谱AI）、Qwen 3.6 Plus（通义千问）、DeepSeek V4-Pro / V4-Flash、MiniMax M2
-- 其他提供商：xAI Grok 4.20 / Grok Voice Think Fast、Mistral、Groq、Together AI、Perplexity、Meta Muse Spark
-- 模型选择指南、模型对比表、模型性能分级参考（第一梯队：GPT-5.5、Claude Opus 4.7、Gemini 3.1 Pro）
+- Anthropic（Claude系列）：Claude Opus 4.7（GA，`claude-opus-4-7`，1M 上下文）、Claude Sonnet、Claude Haiku
+- OpenAI（GPT系列）：GPT-5.5（`gpt-5.5`，1M 上下文，复杂推理与编码旗舰）、GPT-5.4、GPT-5.4 mini / nano
+- Google（Gemini系列）：Gemini 3.1 Pro Preview（`gemini-3.1-pro-preview`）、Gemini 3.1 Flash-Lite（Stable）、Gemini 3 Flash
+- 国产模型：Kimi、GLM、Qwen、DeepSeek、MiniMax 等条目必须按官方模型页/API 文档定期复核后再写入“最新”口径
+- 其他提供商：xAI、Mistral、Groq、Together AI、Perplexity、Meta 等条目必须区分开放 API、私有预览和产品内可用
+- 模型选择指南、模型对比表、模型性能分级参考（第一梯队：GPT-5.5、Claude Opus 4.7、Gemini 3.1 Pro Preview）
 
 **03. MCP Servers导航**
 - 官方MCP Servers（文件系统、GitHub、数据库）
@@ -1034,8 +1046,8 @@
 ### 8.1 技术约束
 
 - 使用 Next.js 16 + TypeScript + Tailwind CSS
-- 内容使用 Markdown/MDX 格式
-- 部署在 Vercel 或 GitHub Pages
+- 当前内容主要使用 `app/**/page.tsx` TSX 页面；Markdown/MDX 为未来可选内容系统
+- 当前主部署平台为 Cloudflare Pages，API 使用 Cloudflare Pages Functions，模型动态由 Cloudflare Worker 更新
 
 ### 8.2 资源约束
 
@@ -1092,7 +1104,7 @@
 
 ---
 
-**文档版本**：v1.1
-**最后更新**：2025-01-27
-**文档状态**：已更新-待评审
+**文档版本**：v1.2
+**最后更新**：2026-05-11
+**文档状态**：当前实现校准
 **基于大纲**：AI编程工具综合培训网站大纲 v1.0

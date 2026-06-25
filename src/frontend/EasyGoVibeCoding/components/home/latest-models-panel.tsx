@@ -127,7 +127,7 @@ export function LatestModelsPanel() {
               </span>
             </h2>
             <p className="mt-3 text-sm leading-7 text-gray-700 sm:text-base">
-              自动汇总 Anthropic / OpenAI / Google / 国产厂商 最新旗舰模型与发布动态，帮你随时掌握选型依据。
+              自动汇总官方可核验的大模型发布动态，优先采用模型页/API 文档口径，帮你随时掌握选型依据。
             </p>
           </div>
           <div className="flex items-center gap-3">

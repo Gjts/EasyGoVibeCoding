@@ -1,11 +1,33 @@
 # AI 编程工具综合培训网站 - 任务详情 (Task Details)
 
-> **文档版本**：v1.1
-> **最后更新**：2025-01-27
-> **文档状态**：已更新-待评审
+> **文档版本**：v1.2
+> **最后更新**：2026-05-11
+> **文档状态**：当前实现校准
 > **基于大纲**：AI编程工具综合培训网站大纲 v1.0
 
 ---
+
+## 2026-05-11 任务状态校准
+
+本文档早期任务清单仍保留规划阶段验收项。当前应按以下状态推进：
+
+| 事项 | 当前状态 | 后续处理 |
+| --- | --- | --- |
+| Next.js 前端与静态构建 | 已实现 | 持续维护 |
+| 多模块课程页面 | 已实现 | 内容继续补齐 |
+| Cloudflare Pages 部署 | 已实现 | 文档和环境变量继续校准 |
+| Pages Functions | 已实现 | 当前包含 `send-email`、`site-stats`、`models` |
+| 模型更新 Worker | 已实现 | 补鉴权说明、定期核验官方来源 |
+| 学习进度追踪 | 部分实现 | 当前为本地访问记录，非账号进度 |
+| 工具对比/选型助手 | 部分实现 | 页面存在，完整交互助手待补 |
+| 主题切换 | 部分实现 | `ThemeProvider` 存在，根布局与 UI 开关待补 |
+| MDX/content 系统 | 未实现 | 先不要作为新增内容默认路径 |
+| 社区评论/Q&A | 未实现 | 仍属规划 |
+| 测试框架 | 未实现 | 需新增 Vitest/RTL 或等价方案 |
+| CI/CD | 未实现 | 当前未见 `.github` 工作流 |
+| sitemap/robots | 未实现 | 构建后 `out/` 未生成对应文件 |
+
+执行新任务时，优先按当前代码形态拆解，不要把历史规划中的 MDX、Vercel、Algolia、注册用户、社区等默认视为既有能力。
 
 ## 一、任务概览
 
@@ -400,14 +422,18 @@
 **依赖**：DEV-001
 
 **任务描述**：
-- 配置 Vercel 部署（或 GitHub Pages）
-- 配置环境变量
+- 配置 Cloudflare Pages 静态部署
+- 配置 Cloudflare Pages Functions
+- 配置 `RESEND_API_KEY` 环境变量和 `SITE_STATS_KV` 绑定
+- 配置 `model-updater` Worker 与 Pages 共享 KV
 - 配置域名和 SSL
 - 配置 CI/CD 流程
 - 配置监控和日志
 
 **验收标准**：
-- [ ] 部署成功
+- [x] Cloudflare Pages 部署成功
+- [x] `functions/` 可复制到 `out/functions`
+- [ ] `/api/send-email`、`/api/site-stats`、`/api/models` 在线验证通过
 - [ ] 域名和 SSL 配置正确
 - [ ] CI/CD 流程正常
 - [ ] 监控和日志正常
@@ -1652,15 +1678,17 @@
 
 ### 10.3 第三方服务
 
-- 部署服务：Vercel（免费版或付费版）
-- 搜索服务：Algolia（可选）或本地搜索
+- 部署服务：Cloudflare Pages
+- API 服务：Cloudflare Pages Functions
+- 定时任务：Cloudflare Worker
+- 搜索服务：当前本地搜索；Algolia 可作为未来升级
 - 评论服务：Giscus、Utterances（可选）或自建
-- 监控服务：Vercel Analytics（可选）
+- 监控服务：Cloudflare Analytics / Vercel Analytics（当前 layout 已接入 Vercel Analytics，部署平台仍为 Cloudflare Pages）
 
 ---
 
-**文档版本**：v1.1
-**最后更新**：2025-01-27
-**文档状态**：已更新-待评审
+**文档版本**：v1.2
+**最后更新**：2026-05-11
+**文档状态**：当前实现校准
 **基于大纲**：AI编程工具综合培训网站大纲 v1.0
-**新增任务**：DEV-019（工具对比矩阵）、DEV-020（选型决策助手）、DEV-021（学习路径推荐器）
+**新增任务**：当前实现状态校准、Cloudflare 部署链路、模型动态 Worker、未完成项分级

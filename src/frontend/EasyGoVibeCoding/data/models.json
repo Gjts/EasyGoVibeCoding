@@ -1,86 +1,102 @@
 {
-  "updatedAt": "2026-04-27T00:00:00.000Z",
-  "source": "seed-official-2026-04-27-gpt-5-5",
+  "updatedAt": "2026-06-24T00:00:00.000Z",
+  "source": "seed-official-verified-2026-06-24",
   "models": [
     {
       "provider": "Anthropic",
-      "name": "Claude Opus 4.7",
-      "releaseDate": "2026-04-16",
+      "name": "Claude Fable 5",
+      "releaseDate": "2026-06-09",
       "contextWindow": "1M",
       "highlights": [
-        "官方 GA，面向编码、Agent 与复杂多步骤任务",
-        "高分辨率视觉理解升级",
-        "API 型号：claude-opus-4-7"
+        "Anthropic 最强公开模型，面向最高难度推理与长程 Agent 工作",
+        "API 型号：claude-fable-5，Claude API / Bedrock / Vertex AI / Microsoft Foundry 可用",
+        "1M 上下文，adaptive thinking 常开"
       ],
       "tier": 1,
-      "url": "https://www.anthropic.com/claude/opus",
+      "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
       "category": "model",
-      "tags": ["Anthropic", "编程", "Agent", "1M上下文"],
-      "description": "Anthropic 最新 GA 旗舰，适合复杂软件工程、长程 Agent 与专业知识工作"
+      "tags": ["Anthropic", "推理", "Agent", "1M上下文"],
+      "description": "Anthropic 2026-06-09 GA 的最高能力公开模型，适合复杂软件工程、深度研究和高自治 Agent"
     },
     {
       "provider": "OpenAI",
       "name": "GPT-5.5",
       "releaseDate": "2026-04-23",
-      "contextWindow": "未公开",
+      "contextWindow": "1M",
       "highlights": [
-        "OpenAI 最新旗舰，面向真实工作和长程 Agent",
-        "编码、在线研究、数据分析、文档表格和软件操作增强",
-        "发布页 2026-04-24 更新称 GPT-5.5 / Pro 已支持 API"
+        "OpenAI 官方模型页推荐用于复杂推理与编码",
+        "模型 ID：gpt-5.5，Responses API 可用，支持 text/image 输入",
+        "1M 上下文、128K 最大输出，支持函数调用、搜索、文件检索和电脑使用"
       ],
       "tier": 1,
-      "url": "https://openai.com/index/introducing-gpt-5-5/",
+      "url": "https://platform.openai.com/docs/models",
       "category": "model",
       "tags": ["OpenAI", "推理", "Codex", "Agent"],
-      "description": "OpenAI 最新主线旗舰，适合复杂软件工程、电脑使用、知识工作和科研分析"
+      "description": "OpenAI 当前旗舰模型，适合复杂软件工程、Agent、电脑使用和专业知识工作"
     },
     {
       "provider": "Google",
-      "name": "Gemini 3.1 Pro",
-      "releaseDate": "2026-02-19",
-      "contextWindow": "1M级",
+      "name": "Gemini 3.5 Flash",
+      "releaseDate": "2026-06-23",
+      "contextWindow": "1,048,576",
       "highlights": [
-        "3.1 Pro preview，强化复杂推理",
-        "面向 Gemini API、Vertex AI 与 Gemini 产品滚动",
-        "适合综合数据、复杂解释与创意编码"
+        "GA 稳定模型，Google 文档称为最智能 Flash 模型",
+        "模型 ID：gemini-3.5-flash，65,536 最大输出 token",
+        "面向 Agentic execution、编码、长程任务和规模化子 Agent"
       ],
       "tier": 1,
-      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-1-pro/",
+      "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash",
       "category": "model",
-      "tags": ["Google", "多模态", "推理", "预览"],
-      "description": "Google Gemini 3 系列的 Pro 级推理升级，适合复杂多模态与 Agent 原型"
+      "tags": ["Google", "多模态", "编程", "1M上下文"],
+      "description": "Google Gemini 3.5 稳定主力模型，适合规模化 Agent、编码循环、多模态和长程工作流"
     },
     {
-      "provider": "Anthropic",
-      "name": "Claude Sonnet 4.6",
-      "releaseDate": "2026-02-17",
-      "contextWindow": "1M beta",
+      "provider": "Moonshot",
+      "name": "Kimi K2.7 Code",
+      "releaseDate": "2026-06-24",
+      "contextWindow": "256K",
       "highlights": [
-        "日常开发与生产 Agent 的主力平衡模型",
-        "编码、电脑使用、长上下文推理全面升级",
-        "API 型号：claude-sonnet-4-6"
+        "Kimi API 文档公告 K2.7 Code 已正式发布，高速版同步上线",
+        "模型 ID：kimi-k2.7-code / kimi-k2.7-code-highspeed",
+        "256K 上下文，支持文本、图像、视频输入、工具调用和长思考"
       ],
       "tier": 2,
-      "url": "https://www.anthropic.com/claude/sonnet",
+      "url": "https://platform.kimi.ai/docs/guide/kimi-k2-7-code-quickstart",
       "category": "model",
-      "tags": ["Anthropic", "平衡", "Agent", "1M上下文"],
-      "description": "Anthropic 最新 Sonnet，面向大规模日常开发、Agent 与企业工作流"
+      "tags": ["Moonshot", "中文", "编程", "Agent"],
+      "description": "Kimi 最新编码模型，面向长上下文代码任务、多模态工具调用和高成功率 Agentic Coding"
+    },
+    {
+      "provider": "Zhipu",
+      "name": "GLM-5.2",
+      "releaseDate": "2026-06-16",
+      "contextWindow": "1M",
+      "highlights": [
+        "新一代旗舰模型上线，支持 1M 无损上下文",
+        "Coding 与长程任务评测达到开源 SOTA",
+        "强化复杂系统工程、深度调试、项目级上下文承载和工程规范遵循"
+      ],
+      "tier": 2,
+      "url": "https://docs.bigmodel.cn/cn/update/new-releases",
+      "category": "model",
+      "tags": ["Zhipu", "中文", "Coding", "1M上下文"],
+      "description": "智谱 2026-06 旗舰，适合中文工程场景、长程 Agent、复杂系统开发和国产合规选型"
     },
     {
       "provider": "xAI",
-      "name": "Grok 4.20 Reasoning",
-      "releaseDate": "2026-03-10",
-      "contextWindow": "2M",
+      "name": "Grok 4.3",
+      "releaseDate": "2026-05-29",
+      "contextWindow": "1M",
       "highlights": [
-        "xAI API 最新旗舰推理模型",
-        "强调 Agent 工具调用、速度与严格指令遵循",
-        "2M 上下文窗口"
+        "xAI 文档推荐的通用首选模型",
+        "模型 ID：grok-4.3，支持可配置 reasoning",
+        "强调 agentic tool calling、低幻觉率和 1M 上下文"
       ],
       "tier": 2,
-      "url": "https://x.ai/api",
+      "url": "https://docs.x.ai/developers/models",
       "category": "model",
-      "tags": ["xAI", "推理", "工具调用", "2M上下文"],
-      "description": "xAI API 旗舰推理模型，适合企业级工具调用和长上下文任务"
+      "tags": ["xAI", "推理", "工具调用", "1M上下文"],
+      "description": "xAI 当前主力通用模型，适合工具调用、分析、长上下文和生产级 Agent 工作流"
     },
     {
       "provider": "DeepSeek",
@@ -99,38 +115,6 @@
       "description": "DeepSeek V4 预览旗舰，主打开源、长上下文与 Agentic Coding"
     },
     {
-      "provider": "Zhipu",
-      "name": "GLM-5.1",
-      "releaseDate": "2026-04-07",
-      "contextWindow": "未公开",
-      "highlights": [
-        "新一代旗舰模型上线",
-        "Coding 与长程任务能力显著增强",
-        "强化自主规划、持续执行与 tool use"
-      ],
-      "tier": 2,
-      "url": "https://docs.bigmodel.cn/cn/update/new-releases",
-      "category": "model",
-      "tags": ["Zhipu", "中文", "Coding", "Agent"],
-      "description": "智谱新一代旗舰，面向长程工程任务、中文场景与国产合规选型"
-    },
-    {
-      "provider": "Moonshot",
-      "name": "Kimi K2.6",
-      "releaseDate": "2026-04-20",
-      "contextWindow": "未公开",
-      "highlights": [
-        "Moonshot 官网展示的最新旗舰模型",
-        "原生多模态、代码能力与 Agent 性能增强",
-        "面向分析、表格、幻灯片和自主编程"
-      ],
-      "tier": 2,
-      "url": "https://www.moonshot.cn/en/",
-      "category": "model",
-      "tags": ["Moonshot", "中文", "多模态", "Agent"],
-      "description": "Moonshot 最新 Kimi 旗舰，聚焦复杂工作流、代码与 Agent 场景"
-    },
-    {
       "provider": "Alibaba",
       "name": "Qwen 3.6 Plus",
       "releaseDate": "2026-04-08",
@@ -141,7 +125,7 @@
         "每日 1000 次免费调用额度"
       ],
       "tier": 2,
-      "url": "https://qwenlm.github.io/qwen-code-docs/en/blog/weekly-update-2026-04-09/",
+      "url": "https://qwenlm.github.io/qwen-code-docs/en/blog/",
       "category": "model",
       "tags": ["Alibaba", "中文", "编程", "1M上下文"],
       "description": "Qwen Code 主力模型，适合中文编程、长上下文与日常 Agent 开发"
@@ -153,14 +137,14 @@
       "contextWindow": "未公开",
       "highlights": [
         "Meta Superintelligence Labs 首个 Muse 系列模型",
-        "驱动 Meta AI app 与 meta.ai",
+        "驱动 Meta AI app 与 meta.ai，并逐步扩展到 Meta 生态产品",
         "私有 API 预览面向部分合作伙伴开放"
       ],
       "tier": 2,
       "url": "https://about.fb.com/news/2026/04/introducing-muse-spark-meta-superintelligence-labs/",
       "category": "model",
       "tags": ["Meta", "多模态", "私有预览"],
-      "description": "Meta 最新产品模型，面向多模态理解、个人助手和社交内容场景"
+      "description": "Meta 最新产品模型，面向多模态理解、个人助手、视觉编码和社交内容场景"
     },
     {
       "provider": "DeepSeek",
@@ -170,7 +154,7 @@
       "highlights": [
         "V4 系列的快捷经济版本",
         "简单 Agent 任务接近 V4-Pro",
-        "API 同步上线"
+        "API 同步上线，支持 OpenAI ChatCompletions 与 Anthropic 接口"
       ],
       "tier": 3,
       "url": "https://api-docs.deepseek.com/zh-cn/news/news260424",
@@ -182,36 +166,94 @@
       "provider": "Google",
       "name": "Gemini 3.1 Flash-Lite",
       "releaseDate": "2026-03-03",
-      "contextWindow": "未公开",
+      "contextWindow": "1,048,576",
       "highlights": [
-        "Gemini 3.1 系列的低成本高吞吐模型",
-        "面向高频开发者工作负载",
-        "$0.25/1M input 与 $1.50/1M output"
+        "模型 ID：gemini-3.1-flash-lite",
+        "稳定低延迟、低成本模型，面向高频轻量任务",
+        "支持文本、图像、视频、音频和 PDF 输入"
       ],
       "tier": 3,
-      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-1-flash-lite/",
+      "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite",
       "category": "model",
       "tags": ["Google", "低成本", "高吞吐"],
-      "description": "Google 面向规模化调用的轻量模型，适合翻译、审核、批量 UI 和模拟生成"
+      "description": "Google 面向规模化调用的轻量稳定模型，适合翻译、抽取、转写和成本敏感的高频任务"
     },
     {
       "provider": "xAI",
-      "name": "Grok 4.1 Fast Reasoning",
-      "releaseDate": "2025-11-19",
-      "contextWindow": "2M",
+      "name": "Grok Build 0.1",
+      "releaseDate": "2026-05-29",
+      "contextWindow": "256K",
       "highlights": [
-        "低成本工具调用模型",
-        "适合延迟和预算敏感场景",
-        "2M 上下文窗口"
+        "xAI 早期访问编码模型",
+        "模型 ID：grok-build-0.1",
+        "专为 agentic coding workflow 训练，强调速度和代码任务执行"
       ],
       "tier": 3,
-      "url": "https://x.ai/api",
+      "url": "https://docs.x.ai/developers/models",
       "category": "model",
-      "tags": ["xAI", "低成本", "工具调用", "2M上下文"],
-      "description": "xAI 轻量推理模型，适合高频工具调用和成本敏感任务"
+      "tags": ["xAI", "编程", "Agent", "早期访问"],
+      "description": "xAI 面向编码 Agent 的快速模型，适合原型、轻量代码任务和低延迟工程工作流"
+    },
+    {
+      "provider": "OpenAI",
+      "name": "GPT-5.4 mini",
+      "releaseDate": "2026-03-05",
+      "contextWindow": "400K",
+      "highlights": [
+        "OpenAI 官方模型页推荐的低延迟、低成本变体",
+        "模型 ID：gpt-5.4-mini",
+        "400K 上下文、128K 最大输出，支持函数调用、搜索、文件检索和电脑使用"
+      ],
+      "tier": 3,
+      "url": "https://platform.openai.com/docs/models",
+      "category": "model",
+      "tags": ["OpenAI", "低成本", "编程", "Agent"],
+      "description": "OpenAI 面向高频工程任务的 mini 模型，适合成本敏感的代码、子 Agent 和工具调用场景"
     }
   ],
   "news": [
+    {
+      "date": "2026-06-24",
+      "provider": "Moonshot",
+      "title": "Kimi K2.7 Code 已在 Kimi API 文档上线",
+      "summary": "Kimi API 文档公告 K2.7 Code 正式发布，高速版同步上线，支持 256K 上下文、长思考、文本/图像/视频输入和工具调用。",
+      "url": "https://platform.kimi.ai/docs/guide/kimi-k2-7-code-quickstart"
+    },
+    {
+      "date": "2026-06-23",
+      "provider": "Google",
+      "title": "Gemini 3.5 Flash 进入 GA 稳定口径",
+      "summary": "Google 文档将 gemini-3.5-flash 标为 GA、Stable，定位为最智能 Flash 模型，支持 1,048,576 输入 token 和 65,536 输出 token。",
+      "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash"
+    },
+    {
+      "date": "2026-06-16",
+      "provider": "Zhipu",
+      "title": "GLM-5.2 新一代旗舰模型上线",
+      "summary": "智谱发布 GLM-5.2，支持 1M 无损上下文，强化 Coding、长程任务、复杂系统工程、深度调试和项目级上下文承载。",
+      "url": "https://docs.bigmodel.cn/cn/update/new-releases"
+    },
+    {
+      "date": "2026-06-09",
+      "provider": "Anthropic",
+      "title": "Claude Fable 5 正式 GA",
+      "summary": "Anthropic 文档列出 Claude Fable 5 为最强公开模型，面向最高难度推理和长程 Agent 工作，1M 上下文并在主要云平台可用。",
+      "url": "https://platform.claude.com/docs/en/about-claude/models/overview"
+    },
+    {
+      "date": "2026-05-29",
+      "provider": "xAI",
+      "title": "Grok 4.3 与 Grok Build 0.1 列入 xAI API 模型页",
+      "summary": "xAI 文档列出 grok-4.3 为当前通用首选模型，1M 上下文；同时推出面向 Agentic Coding 的早期访问模型 grok-build-0.1。",
+      "url": "https://docs.x.ai/developers/models"
+    },
+    {
+      "date": "2026-05-12",
+      "provider": "Meta",
+      "title": "Muse Spark 扩展到 Meta AI 与眼镜场景",
+      "summary": "Meta 更新 Muse Spark 发布文，说明该模型带来更快语音响应、AI 眼镜升级和更多 Meta AI 产品能力，并继续提供私有 API 预览。",
+      "url": "https://about.fb.com/news/2026/04/introducing-muse-spark-meta-superintelligence-labs/"
+    },
     {
       "date": "2026-04-24",
       "provider": "DeepSeek",
@@ -223,78 +265,22 @@
       "date": "2026-04-23",
       "provider": "OpenAI",
       "title": "GPT-5.5 发布",
-      "summary": "OpenAI 发布 GPT-5.5，强化 Agentic Coding、电脑使用、知识工作和早期科研；发布页 4 月 24 日更新称 GPT-5.5 / Pro 已支持 API。",
+      "summary": "OpenAI 发布 GPT-5.5，并在官方模型页将 gpt-5.5 标为复杂推理与编码旗舰，1M 上下文、128K 最大输出并支持多类工具。",
       "url": "https://openai.com/index/introducing-gpt-5-5/"
-    },
-    {
-      "date": "2026-04-23",
-      "provider": "xAI",
-      "title": "Grok Voice Think Fast 1.0 发布",
-      "summary": "xAI 发布 grok-voice-think-fast-1.0，定位为新的旗舰语音模型，面向复杂多轮语音工作流与高频工具调用。",
-      "url": "https://x.ai/news/grok-voice-think-fast-1"
-    },
-    {
-      "date": "2026-04-20",
-      "provider": "Moonshot",
-      "title": "Kimi K2.6 成为 Moonshot 最新旗舰",
-      "summary": "Moonshot 官网展示 Kimi K2.6 为最新旗舰，强调原生多模态、代码能力与 Agent 性能。",
-      "url": "https://www.moonshot.cn/en/"
-    },
-    {
-      "date": "2026-04-16",
-      "provider": "Anthropic",
-      "title": "Claude Opus 4.7 正式发布",
-      "summary": "Anthropic 发布 Claude Opus 4.7，面向编码、Agent、视觉和复杂多步骤任务增强，API 型号为 claude-opus-4-7。",
-      "url": "https://www.anthropic.com/news/claude-opus-4-7"
-    },
-    {
-      "date": "2026-04-08",
-      "provider": "Meta",
-      "title": "Meta 发布 Muse Spark",
-      "summary": "Meta 发布 Muse Spark，作为 Meta Superintelligence Labs 的首个 Muse 系列模型，已驱动 Meta AI app 与 meta.ai，并开放私有 API 预览。",
-      "url": "https://about.fb.com/news/2026/04/introducing-muse-spark-meta-superintelligence-labs/"
     },
     {
       "date": "2026-04-08",
       "provider": "Alibaba",
       "title": "Qwen 3.6 Plus 在 Qwen Code 上线",
-      "summary": "Qwen Code 发布 Qwen 3.6 Plus 可用，提供 1M 上下文和中文编程场景优化。",
-      "url": "https://qwenlm.github.io/qwen-code-docs/en/blog/weekly-update-2026-04-09/"
-    },
-    {
-      "date": "2026-04-07",
-      "provider": "Zhipu",
-      "title": "GLM-5.1 新一代旗舰模型上线",
-      "summary": "智谱发布 GLM-5.1，强化 Coding、长程任务、自主规划、持续执行与 tool use 能力。",
-      "url": "https://docs.bigmodel.cn/cn/update/new-releases"
-    },
-    {
-      "date": "2026-03-05",
-      "provider": "OpenAI",
-      "title": "GPT-5.4 发布",
-      "summary": "OpenAI 发布 GPT-5.4，ChatGPT、API 与 Codex 同步可用，融合 GPT-5.3-Codex 编程能力并支持 Codex 1M 上下文实验。",
-      "url": "https://openai.com/index/introducing-gpt-5-4/"
+      "summary": "Qwen Code 发布 Qwen 3.6 Plus 可用，提供 1M 上下文、中文编程场景优化和每日 1000 次免费调用额度。",
+      "url": "https://qwenlm.github.io/qwen-code-docs/en/blog/"
     },
     {
       "date": "2026-03-03",
       "provider": "Google",
-      "title": "Gemini 3.1 Flash-Lite 发布",
-      "summary": "Google 发布 Gemini 3.1 Flash-Lite preview，面向高吞吐开发者工作负载，主打低成本、低延迟和可控思考级别。",
-      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-1-flash-lite/"
-    },
-    {
-      "date": "2026-02-19",
-      "provider": "Google",
-      "title": "Gemini 3.1 Pro 发布预览",
-      "summary": "Google 发布 Gemini 3.1 Pro preview，强化复杂推理，并面向 Gemini API、Vertex AI、Gemini Enterprise、Gemini CLI 等渠道开放。",
-      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-1-pro/"
-    },
-    {
-      "date": "2026-02-17",
-      "provider": "Anthropic",
-      "title": "Claude Sonnet 4.6 发布",
-      "summary": "Anthropic 发布 Sonnet 4.6，升级编码、电脑使用、长上下文推理、Agent 规划、知识工作和设计能力。",
-      "url": "https://www.anthropic.com/claude/sonnet"
+      "title": "Gemini 3.1 Flash-Lite 成为轻量稳定选项",
+      "summary": "Google 模型文档列出 gemini-3.1-flash-lite，面向低延迟、低成本和高频轻量任务，支持多模态输入与 1,048,576 输入 token。",
+      "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite"
     }
   ]
 }

@@ -12,12 +12,13 @@
 在本地使用 Next.js 开发模式、静态导出预览，或尚未部署到 Cloudflare Pages 时，这个接口并不存在，所以会返回 `404`。  
 这属于预期现象，不代表统计功能代码本身有问题。
 
-只有在以下条件满足后，站点统计接口才会正常工作：
+只有在以下条件满足后，站点统计接口和模型动态接口才会正常工作：
 
 1. 项目已经构建完成
 2. `functions` 已复制到 `out/functions`
 3. 已部署到 **Cloudflare Pages**
 4. Pages 项目中已绑定 `SITE_STATS_KV`
+5. `model-updater` Worker 已成功写入 `models:latest`（否则 `/api/models` 会提示回退到静态 `data/models.json`）
 
 ## 解决方案
 
@@ -27,7 +28,7 @@
 
 ### 2. 配置 Cloudflare Pages 环境变量
 
-在 Cloudflare Pages 控制台中配置以下环境变量：
+在 Cloudflare Pages 控制台中配置以下环境变量和绑定：
 
 1. 登录 [Cloudflare Dashboard](https://dash.cloudflare.com/)
 2. 进入你的 Pages 项目
@@ -38,19 +39,27 @@
 RESEND_API_KEY = 你的_Resend_API_密钥
 ```
 
+KV 绑定：
+
+```text
+SITE_STATS_KV = 与 Worker 共享的 KV namespace
+```
+
 **重要**：
 - 确保在 **Production**、**Preview** 和 **Branch deployments** 中都添加了环境变量
 - 环境变量名称必须完全匹配：`RESEND_API_KEY`（区分大小写）
+- `SITE_STATS_KV` 同时服务站点统计和模型动态读取；Pages 与 `src/backend/model-updater` Worker 必须指向同一个 KV namespace
 
 ### 3. 验证部署
 
 部署后，检查以下内容：
 
 1. **检查 Functions 是否部署**：
-   - 在 Cloudflare Pages 控制台的 **Functions** 标签页中，应该能看到 `api/send-email` 函数
+   - 在 Cloudflare Pages 控制台的 **Functions** 标签页中，应该能看到 `api/send-email`、`api/site-stats`、`api/models` 函数
 
 2. **检查环境变量**：
    - 在 **Settings** → **Environment variables** 中确认 `RESEND_API_KEY` 已配置
+   - 在 **Settings** → **Functions** 或绑定区域确认 `SITE_STATS_KV` 已绑定
 
 3. **测试邮件发送**：
    - 访问网站的联系表单
@@ -69,8 +78,8 @@ RESEND_API_KEY=你的_Resend_API_密钥
 然后运行：
 
 ```bash
-npm run build
-npm run pages:deploy
+pnpm build
+pnpm pages:deploy
 ```
 
 **注意：**
@@ -78,6 +87,7 @@ npm run pages:deploy
 - 本地可以测试页面渲染和普通前端逻辑
 - 本地不一定能直接测试 `Cloudflare Pages Functions`
 - ` /api/site-stats ` 真实统计接口需要部署到 Cloudflare Pages 后才可访问
+- ` /api/models ` 真实模型接口需要部署到 Cloudflare Pages 且 KV 中存在 `models:latest` 后才可返回实时数据
 - 如果你在本地控制台看到 `404`，通常是因为统计接口还没有部署，不是页面本身报错
 
 ## 常见问题
@@ -122,6 +132,15 @@ A: 检查以下几点：
    - `site-stats:totals`
    - `site-stats:visitor:...`
 
+### Q: 为什么最新模型接口返回 fallback 或 404？
+
+A: 通常是以下原因之一：
+1. ✅ 当前还在本地开发环境，不是在 Cloudflare Pages 上访问
+2. ✅ `out/functions/api/models.ts` 没有被复制到构建输出目录
+3. ✅ Pages 项目未绑定 `SITE_STATS_KV`
+4. ✅ `model-updater` Worker 尚未成功写入 `models:latest`
+5. ✅ 前端会自动回退到 `data/models.json`，这属于预期降级链路
+
 ## 文件结构
 
 部署后的文件结构应该是：
@@ -129,10 +148,10 @@ A: 检查以下几点：
 ```
 out/
 ├── _next/
-├── api/
 ├── ...
 └── functions/          ← 这个目录必须存在
     └── api/
+        ├── models.ts
         ├── send-email.ts
         └── site-stats.ts
 ```
@@ -141,3 +160,4 @@ out/
 
 - [Cloudflare Pages Functions 文档](https://developers.cloudflare.com/pages/platform/functions/)
 - [Resend API 文档](https://resend.com/docs/api-reference/emails/send-email)
+- [Cloudflare Workers KV 文档](https://developers.cloudflare.com/kv/)

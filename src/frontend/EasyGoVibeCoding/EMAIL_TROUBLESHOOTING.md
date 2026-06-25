@@ -30,8 +30,8 @@
 ```bash
 # 重新构建并部署
 cd src/frontend/EasyGoVibeCoding
-npm run build
-npm run pages:deploy
+pnpm build
+pnpm pages:deploy
 ```
 
 **验证文件结构：**
@@ -40,7 +40,9 @@ npm run pages:deploy
 out/
 └── functions/
     └── api/
-        └── send-email.ts
+        ├── models.ts
+        ├── send-email.ts
+        └── site-stats.ts
 ```
 
 ### 3. ✅ 检查构建脚本
@@ -49,7 +51,7 @@ out/
 ```json
 {
   "scripts": {
-    "build": "next build",
+    "build": "node scripts/build-with-meta.js",
     "postbuild": "node scripts/copy-functions.js"
   }
 }
@@ -116,8 +118,8 @@ curl -X POST https://api.resend.com/emails \
    - 对比两个项目的部署配置
 
 3. **代码差异：**
-   - 两个项目的 `functions/api/send-email.ts` 代码应该相同
-   - 如果不同，需要同步代码
+   - 不要假设两个项目的 `functions/api/send-email.ts` 必须完全相同
+   - 以当前项目的表单字段、收件人策略、错误返回和安全要求为准
 
 ## 解决方案
 
@@ -133,17 +135,14 @@ curl -X POST https://api.resend.com/emails \
 ### 方案 2：重新部署 Functions
 
 ```bash
-# 清理旧的构建文件
-rm -rf out
-
 # 重新构建
-npm run build
+pnpm build
 
 # 验证 functions 是否被复制
-ls -la out/functions/api/send-email.ts
+Test-Path out/functions/api/send-email.ts
 
 # 重新部署
-npm run pages:deploy
+pnpm pages:deploy
 ```
 
 ### 方案 3：使用相同的 Resend API Key
@@ -162,6 +161,12 @@ npm run pages:deploy
 3. **邮箱格式验证** - 客户端和服务器端双重验证
 4. **更好的错误信息** - 返回详细的错误描述，便于排查问题
 
+仍需注意：
+
+- 邮件接口目前没有验证码、限流或防刷策略，公开上线后应补充。
+- 表单内容进入邮件 HTML 前应持续关注转义/清洗，避免邮件内容注入。
+- 生产环境错误响应不应长期暴露过细的内部错误或 stack。
+
 ## 测试步骤
 
 1. **本地测试：**
@@ -170,7 +175,7 @@ npm run pages:deploy
    echo "RESEND_API_KEY=your_api_key_here" > .env.local
    
    # 构建项目
-   npm run build
+   pnpm build
    
    # 使用 wrangler 本地测试
    wrangler pages dev out
