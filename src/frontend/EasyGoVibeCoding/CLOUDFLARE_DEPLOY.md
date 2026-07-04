@@ -19,7 +19,8 @@
 3. 已部署到 **Cloudflare Pages**
 4. Pages 项目中已绑定 `SITE_STATS_KV`
 5. 如需真实邮箱反馈滚动展示，Pages 项目中已绑定 `FEEDBACK_KV`
-6. `model-updater` Worker 已成功写入 `models:latest`（否则 `/api/models` 会提示回退到静态 `data/models.json`）
+6. `model-updater` Worker 已成功写入 `models:latest`（未配置外部 LLM key 时会写入 `seed-static-fallback` 静态校验兜底）
+7. 如需首页“请求最新”按钮触发一次真实更新，Pages 项目已绑定 `MODEL_UPDATER` service binding，并配置 `MODEL_UPDATER_TOKEN`
 
 ## 解决方案
 
@@ -38,6 +39,20 @@
 
 ```
 RESEND_API_KEY = 你的_Resend_API_密钥
+MODEL_UPDATER_TOKEN = 与 model-updater Worker RUN_TOKEN 一致的随机长 token
+# 可选 fallback；通常优先使用 MODEL_UPDATER service binding
+MODEL_UPDATER_URL = https://model-updater.<your-subdomain>.workers.dev/__run
+```
+
+`model-updater` Worker 如需真实联网模型情报更新，单独配置 Worker secret：
+
+```bash
+cd src/backend/model-updater
+ npx wrangler secret put OPENROUTER_API_KEY
+# 可选：切换 LLM_PROVIDER=perplexity 后：
+npx wrangler secret put PERPLEXITY_API_KEY
+# 或切换 LLM_PROVIDER=anthropic 后：
+npx wrangler secret put ANTHROPIC_API_KEY
 ```
 
 KV 绑定：
@@ -52,13 +67,16 @@ FEEDBACK_KV = 用于存储待确认和已确认的邮箱反馈
 - 环境变量名称必须完全匹配：`RESEND_API_KEY`（区分大小写）
 - `SITE_STATS_KV` 同时服务站点统计和模型动态读取；Pages 与 `src/backend/model-updater` Worker 必须指向同一个 KV namespace
 - `FEEDBACK_KV` 用于双重确认反馈展示；当前 `wrangler.toml` 复用同一 KV namespace，并通过 `email-feedback:*` 前缀隔离
+- `MODEL_UPDATER_TOKEN` 不要放到前端公开变量里；它只由 Pages Function 在服务端调用 Worker 时使用
+- `MODEL_UPDATER` 是 Pages → Worker 的 Service Binding，当前已在 `wrangler.toml` 配置为绑定到 `model-updater`
+- `OPENROUTER_API_KEY` / `PERPLEXITY_API_KEY` / `ANTHROPIC_API_KEY` 是配置在 `src/backend/model-updater` Worker 上的 secret，不是 Pages secret；没有外部 key 时刷新链路仍可用，但数据源会显示为 `seed-static-fallback`
 
 ### 3. 验证部署
 
 部署后，检查以下内容：
 
 1. **检查 Functions 是否部署**：
-   - 在 Cloudflare Pages 控制台的 **Functions** 标签页中，应该能看到 `api/send-email`、`api/site-stats`、`api/models`、`api/feedback`、`api/feedback/confirm` 函数
+   - 在 Cloudflare Pages 控制台的 **Functions** 标签页中，应该能看到 `api/send-email`、`api/site-stats`、`api/models`、`api/models/refresh`、`api/feedback`、`api/feedback/confirm` 函数
 
 2. **检查环境变量**：
    - 在 **Settings** → **Environment variables** 中确认 `RESEND_API_KEY` 已配置
@@ -91,6 +109,7 @@ pnpm pages:deploy
 - 本地不一定能直接测试 `Cloudflare Pages Functions`
 - ` /api/site-stats ` 真实统计接口需要部署到 Cloudflare Pages 后才可访问
 - ` /api/models ` 真实模型接口需要部署到 Cloudflare Pages 且 KV 中存在 `models:latest` 后才可返回实时数据
+- ` /api/models/refresh ` 真实刷新接口需要部署到 Cloudflare Pages，并配置 `MODEL_UPDATER` service binding / `MODEL_UPDATER_TOKEN`
 - ` /api/feedback ` 真实反馈接口需要部署到 Cloudflare Pages 且绑定 `FEEDBACK_KV` 后才会返回已确认反馈
 - 如果你在本地控制台看到 `404`，通常是因为统计接口还没有部署，不是页面本身报错
 
@@ -117,12 +136,12 @@ A: 检查以下几点：
 3. ✅ 检查 Cloudflare Pages Functions 日志中的错误信息
 4. ✅ 确认 Resend API Key 是否有效（可以在 Resend 控制台查看使用情况）
 
-### Q: 如何验证真实反馈双重授权？
+### Q: 如何验证真实反馈审核展示？
 
 A: 按以下链路检查：
 1. ✅ 用户提交反馈时勾选公开展示授权
-2. ✅ 站点向用户邮箱发送确认邮件
-3. ✅ 用户点击 `/api/feedback/confirm?token=...` 确认链接
+2. ✅ 站点向站长邮箱 `1301385382gjts@gmail.com` 发送审核邮件
+3. ✅ 站长阅读内容后点击 `/api/feedback/confirm?token=...` 审核链接
 4. ✅ KV 中出现 `email-feedback:confirmed:index` 和 `email-feedback:confirmed:...`
 5. ✅ 首页反馈滚动区通过 `/api/feedback` 读取已确认、已脱敏的反馈
 
@@ -152,7 +171,33 @@ A: 通常是以下原因之一：
 2. ✅ `out/functions/api/models.ts` 没有被复制到构建输出目录
 3. ✅ Pages 项目未绑定 `SITE_STATS_KV`
 4. ✅ `model-updater` Worker 尚未成功写入 `models:latest`
-5. ✅ 前端会自动回退到 `data/models.json`，这属于预期降级链路
+5. ✅ 未配置外部 LLM key 时，Worker 会写入 `seed-static-fallback`；前端会明确展示为静态校验兜底
+6. ✅ 前端会自动回退到 `data/models.json`，这属于预期降级链路
+
+### Q: 如何让最新模型定时更新？
+
+A: `src/backend/model-updater` 是独立 Cloudflare Worker，`wrangler.toml` 已配置：
+
+```toml
+[triggers]
+crons = ["0 */6 * * *"]
+```
+
+部署该 Worker 后，Cloudflare 会每 6 小时触发一次 `scheduled()`，Worker 把结果写入共享 KV 的 `models:latest`。如果已配置 `OPENROUTER_API_KEY`、`PERPLEXITY_API_KEY` 或 `ANTHROPIC_API_KEY`，它会调用联网检索接口；如果没有配置外部 key，会写入 `seed-static-fallback` 静态校验兜底，保证页面和接口不中断。
+
+当前 OpenRouter 默认使用免费模型池并按顺序重试：
+
+```text
+openrouter/free
+openai/gpt-oss-120b:free
+nvidia/nemotron-3-super-120b-a12b:free
+```
+
+每个免费模型默认最多等待 22 秒，超时后自动尝试下一个模型，避免某个免费模型排队过久导致首页“请求最新”失败。
+
+### Q: 首页“请求最新”按钮实际做了什么？
+
+A: 点击按钮会发起一次 `POST /api/models/refresh`。Pages Function 会优先通过 `MODEL_UPDATER` Service Binding 内部调用 `model-updater /__run`，并带上服务端环境变量中的 `MODEL_UPDATER_TOKEN`。Worker 更新 KV 后，Pages Function 会在同一个响应里返回模型数据。也就是说，生产环境下这不是只读缓存刷新，而是一次真实的更新请求；是否为实时联网检索取决于 Worker 是否配置了外部 provider key。
 
 ## 文件结构
 
@@ -167,6 +212,8 @@ out/
         ├── feedback/
         │   ├── confirm.ts
         │   └── index.ts
+        ├── models/
+        │   └── refresh.ts
         ├── models.ts
         ├── send-email.ts
         └── site-stats.ts

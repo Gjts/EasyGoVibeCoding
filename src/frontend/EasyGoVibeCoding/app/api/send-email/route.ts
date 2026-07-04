@@ -34,8 +34,8 @@ export async function POST(request: NextRequest) {
 
     const publicDisplayStatus:
       | "not_requested"
-      | "pending_cloudflare_deploy" = allowPublicDisplay
-      ? "pending_cloudflare_deploy"
+      | "owner_review_required" = allowPublicDisplay
+      ? "owner_review_required"
       : "not_requested"
 
     // Send email using Resend
@@ -55,7 +55,7 @@ export async function POST(request: NextRequest) {
             <p><strong>允许脱敏后公开展示 / Public display allowed:</strong> ${allowPublicDisplay ? "是 / Yes" : "否 / No"}</p>
             <p><strong>公开展示状态 / Public display status:</strong> ${
               allowPublicDisplay
-                ? "本地 Next API 不写入 KV；部署到 Cloudflare Pages 后会发送确认链接 / Confirmation runs in Cloudflare Pages Functions"
+                ? "等待站长邮箱审核；Cloudflare Pages Function 会生成公开展示审核链接 / Waiting for owner review"
                 : "未请求公开展示 / Not requested"
             }</p>
             <p><strong>消息 / Message:</strong></p>

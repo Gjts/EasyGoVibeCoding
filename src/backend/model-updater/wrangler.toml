@@ -19,10 +19,14 @@ crons = ["0 */6 * * *"]
 [observability]
 enabled = true
 
-# 可切换的 LLM provider，默认 perplexity
+# 可切换的 LLM provider，默认 openrouter
 # 运行期密钥通过 `wrangler secret put <NAME>` 注入，不落库
 [vars]
-LLM_PROVIDER = "perplexity"
-LLM_MODEL = "sonar-pro"
+LLM_PROVIDER = "openrouter"
+LLM_MODEL = "openrouter/free"
+LLM_MODEL_FALLBACKS = "openai/gpt-oss-120b:free,nvidia/nemotron-3-super-120b-a12b:free"
+OPENROUTER_SITE_URL = "https://easy-go-vibe-coding.pages.dev"
+OPENROUTER_APP_TITLE = "EasyGoVibeCoding"
+OPENROUTER_MODEL_TIMEOUT_MS = "14000"
 # 历史条目保留月数（超过则自动清理）
 HISTORY_MONTHS_TO_KEEP = "6"

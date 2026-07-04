@@ -2,7 +2,7 @@
  * Worker 运行时注入的环境
  *
  * - SITE_STATS_KV：与 Pages 共享的 KV 命名空间
- * - LLM_PROVIDER：选择调用哪个 LLM，默认 perplexity
+ * - LLM_PROVIDER：选择调用哪个 LLM，默认 openrouter
  * - *_API_KEY：通过 `wrangler secret put` 注入，不入库
  */
 export interface Env {
@@ -10,18 +10,32 @@ export interface Env {
 
   LLM_PROVIDER?: string;
   LLM_MODEL?: string;
+  LLM_MODEL_FALLBACKS?: string;
   HISTORY_MONTHS_TO_KEEP?: string;
 
   PERPLEXITY_API_KEY?: string;
   ANTHROPIC_API_KEY?: string;
+  OPENROUTER_API_KEY?: string;
+  OPENROUTER_SITE_URL?: string;
+  OPENROUTER_APP_TITLE?: string;
+  OPENROUTER_MODEL_TIMEOUT_MS?: string;
   OPENAI_API_KEY?: string;
   GEMINI_API_KEY?: string;
+  RUN_TOKEN?: string;
 }
 
-export type ProviderId = "perplexity" | "anthropic" | "openai" | "gemini";
+export type ProviderId =
+  | "perplexity"
+  | "anthropic"
+  | "openrouter"
+  | "openai"
+  | "gemini"
+  | "seed";
 
 export function resolveProvider(env: Env): ProviderId {
-  const raw = (env.LLM_PROVIDER || "perplexity").toLowerCase().trim();
+  const raw = (env.LLM_PROVIDER || "openrouter").toLowerCase().trim();
+  if (raw === "seed") return "seed";
+  if (raw === "openrouter") return "openrouter";
   if (raw === "anthropic") return "anthropic";
   if (raw === "openai") return "openai";
   if (raw === "gemini") return "gemini";

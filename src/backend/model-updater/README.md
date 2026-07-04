@@ -1,6 +1,6 @@
 # model-updater
 
-Cloudflare Worker，通过 Cron Trigger **每 6 小时**调用 LLM 联网搜索 API 抓取主流 AI 模型最新发布动态，写入 Pages 站点共享的 KV，由 Pages Function `/api/models` 对外暴露。
+Cloudflare Worker，通过 Cron Trigger **每 6 小时**刷新主流 AI 模型发布动态，写入 Pages 站点共享的 KV，由 Pages Function `/api/models` 对外暴露。配置 OpenRouter / Perplexity / Anthropic API key 后会调用联网检索；未配置外部 key 时会写入已校验的 `data/models.json` 静态兜底数据，并把 `source` 标记为 `seed-static-fallback`。
 
 ## 架构位置
 
@@ -56,11 +56,30 @@ id = "04e02c1e72b44bee95ad85eb96c6da07"
 
 ### 3. 配置 LLM 密钥（secret 方式，不落库）
 
-默认 provider 是 **Perplexity**：
+默认 provider 是 **OpenRouter**：
 
 ```bash
-npx wrangler secret put PERPLEXITY_API_KEY
+npx wrangler secret put OPENROUTER_API_KEY
 ```
+
+默认模型池使用 OpenRouter 免费模型，并启用 OpenRouter `web` plugin 做联网检索：
+
+1. `openrouter/free`
+2. `openai/gpt-oss-120b:free`
+3. `nvidia/nemotron-3-super-120b-a12b:free`
+
+Worker 会按顺序尝试，某个模型接口失败或返回内容无法通过 Schema 校验时，会继续尝试下一个模型。
+每个免费模型默认最多等待 14 秒，可通过 `OPENROUTER_MODEL_TIMEOUT_MS` 调整；如果免费模型超时或限流，Worker 会使用 OpenRouter 官方模型目录兜底，避免整次刷新请求失败。
+
+如果暂时不配置 `OPENROUTER_API_KEY`、`PERPLEXITY_API_KEY` 或 `ANTHROPIC_API_KEY`，Worker 仍会使用 `data/models.json` 作为静态校验兜底写入 KV，保证定时任务和首页“请求最新”链路可用；这时接口返回的 `source` 会是 `seed-static-fallback`。要获得真正的实时联网检索结果，必须配置一个外部 provider key。
+
+手动刷新端点也需要 secret，避免公开环境被外部刷调用：
+
+```bash
+npx wrangler secret put RUN_TOKEN
+```
+
+同一个值还需要配置到 Cloudflare Pages 项目的 `MODEL_UPDATER_TOKEN`，供 `/api/models/refresh` 服务端通过 Service Binding 调用使用。
 
 如果切换到 Anthropic：
 
@@ -75,7 +94,20 @@ LLM_MODEL = "claude-sonnet-4-5"
 npx wrangler secret put ANTHROPIC_API_KEY
 ```
 
-> 目前已实现 `perplexity` / `anthropic` 两个 provider；`openai` / `gemini` 占位会回退到 perplexity，后续可按相同接口扩展 `src/providers/`。
+如果切换到 Perplexity：
+
+```toml
+# wrangler.toml 修改：
+[vars]
+LLM_PROVIDER = "perplexity"
+LLM_MODEL = "sonar-pro"
+```
+
+```bash
+npx wrangler secret put PERPLEXITY_API_KEY
+```
+
+> 目前已实现 `openrouter` / `perplexity` / `anthropic` / `seed` 四个 provider；`openai` / `gemini` 占位会回退到 `seed`，后续可按相同接口扩展 `src/providers/`。
 
 ### 4. 部署
 
@@ -90,15 +122,17 @@ pnpm deploy   # 等价于 npx wrangler deploy
 
 ### 5. 手动触发一次（用于首次填充 KV）
 
-当前 `/__run` 手动触发端点用于部署后的人工填充和排错。代码里尚未强制 token 鉴权，公开环境应优先通过 Cloudflare Worker 路由/访问策略限制，或在上线前补充 `RUN_TOKEN` 校验。
+当前 `/__run` 手动触发端点用于部署后的人工填充和排错，必须携带 `RUN_TOKEN`。
 
 ```bash
 # 部署环境
-curl -X POST https://model-updater.<your-account>.workers.dev/__run
+curl -X POST https://model-updater.<your-account>.workers.dev/__run \
+  -H "Authorization: Bearer <RUN_TOKEN>"
 
 # 本地 dev
 pnpm dev
-curl -X POST http://127.0.0.1:8787/__run
+curl -X POST http://127.0.0.1:8787/__run \
+  -H "Authorization: Bearer <RUN_TOKEN>"
 ```
 
 成功返回：
@@ -107,11 +141,31 @@ curl -X POST http://127.0.0.1:8787/__run
 {
   "status": "updated",
   "nowISO": "2026-05-11T00:00:00.000Z",
-  "source": "perplexity-sonar-pro",
+  "source": "openrouter-openrouter/free",
   "modelsCount": 8,
   "newsCount": 5
 }
 ```
+
+### 6. 连接 Pages 首页刷新按钮
+
+Cloudflare Pages 项目需要绑定 `model-updater` Worker：
+
+```toml
+[[services]]
+binding = "MODEL_UPDATER"
+service = "model-updater"
+```
+
+并设置：
+
+```text
+MODEL_UPDATER_TOKEN=<RUN_TOKEN>
+# 可选公网 fallback；通常不需要
+MODEL_UPDATER_URL=https://model-updater.<your-account>.workers.dev/__run
+```
+
+首页“请求最新”按钮会调用 `POST /api/models/refresh`。该 Pages Function 优先通过 `MODEL_UPDATER` Service Binding 内部请求 `model-updater /__run`，Worker 更新 KV 后，Pages Function 会读取 `models:latest` 并在同一个响应里返回最新数据。
 
 ## KV key 约定
 
@@ -138,7 +192,7 @@ npx wrangler kv key put --binding=SITE_STATS_KV models:latest "$(cat /tmp/prev.j
 所有 payload 必须通过 `src/frontend/EasyGoVibeCoding/lib/model-schema.ts` 里的 `ModelsPayloadSchema` 校验，字段含义：
 
 - `updatedAt` ISO8601 UTC 时间戳
-- `source` provider 标识，如 `perplexity-sonar-pro`
+- `source` provider 标识，如 `openrouter-openrouter/free`
 - `models[]` 当前主流模型，每项含 `provider / name / releaseDate / contextWindow / highlights / tier (1-3) / url / category / tags / description`
 - `news[]` 最近 6 个月内重大发布，每项含 `date / provider / title / summary (≤240 字) / url`
 
@@ -153,7 +207,7 @@ Worker 在写入前会做三层防护：
 - 模型 ID、上下文窗口、价格、稳定性和工具能力以官方模型页/API 文档为准。
 - 新闻稿可作为背景材料，但不应覆盖官方模型页/API 文档。
 - 对无法由官方来源确认的条目，Worker 应省略或降级描述，不能写成“最新旗舰”或“已开放 API”。
-- 前端 `data/models.json` 只是构建时 fallback，线上真实数据优先来自 KV 的 `models:latest`。
+- 前端 `data/models.json` 既是构建时 fallback，也是未配置外部 provider key 时的 Worker 静态兜底；线上真实数据优先来自 KV 的 `models:latest`，并通过 `source` 区分实时检索还是静态兜底。
 
 ## 工程规则符合性
 

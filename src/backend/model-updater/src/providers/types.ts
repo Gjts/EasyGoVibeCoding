@@ -1,5 +1,5 @@
 import type { ModelsPayload } from "../../../../frontend/EasyGoVibeCoding/lib/model-schema"
-import type { Env } from "../env"
+import type { Env, ProviderId } from "../env"
 import type { PromptInput } from "../prompt"
 
 export interface ProviderResult {
@@ -12,7 +12,7 @@ export interface ProviderResult {
 }
 
 export interface LlmProvider {
-  readonly id: "perplexity" | "anthropic" | "openai" | "gemini"
+  readonly id: ProviderId
   /** 调用 LLM API，要求返回 JSON；上层负责 zod 校验 */
   fetchPayload(env: Env, input: PromptInput): Promise<ProviderResult>
 }

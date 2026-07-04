@@ -194,29 +194,32 @@ function buildOwnerEmailHtml({
 
 function buildConfirmationEmailHtml({
   displayName,
+  email,
   excerpt,
   confirmUrl,
   expiresAt,
 }: {
   displayName: string
+  email: string
   excerpt: string
   confirmUrl: string
   expiresAt: string
 }) {
   return `
     <div style="font-family: Arial, sans-serif; max-width: 640px; margin: 0 auto; color: #111827;">
-      <h2 style="color: #2563eb;">确认公开展示你的反馈</h2>
-      <p>你在 EasyGoVibeCoding 反馈表单中勾选了“允许脱敏后公开展示”。请确认下面这条摘录可以展示在网站的反馈滚动区。</p>
+      <h2 style="color: #2563eb;">审核公开展示这条反馈</h2>
+      <p>有用户在 EasyGoVibeCoding 反馈表单中勾选了“允许脱敏后公开展示”。请你审核下面这条脱敏摘录，确认后才会展示在网站反馈滚动区。</p>
       <div style="background: #f8fafc; border-left: 4px solid #2563eb; padding: 16px; border-radius: 8px; margin: 20px 0;">
         <p><strong>展示称呼：</strong>${escapeHtml(displayName)}</p>
+        <p><strong>原始邮箱：</strong>${escapeHtml(email)}</p>
         <p><strong>公开摘录：</strong>${escapeHtml(excerpt)}</p>
       </div>
       <p>
         <a href="${escapeHtml(confirmUrl)}" style="display: inline-block; background: #2563eb; color: white; padding: 12px 18px; border-radius: 10px; text-decoration: none; font-weight: 700;">
-          确认允许公开展示
+          审核通过并公开展示
         </a>
       </p>
-      <p style="font-size: 13px; color: #64748b;">确认链接有效期至 ${escapeHtml(formatReceivedAt(expiresAt))}。如果你没有提交过反馈，忽略这封邮件即可。</p>
+      <p style="font-size: 13px; color: #64748b;">审核链接有效期至 ${escapeHtml(formatReceivedAt(expiresAt))}。点击后会把这条脱敏摘录写入 FEEDBACK_KV 的 confirmed 列表。</p>
     </div>
   `
 }
@@ -276,7 +279,7 @@ export const onRequestPost = async ({
     const kv = getFeedbackKv(env)
     const submittedAt = new Date().toISOString()
     let publicDisplayStatus = allowPublicDisplay
-      ? "等待用户邮箱确认 / Waiting for email confirmation"
+      ? "等待站长邮箱审核 / Waiting for owner review"
       : "未请求公开展示 / Not requested"
     let confirmationPayload: EmailPayload | undefined
 
@@ -315,10 +318,12 @@ export const onRequestPost = async ({
 
         confirmationPayload = {
           from: "EasyGoVibeCoding Contact <onboarding@resend.dev>",
-          to: [email],
-          subject: "确认公开展示你的 EasyGoVibeCoding 反馈",
+          to: [OWNER_EMAIL],
+          reply_to: email,
+          subject: "审核公开展示一条 EasyGoVibeCoding 反馈",
           html: buildConfirmationEmailHtml({
             displayName: item.displayName,
+            email,
             excerpt: item.excerpt,
             confirmUrl,
             expiresAt,
@@ -349,7 +354,7 @@ export const onRequestPost = async ({
       success: true,
       data,
       publicDisplayStatus: allowPublicDisplay
-        ? "confirmation_required"
+        ? "owner_review_required"
         : "not_requested",
     })
   } catch (error) {

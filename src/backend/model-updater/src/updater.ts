@@ -8,7 +8,7 @@ import { pickProvider } from "./providers"
 import type { ProviderResult } from "./providers/types"
 import { pruneHistory, readLatest, writeError, writeLatest } from "./kv"
 
-const MAX_RETRIES = 1
+const MAX_RETRIES = 0
 
 export interface UpdateOutcome {
   status: "updated" | "skipped" | "failed"

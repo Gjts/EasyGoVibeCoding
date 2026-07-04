@@ -82,8 +82,8 @@ export function ContactSection() {
       const publicDisplayStatus = responseData?.publicDisplayStatus
       setSuccessMessage(
         formState.allowPublicDisplay &&
-          publicDisplayStatus === "confirmation_required"
-          ? "请查收确认邮件，点击确认链接后才会进入网站滚动展示。"
+          publicDisplayStatus === "owner_review_required"
+          ? "反馈已发送给我。我审核脱敏摘录后，才会进入网站滚动展示。"
           : "我会尽快阅读并回复。",
       )
       setStatus("success")
@@ -288,7 +288,7 @@ export function ContactSection() {
                   onChange={handlePublicDisplayChange}
                 />
                 <span className="text-sm leading-6 text-gray-700">
-                  允许我将这条反馈脱敏后滚动展示在网站上。提交后会向该邮箱发送确认链接，点击确认后才会公开；不会公开邮箱。
+                  允许我将这条反馈脱敏后滚动展示在网站上。提交后会发送到我的邮箱，我审核内容后再公开；不会公开邮箱。
                 </span>
               </label>
 

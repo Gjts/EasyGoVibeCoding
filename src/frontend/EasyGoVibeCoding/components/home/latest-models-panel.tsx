@@ -8,12 +8,15 @@ import {
   Sparkles,
   Zap,
   Trophy,
+  History,
+  Database,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import {
   formatUpdatedAt,
   getLatestModels,
   getLatestNews,
+  refreshLatestModels,
   seedPayload,
   type GetLatestResult,
 } from "@/lib/models"
@@ -72,6 +75,18 @@ function providerStyle(name: string) {
   return PROVIDER_STYLES[name] ?? PROVIDER_STYLES.DeepSeek
 }
 
+function isSeedSource(source: string) {
+  return source.includes("seed")
+}
+
+function sourceLabel(source: string) {
+  if (source === "seed-static-fallback") return "静态校验兜底"
+  if (source.startsWith("openrouter-")) return "OpenRouter 实时检索"
+  if (source.startsWith("perplexity-")) return "Perplexity 实时检索"
+  if (source.startsWith("anthropic-")) return "Anthropic 实时检索"
+  return source
+}
+
 export function LatestModelsPanel() {
   const [state, setState] = useState<GetLatestResult>({
     payload: seedPayload,
@@ -81,7 +96,7 @@ export function LatestModelsPanel() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  const refresh = useCallback(async (signal?: AbortSignal) => {
+  const loadLatest = useCallback(async (signal?: AbortSignal) => {
     setLoading(true)
     setError(null)
     try {
@@ -95,14 +110,32 @@ export function LatestModelsPanel() {
     }
   }, [])
 
+  const refresh = useCallback(async () => {
+    setLoading(true)
+    setError(null)
+    try {
+      const result = await refreshLatestModels()
+      setState(result)
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "刷新失败"
+      setError(message)
+    } finally {
+      setLoading(false)
+    }
+  }, [])
+
   useEffect(() => {
     const controller = new AbortController()
-    void refresh(controller.signal)
+    void loadLatest(controller.signal)
     return () => controller.abort()
-  }, [refresh])
+  }, [loadLatest])
 
   const news = getLatestNews(state.payload, MAX_NEWS)
   const topModels = state.payload.models.filter((m) => m.tier === 1).slice(0, 3)
+  const releaseHistory = [...state.payload.models].sort((a, b) => {
+    const dateOrder = b.releaseDate.localeCompare(a.releaseDate)
+    return dateOrder !== 0 ? dateOrder : a.name.localeCompare(b.name)
+  })
 
   return (
     <section className="relative overflow-hidden py-16 sm:py-20 bg-gradient-to-br from-sky-50 via-cyan-50 to-indigo-50">
@@ -127,11 +160,11 @@ export function LatestModelsPanel() {
               </span>
             </h2>
             <p className="mt-3 text-sm leading-7 text-gray-700 sm:text-base">
-              自动汇总官方可核验的大模型发布动态，优先采用模型页/API 文档口径，帮你随时掌握选型依据。
+              自动尝试读取最新模型数据，优先采用官方模型页/API 文档口径；如果接口不可用，会明确回退到静态种子，不把未验证内容当作最新。
             </p>
           </div>
           <div className="flex items-center gap-3">
-            <SourceBadge from={state.from} />
+            <SourceBadge from={state.from} source={state.payload.source} />
             <Button
               variant="outline"
               size="sm"
@@ -143,8 +176,43 @@ export function LatestModelsPanel() {
               <RefreshCw
                 className={cn("mr-2 h-4 w-4", loading && "animate-spin")}
               />
-              {loading ? "刷新中..." : "刷新"}
+              {loading ? "请求中..." : "请求最新"}
             </Button>
+          </div>
+        </div>
+
+        <div className="mb-6 grid grid-cols-1 gap-4 md:grid-cols-3">
+          <div className="rounded-2xl border border-cyan-100 bg-white/75 p-4 shadow-sm backdrop-blur">
+            <div className="mb-2 flex items-center gap-2 text-sm font-bold text-gray-900">
+              <RefreshCw className="h-4 w-4 text-cyan-600" />
+              更新机制
+            </div>
+            <p className="text-xs leading-6 text-gray-600">
+              打开页面会优先请求 <span className="font-mono">/api/models</span>；点击“请求最新”会触发一次 <span className="font-mono">/api/models/refresh</span>。
+            </p>
+          </div>
+          <div className="rounded-2xl border border-blue-100 bg-white/75 p-4 shadow-sm backdrop-blur">
+            <div className="mb-2 flex items-center gap-2 text-sm font-bold text-gray-900">
+              <Database className="h-4 w-4 text-blue-600" />
+              当前数据源
+            </div>
+            <p className="text-xs leading-6 text-gray-600">
+              {isSeedSource(state.payload.source)
+                ? "当前页面已读取线上 API 的静态校验兜底数据；配置外部检索 key 后会切换为实时更新。"
+                : "当前页面已读取线上模型 API 的实时检索数据。"}
+              <span className="ml-1 font-mono text-gray-900">
+                {sourceLabel(state.payload.source)}
+              </span>
+            </p>
+          </div>
+          <div className="rounded-2xl border border-indigo-100 bg-white/75 p-4 shadow-sm backdrop-blur">
+            <div className="mb-2 flex items-center gap-2 text-sm font-bold text-gray-900">
+              <History className="h-4 w-4 text-indigo-600" />
+              历史可追溯
+            </div>
+            <p className="text-xs leading-6 text-gray-600">
+              已收录 {releaseHistory.length} 个模型发布时间，下面可以滚动查看历史记录和官方入口。
+            </p>
           </div>
         </div>
 
@@ -274,13 +342,85 @@ export function LatestModelsPanel() {
           </div>
         </div>
 
+        <div className="mt-6 rounded-3xl border-2 border-white bg-white/80 p-6 shadow-lg backdrop-blur-xl">
+          <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <h3 className="flex items-center gap-2 text-lg font-bold text-gray-900">
+                <span className="inline-flex h-9 w-9 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-500 text-white shadow-md">
+                  <History className="h-5 w-5" />
+                </span>
+                历史模型发布时间
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-gray-600">
+                按发布日期倒序排列，方便回看每家模型的更新节奏。
+              </p>
+            </div>
+            <span className="rounded-full border border-indigo-100 bg-indigo-50 px-3 py-1 text-xs font-bold text-indigo-700">
+              可滚动查看全部
+            </span>
+          </div>
+
+          <div className="max-h-[360px] overflow-y-auto pr-2" aria-label="历史模型发布时间列表">
+            <ol className="relative space-y-3 border-l-2 border-indigo-100 pl-5">
+              {releaseHistory.map((model) => {
+                const ps = providerStyle(model.provider)
+                return (
+                  <li key={`${model.provider}-${model.name}-${model.releaseDate}`} className="relative">
+                    <span className="absolute -left-[29px] top-4 h-3 w-3 rounded-full border-2 border-white bg-indigo-500 shadow-sm" />
+                    <a
+                      href={model.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group block rounded-2xl border border-transparent bg-white/70 p-4 transition-all hover:-translate-y-0.5 hover:border-indigo-200 hover:bg-white hover:shadow-md"
+                    >
+                      <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+                        <div className="min-w-0">
+                          <div className="flex flex-wrap items-center gap-2">
+                            <span className="font-mono text-xs font-bold text-indigo-700">
+                              {model.releaseDate}
+                            </span>
+                            <span
+                              className={cn(
+                                "rounded-full border px-2 py-0.5 text-xs font-semibold",
+                                ps.chip,
+                              )}
+                            >
+                              {model.provider}
+                            </span>
+                            <span className="rounded-full bg-gray-100 px-2 py-0.5 text-xs font-semibold text-gray-600">
+                              T{model.tier}
+                            </span>
+                          </div>
+                          <div className="mt-2 flex items-center gap-1 font-bold text-gray-900 group-hover:text-blue-600">
+                            {model.name}
+                            <ExternalLink className="h-3.5 w-3.5" />
+                          </div>
+                          <p className="mt-1 text-sm leading-6 text-gray-600">
+                            {model.description}
+                          </p>
+                        </div>
+                        <span className="shrink-0 rounded-full bg-indigo-50 px-2.5 py-1 text-xs font-mono font-semibold text-indigo-700">
+                          {model.contextWindow}
+                        </span>
+                      </div>
+                    </a>
+                  </li>
+                )
+              })}
+            </ol>
+          </div>
+        </div>
+
         {/* Footer */}
-        <div className="mt-6 text-xs text-gray-600">
+        <div className="mt-6 text-xs leading-6 text-gray-600">
           数据更新时间：
           <span className="ml-1 font-mono font-semibold text-gray-900">
             {formatUpdatedAt(state.payload.updatedAt)}
           </span>
-          <span className="ml-2">· 数据源：{state.payload.source}</span>
+          <span className="ml-2">
+            · 本次请求：{formatUpdatedAt(state.fetchedAt)}
+          </span>
+          <span className="ml-2">· 数据源：{sourceLabel(state.payload.source)}</span>
           {error ? (
             <span className="ml-2 text-rose-600">（刷新失败：{error}）</span>
           ) : null}
@@ -290,8 +430,14 @@ export function LatestModelsPanel() {
   )
 }
 
-function SourceBadge({ from }: { from: GetLatestResult["from"] }) {
-  if (from === "api") {
+function SourceBadge({
+  from,
+  source,
+}: {
+  from: GetLatestResult["from"]
+  source: string
+}) {
+  if (from === "api" && !isSeedSource(source)) {
     return (
       <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700 shadow-sm">
         <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" />
@@ -302,7 +448,7 @@ function SourceBadge({ from }: { from: GetLatestResult["from"] }) {
   return (
     <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-xs font-semibold text-amber-700 shadow-sm">
       <span className="h-1.5 w-1.5 rounded-full bg-amber-500" />
-      静态种子数据
+      静态校验数据
     </span>
   )
 }

@@ -3,6 +3,7 @@
  *
  * 读取 Cloudflare KV 中的最新模型动态数据。
  * 数据由独立 Worker (src/backend/model-updater) 每 6 小时写入。
+ * 手动更新由 POST /api/models/refresh 触发；本端点只负责读取缓存。
  *
  * 行为：
  * - KV 命中：返回 200 + 数据 + ETag + Cache-Control

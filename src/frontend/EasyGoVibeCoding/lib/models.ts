@@ -7,6 +7,7 @@ import {
 } from "@/lib/model-schema"
 
 const API_ENDPOINT = "/api/models"
+const REFRESH_ENDPOINT = "/api/models/refresh"
 
 export const seedPayload: ModelsPayload = parseSeedOrThrow(seedData)
 
@@ -41,6 +42,44 @@ export async function getLatestModels(
   } catch {
     return { payload: seedPayload, from: "seed", fetchedAt }
   }
+}
+
+/**
+ * 手动刷新：生产环境通过 Pages Function 触发 model-updater Worker，
+ * Worker 写入 KV 后同一响应返回最新 payload。Next dev 没有 Pages
+ * Functions 时，404 会回退为普通读取，方便本地开发。
+ */
+export async function refreshLatestModels(
+  signal?: AbortSignal,
+): Promise<GetLatestResult> {
+  const fetchedAt = new Date().toISOString()
+  const res = await fetch(REFRESH_ENDPOINT, {
+    method: "POST",
+    signal,
+    headers: { accept: "application/json" },
+  })
+
+  if (res.status === 404) {
+    return getLatestModels(signal)
+  }
+
+  const body = (await res.json().catch(() => null)) as {
+    data?: unknown
+    error?: string
+    details?: string
+  } | null
+
+  if (!res.ok) {
+    const details = body?.details ? `：${body.details}` : ""
+    throw new Error(`${body?.error || "模型刷新失败"}${details}`)
+  }
+
+  const parsed = ModelsPayloadSchema.safeParse(body?.data)
+  if (!parsed.success) {
+    throw new Error("模型刷新返回的数据未通过校验")
+  }
+
+  return { payload: parsed.data, from: "api", fetchedAt }
 }
 
 export function getModelsByTier(

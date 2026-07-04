@@ -20,5 +20,11 @@ binding = "FEEDBACK_KV"
 id = "04e02c1e72b44bee95ad85eb96c6da07"
 preview_id = "04e02c1e72b44bee95ad85eb96c6da07"
 
+# 首页“请求最新”通过 Service Binding 内部调用 model-updater Worker，
+# 避免依赖公开 workers.dev URL。
+[[services]]
+binding = "MODEL_UPDATER"
+service = "model-updater"
+
 [observability]
 enabled = true

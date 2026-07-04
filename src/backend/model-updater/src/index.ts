@@ -36,6 +36,9 @@ export default {
     }
 
     if (request.method === "POST" && url.pathname === "/__run") {
+      const authError = authorizeRun(request, env)
+      if (authError) return authError
+
       const outcome = await runUpdate(env)
       const status = outcome.status === "updated" ? 200 : 500
       return json(outcome, status)
@@ -50,6 +53,32 @@ export default {
     )
   },
 } satisfies ExportedHandler<Env>
+
+function authorizeRun(request: Request, env: Env): Response | null {
+  const expectedToken = env.RUN_TOKEN?.trim()
+
+  if (!expectedToken) {
+    return json(
+      {
+        error: "RUN_TOKEN is not configured",
+        hint: "Set RUN_TOKEN as a Worker secret before exposing POST /__run",
+      },
+      503,
+    )
+  }
+
+  const url = new URL(request.url)
+  const bearer = request.headers.get("authorization") || ""
+  const headerToken = bearer.startsWith("Bearer ") ? bearer.slice(7).trim() : ""
+  const queryToken = url.searchParams.get("token")?.trim() || ""
+  const provided = headerToken || queryToken
+
+  if (provided !== expectedToken) {
+    return json({ error: "Unauthorized" }, 401)
+  }
+
+  return null
+}
 
 function json(data: unknown, status = 200): Response {
   return new Response(JSON.stringify(data, null, 2), {
