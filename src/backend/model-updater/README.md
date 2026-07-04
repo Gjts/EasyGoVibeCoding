@@ -194,6 +194,8 @@ npx wrangler kv key put --binding=SITE_STATS_KV models:latest "$(cat /tmp/prev.j
 - `updatedAt` ISO8601 UTC 时间戳
 - `source` provider 标识，如 `openrouter-openrouter/free`
 - `models[]` 当前主流模型，每项含 `provider / name / releaseDate / contextWindow / highlights / tier (1-3) / url / category / tags / description`
+  - `tier` 是能力分级，不是发布时间排序：`1=旗舰/高强度模型`，`2=平衡主力模型`，`3=轻量/免费/低成本模型`
+  - 首页第一梯队优先按御三家各取一个旗舰代表（Anthropic / OpenAI / Google），避免同一家模型家族占满全部旗舰位
 - `news[]` 最近 6 个月内重大发布，每项含 `date / provider / title / summary (≤240 字) / url`
 
 Worker 在写入前会做三层防护：

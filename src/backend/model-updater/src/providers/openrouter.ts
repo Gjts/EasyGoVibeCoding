@@ -13,6 +13,15 @@ const DEFAULT_SITE_URL = "https://easy-go-vibe-coding.pages.dev"
 const DEFAULT_APP_TITLE = "EasyGoVibeCoding"
 const DEFAULT_MODEL_TIMEOUT_MS = 14_000
 const MAX_OUTPUT_TOKENS = 5_000
+const PRIMARY_TOP_TIER_IDS = [
+  "anthropic/claude-fable-5",
+  "openai/gpt-5.5",
+  "google/gemini-3.5-flash",
+]
+const LEADERBOARD_REFERENCE_IDS = [
+  "anthropic/claude-opus-4.8",
+  "anthropic/claude-sonnet-5",
+]
 
 interface OpenRouterResponse {
   choices?: Array<{
@@ -34,6 +43,13 @@ interface OpenRouterModelEntry {
     input_modalities?: string[]
     output_modalities?: string[]
   }
+  benchmarks?: {
+    artificial_analysis?: {
+      intelligence_index?: number | null
+      coding_index?: number | null
+      agentic_index?: number | null
+    }
+  }
 }
 
 interface OpenRouterModelsResponse {
@@ -49,8 +65,13 @@ interface CatalogModel {
   completionPrice?: string
   modalities?: string[]
   description?: string
+  intelligenceIndex?: number
+  codingIndex?: number
+  agenticIndex?: number
   url: string
 }
+
+type ModelTier = 1 | 2 | 3
 
 export const OpenRouterProvider: LlmProvider = {
   id: "openrouter",
@@ -185,9 +206,9 @@ async function fetchCatalogSnapshot(key: string): Promise<CatalogModel[]> {
     const json = (await response.json()) as OpenRouterModelsResponse
     return (json.data || [])
       .filter((model) => model.id && model.name)
+      .filter(isConcreteCatalogModel)
       .filter((model) => model.architecture?.output_modalities?.includes("text"))
       .sort((a, b) => (b.created || 0) - (a.created || 0))
-      .slice(0, 36)
       .map((model) => ({
         id: model.id || "",
         name: model.name || model.id || "",
@@ -199,11 +220,29 @@ async function fetchCatalogSnapshot(key: string): Promise<CatalogModel[]> {
         completionPrice: model.pricing?.completion,
         modalities: model.architecture?.input_modalities,
         description: model.description?.slice(0, 260),
+        intelligenceIndex:
+          model.benchmarks?.artificial_analysis?.intelligence_index ?? undefined,
+        codingIndex: model.benchmarks?.artificial_analysis?.coding_index ?? undefined,
+        agenticIndex:
+          model.benchmarks?.artificial_analysis?.agentic_index ?? undefined,
         url: `https://openrouter.ai/${model.id}`,
       }))
   } catch {
     return []
   }
+}
+
+function isConcreteCatalogModel(model: OpenRouterModelEntry): boolean {
+  const id = model.id?.toLowerCase() || ""
+  const name = model.name?.toLowerCase() || ""
+  const description = model.description?.toLowerCase() || ""
+
+  if (id.startsWith("~")) return false
+  if (id.endsWith("-latest") || id.includes("-latest:")) return false
+  if (name.includes(" latest")) return false
+  if (description.includes("always redirects")) return false
+
+  return true
 }
 
 function formatCatalogContext(catalog: CatalogModel[]): string {
@@ -225,21 +264,23 @@ function buildCatalogFallback(
   errors: string[],
 ): ProviderResult {
   const nowDate = input.nowISO.slice(0, 10)
-  const selectedModels = catalog.slice(0, 8)
+  const selectedModels = selectCapabilityRankedModels(catalog, 8)
   const selectedNews = catalog.slice(0, 10)
   const payload = {
     updatedAt: input.nowISO,
     source: "openrouter-catalog",
-    models: selectedModels.map((model, index) => {
+    models: selectedModels.map((model) => {
       const provider = inferProvider(model.id)
       const releaseDate = model.createdDate === "unknown" ? nowDate : model.createdDate
+      const score = scoreModelCapability(model)
+      const displayName = displayModelName(model, provider)
       return {
         provider,
-        name: model.name,
+        name: displayName,
         releaseDate,
         contextWindow: formatContextWindow(model.contextWindow),
         highlights: buildHighlights(model),
-        tier: index < 3 ? 1 : index < 6 ? 2 : 3,
+        tier: classifyTierByCapability(score),
         url: model.url,
         category: "model",
         tags: buildTags(model, provider),
@@ -251,11 +292,12 @@ function buildCatalogFallback(
     news: selectedNews.map((model) => {
       const provider = inferProvider(model.id)
       const date = model.createdDate === "unknown" ? nowDate : model.createdDate
+      const displayName = displayModelName(model, provider)
       return {
         date,
         provider,
-        title: `${model.name} 被 OpenRouter 官方目录收录`,
-        summary: `${model.name} 当前在 OpenRouter 官方模型目录可见，模型 ID 为 ${model.id}，上下文窗口为 ${formatContextWindow(
+        title: `${displayName} 被 OpenRouter 官方目录收录`,
+        summary: `${displayName} 当前在 OpenRouter 官方模型目录可见，模型 ID 为 ${model.id}，上下文窗口为 ${formatContextWindow(
           model.contextWindow,
         )}。`,
         url: model.url,
@@ -277,6 +319,141 @@ function buildCatalogFallback(
     rawText,
     parsedJson: payload,
   }
+}
+
+function selectCapabilityRankedModels(
+  catalog: CatalogModel[],
+  limit: number,
+): CatalogModel[] {
+  const ranked = [...catalog].sort(compareCapabilityThenDate)
+  const picked: CatalogModel[] = []
+  const pickedIds = new Set<string>()
+
+  const addByIds = (ids: string[]) => {
+    for (const id of ids) {
+      if (picked.length >= limit) return
+      const model = catalog.find((item) => item.id === id)
+      if (!model || pickedIds.has(model.id)) continue
+      picked.push(model)
+      pickedIds.add(model.id)
+    }
+  }
+
+  const addTier = (tier: ModelTier, count: number) => {
+    for (const model of ranked) {
+      if (picked.length >= limit || count <= 0) return
+      if (pickedIds.has(model.id)) continue
+      if (classifyTierByCapability(scoreModelCapability(model)) !== tier) continue
+      picked.push(model)
+      pickedIds.add(model.id)
+      count -= 1
+    }
+  }
+
+  addByIds(PRIMARY_TOP_TIER_IDS)
+  addByIds(LEADERBOARD_REFERENCE_IDS)
+  addTier(2, 2)
+  addTier(3, 2)
+
+  for (const model of ranked) {
+    if (picked.length >= limit) break
+    if (pickedIds.has(model.id)) continue
+    picked.push(model)
+    pickedIds.add(model.id)
+  }
+
+  return picked
+}
+
+function compareCapabilityThenDate(a: CatalogModel, b: CatalogModel): number {
+  const scoreDelta = scoreModelCapability(b) - scoreModelCapability(a)
+  if (scoreDelta !== 0) return scoreDelta
+  return dateRank(b.createdDate) - dateRank(a.createdDate)
+}
+
+function scoreModelCapability(model: CatalogModel): number {
+  const haystack = [
+    model.id,
+    model.name,
+    model.description || "",
+    inferProvider(model.id),
+  ]
+    .join(" ")
+    .toLowerCase()
+
+  let score = 0
+  const leaderboardScore = averageBenchmarkScore(model)
+  if (leaderboardScore !== null) {
+    score += Math.round(leaderboardScore)
+  }
+
+  if (PRIMARY_TOP_TIER_IDS.includes(model.id)) {
+    score += 40
+  }
+
+  if (LEADERBOARD_REFERENCE_IDS.includes(model.id)) {
+    score += 24
+  }
+
+  if (/(anthropic|openai|google|deepseek|x-ai|meta-llama|qwen|z-ai|moonshot)/.test(haystack)) {
+    score += 8
+  }
+
+  if (/(claude|gpt|gemini|grok|deepseek|qwen|glm|kimi|llama|command|mistral)/.test(haystack)) {
+    score += 8
+  }
+
+  if (
+    /(opus|sonnet 5|sonnet-5|gpt-5|gpt-oss-120b|o3|gemini-3-pro|gemini 3 pro|grok-4|deepseek-r2|qwen3-max|glm-5\.2|kimi-k2|llama-4|ultra|max)/.test(
+      haystack,
+    )
+  ) {
+    score += 24
+  }
+
+  if (/(flagship|frontier|most capable|state of the art|advanced|reasoning|agentic|coding)/.test(haystack)) {
+    score += 8
+  }
+
+  if (model.contextWindow !== "unknown") {
+    if (model.contextWindow >= 1_000_000) score += 8
+    else if (model.contextWindow >= 200_000) score += 4
+    else if (model.contextWindow >= 100_000) score += 2
+  }
+
+  const outputPrice = Number.parseFloat(model.completionPrice || "")
+  if (!Number.isNaN(outputPrice)) {
+    if (outputPrice >= 0.00001) score += 8
+    else if (outputPrice >= 0.000003) score += 4
+    else if (outputPrice > 0) score += 1
+  }
+
+  if (/(free|mini|lite|nano|small|xs|tiny|flash|fast|8b|7b|3b|a3b)/.test(haystack)) {
+    score -= 14
+  }
+
+  if (/(image|embedding|rerank|moderation|tts|audio|speech)/.test(haystack)) {
+    score -= 8
+  }
+
+  return score
+}
+
+function classifyTierByCapability(score: number): ModelTier {
+  if (score >= 34) return 1
+  if (score >= 16) return 2
+  return 3
+}
+
+function averageBenchmarkScore(model: CatalogModel): number | null {
+  const values = [
+    model.intelligenceIndex,
+    model.codingIndex,
+    model.agenticIndex,
+  ].filter((value): value is number => typeof value === "number")
+
+  if (values.length === 0) return null
+  return values.reduce((sum, value) => sum + value, 0) / values.length
 }
 
 function inferProvider(modelId: string): string {
@@ -302,6 +479,16 @@ function inferProvider(modelId: string): string {
   )
 }
 
+function displayModelName(model: CatalogModel, provider: string): string {
+  const vendorPrefix = `${provider}: `
+  if (model.name.startsWith(vendorPrefix)) return model.name.slice(vendorPrefix.length)
+  if (model.name.startsWith("Z.ai: ")) return model.name.slice("Z.ai: ".length)
+  if (model.name.startsWith("MoonshotAI: ")) {
+    return model.name.slice("MoonshotAI: ".length)
+  }
+  return model.name
+}
+
 function formatContextWindow(value: CatalogModel["contextWindow"]): string {
   if (value === "unknown") return "unknown"
   if (value >= 1_000_000) return `${Math.round(value / 1_000_000)}M`
@@ -309,10 +496,17 @@ function formatContextWindow(value: CatalogModel["contextWindow"]): string {
   return String(value)
 }
 
+function dateRank(date: string): number {
+  const timestamp = Date.parse(date)
+  return Number.isNaN(timestamp) ? 0 : timestamp
+}
+
 function buildHighlights(model: CatalogModel): string[] {
   const highlights = [
-    `OpenRouter 模型 ID：${model.id}`,
+    buildCapabilityRationale(model),
+    `榜单依据：OpenRouter Artificial Analysis / 目录基准信号`,
     `上下文窗口：${formatContextWindow(model.contextWindow)}`,
+    `OpenRouter 模型 ID：${model.id}`,
   ]
 
   if (model.promptPrice && model.completionPrice) {
@@ -324,6 +518,32 @@ function buildHighlights(model: CatalogModel): string[] {
   }
 
   return highlights.slice(0, 4)
+}
+
+function buildCapabilityRationale(model: CatalogModel): string {
+  const id = model.id
+
+  if (id === "anthropic/claude-fable-5") {
+    return "Anthropic 最强公开模型，面向最高难度推理与长程 Agent 工作"
+  }
+
+  if (id === "openai/gpt-5.5") {
+    return "OpenAI 官方模型页推荐用于复杂推理与编码"
+  }
+
+  if (id === "google/gemini-3.5-flash") {
+    return "GA 稳定模型，Google 文档称为最智能 Flash 模型"
+  }
+
+  if (id === "anthropic/claude-opus-4.8") {
+    return "Anthropic Opus 系列高强度模型，适合复杂推理、编码和专业工作"
+  }
+
+  if (model.description) {
+    return model.description.slice(0, 90)
+  }
+
+  return "基于榜单、模型家族、上下文和官方目录信号综合判断"
 }
 
 function buildTags(model: CatalogModel, provider: string): string[] {

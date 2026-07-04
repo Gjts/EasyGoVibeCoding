@@ -83,6 +83,8 @@ export function buildUserPrompt(input: PromptInput): string {
     "",
     "输出要求：",
     "- models 数组至少包含 6 个当前主流模型，tier 分级（1=旗舰，2=平衡，3=轻量）",
+    "- tier 必须按模型强度/综合能力分级，不得按发布时间或热度分级；免费、mini、lite、flash、small、XS 等轻量模型默认不能标为 tier 1，除非官方明确宣称它是当前旗舰/最高能力模型",
+    "- 第一梯队首页展示优先按御三家各取一个旗舰代表：Anthropic、OpenAI、Google；同一家族多个强模型可进入历史列表，但不要挤掉其他御三家的旗舰位",
     "- news 数组按 date 倒序排列，至多 10 条，覆盖最近 6 个月内的重大发布",
     "- source 字段请填写 " + `"${input.providerSource}"`,
     "- updatedAt 使用 ISO8601 UTC 时间戳",
