@@ -81,6 +81,8 @@ out
 # Local agent/runtime artifacts
 .opc/
 .omx/
+.impeccable/config.local.json
+.impeccable/hook.cache.json
 
 # Nuxt.js build / generate output
 .nuxt
