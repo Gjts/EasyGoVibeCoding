@@ -104,9 +104,16 @@ async function readConfirmedIndex(kv: KVNamespace): Promise<string[]> {
     type: "json",
   })) as string[] | null
 
-  return Array.isArray(raw)
-    ? raw.filter((id) => typeof id === "string" && id.length > 0)
-    : []
+  if (!Array.isArray(raw)) return []
+
+  const seen = new Set<string>()
+  return raw.filter((id) => {
+    if (typeof id !== "string" || id.length === 0 || seen.has(id)) {
+      return false
+    }
+    seen.add(id)
+    return true
+  })
 }
 
 async function addConfirmedFeedback(kv: KVNamespace, item: PublicFeedbackItem) {
