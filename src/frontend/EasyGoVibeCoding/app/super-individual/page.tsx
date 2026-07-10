@@ -1,5 +1,7 @@
 import { CourseLayout } from "@/components/course/course-layout";
 import { superIndividualChapters } from "@/components/course/chapters";
+import { SponsoredPlacement } from "@/components/sponsor/sponsored-placement";
+import { getScheduledSponsorsForSlot } from "@/lib/sponsors";
 import Link from "next/link";
 import { ArrowRight, Sparkles, Target, Workflow, TrendingUp, BookOpen, Award } from "lucide-react";
 
@@ -40,6 +42,10 @@ const modules = [
     gradient: "from-pink-500 to-rose-500",
   },
 ];
+
+const homeSponsorCampaigns = getScheduledSponsorsForSlot(
+  "super-individual-home",
+);
 
 export default function SuperIndividualPage() {
   return (
@@ -103,6 +109,11 @@ export default function SuperIndividualPage() {
           })}
         </div>
       </div>
+
+      <SponsoredPlacement
+        slot="super-individual-home"
+        campaigns={homeSponsorCampaigns}
+      />
 
       {/* Modules */}
       <div className="mb-12">

@@ -3,6 +3,12 @@ import assert from "node:assert/strict"
 
 import { SPONSOR_SLOTS } from "../../lib/sponsor-schema.ts"
 import {
+  createSponsorEventPayload,
+  createSponsorImpressionGate,
+  getSponsorImpressionStorageKey,
+  sendSponsorEvent,
+} from "../../lib/sponsor-event-client.ts"
+import {
   SPONSOR_EVENT_SLOTS,
   parseSponsorEvent,
 } from "../../functions/_shared/sponsor-event.ts"
@@ -61,12 +67,315 @@ async function assertRejected(request, status, options) {
   return result.response
 }
 
+async function withPatchedBrowserGlobals(patches, callback) {
+  const originals = new Map(
+    Object.keys(patches).map((key) => [
+      key,
+      Object.getOwnPropertyDescriptor(globalThis, key),
+    ]),
+  )
+
+  try {
+    for (const [key, value] of Object.entries(patches)) {
+      Object.defineProperty(globalThis, key, {
+        configurable: true,
+        writable: true,
+        value,
+      })
+    }
+    await callback()
+  } finally {
+    for (const [key, descriptor] of originals) {
+      if (descriptor) {
+        Object.defineProperty(globalThis, key, descriptor)
+      } else {
+        delete globalThis[key]
+      }
+    }
+  }
+}
+
 test("frontend and function slot contracts stay identical", () => {
   assert.deepEqual(SPONSOR_EVENT_SLOTS, SPONSOR_SLOTS)
 })
 
 test("accepts the minimal privacy-safe payload", () => {
   assert.deepEqual(parseSponsorEvent(valid), valid)
+})
+
+test("client payload contains only the server-approved fields", () => {
+  assert.deepEqual(
+    createSponsorEventPayload({
+      eventType: "click",
+      campaignId: "vendor-product-2026-08",
+      slot: "super-individual-home",
+      path: "/super-individual",
+      email: "reader@example.com",
+      rawIp: "203.0.113.10",
+      userAgent: "identity-like-agent",
+      crossSiteId: "reader-123",
+    }),
+    {
+      schemaVersion: 1,
+      eventType: "click",
+      campaignId: "vendor-product-2026-08",
+      slot: "super-individual-home",
+      path: "/super-individual",
+    },
+  )
+})
+
+test("impression dedupe key changes independently by campaign, slot, and path", () => {
+  const first = getSponsorImpressionStorageKey(
+    "campaign-a",
+    "super-individual-home",
+    "/super-individual",
+  )
+
+  assert.notEqual(
+    first,
+    getSponsorImpressionStorageKey(
+      "campaign-b",
+      "super-individual-home",
+      "/super-individual",
+    ),
+  )
+  assert.notEqual(
+    first,
+    getSponsorImpressionStorageKey(
+      "campaign-a",
+      "super-individual-monetization",
+      "/super-individual",
+    ),
+  )
+  assert.notEqual(
+    first,
+    getSponsorImpressionStorageKey(
+      "campaign-a",
+      "super-individual-home",
+      "/super-individual/monetization",
+    ),
+  )
+})
+
+test("sendSponsorEvent uses a successful JSON Blob beacon without fetching", async () => {
+  const fetchCalls = []
+  let beaconCall
+
+  await withPatchedBrowserGlobals(
+    {
+      window: {},
+      navigator: {
+        sendBeacon(url, body) {
+          beaconCall = { url, body }
+          return true
+        },
+      },
+      fetch(...args) {
+        fetchCalls.push(args)
+        return Promise.resolve(new Response(null, { status: 204 }))
+      },
+    },
+    async () => {
+      const payload = createSponsorEventPayload(valid)
+      sendSponsorEvent(payload)
+
+      assert.equal(beaconCall.url, "/api/sponsor-events")
+      assert.ok(beaconCall.body instanceof Blob)
+      assert.equal(beaconCall.body.type, "application/json")
+      assert.deepEqual(JSON.parse(await beaconCall.body.text()), payload)
+      assert.deepEqual(fetchCalls, [])
+    },
+  )
+})
+
+test("sendSponsorEvent falls back to keepalive fetch when beacon returns false", async () => {
+  const fetchCalls = []
+
+  await withPatchedBrowserGlobals(
+    {
+      window: {},
+      navigator: { sendBeacon: () => false },
+      fetch(...args) {
+        fetchCalls.push(args)
+        return Promise.resolve(new Response(null, { status: 204 }))
+      },
+    },
+    async () => {
+      const payload = createSponsorEventPayload(valid)
+      sendSponsorEvent(payload)
+      await Promise.resolve()
+
+      assert.deepEqual(fetchCalls, [
+        [
+          "/api/sponsor-events",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+            credentials: "same-origin",
+            keepalive: true,
+          },
+        ],
+      ])
+    },
+  )
+})
+
+test("sendSponsorEvent falls back to keepalive fetch when beacon throws", async () => {
+  const fetchCalls = []
+
+  await withPatchedBrowserGlobals(
+    {
+      window: {},
+      navigator: {
+        sendBeacon() {
+          throw new Error("beacon unavailable")
+        },
+      },
+      fetch(...args) {
+        fetchCalls.push(args)
+        return Promise.resolve(new Response(null, { status: 204 }))
+      },
+    },
+    async () => {
+      const payload = createSponsorEventPayload(valid)
+      sendSponsorEvent(payload)
+      await Promise.resolve()
+
+      assert.equal(fetchCalls.length, 1)
+      assert.equal(fetchCalls[0][0], "/api/sponsor-events")
+      assert.equal(fetchCalls[0][1].keepalive, true)
+      assert.equal(fetchCalls[0][1].body, JSON.stringify(payload))
+    },
+  )
+})
+
+test("impression gate restarts a full second after visibility resumes and cleans up", () => {
+  let visible = true
+  let intersectionListener
+  let visibilityListener
+  let nextTimerId = 1
+  let observerDisconnects = 0
+  let visibilityUnsubscribes = 0
+  let impressions = 0
+  const timers = new Map()
+
+  const dispose = createSponsorImpressionGate({
+    setTimer(callback, delayMs) {
+      const timerId = nextTimerId
+      nextTimerId += 1
+      timers.set(timerId, { callback, delayMs })
+      return timerId
+    },
+    clearTimer(timerId) {
+      timers.delete(timerId)
+    },
+    isPageVisible: () => visible,
+    isCampaignActive: () => true,
+    observeHalfVisible(listener) {
+      intersectionListener = listener
+      return () => {
+        observerDisconnects += 1
+      }
+    },
+    subscribeToVisibility(listener) {
+      visibilityListener = listener
+      return () => {
+        visibilityUnsubscribes += 1
+      }
+    },
+    onViewable: () => {
+      impressions += 1
+    },
+  })
+
+  intersectionListener(true)
+  const firstTimerId = [...timers.keys()][0]
+  assert.equal(timers.get(firstTimerId).delayMs, 1_000)
+
+  visible = false
+  visibilityListener()
+  assert.equal(timers.size, 0)
+
+  visible = true
+  visibilityListener()
+  const resumedTimerId = [...timers.keys()][0]
+  assert.notEqual(resumedTimerId, firstTimerId)
+  assert.equal(timers.get(resumedTimerId).delayMs, 1_000)
+
+  const resumedTimer = timers.get(resumedTimerId)
+  timers.delete(resumedTimerId)
+  resumedTimer.callback()
+  assert.equal(impressions, 1)
+
+  intersectionListener(false)
+  intersectionListener(true)
+  assert.equal(timers.size, 1)
+  dispose()
+
+  assert.equal(timers.size, 0)
+  assert.equal(observerDisconnects, 1)
+  assert.equal(visibilityUnsubscribes, 1)
+
+  intersectionListener(true)
+  visibilityListener()
+  assert.equal(timers.size, 0)
+  assert.equal(impressions, 1)
+})
+
+test("impression gate rechecks page visibility and campaign activity before firing", () => {
+  let visible = true
+  let campaignActive = true
+  let intersectionListener
+  let nextTimerId = 1
+  let impressions = 0
+  const timers = new Map()
+
+  const dispose = createSponsorImpressionGate({
+    setTimer(callback) {
+      const timerId = nextTimerId
+      nextTimerId += 1
+      timers.set(timerId, callback)
+      return timerId
+    },
+    clearTimer(timerId) {
+      timers.delete(timerId)
+    },
+    isPageVisible: () => visible,
+    isCampaignActive: () => campaignActive,
+    observeHalfVisible(listener) {
+      intersectionListener = listener
+      return () => undefined
+    },
+    subscribeToVisibility() {
+      return () => undefined
+    },
+    onViewable: () => {
+      impressions += 1
+    },
+  })
+
+  const runOnlyTimer = () => {
+    assert.equal(timers.size, 1)
+    const [timerId, callback] = [...timers.entries()][0]
+    timers.delete(timerId)
+    callback()
+  }
+
+  intersectionListener(true)
+  campaignActive = false
+  runOnlyTimer()
+  assert.equal(impressions, 0)
+
+  campaignActive = true
+  intersectionListener(false)
+  intersectionListener(true)
+  visible = false
+  runOnlyTimer()
+  assert.equal(impressions, 0)
+
+  dispose()
 })
 
 test("rejects unknown slots, paths, event types, and extra identity data", () => {

@@ -30,3 +30,27 @@ export function selectActiveSponsor(
     ) ?? null
   )
 }
+
+const MAX_SPONSOR_SCHEDULE_REFRESH_DELAY_MS = 60 * 60 * 1_000
+
+export function getSponsorScheduleRefreshDelay(
+  campaigns: SponsorCampaign[],
+  slot: SponsorSlot,
+  now: Date = new Date(),
+  maximumDelayMs = MAX_SPONSOR_SCHEDULE_REFRESH_DELAY_MS,
+): number {
+  const timestamp = now.getTime()
+  const nextBoundary = getScheduledSponsors(campaigns, slot)
+    .flatMap((campaign) => [
+      Date.parse(campaign.startsAt),
+      Date.parse(campaign.endsAt),
+    ])
+    .filter((boundary) => boundary > timestamp)
+    .reduce(
+      (earliest, boundary) => Math.min(earliest, boundary),
+      Number.POSITIVE_INFINITY,
+    )
+
+  if (!Number.isFinite(nextBoundary)) return maximumDelayMs
+  return Math.min(nextBoundary - timestamp, maximumDelayMs)
+}

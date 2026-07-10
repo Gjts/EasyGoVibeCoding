@@ -6,6 +6,7 @@ import {
 } from "../../lib/sponsor-schema.ts"
 import {
   getScheduledSponsors,
+  getSponsorScheduleRefreshDelay,
   selectActiveSponsor,
 } from "../../lib/sponsor-schedule.ts"
 
@@ -69,6 +70,50 @@ test("does not select campaigns before start, at end, or in another slot", () =>
       new Date("2026-08-15T00:00:00+08:00"),
     ),
     null,
+  )
+})
+
+test("schedules selection refresh at the next campaign start and end boundary", () => {
+  const campaigns = [campaign()]
+
+  assert.equal(
+    getSponsorScheduleRefreshDelay(
+      campaigns,
+      "super-individual-home",
+      new Date("2026-07-31T23:59:55+08:00"),
+    ),
+    5_000,
+  )
+  assert.equal(
+    getSponsorScheduleRefreshDelay(
+      campaigns,
+      "super-individual-home",
+      new Date("2026-08-31T23:59:53+08:00"),
+    ),
+    7_000,
+  )
+})
+
+test("caps sponsor refresh timers and ignores unrelated slot boundaries", () => {
+  const maximumDelayMs = 60_000
+
+  assert.equal(
+    getSponsorScheduleRefreshDelay(
+      [campaign({ placements: ["super-individual-monetization"] })],
+      "super-individual-home",
+      new Date("2026-07-31T23:59:55+08:00"),
+      maximumDelayMs,
+    ),
+    maximumDelayMs,
+  )
+  assert.equal(
+    getSponsorScheduleRefreshDelay(
+      [campaign()],
+      "super-individual-home",
+      new Date("2026-07-30T00:00:00+08:00"),
+      maximumDelayMs,
+    ),
+    maximumDelayMs,
   )
 })
 

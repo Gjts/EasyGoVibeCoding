@@ -1,5 +1,7 @@
 import { CourseLayout } from "@/components/course/course-layout";
 import { superIndividualChapters } from "@/components/course/chapters";
+import { SponsoredPlacement } from "@/components/sponsor/sponsored-placement";
+import { getScheduledSponsorsForSlot } from "@/lib/sponsors";
 import { TrendingUp, Package, BadgeDollarSign, CheckCircle2 } from "lucide-react";
 
 const offers = [
@@ -7,6 +9,10 @@ const offers = [
   { title: "产品型（可规模化）", desc: "模板/课程/工具/订阅，把交付标准化与可复制化。" },
   { title: "渠道型（可复利）", desc: "内容、社区、合作分销，让获客成本持续下降。" },
 ];
+
+const monetizationSponsorCampaigns = getScheduledSponsorsForSlot(
+  "super-individual-monetization",
+);
 
 export default function SuperIndividualMonetizationPage() {
   return (
@@ -42,6 +48,11 @@ export default function SuperIndividualMonetizationPage() {
             ))}
           </div>
         </section>
+
+        <SponsoredPlacement
+          slot="super-individual-monetization"
+          campaigns={monetizationSponsorCampaigns}
+        />
 
         <section className="p-6 rounded-xl border border-border bg-card">
           <h2 className="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
