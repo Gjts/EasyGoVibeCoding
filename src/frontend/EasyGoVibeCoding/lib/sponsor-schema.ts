@@ -16,7 +16,13 @@ export const SPONSOR_STATUSES = [
 const HttpsUrlSchema = z
   .string()
   .url()
-  .refine((value) => new URL(value).protocol === "https:", {
+  .refine((value) => {
+    try {
+      return new URL(value).protocol === "https:"
+    } catch {
+      return false
+    }
+  }, {
     message: "destinationUrl must use HTTPS",
   })
 

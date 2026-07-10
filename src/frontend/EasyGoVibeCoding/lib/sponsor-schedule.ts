@@ -9,7 +9,11 @@ export function getScheduledSponsors(
       (campaign) =>
         campaign.status === "active" && campaign.placements.includes(slot),
     )
-    .sort((left, right) => left.startsAt.localeCompare(right.startsAt))
+    .sort((left, right) => {
+      const startsAtDifference =
+        Date.parse(left.startsAt) - Date.parse(right.startsAt)
+      return startsAtDifference || left.id.localeCompare(right.id)
+    })
 }
 
 export function selectActiveSponsor(

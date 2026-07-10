@@ -5,6 +5,7 @@ import {
   parseSponsorCampaigns,
 } from "../../lib/sponsor-schema.ts"
 import {
+  getScheduledSponsors,
   selectActiveSponsor,
 } from "../../lib/sponsor-schedule.ts"
 
@@ -71,6 +72,30 @@ test("does not select campaigns before start, at end, or in another slot", () =>
   )
 })
 
+test("orders mixed-offset starts chronologically and breaks ties by ID", () => {
+  const campaigns = [
+    campaign({
+      id: "zulu-tie",
+      startsAt: "2026-07-31T16:30:00+00:00",
+    }),
+    campaign({
+      id: "later-utc",
+      startsAt: "2026-07-31T17:00:00+00:00",
+    }),
+    campaign({
+      id: "alpha-tie",
+      startsAt: "2026-08-01T00:30:00+08:00",
+    }),
+  ]
+
+  assert.deepEqual(
+    getScheduledSponsors(campaigns, "super-individual-home").map(
+      ({ id }) => id,
+    ),
+    ["alpha-tie", "zulu-tie", "later-utc"],
+  )
+})
+
 test("rejects non-HTTPS destinations and reversed dates", () => {
   assert.throws(
     () =>
@@ -93,6 +118,22 @@ test("rejects non-HTTPS destinations and reversed dates", () => {
       }),
     /endsAt/,
   )
+})
+
+test("reports malformed destinations as normalized validation errors", () => {
+  let thrown
+
+  try {
+    parseSponsorCampaigns({
+      schemaVersion: 1,
+      campaigns: [campaign({ destinationUrl: "not a url" })],
+    })
+  } catch (error) {
+    thrown = error
+  }
+
+  assert.ok(thrown instanceof Error)
+  assert.match(thrown.message, /destinationUrl/)
 })
 
 test("rejects overlapping active campaigns in the same slot", () => {
