@@ -1,4 +1,7 @@
-import { parseSponsorEvent } from "../_shared/sponsor-event"
+import {
+  parseSponsorEvent,
+  readBodyWithinLimit,
+} from "../_shared/sponsor-event.ts"
 
 interface Env {
   SPONSOR_ANALYTICS?: AnalyticsEngineDataset
@@ -32,12 +35,16 @@ export const onRequestPost = async ({
   if (!env.SPONSOR_ANALYTICS) {
     return json({ error: "Sponsor analytics is not configured" }, 503)
   }
-  if (!(request.headers.get("content-type") || "").includes("application/json")) {
+  const contentType = (request.headers.get("content-type") || "")
+    .split(";", 1)[0]
+    .trim()
+    .toLowerCase()
+  if (contentType !== "application/json") {
     return json({ error: "Content-Type must be application/json" }, 400)
   }
 
-  const rawBody = await request.text()
-  if (rawBody.length > 2048) {
+  const rawBody = await readBodyWithinLimit(request.body, 2048)
+  if (rawBody === null) {
     return json({ error: "Payload too large" }, 413)
   }
   const input = (() => {

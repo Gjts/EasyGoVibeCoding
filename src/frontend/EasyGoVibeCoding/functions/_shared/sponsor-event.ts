@@ -20,6 +20,35 @@ export interface SponsorEvent {
   path: string
 }
 
+export async function readBodyWithinLimit(
+  body: ReadableStream<Uint8Array> | null,
+  maxBytes: number,
+): Promise<string | null> {
+  if (!body) return ""
+
+  const reader = body.getReader()
+  const decoder = new TextDecoder()
+  let bytesRead = 0
+  let text = ""
+
+  try {
+    while (true) {
+      const { done, value } = await reader.read()
+      if (done) return text + decoder.decode()
+
+      bytesRead += value.byteLength
+      if (bytesRead > maxBytes) {
+        await reader.cancel()
+        return null
+      }
+
+      text += decoder.decode(value, { stream: true })
+    }
+  } finally {
+    reader.releaseLock()
+  }
+}
+
 function isRecord(input: unknown): input is Record<string, unknown> {
   return Boolean(input) && typeof input === "object" && !Array.isArray(input)
 }
