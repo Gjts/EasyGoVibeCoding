@@ -26,5 +26,9 @@ preview_id = "04e02c1e72b44bee95ad85eb96c6da07"
 binding = "MODEL_UPDATER"
 service = "model-updater"
 
+[[analytics_engine_datasets]]
+binding = "SPONSOR_ANALYTICS"
+dataset = "easy_go_vibe_sponsor_events"
+
 [observability]
 enabled = true

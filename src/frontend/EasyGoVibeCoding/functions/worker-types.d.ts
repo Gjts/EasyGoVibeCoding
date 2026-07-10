@@ -14,3 +14,11 @@ interface KVNamespace {
   ): Promise<void>
   delete(key: string): Promise<void>
 }
+
+interface AnalyticsEngineDataset {
+  writeDataPoint(event: {
+    indexes?: string[]
+    blobs?: string[]
+    doubles?: number[]
+  }): void
+}
