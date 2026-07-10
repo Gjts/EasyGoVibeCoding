@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "rootDir": "../../",
+    "outDir": ".test-dist",
+    "noEmit": false,
+    "isolatedModules": false
+  },
+  "include": [
+    "src/**/*.ts",
+    "../../frontend/EasyGoVibeCoding/lib/model-schema.ts"
+  ]
+}

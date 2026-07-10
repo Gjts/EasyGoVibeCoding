@@ -8,7 +8,7 @@ import { pickProvider } from "./providers"
 import type { ProviderResult } from "./providers/types"
 import { pruneHistory, readLatest, writeError, writeLatest } from "./kv"
 
-const MAX_RETRIES = 0
+const MAX_RETRIES = 1
 
 export interface UpdateOutcome {
   status: "updated" | "skipped" | "failed"
@@ -37,7 +37,7 @@ export async function runUpdate(env: Env): Promise<UpdateOutcome> {
     try {
       const result = await attemptOnce()
       lastRaw = result.rawText
-      const payload = buildValidatedPayload(result, nowISO)
+      const payload = buildValidatedPayload(result, nowISO, previous)
       await writeLatest(env.SITE_STATS_KV, payload, previous)
       await pruneHistory(env.SITE_STATS_KV, resolveHistoryMonths(env))
       return {
@@ -64,6 +64,7 @@ export async function runUpdate(env: Env): Promise<UpdateOutcome> {
 function buildValidatedPayload(
   result: ProviderResult,
   nowISO: string,
+  previous: ModelsPayload | null,
 ): ModelsPayload {
   const normalizedJson = coerceSourceAndTimestamp(
     result.parsedJson,
@@ -78,7 +79,62 @@ function buildValidatedPayload(
       .join("; ")
     throw new Error(`Payload failed schema validation: ${issues}`)
   }
-  return parsed.data
+  const current = {
+    ...parsed.data,
+    models: balanceFlagshipProviders(parsed.data.models),
+  }
+  return { ...current, releases: mergeReleases(current, previous) }
+}
+
+function balanceFlagshipProviders(
+  models: ModelsPayload["models"],
+): ModelsPayload["models"] {
+  const tierOne = models.filter((model) => model.tier === 1)
+  const preferred = ["Anthropic", "OpenAI", "Google"]
+    .map((provider) => tierOne.find((model) => model.provider === provider))
+    .filter((model): model is ModelsPayload["models"][number] => Boolean(model))
+  const preferredKeys = new Set(
+    preferred.map((model) => `${model.provider}:${model.name}`),
+  )
+  const remainingTierOne = tierOne.filter(
+    (model) => !preferredKeys.has(`${model.provider}:${model.name}`),
+  )
+  const otherTiers = models.filter((model) => model.tier !== 1)
+  return [...preferred, ...remainingTierOne, ...otherTiers]
+}
+
+function mergeReleases(
+  current: ModelsPayload,
+  previous: ModelsPayload | null,
+): ModelsPayload["releases"] {
+  const candidates = [
+    ...current.releases,
+    ...current.models,
+    ...(previous?.releases || []),
+    ...(previous?.models || []),
+  ]
+  const releases = new Map<string, ModelsPayload["releases"][number]>()
+  for (const model of candidates) {
+    const key = `${model.provider}:${model.name}`.toLowerCase()
+    const current = releases.get(key)
+    if (!current || dateQuality(model) > dateQuality(current)) {
+      releases.set(key, model)
+    }
+  }
+
+  return [...releases.values()]
+    .sort((a, b) => {
+      const dateOrder = b.releaseDate.localeCompare(a.releaseDate)
+      if (dateOrder !== 0) return dateOrder
+      return `${a.provider}:${a.name}`.localeCompare(`${b.provider}:${b.name}`)
+    })
+    .slice(0, 120)
+}
+
+function dateQuality(model: ModelsPayload["releases"][number]): number {
+  if (model.dateKind === "official-release") return 2
+  if (model.dateKind === "unverified") return 1
+  return 0
 }
 
 function coerceSourceAndTimestamp(
@@ -90,9 +146,10 @@ function coerceSourceAndTimestamp(
   const v = value as Record<string, unknown>
   return {
     ...v,
-    source: typeof v.source === "string" && v.source ? v.source : source,
+    source,
     updatedAt:
       typeof v.updatedAt === "string" && v.updatedAt ? v.updatedAt : nowISO,
+    releases: Array.isArray(v.releases) ? v.releases : [],
     news: Array.isArray(v.news) ? v.news : [],
   }
 }

@@ -63,6 +63,9 @@ if (!Array.isArray(payload.models) || payload.models.length === 0) {
 if (!Array.isArray(payload.news)) {
   fail("payload.news must be array");
 }
+if (payload.releases !== undefined && !Array.isArray(payload.releases)) {
+  fail("payload.releases must be array when present");
+}
 
 payload.models.forEach((m, i) => {
   requireKeys(m, REQUIRED_MODEL_KEYS, `models[${i}]`);
@@ -77,6 +80,19 @@ payload.models.forEach((m, i) => {
   }
 });
 
+(payload.releases || []).forEach((m, i) => {
+  requireKeys(m, REQUIRED_MODEL_KEYS, `releases[${i}]`);
+  if (!DATE_REGEX.test(m.releaseDate)) {
+    fail(`releases[${i}].releaseDate must be YYYY-MM-DD, got "${m.releaseDate}"`);
+  }
+  if (![1, 2, 3].includes(m.tier)) {
+    fail(`releases[${i}].tier must be 1|2|3, got ${m.tier}`);
+  }
+  if (!Array.isArray(m.highlights) || m.highlights.length === 0) {
+    fail(`releases[${i}].highlights must be non-empty array`);
+  }
+});
+
 payload.news.forEach((n, i) => {
   requireKeys(n, REQUIRED_NEWS_KEYS, `news[${i}]`);
   if (!DATE_REGEX.test(n.date)) {
@@ -88,5 +104,5 @@ payload.news.forEach((n, i) => {
 });
 
 console.log(
-  `\u2705 data/models.json valid: ${payload.models.length} models, ${payload.news.length} news`,
+  `\u2705 data/models.json valid: ${payload.models.length} models, ${(payload.releases || []).length} historical releases, ${payload.news.length} news`,
 );

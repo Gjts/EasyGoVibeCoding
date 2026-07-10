@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-06-24T00:00:00.000Z",
-  "source": "seed-official-verified-2026-06-24",
+  "updatedAt": "2026-07-10T00:00:00.000Z",
+  "source": "seed-official-verified-2026-07-10",
   "models": [
     {
       "provider": "Anthropic",
@@ -20,19 +20,19 @@
     },
     {
       "provider": "OpenAI",
-      "name": "GPT-5.5",
-      "releaseDate": "2026-04-23",
-      "contextWindow": "1M",
+      "name": "GPT-5.6 Sol",
+      "releaseDate": "2026-07-09",
+      "contextWindow": "1.05M",
       "highlights": [
-        "OpenAI 官方模型页推荐用于复杂推理与编码",
-        "模型 ID：gpt-5.5，Responses API 可用，支持 text/image 输入",
-        "1M 上下文、128K 最大输出，支持函数调用、搜索、文件检索和电脑使用"
+        "OpenAI 官方模型页列出的复杂推理与编码旗舰",
+        "模型 ID：gpt-5.6-sol，gpt-5.6 别名指向 Sol",
+        "1.05M 上下文、128K 最大输出，支持函数、Web 搜索、文件搜索和电脑使用"
       ],
       "tier": 1,
-      "url": "https://platform.openai.com/docs/models",
+      "url": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
       "category": "model",
       "tags": ["OpenAI", "推理", "Codex", "Agent"],
-      "description": "OpenAI 当前旗舰模型，适合复杂软件工程、Agent、电脑使用和专业知识工作"
+      "description": "OpenAI 2026-07-09 发布的前沿旗舰，适合复杂软件工程、Agent 和专业知识工作"
     },
     {
       "provider": "Google",
@@ -211,7 +211,32 @@
       "description": "OpenAI 面向高频工程任务的 mini 模型，适合成本敏感的代码、子 Agent 和工具调用场景"
     }
   ],
+  "releases": [
+    {
+      "provider": "OpenAI",
+      "name": "GPT-5.5",
+      "releaseDate": "2026-04-23",
+      "contextWindow": "1M",
+      "highlights": [
+        "OpenAI 上一代复杂推理与编码旗舰",
+        "模型 ID：gpt-5.5",
+        "1M 上下文、128K 最大输出"
+      ],
+      "tier": 1,
+      "url": "https://developers.openai.com/api/docs/models",
+      "category": "model",
+      "tags": ["OpenAI", "历史旗舰"],
+      "description": "GPT-5.6 发布前的 OpenAI 旗舰模型，保留在历史发布时间中"
+    }
+  ],
   "news": [
+    {
+      "date": "2026-07-09",
+      "provider": "OpenAI",
+      "title": "GPT-5.6 Sol / Terra / Luna 发布",
+      "summary": "OpenAI 发布 GPT-5.6 系列：Sol 面向前沿能力，Terra 平衡智能与成本，Luna 面向高吞吐；gpt-5.6 别名指向 Sol。",
+      "url": "https://developers.openai.com/api/docs/changelog"
+    },
     {
       "date": "2026-06-24",
       "provider": "Moonshot",

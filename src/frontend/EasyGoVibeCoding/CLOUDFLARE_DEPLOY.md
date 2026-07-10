@@ -69,7 +69,7 @@ FEEDBACK_KV = 用于存储待确认和已确认的邮箱反馈
 - `FEEDBACK_KV` 用于双重确认反馈展示；当前 `wrangler.toml` 复用同一 KV namespace，并通过 `email-feedback:*` 前缀隔离
 - `MODEL_UPDATER_TOKEN` 不要放到前端公开变量里；它只由 Pages Function 在服务端调用 Worker 时使用
 - `MODEL_UPDATER` 是 Pages → Worker 的 Service Binding，当前已在 `wrangler.toml` 配置为绑定到 `model-updater`
-- `OPENROUTER_API_KEY` / `PERPLEXITY_API_KEY` / `ANTHROPIC_API_KEY` 是配置在 `src/backend/model-updater` Worker 上的 secret，不是 Pages secret；没有外部 key 时刷新链路仍可用，但数据源会显示为 `seed-static-fallback`
+- `OPENROUTER_API_KEY` / `PERPLEXITY_API_KEY` / `ANTHROPIC_API_KEY` 是配置在 `src/backend/model-updater` Worker 上的 secret，不是 Pages secret；没有外部 key 时刷新链路仍可用，但数据源会显示为 `seed-static-fallback`。OpenRouter Web Search 会产生少量搜索费用，即使所选模型本身免费
 
 ### 3. 验证部署
 
@@ -183,7 +183,9 @@ A: `src/backend/model-updater` 是独立 Cloudflare Worker，`wrangler.toml` 已
 crons = ["0 */6 * * *"]
 ```
 
-部署该 Worker 后，Cloudflare 会每 6 小时触发一次 `scheduled()`，Worker 把结果写入共享 KV 的 `models:latest`。如果已配置 `OPENROUTER_API_KEY`、`PERPLEXITY_API_KEY` 或 `ANTHROPIC_API_KEY`，它会调用联网检索接口；如果没有配置外部 key，会写入 `seed-static-fallback` 静态校验兜底，保证页面和接口不中断。
+部署该 Worker 后，Cloudflare 会每 6 小时触发一次 `scheduled()`，Worker 把结果写入共享 KV 的 `models:latest`。如果已配置 `OPENROUTER_API_KEY`、`PERPLEXITY_API_KEY` 或 `ANTHROPIC_API_KEY`，它会调用联网检索接口；OpenRouter 路径还会用官方 News RSS 校正 OpenAI 发布日期。联网模型失败时降级为目录数据，没有外部 key 时写入 `seed-static-fallback`，保证页面和接口不中断。
+
+OpenAI 兼容中转站的 `/v1/models` 不提供官方 `releaseDate` / `tier` 语义，不能直接替代官方发布源。中转 key 只能在新增并验证专用 provider 后通过 Worker secret 配置，不能写入仓库或 `NEXT_PUBLIC_*` 环境变量。
 
 当前 OpenRouter 默认使用免费模型池并按顺序重试：
 

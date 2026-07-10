@@ -22,6 +22,7 @@ import {
 } from "@/lib/models"
 
 const MAX_NEWS = 5
+const POLL_INTERVAL_MS = 5 * 60 * 1000
 
 const PROVIDER_STYLES: Record<
   string,
@@ -81,6 +82,10 @@ function isSeedSource(source: string) {
 
 function sourceLabel(source: string) {
   if (source === "seed-static-fallback") return "静态校验兜底"
+  if (source === "openrouter-catalog+openai-official") {
+    return "OpenRouter 目录 + OpenAI 官方发布记录"
+  }
+  if (source === "openrouter-catalog") return "OpenRouter 模型目录"
   if (source.startsWith("openrouter-")) return "OpenRouter 实时检索"
   if (source.startsWith("perplexity-")) return "Perplexity 实时检索"
   if (source.startsWith("anthropic-")) return "Anthropic 实时检索"
@@ -125,14 +130,33 @@ export function LatestModelsPanel() {
   }, [])
 
   useEffect(() => {
-    const controller = new AbortController()
-    void loadLatest(controller.signal)
-    return () => controller.abort()
+    let controller = new AbortController()
+    const poll = () => {
+      controller.abort()
+      controller = new AbortController()
+      void loadLatest(controller.signal)
+    }
+
+    poll()
+    const interval = window.setInterval(poll, POLL_INTERVAL_MS)
+    return () => {
+      window.clearInterval(interval)
+      controller.abort()
+    }
   }, [loadLatest])
 
   const news = getLatestNews(state.payload, MAX_NEWS)
   const topModels = state.payload.models.filter((m) => m.tier === 1).slice(0, 3)
-  const releaseHistory = [...state.payload.models].sort((a, b) => {
+  const releaseKeys = new Set<string>()
+  const releaseHistory = [
+    ...state.payload.releases,
+    ...state.payload.models,
+  ].filter((model) => {
+    const key = `${model.provider}:${model.name}`.toLowerCase()
+    if (releaseKeys.has(key)) return false
+    releaseKeys.add(key)
+    return true
+  }).sort((a, b) => {
     const dateOrder = b.releaseDate.localeCompare(a.releaseDate)
     return dateOrder !== 0 ? dateOrder : a.name.localeCompare(b.name)
   })
@@ -349,10 +373,10 @@ export function LatestModelsPanel() {
                 <span className="inline-flex h-9 w-9 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-500 text-white shadow-md">
                   <History className="h-5 w-5" />
                 </span>
-                历史模型发布时间
+                历史模型时间线
               </h3>
               <p className="mt-2 text-sm leading-6 text-gray-600">
-                按发布日期倒序排列，方便回看每家模型的更新节奏。
+                官方发布日期优先；无法官方核验的条目标为目录收录时间。
               </p>
             </div>
             <span className="rounded-full border border-indigo-100 bg-indigo-50 px-3 py-1 text-xs font-bold text-indigo-700">
@@ -360,7 +384,7 @@ export function LatestModelsPanel() {
             </span>
           </div>
 
-          <div className="max-h-[360px] overflow-y-auto pr-2" aria-label="历史模型发布时间列表">
+          <div className="max-h-[360px] overflow-y-auto pr-2" aria-label="历史模型时间线列表">
             <ol className="relative space-y-3 border-l-2 border-indigo-100 pl-5">
               {releaseHistory.map((model) => {
                 const ps = providerStyle(model.provider)
@@ -378,6 +402,22 @@ export function LatestModelsPanel() {
                           <div className="flex flex-wrap items-center gap-2">
                             <span className="font-mono text-xs font-bold text-indigo-700">
                               {model.releaseDate}
+                            </span>
+                            <span
+                              className={cn(
+                                "rounded-full border px-2 py-0.5 text-xs font-semibold",
+                                model.dateKind === "official-release"
+                                  ? "border-emerald-200 bg-emerald-50 text-emerald-700"
+                                  : model.dateKind === "catalog-observed"
+                                    ? "border-amber-200 bg-amber-50 text-amber-700"
+                                    : "border-gray-200 bg-gray-50 text-gray-600",
+                              )}
+                            >
+                              {model.dateKind === "official-release"
+                                ? "官方发布"
+                                : model.dateKind === "catalog-observed"
+                                  ? "目录收录"
+                                  : "待核验"}
                             </span>
                             <span
                               className={cn(

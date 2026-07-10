@@ -8,6 +8,7 @@
     "dev": "wrangler dev --local",
     "deploy": "wrangler deploy",
     "tail": "wrangler tail",
+    "test": "tsc -p tsconfig.test.json && node --test \"test/*.test.cjs\"",
     "typecheck": "tsc --noEmit",
     "trigger": "curl -s -X POST http://127.0.0.1:8787/__run | jq"
   },

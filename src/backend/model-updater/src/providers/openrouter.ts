@@ -1,6 +1,11 @@
 import type { Env } from "../env"
 import { buildSystemPrompt, buildUserPrompt, type PromptInput } from "../prompt"
 import { extractJsonString, type LlmProvider, type ProviderResult } from "./types"
+import {
+  fetchOpenAiReleases,
+  openAiModelUrl,
+  type OpenAiRelease,
+} from "./openai-releases"
 
 const API_URL = "https://openrouter.ai/api/v1/chat/completions"
 const MODELS_API_URL = "https://openrouter.ai/api/v1/models"
@@ -13,15 +18,23 @@ const DEFAULT_SITE_URL = "https://easy-go-vibe-coding.pages.dev"
 const DEFAULT_APP_TITLE = "EasyGoVibeCoding"
 const DEFAULT_MODEL_TIMEOUT_MS = 14_000
 const MAX_OUTPUT_TOKENS = 5_000
-const PRIMARY_TOP_TIER_IDS = [
-  "anthropic/claude-fable-5",
-  "openai/gpt-5.5",
-  "google/gemini-3.5-flash",
+const OFFICIAL_SEARCH_DOMAINS = [
+  "openai.com",
+  "developers.openai.com",
+  "anthropic.com",
+  "platform.claude.com",
+  "ai.google.dev",
+  "blog.google",
+  "alibabacloud.com",
+  "qwenlm.github.io",
+  "bigmodel.cn",
+  "kimi.ai",
+  "deepseek.com",
+  "x.ai",
+  "about.fb.com",
 ]
-const LEADERBOARD_REFERENCE_IDS = [
-  "anthropic/claude-opus-4.8",
-  "anthropic/claude-sonnet-5",
-]
+const PRIMARY_FLAGSHIP_PROVIDERS = ["anthropic", "openai", "google"]
+const RELEASE_HISTORY_LIMIT = 60
 
 interface OpenRouterResponse {
   choices?: Array<{
@@ -69,6 +82,8 @@ interface CatalogModel {
   codingIndex?: number
   agenticIndex?: number
   url: string
+  dateKind: "official-release" | "catalog-observed"
+  releaseSourceUrl?: string
 }
 
 type ModelTier = 1 | 2 | 3
@@ -85,14 +100,29 @@ export const OpenRouterProvider: LlmProvider = {
 
     const models = resolveModelCandidates(env)
     const timeoutMs = resolveModelTimeout(env)
-    const catalog = await fetchCatalogSnapshot(key)
+    const [catalogSnapshot, openAiReleases] = await Promise.all([
+      fetchCatalogSnapshot(key),
+      fetchOpenAiReleases(),
+    ])
+    const catalog = applyOpenAiReleaseMetadata(
+      catalogSnapshot,
+      openAiReleases,
+    )
     const catalogContext = formatCatalogContext(catalog)
     let lastError: unknown = null
     const errors: string[] = []
 
     for (const model of models) {
       try {
-        return await fetchWithModel(env, input, key, model, timeoutMs, catalogContext)
+        const result = await fetchWithModel(
+          env,
+          input,
+          key,
+          model,
+          timeoutMs,
+          catalogContext,
+        )
+        return attachCatalogReleases(result, catalog, input.nowISO)
       } catch (error) {
         lastError = error
         errors.push(`${model}: ${errorMessage(error)}`)
@@ -107,6 +137,29 @@ export const OpenRouterProvider: LlmProvider = {
     const details = errors.join(" | ").slice(0, 800)
     throw new Error(`OpenRouter model fallback exhausted: ${message}; ${details}`)
   },
+}
+
+function attachCatalogReleases(
+  result: ProviderResult,
+  catalog: CatalogModel[],
+  nowISO: string,
+): ProviderResult {
+  if (!result.parsedJson || typeof result.parsedJson !== "object") return result
+  const payload = result.parsedJson as Record<string, unknown>
+  const generatedReleases = Array.isArray(payload.releases)
+    ? payload.releases
+    : []
+  const catalogReleases = selectRecentReleases(catalog, nowISO).map((model) =>
+    toModelEntry(model, nowISO),
+  )
+
+  return {
+    ...result,
+    parsedJson: {
+      ...payload,
+      releases: [...generatedReleases, ...catalogReleases].slice(0, 120),
+    },
+  }
 }
 
 function resolveModelCandidates(env: Env): string[] {
@@ -147,6 +200,15 @@ async function fetchWithModel(
         { role: "user", content: `${buildUserPrompt(input)}\n\n${catalogContext}` },
       ],
       temperature: 0.1,
+      plugins: [
+        {
+          id: "web",
+          max_results: 10,
+          include_domains: OFFICIAL_SEARCH_DOMAINS,
+          search_prompt:
+            "仅使用下列厂商官方页面核验模型名称、发布日期、能力分层与来源链接。",
+        },
+      ],
     }
 
     const res = await fetch(API_URL, {
@@ -226,10 +288,51 @@ async function fetchCatalogSnapshot(key: string): Promise<CatalogModel[]> {
         agenticIndex:
           model.benchmarks?.artificial_analysis?.agentic_index ?? undefined,
         url: `https://openrouter.ai/${model.id}`,
+        dateKind: "catalog-observed" as const,
       }))
   } catch {
     return []
   }
+}
+
+function applyOpenAiReleaseMetadata(
+  catalog: CatalogModel[],
+  releases: Map<string, OpenAiRelease>,
+): CatalogModel[] {
+  return catalog.map((model) => {
+    const openAiModelId = model.id.startsWith("openai/")
+      ? model.id.slice("openai/".length)
+      : ""
+    const match = findOpenAiRelease(openAiModelId, releases)
+    if (!match) return model
+    const { release } = match
+    return {
+      ...model,
+      createdDate: release.releaseDate,
+      url: openAiModelUrl(openAiModelId),
+      dateKind: "official-release",
+      releaseSourceUrl: release.sourceUrl,
+    }
+  })
+}
+
+function findOpenAiRelease(
+  modelId: string,
+  releases: Map<string, OpenAiRelease>,
+): { familyId: string; release: OpenAiRelease } | undefined {
+  const exact = releases.get(modelId)
+  if (exact) return { familyId: modelId, release: exact }
+
+  const family = [...releases.entries()]
+    .filter(([familyId]) =>
+      new RegExp(`^${escapeRegex(familyId)}-(sol|terra|luna)$`).test(modelId),
+    )
+    .sort(([a], [b]) => b.length - a.length)[0]
+  return family ? { familyId: family[0], release: family[1] } : undefined
+}
+
+function escapeRegex(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
 }
 
 function isConcreteCatalogModel(model: OpenRouterModelEntry): boolean {
@@ -263,44 +366,39 @@ function buildCatalogFallback(
   catalog: CatalogModel[],
   errors: string[],
 ): ProviderResult {
-  const nowDate = input.nowISO.slice(0, 10)
   const selectedModels = selectCapabilityRankedModels(catalog, 8)
   const selectedNews = catalog.slice(0, 10)
+  const releases = selectRecentReleases(catalog, input.nowISO)
+  const hasOfficialOpenAiData = catalog.some((model) =>
+    model.url.startsWith("https://developers.openai.com/"),
+  )
+  const source = hasOfficialOpenAiData
+    ? "openrouter-catalog+openai-official"
+    : "openrouter-catalog"
   const payload = {
     updatedAt: input.nowISO,
-    source: "openrouter-catalog",
-    models: selectedModels.map((model) => {
-      const provider = inferProvider(model.id)
-      const releaseDate = model.createdDate === "unknown" ? nowDate : model.createdDate
-      const score = scoreModelCapability(model)
-      const displayName = displayModelName(model, provider)
-      return {
-        provider,
-        name: displayName,
-        releaseDate,
-        contextWindow: formatContextWindow(model.contextWindow),
-        highlights: buildHighlights(model),
-        tier: classifyTierByCapability(score),
-        url: model.url,
-        category: "model",
-        tags: buildTags(model, provider),
-        description:
-          model.description?.slice(0, 190) ||
-          "OpenRouter 官方模型目录收录的文本模型，可用于观察近期模型发布与可用性。",
-      }
-    }),
+    source,
+    models: selectedModels.map((model) => toModelEntry(model, input.nowISO)),
+    releases: releases.map((model) => toModelEntry(model, input.nowISO)),
     news: selectedNews.map((model) => {
       const provider = inferProvider(model.id)
-      const date = model.createdDate === "unknown" ? nowDate : model.createdDate
+      const date = releaseDateOrFallback(model, input.nowISO)
       const displayName = displayModelName(model, provider)
+      const officialOpenAi = model.url.startsWith(
+        "https://developers.openai.com/",
+      )
       return {
         date,
         provider,
-        title: `${displayName} 被 OpenRouter 官方目录收录`,
-        summary: `${displayName} 当前在 OpenRouter 官方模型目录可见，模型 ID 为 ${model.id}，上下文窗口为 ${formatContextWindow(
-          model.contextWindow,
-        )}。`,
-        url: model.url,
+        title: officialOpenAi
+          ? `${displayName} 由 OpenAI 官方发布源确认`
+          : `${displayName} 被 OpenRouter 模型目录收录`,
+        summary: officialOpenAi
+          ? `${displayName} 的发布日期已由 OpenAI 官方产品发布源校验，模型 ID 为 ${model.id}。`
+          : `${displayName} 当前在 OpenRouter 模型目录可见，模型 ID 为 ${model.id}，上下文窗口为 ${formatContextWindow(
+              model.contextWindow,
+            )}。`,
+        url: model.releaseSourceUrl || model.url,
       }
     }),
   }
@@ -315,10 +413,73 @@ function buildCatalogFallback(
   )
 
   return {
-    sourceLabel: "openrouter-catalog",
+    sourceLabel: source,
     rawText,
     parsedJson: payload,
   }
+}
+
+function toModelEntry(model: CatalogModel, nowISO: string) {
+  const provider = inferProvider(model.id)
+  return {
+    provider,
+    name: displayModelName(model, provider),
+    releaseDate: releaseDateOrFallback(model, nowISO),
+    contextWindow: formatContextWindow(model.contextWindow),
+    highlights: buildHighlights(model),
+    tier: classifyTierByCapability(scoreModelCapability(model)),
+    url: model.url,
+    dateKind: model.dateKind,
+    category: "model" as const,
+    tags: buildTags(model, provider),
+    description:
+      model.description?.slice(0, 190) ||
+      "模型目录收录的文本模型，可用于观察近期模型发布与可用性。",
+  }
+}
+
+function releaseDateOrFallback(model: CatalogModel, nowISO: string): string {
+  return model.createdDate === "unknown" ? nowISO.slice(0, 10) : model.createdDate
+}
+
+function selectRecentReleases(
+  catalog: CatalogModel[],
+  nowISO: string,
+): CatalogModel[] {
+  const cutoff = new Date(nowISO)
+  cutoff.setUTCMonth(cutoff.getUTCMonth() - 6)
+  const cutoffDate = cutoff.toISOString().slice(0, 10)
+
+  const recent = catalog
+    .filter((model) => model.createdDate !== "unknown")
+    .filter((model) => model.createdDate >= cutoffDate)
+  return dedupeCatalogAliases(recent).slice(0, RELEASE_HISTORY_LIMIT)
+}
+
+function dedupeCatalogAliases(catalog: CatalogModel[]): CatalogModel[] {
+  const availableIds = new Set(
+    catalog.map((model) => model.id.replace(/:.+$/, "")),
+  )
+  const selected = new Map<string, CatalogModel>()
+
+  for (const model of catalog) {
+    const baseId = model.id.replace(/:.+$/, "")
+    const withoutPro = baseId.replace(/-pro$/, "")
+    const key = availableIds.has(withoutPro) ? withoutPro : baseId
+    const current = selected.get(key)
+    if (!current || releaseQuality(model) > releaseQuality(current)) {
+      selected.set(key, model)
+    }
+  }
+
+  return [...selected.values()]
+}
+
+function releaseQuality(model: CatalogModel): number {
+  let quality = model.dateKind === "official-release" ? 2 : 0
+  if (!model.id.includes(":")) quality += 1
+  if (!model.id.endsWith("-pro")) quality += 1
+  return quality
 }
 
 function selectCapabilityRankedModels(
@@ -329,14 +490,10 @@ function selectCapabilityRankedModels(
   const picked: CatalogModel[] = []
   const pickedIds = new Set<string>()
 
-  const addByIds = (ids: string[]) => {
-    for (const id of ids) {
-      if (picked.length >= limit) return
-      const model = catalog.find((item) => item.id === id)
-      if (!model || pickedIds.has(model.id)) continue
-      picked.push(model)
-      pickedIds.add(model.id)
-    }
+  const add = (model: CatalogModel | undefined) => {
+    if (!model || picked.length >= limit || pickedIds.has(model.id)) return
+    picked.push(model)
+    pickedIds.add(model.id)
   }
 
   const addTier = (tier: ModelTier, count: number) => {
@@ -350,10 +507,12 @@ function selectCapabilityRankedModels(
     }
   }
 
-  addByIds(PRIMARY_TOP_TIER_IDS)
-  addByIds(LEADERBOARD_REFERENCE_IDS)
+  for (const provider of PRIMARY_FLAGSHIP_PROVIDERS) {
+    add(pickProviderFlagship(ranked, provider))
+  }
+  addTier(1, 2)
   addTier(2, 2)
-  addTier(3, 2)
+  addTier(3, 1)
 
   for (const model of ranked) {
     if (picked.length >= limit) break
@@ -363,6 +522,32 @@ function selectCapabilityRankedModels(
   }
 
   return picked
+}
+
+function pickProviderFlagship(
+  ranked: CatalogModel[],
+  provider: string,
+): CatalogModel | undefined {
+  const providerModels = ranked.filter(
+    (model) => catalogProviderId(model.id) === provider,
+  )
+  const fullSizeModels = providerModels.filter(
+    (model) => !isLightweightOrSpecialized(model),
+  )
+  return (fullSizeModels.length > 0 ? fullSizeModels : providerModels).sort(
+    compareCapabilityThenDate,
+  )[0]
+}
+
+function catalogProviderId(modelId: string): string {
+  return modelId.split("/")[0]?.toLowerCase() || "other"
+}
+
+function isLightweightOrSpecialized(model: CatalogModel): boolean {
+  const value = `${model.id} ${model.name}`.toLowerCase()
+  return /(?:^|[-\s])(free|mini|nano|lite|small|xs|flash|fast|luna|terra|image|realtime|audio|embedding|moderation)(?:$|[-\s])/.test(
+    value,
+  )
 }
 
 function compareCapabilityThenDate(a: CatalogModel, b: CatalogModel): number {
@@ -387,12 +572,8 @@ function scoreModelCapability(model: CatalogModel): number {
     score += Math.round(leaderboardScore)
   }
 
-  if (PRIMARY_TOP_TIER_IDS.includes(model.id)) {
-    score += 40
-  }
-
-  if (LEADERBOARD_REFERENCE_IDS.includes(model.id)) {
-    score += 24
+  if (model.url.startsWith("https://developers.openai.com/")) {
+    score += 16
   }
 
   if (/(anthropic|openai|google|deepseek|x-ai|meta-llama|qwen|z-ai|moonshot)/.test(haystack)) {
@@ -521,22 +702,8 @@ function buildHighlights(model: CatalogModel): string[] {
 }
 
 function buildCapabilityRationale(model: CatalogModel): string {
-  const id = model.id
-
-  if (id === "anthropic/claude-fable-5") {
-    return "Anthropic 最强公开模型，面向最高难度推理与长程 Agent 工作"
-  }
-
-  if (id === "openai/gpt-5.5") {
-    return "OpenAI 官方模型页推荐用于复杂推理与编码"
-  }
-
-  if (id === "google/gemini-3.5-flash") {
-    return "GA 稳定模型，Google 文档称为最智能 Flash 模型"
-  }
-
-  if (id === "anthropic/claude-opus-4.8") {
-    return "Anthropic Opus 系列高强度模型，适合复杂推理、编码和专业工作"
+  if (model.url.startsWith("https://developers.openai.com/")) {
+    return "发布日期由 OpenAI 官方产品发布源校验"
   }
 
   if (model.description) {

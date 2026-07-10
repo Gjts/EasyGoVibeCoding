@@ -23,6 +23,11 @@ export const MODEL_PROVIDERS = [
 ] as const
 
 export const MODEL_TIERS = [1, 2, 3] as const
+export const MODEL_DATE_KINDS = [
+  "official-release",
+  "catalog-observed",
+  "unverified",
+] as const
 
 export const MODEL_CATEGORIES = [
   "ide",
@@ -38,6 +43,7 @@ export const ModelEntrySchema = z.object({
   releaseDate: z
     .string()
     .regex(/^\d{4}-\d{2}-\d{2}$/, "releaseDate must be YYYY-MM-DD"),
+  dateKind: z.enum(MODEL_DATE_KINDS).default("unverified"),
   contextWindow: z.string().min(1),
   highlights: z.array(z.string().min(1)).max(8),
   tier: z.union([z.literal(1), z.literal(2), z.literal(3)]),
@@ -57,12 +63,31 @@ export const NewsEntrySchema = z.object({
   url: z.string().url(),
 })
 
-export const ModelsPayloadSchema = z.object({
-  updatedAt: z.string().datetime(),
-  source: z.string().min(1),
-  models: z.array(ModelEntrySchema).min(1),
-  news: z.array(NewsEntrySchema).max(30).default([]),
-})
+export const ModelsPayloadSchema = z
+  .object({
+    updatedAt: z.string().datetime(),
+    source: z.string().min(1),
+    models: z.array(ModelEntrySchema).min(1),
+    releases: z.array(ModelEntrySchema).max(120).default([]),
+    news: z.array(NewsEntrySchema).max(30).default([]),
+  })
+  .transform((payload) => {
+    const trustedDateKind: ModelEntry["dateKind"] | null = payload.source.startsWith("seed-")
+      ? "official-release"
+      : payload.source === "openrouter-catalog"
+        ? "catalog-observed"
+        : null
+    if (!trustedDateKind) return payload
+    const markDateKind = (model: ModelEntry): ModelEntry => ({
+      ...model,
+      dateKind: trustedDateKind,
+    })
+    return {
+      ...payload,
+      models: payload.models.map(markDateKind),
+      releases: payload.releases.map(markDateKind),
+    }
+  })
 
 export type ModelEntry = z.infer<typeof ModelEntrySchema>
 export type NewsEntry = z.infer<typeof NewsEntrySchema>

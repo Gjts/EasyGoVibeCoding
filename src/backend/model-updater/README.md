@@ -1,6 +1,6 @@
 # model-updater
 
-Cloudflare Worker，通过 Cron Trigger **每 6 小时**刷新主流 AI 模型发布动态，写入 Pages 站点共享的 KV，由 Pages Function `/api/models` 对外暴露。配置 OpenRouter / Perplexity / Anthropic API key 后会调用联网检索；未配置外部 key 时会写入已校验的 `data/models.json` 静态兜底数据，并把 `source` 标记为 `seed-static-fallback`。
+Cloudflare Worker，通过 Cron Trigger **每 6 小时**刷新主流 AI 模型发布动态，写入 Pages 站点共享的 KV，由 Pages Function `/api/models` 对外暴露。配置 OpenRouter / Perplexity / Anthropic API key 后会调用联网检索；OpenRouter 路径同时读取模型目录，并用 OpenAI 官方 News RSS 校正 GPT 系列发布日期。未配置外部 key 时会写入已校验的 `data/models.json` 静态兜底数据，并把 `source` 标记为 `seed-static-fallback`。
 
 ## 架构位置
 
@@ -22,6 +22,7 @@ Cron 0 */6 * * *
              ├─ readLatest(KV)               → 作为上下文注入 prompt
              ├─ pickProvider(env).fetchPayload()
              ├─ ModelsPayloadSchema.parse()  → 严格校验，失败不写入
+             ├─ merge releases               → 合并本轮目录、当前模型和既有历史
              ├─ writeLatest(KV)              → models:previous ← old, models:latest ← new
              ├─ appendHistory(KV)            → models:history:YYYY-MM
              └─ pruneHistory(KV)             → 保留最近 N 个月
@@ -62,14 +63,14 @@ id = "04e02c1e72b44bee95ad85eb96c6da07"
 npx wrangler secret put OPENROUTER_API_KEY
 ```
 
-默认模型池使用 OpenRouter 免费模型，并启用 OpenRouter `web` plugin 做联网检索：
+默认模型池使用 OpenRouter 免费模型，并启用 OpenRouter `web` plugin 做联网检索。搜索结果限制在配置的厂商官方域名；Web Search 即使搭配免费模型也会产生 OpenRouter 搜索费用：
 
 1. `openrouter/free`
 2. `openai/gpt-oss-120b:free`
 3. `nvidia/nemotron-3-super-120b-a12b:free`
 
 Worker 会按顺序尝试，某个模型接口失败或返回内容无法通过 Schema 校验时，会继续尝试下一个模型。
-每个免费模型默认最多等待 14 秒，可通过 `OPENROUTER_MODEL_TIMEOUT_MS` 调整；如果免费模型超时或限流，Worker 会使用 OpenRouter 官方模型目录兜底，避免整次刷新请求失败。
+每个免费模型默认最多等待 14 秒，可通过 `OPENROUTER_MODEL_TIMEOUT_MS` 调整；如果免费模型超时、限流或输出未通过 Schema，Worker 会使用 OpenRouter 模型目录兜底，避免整次刷新请求失败。目录中的 OpenAI 条目会再用 `https://openai.com/news/rss.xml` 的官方产品发布时间校正。
 
 如果暂时不配置 `OPENROUTER_API_KEY`、`PERPLEXITY_API_KEY` 或 `ANTHROPIC_API_KEY`，Worker 仍会使用 `data/models.json` 作为静态校验兜底写入 KV，保证定时任务和首页“请求最新”链路可用；这时接口返回的 `source` 会是 `seed-static-fallback`。要获得真正的实时联网检索结果，必须配置一个外部 provider key。
 
@@ -107,7 +108,7 @@ LLM_MODEL = "sonar-pro"
 npx wrangler secret put PERPLEXITY_API_KEY
 ```
 
-> 目前已实现 `openrouter` / `perplexity` / `anthropic` / `seed` 四个 provider；`openai` / `gemini` 占位会回退到 `seed`，后续可按相同接口扩展 `src/providers/`。
+> 目前已实现 `openrouter` / `perplexity` / `anthropic` / `seed` 四个 provider；`openai` / `gemini` 占位会回退到 `seed`。OpenAI 兼容中转站的 `/v1/models` 只能作为“模型已可见”的发现信号，其 `created` 字段不等于官方发布日期，因此不能直接作为历史发布时间权威。
 
 ### 4. 部署
 
@@ -193,10 +194,15 @@ npx wrangler kv key put --binding=SITE_STATS_KV models:latest "$(cat /tmp/prev.j
 
 - `updatedAt` ISO8601 UTC 时间戳
 - `source` provider 标识，如 `openrouter-openrouter/free`
-- `models[]` 当前主流模型，每项含 `provider / name / releaseDate / contextWindow / highlights / tier (1-3) / url / category / tags / description`
+  - `openrouter-catalog+openai-official`：OpenRouter 目录发现 + OpenAI 官方 RSS 日期校正
+  - `openrouter-catalog`：仅目录降级，日期是目录收录时间，不等同于厂商正式发布日期
+  - `seed-static-fallback`：静态种子兜底，内容不会因 Cron 自动发现新品
+- `models[]` 当前主流模型，每项含 `provider / name / releaseDate / dateKind / contextWindow / highlights / tier (1-3) / url / category / tags / description`
   - `tier` 是能力分级，不是发布时间排序：`1=旗舰/高强度模型`，`2=平衡主力模型`，`3=轻量/免费/低成本模型`
   - 首页第一梯队优先按御三家各取一个旗舰代表（Anthropic / OpenAI / Google），避免同一家模型家族占满全部旗舰位
+  - `dateKind=official-release` 表示厂商官方发布记录；`catalog-observed` 表示 OpenRouter 目录首次可见时间，前端会明确区分
 - `news[]` 最近 6 个月内重大发布，每项含 `date / provider / title / summary (≤240 字) / url`
+- `releases[]` 最近发布与既有历史的去重合并集合，最多 120 条；首页“历史模型发布时间”读取此字段并同时兼容旧 payload
 
 Worker 在写入前会做三层防护：
 
@@ -206,14 +212,13 @@ Worker 在写入前会做三层防护：
 
 ## 内容口径
 
-- 模型 ID、上下文窗口、价格、稳定性和工具能力以官方模型页/API 文档为准。
+- 模型 ID、上下文窗口、价格、稳定性和工具能力以官方模型页/API 文档为准；OpenAI 产品发布日期优先使用官方 News RSS / API Changelog。
 - 新闻稿可作为背景材料，但不应覆盖官方模型页/API 文档。
 - 对无法由官方来源确认的条目，Worker 应省略或降级描述，不能写成“最新旗舰”或“已开放 API”。
 - 前端 `data/models.json` 既是构建时 fallback，也是未配置外部 provider key 时的 Worker 静态兜底；线上真实数据优先来自 KV 的 `models:latest`，并通过 `source` 区分实时检索还是静态兜底。
 
 ## 工程规则符合性
 
-- 每个文件 < 200 行，职责单一（`env / prompt / providers/* / kv / updater / index`）
 - 无 `if/else` 嵌套超过 2 层
 - 前后端共享类型定义，避免重复手工维护
 - API 响应结构与 zod Schema 1:1 对齐
