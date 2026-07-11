@@ -1,0 +1,11 @@
+{
+  "sourceLocale": "zh-CN",
+  "targetLocales": [
+    "ja",
+    "en",
+    "fr",
+    "de"
+  ],
+  "model": "gpt-5.4-mini",
+  "cacheKey": "81eb38f796f6a30d2e4f92c6aca8f3fd0b189ed3f121051cd0e9c4fba8eaaeb1"
+}
