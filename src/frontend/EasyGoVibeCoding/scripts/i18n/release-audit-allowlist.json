@@ -2,6 +2,7 @@
   {
     "locale": "ja",
     "route": "/ja/academy/tools/selection",
+    "file": "ja/academy/tools/selection.html",
     "scope": "source-identical",
     "text": "Pro: $19/月 | Team: $39/月",
     "reason": "Product plan names, prices, currency notation, and the Japanese month unit are intentionally identical to the source."
@@ -9,8 +10,25 @@
   {
     "locale": "ja",
     "route": "/ja/academy/tools/selection",
+    "file": "ja/academy/tools/selection.html",
     "scope": "source-identical",
     "text": "Pro: $20/月 | Business: $40/月",
     "reason": "Product plan names, prices, currency notation, and the Japanese month unit are intentionally identical to the source."
+  },
+  {
+    "locale": "ja",
+    "route": "/ja/academy/tools/selection",
+    "file": "ja/academy/tools/selection/__next._full.txt",
+    "scope": "source-identical",
+    "text": "Pro: $19/月 | Team: $39/月",
+    "reason": "The route-specific RSC payload mirrors the intentional product plan names, prices, currency notation, and Japanese month unit rendered by its HTML page."
+  },
+  {
+    "locale": "ja",
+    "route": "/ja/academy/tools/selection",
+    "file": "ja/academy/tools/selection/__next._full.txt",
+    "scope": "source-identical",
+    "text": "Pro: $20/月 | Business: $40/月",
+    "reason": "The route-specific RSC payload mirrors the intentional product plan names, prices, currency notation, and Japanese month unit rendered by its HTML page."
   }
 ]

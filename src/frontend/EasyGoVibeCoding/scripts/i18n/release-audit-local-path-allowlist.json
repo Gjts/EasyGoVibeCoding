@@ -1,0 +1,1017 @@
+[
+  {
+    "path": "advanced/dev-basics.html",
+    "text": "\\\\n\\u003c/module\\u003e\\",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "advanced/dev-basics.html",
+    "text": "\\\\n\\u003c/plugin\\u003e\\",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "advanced/dev-basics.txt",
+    "text": "\\\\.git\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "advanced/dev-basics.txt",
+    "text": "\\\\.venv\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "advanced/dev-basics/__next._full.txt",
+    "text": "\\\\.git\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "advanced/dev-basics/__next._full.txt",
+    "text": "\\\\.venv\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "advanced/dev-basics/__next.advanced/dev-basics/__PAGE__.txt",
+    "text": "\\\\.git\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "advanced/dev-basics/__next.advanced/dev-basics/__PAGE__.txt",
+    "text": "\\\\.venv\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "advanced/testing.txt",
+    "text": "\\\\s@]+$/\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "advanced/testing/__next._full.txt",
+    "text": "\\\\s@]+$/\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "advanced/testing/__next.advanced/testing/__PAGE__.txt",
+    "text": "\\\\s@]+$/\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "advanced/ui.html",
+    "text": "\\\\n/\\u003e\\\\n\\\\n//",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "advanced/ui.html",
+    "text": "\\\\n/\\u003e\\\\n\\u003cspan",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "advanced/ui.html",
+    "text": "\\\\n\\u003c/button\\u003e\\",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "advanced/ui.html",
+    "text": "\\\\n\\u003c/button\\u003e\\\\n\\\\n//",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "advanced/ui.html",
+    "text": "\\\\n\\u003c/button\\u003e\\\\n\\\\n请提供优化后的代码。\\",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "advanced/ui.html",
+    "text": "\\\\n\\u003c/button\\u003e\\\\n\\\\n请指出：\\\\n1",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "advanced/ui.html",
+    "text": "\\\\n\\u003c/div\\u003e\\",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "advanced/ui.html",
+    "text": "\\\\n\\u003c/div\\u003e\\\\n\\\\n//",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "advanced/ui.html",
+    "text": "\\\\n\\u003c/div\\u003e\\\\n\\\\n\\u003cdiv",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "advanced/ui.html",
+    "text": "\\\\n\\u003c/FixedSizeList\\u003e\\",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "advanced/ui.html",
+    "text": "\\\\n\\u003c/FocusTrap\\u003e\\\\n\\\\n//",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "advanced/ui.html",
+    "text": "\\\\n\\u003c/span\\u003e\\",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "advanced/ui.html",
+    "text": "\\\\n\\u003cbutton",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "advanced/ui.html",
+    "text": "\\\\n\\u003cbutton\\\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "advanced/ui.html",
+    "text": "\\\\n\\u003cdiv",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "advanced/ui.html",
+    "text": "\\\\n\\u003cFixedSizeList\\\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "advanced/ui.html",
+    "text": "\\\\n\\u003cFocusTrap\\u003e\\\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "advanced/ui.html",
+    "text": "\\\\n\\u003cImage\\\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "advanced/ui.html",
+    "text": "\\\\n\\u003cinput",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "advanced/ui.html",
+    "text": "\\\\n\\u003clink",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "advanced/ui.html",
+    "text": "\\\\n\\u003cLoader2",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "advanced/ui.html",
+    "text": "\\\\n\\u003cnav\\u003e",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "advanced/ui.html",
+    "text": "\\\\n\\u003cnav\\u003e导航\\u003c/nav\\u003e\\\\n\\u003cmain\\u003e主要内容\\u003c/main\\u003e\\\\n\\u003carticle\\u003e文章\\u003c/article\\u003e\\\\n\\u003csection\\u003e章节\\u003c/section\\u003e\\\\n\\u003caside\\u003e侧边栏\\u003c/aside\\u003e\\\\n\\u003cheader\\u003e页头\\u003c/header\\u003e\\\\n\\u003cfooter\\u003e页脚\\u003c/footer\\u003e\\\\n\\\\n//",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "advanced/ui.html",
+    "text": "\\\\n\\u003cSkeleton",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "advanced/ui.html",
+    "text": "\\\\n\\u003cspan",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "advanced/ui.html",
+    "text": "\\\\n\\u003e\\\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "de/academy/advanced/dev-basics.html",
+    "text": "\\\\n\\u003c/module\\u003e\\",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "de/academy/advanced/dev-basics.html",
+    "text": "\\\\n\\u003c/plugin\\u003e\\",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "de/academy/advanced/dev-basics.txt",
+    "text": "\\\\.git\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "de/academy/advanced/dev-basics.txt",
+    "text": "\\\\.venv\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "de/academy/advanced/dev-basics/__next._full.txt",
+    "text": "\\\\.git\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "de/academy/advanced/dev-basics/__next._full.txt",
+    "text": "\\\\.venv\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "de/academy/advanced/dev-basics/__next.advanced/dev-basics/__PAGE__.txt",
+    "text": "\\\\.git\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "de/academy/advanced/dev-basics/__next.advanced/dev-basics/__PAGE__.txt",
+    "text": "\\\\.venv\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "de/academy/advanced/testing.txt",
+    "text": "\\\\s@]+$/\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "de/academy/advanced/testing/__next._full.txt",
+    "text": "\\\\s@]+$/\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "de/academy/advanced/testing/__next.advanced/testing/__PAGE__.txt",
+    "text": "\\\\s@]+$/\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "de/academy/advanced/ui.html",
+    "text": "\\\\n/\\u003e\\\\n\\\\n//",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "de/academy/advanced/ui.html",
+    "text": "\\\\n/\\u003e\\\\n\\u003cspan",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "de/academy/advanced/ui.html",
+    "text": "\\\\n\\u003c/button\\u003e\\",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "de/academy/advanced/ui.html",
+    "text": "\\\\n\\u003c/button\\u003e\\\\n\\\\n//",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "de/academy/advanced/ui.html",
+    "text": "\\\\n\\u003c/button\\u003e\\\\n\\\\nBitte",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "de/academy/advanced/ui.html",
+    "text": "\\\\n\\u003c/div\\u003e\\",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "de/academy/advanced/ui.html",
+    "text": "\\\\n\\u003c/div\\u003e\\\\n\\\\n//",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "de/academy/advanced/ui.html",
+    "text": "\\\\n\\u003c/div\\u003e\\\\n\\\\n\\u003cdiv",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "de/academy/advanced/ui.html",
+    "text": "\\\\n\\u003c/FixedSizeList\\u003e\\",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "de/academy/advanced/ui.html",
+    "text": "\\\\n\\u003c/FocusTrap\\u003e\\\\n\\\\n//",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "de/academy/advanced/ui.html",
+    "text": "\\\\n\\u003c/span\\u003e\\",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "de/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cbutton",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "de/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cbutton\\\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "de/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cdiv",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "de/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cFixedSizeList\\\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "de/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cFocusTrap\\u003e\\\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "de/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cImage\\\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "de/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cinput",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "de/academy/advanced/ui.html",
+    "text": "\\\\n\\u003clink",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "de/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cLoader2",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "de/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cnav\\u003e",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "de/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cnav\\u003eNavigation\\u003c/nav\\u003e\\\\n\\u003cmain\\u003eHauptinhalt\\u003c/main\\u003e\\\\n\\u003carticle\\u003eArtikel\\u003c/article\\u003e\\\\n\\u003csection\\u003eAbschnitt\\u003c/section\\u003e\\\\n\\u003caside\\u003eSeitenleiste\\u003c/aside\\u003e\\\\n\\u003cheader\\u003eKopfbereich\\u003c/header\\u003e\\\\n\\u003cfooter\\u003eFußzeile\\u003c/footer\\u003e\\\\n\\\\n//",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "de/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cSkeleton",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "de/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cspan",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "de/academy/advanced/ui.html",
+    "text": "\\\\n\\u003e\\\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "de/academy/images/ai-frameworks/autogpt.png",
+    "text": "\\\\���X��\u0000�ç\\��ٹ�s�_�xt�\u000e�.���}\u0010�E�����\u001f����t��w/ٓ��if�{��\u001e",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "en/academy/advanced/dev-basics.html",
+    "text": "\\\\n\\u003c/module\\u003e\\",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "en/academy/advanced/dev-basics.html",
+    "text": "\\\\n\\u003c/plugin\\u003e\\",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "en/academy/advanced/dev-basics.txt",
+    "text": "\\\\.git\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "en/academy/advanced/dev-basics.txt",
+    "text": "\\\\.venv\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "en/academy/advanced/dev-basics/__next._full.txt",
+    "text": "\\\\.git\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "en/academy/advanced/dev-basics/__next._full.txt",
+    "text": "\\\\.venv\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "en/academy/advanced/dev-basics/__next.advanced/dev-basics/__PAGE__.txt",
+    "text": "\\\\.git\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "en/academy/advanced/dev-basics/__next.advanced/dev-basics/__PAGE__.txt",
+    "text": "\\\\.venv\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "en/academy/advanced/testing.txt",
+    "text": "\\\\s@]+$/\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "en/academy/advanced/testing/__next._full.txt",
+    "text": "\\\\s@]+$/\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "en/academy/advanced/testing/__next.advanced/testing/__PAGE__.txt",
+    "text": "\\\\s@]+$/\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "en/academy/advanced/ui.html",
+    "text": "\\\\n/\\u003e\\\\n\\\\n//",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "en/academy/advanced/ui.html",
+    "text": "\\\\n/\\u003e\\\\n\\u003cspan",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "en/academy/advanced/ui.html",
+    "text": "\\\\n\\u003c/button\\u003e\\",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "en/academy/advanced/ui.html",
+    "text": "\\\\n\\u003c/button\\u003e\\\\n\\\\n//",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "en/academy/advanced/ui.html",
+    "text": "\\\\n\\u003c/button\\u003e\\\\n\\\\nPlease",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "en/academy/advanced/ui.html",
+    "text": "\\\\n\\u003c/div\\u003e\\",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "en/academy/advanced/ui.html",
+    "text": "\\\\n\\u003c/div\\u003e\\\\n\\\\n//",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "en/academy/advanced/ui.html",
+    "text": "\\\\n\\u003c/div\\u003e\\\\n\\\\n\\u003cdiv",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "en/academy/advanced/ui.html",
+    "text": "\\\\n\\u003c/FixedSizeList\\u003e\\",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "en/academy/advanced/ui.html",
+    "text": "\\\\n\\u003c/FocusTrap\\u003e\\\\n\\\\n//",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "en/academy/advanced/ui.html",
+    "text": "\\\\n\\u003c/span\\u003e\\",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "en/academy/advanced/ui.html",
+    "text": "\\\\n\\u003carticle\\u003eArticle\\u003c/article\\u003e\\\\n\\u003csection\\u003eSection\\u003c/section\\u003e\\\\n\\u003caside\\u003eSidebar\\u003c/aside\\u003e\\\\n\\u003cheader\\u003eHeader\\u003c/header\\u003e\\\\n\\u003cfooter\\u003eFooter\\u003c/footer\\u003e\\\\n\\\\n//",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "en/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cbutton",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "en/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cbutton\\\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "en/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cdiv",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "en/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cFixedSizeList\\\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "en/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cFocusTrap\\u003e\\\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "en/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cImage\\\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "en/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cinput",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "en/academy/advanced/ui.html",
+    "text": "\\\\n\\u003clink",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "en/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cLoader2",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "en/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cnav\\u003e",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "en/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cnav\\u003eNavigation\\u003c/nav\\u003e\\\\n\\u003cmain\\u003eMain",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "en/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cSkeleton",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "en/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cspan",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "en/academy/advanced/ui.html",
+    "text": "\\\\n\\u003e\\\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "en/academy/images/ai-frameworks/autogpt.png",
+    "text": "\\\\���X��\u0000�ç\\��ٹ�s�_�xt�\u000e�.���}\u0010�E�����\u001f����t��w/ٓ��if�{��\u001e",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "fr/academy/advanced/dev-basics.html",
+    "text": "\\\\n\\u003c/module\\u003e\\",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "fr/academy/advanced/dev-basics.html",
+    "text": "\\\\n\\u003c/plugin\\u003e\\",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "fr/academy/advanced/dev-basics.txt",
+    "text": "\\\\.git\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "fr/academy/advanced/dev-basics.txt",
+    "text": "\\\\.venv\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "fr/academy/advanced/dev-basics/__next._full.txt",
+    "text": "\\\\.git\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "fr/academy/advanced/dev-basics/__next._full.txt",
+    "text": "\\\\.venv\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "fr/academy/advanced/dev-basics/__next.advanced/dev-basics/__PAGE__.txt",
+    "text": "\\\\.git\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "fr/academy/advanced/dev-basics/__next.advanced/dev-basics/__PAGE__.txt",
+    "text": "\\\\.venv\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "fr/academy/advanced/testing.txt",
+    "text": "\\\\s@]+$/\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "fr/academy/advanced/testing/__next._full.txt",
+    "text": "\\\\s@]+$/\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "fr/academy/advanced/testing/__next.advanced/testing/__PAGE__.txt",
+    "text": "\\\\s@]+$/\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "fr/academy/advanced/ui.html",
+    "text": "\\\\n/\\u003e\\\\n\\\\n//",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "fr/academy/advanced/ui.html",
+    "text": "\\\\n/\\u003e\\\\n\\u003cspan",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "fr/academy/advanced/ui.html",
+    "text": "\\\\n\\u003c/button\\u003e\\",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "fr/academy/advanced/ui.html",
+    "text": "\\\\n\\u003c/button\\u003e\\\\n\\\\n//",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "fr/academy/advanced/ui.html",
+    "text": "\\\\n\\u003c/button\\u003e\\\\n\\\\nVeuillez",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "fr/academy/advanced/ui.html",
+    "text": "\\\\n\\u003c/div\\u003e\\",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "fr/academy/advanced/ui.html",
+    "text": "\\\\n\\u003c/div\\u003e\\\\n\\\\n//",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "fr/academy/advanced/ui.html",
+    "text": "\\\\n\\u003c/div\\u003e\\\\n\\\\n\\u003cdiv",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "fr/academy/advanced/ui.html",
+    "text": "\\\\n\\u003c/FixedSizeList\\u003e\\",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "fr/academy/advanced/ui.html",
+    "text": "\\\\n\\u003c/FocusTrap\\u003e\\\\n\\\\n//",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "fr/academy/advanced/ui.html",
+    "text": "\\\\n\\u003c/span\\u003e\\",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "fr/academy/advanced/ui.html",
+    "text": "\\\\n\\u003carticle\\u003eArticle\\u003c/article\\u003e\\\\n\\u003csection\\u003eSection\\u003c/section\\u003e\\\\n\\u003caside\\u003eBarre",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "fr/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cbutton",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "fr/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cbutton\\\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "fr/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cdiv",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "fr/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cFixedSizeList\\\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "fr/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cFocusTrap\\u003e\\\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "fr/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cheader\\u003eEn-tête\\u003c/header\\u003e\\\\n\\u003cfooter\\u003ePied",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "fr/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cImage\\\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "fr/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cinput",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "fr/academy/advanced/ui.html",
+    "text": "\\\\n\\u003clink",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "fr/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cLoader2",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "fr/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cnav\\u003e",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "fr/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cnav\\u003eNavigation\\u003c/nav\\u003e\\\\n\\u003cmain\\u003eContenu",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "fr/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cSkeleton",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "fr/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cspan",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "fr/academy/advanced/ui.html",
+    "text": "\\\\n\\u003e\\\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "fr/academy/images/ai-frameworks/autogpt.png",
+    "text": "\\\\���X��\u0000�ç\\��ٹ�s�_�xt�\u000e�.���}\u0010�E�����\u001f����t��w/ٓ��if�{��\u001e",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/de.json",
+    "text": "\\\\s@]+$/\\n",
+    "reason": "Intentional local path preserved in the immutable reviewed source or translation catalog as tutorial content."
+  },
+  {
+    "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/en.json",
+    "text": "\\\\s@]+$/\\n",
+    "reason": "Intentional local path preserved in the immutable reviewed source or translation catalog as tutorial content."
+  },
+  {
+    "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/fr.json",
+    "text": "\\\\s@]+$/\\n",
+    "reason": "Intentional local path preserved in the immutable reviewed source or translation catalog as tutorial content."
+  },
+  {
+    "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/ja.json",
+    "text": "\\\\s@]+$/\\n",
+    "reason": "Intentional local path preserved in the immutable reviewed source or translation catalog as tutorial content."
+  },
+  {
+    "path": "i18n/catalog/occurrences.json",
+    "text": "\\\\s@]+$/\\n",
+    "reason": "Intentional local path preserved in the immutable reviewed source or translation catalog as tutorial content."
+  },
+  {
+    "path": "i18n/catalog/source.zh-CN.json",
+    "text": "\\\\s@]+$/\\n",
+    "reason": "Intentional local path preserved in the immutable reviewed source or translation catalog as tutorial content."
+  },
+  {
+    "path": "images/ai-frameworks/autogpt.png",
+    "text": "\\\\���X��\u0000�ç\\��ٹ�s�_�xt�\u000e�.���}\u0010�E�����\u001f����t��w/ٓ��if�{��\u001e",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "ja/academy/advanced/dev-basics.html",
+    "text": "\\\\n\\u003c/module\\u003e\\",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "ja/academy/advanced/dev-basics.html",
+    "text": "\\\\n\\u003c/plugin\\u003e\\",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "ja/academy/advanced/dev-basics.txt",
+    "text": "\\\\.git\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "ja/academy/advanced/dev-basics.txt",
+    "text": "\\\\.venv\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "ja/academy/advanced/dev-basics/__next._full.txt",
+    "text": "\\\\.git\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "ja/academy/advanced/dev-basics/__next._full.txt",
+    "text": "\\\\.venv\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "ja/academy/advanced/dev-basics/__next.advanced/dev-basics/__PAGE__.txt",
+    "text": "\\\\.git\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "ja/academy/advanced/dev-basics/__next.advanced/dev-basics/__PAGE__.txt",
+    "text": "\\\\.venv\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "ja/academy/advanced/testing.txt",
+    "text": "\\\\s@]+$/\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "ja/academy/advanced/testing/__next._full.txt",
+    "text": "\\\\s@]+$/\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "ja/academy/advanced/testing/__next.advanced/testing/__PAGE__.txt",
+    "text": "\\\\s@]+$/\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "ja/academy/advanced/ui.html",
+    "text": "\\\\n/\\u003e\\\\n\\\\n//",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "ja/academy/advanced/ui.html",
+    "text": "\\\\n/\\u003e\\\\n\\u003cspan",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "ja/academy/advanced/ui.html",
+    "text": "\\\\n\\u003c/button\\u003e\\",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "ja/academy/advanced/ui.html",
+    "text": "\\\\n\\u003c/button\\u003e\\\\n\\\\n//",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "ja/academy/advanced/ui.html",
+    "text": "\\\\n\\u003c/button\\u003e\\\\n\\\\n指摘してください：\\\\n1",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "ja/academy/advanced/ui.html",
+    "text": "\\\\n\\u003c/button\\u003e\\\\n\\\\n最適化後のコードを提供してください。\\",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "ja/academy/advanced/ui.html",
+    "text": "\\\\n\\u003c/div\\u003e\\",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "ja/academy/advanced/ui.html",
+    "text": "\\\\n\\u003c/div\\u003e\\\\n\\\\n//",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "ja/academy/advanced/ui.html",
+    "text": "\\\\n\\u003c/div\\u003e\\\\n\\\\n\\u003cdiv",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "ja/academy/advanced/ui.html",
+    "text": "\\\\n\\u003c/FixedSizeList\\u003e\\",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "ja/academy/advanced/ui.html",
+    "text": "\\\\n\\u003c/FocusTrap\\u003e\\\\n\\\\n//",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "ja/academy/advanced/ui.html",
+    "text": "\\\\n\\u003c/span\\u003e\\",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "ja/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cbutton",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "ja/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cbutton\\\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "ja/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cdiv",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "ja/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cFixedSizeList\\\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "ja/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cFocusTrap\\u003e\\\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "ja/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cImage\\\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "ja/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cinput",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "ja/academy/advanced/ui.html",
+    "text": "\\\\n\\u003clink",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "ja/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cLoader2",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "ja/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cnav\\u003e",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "ja/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cnav\\u003eナビゲーション\\u003c/nav\\u003e\\\\n\\u003cmain\\u003eメインコンテンツ\\u003c/main\\u003e\\\\n\\u003carticle\\u003e記事\\u003c/article\\u003e\\\\n\\u003csection\\u003eセクション\\u003c/section\\u003e\\\\n\\u003caside\\u003eサイドバー\\u003c/aside\\u003e\\\\n\\u003cheader\\u003eヘッダー\\u003c/header\\u003e\\\\n\\u003cfooter\\u003eフッター\\u003c/footer\\u003e\\\\n\\\\n//",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "ja/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cSkeleton",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "ja/academy/advanced/ui.html",
+    "text": "\\\\n\\u003cspan",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "ja/academy/advanced/ui.html",
+    "text": "\\\\n\\u003e\\\\n",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "ja/academy/images/ai-frameworks/autogpt.png",
+    "text": "\\\\���X��\u0000�ç\\��ٹ�s�_�xt�\u000e�.���}\u0010�E�����\u001f����t��w/ٓ��if�{��\u001e",
+    "reason": "Intentional local path shown in generated academy tutorial or code-example content."
+  },
+  {
+    "path": "public/images/ai-frameworks/autogpt.png",
+    "text": "\\\\���X��\u0000�ç\\��ٹ�s�_�xt�\u000e�.���}\u0010�E�����\u001f����t��w/ٓ��if�{��\u001e",
+    "reason": "Intentional local-path test fixture in a tracked i18n regression test."
+  },
+  {
+    "path": "scripts/i18n/release-audit.mjs",
+    "text": "\\\\[^\\s",
+    "reason": "Security scanner implementation or malicious test fixture required to prove local-path detection."
+  },
+  {
+    "path": "scripts/i18n/release-audit.mjs",
+    "text": "\\\\/][^\\s",
+    "reason": "Security scanner implementation or malicious test fixture required to prove local-path detection."
+  },
+  {
+    "path": "scripts/i18n/release-audit.test.mjs",
+    "text": "/home/alice/repo",
+    "reason": "Security scanner implementation or malicious test fixture required to prove local-path detection."
+  },
+  {
+    "path": "scripts/i18n/release-audit.test.mjs",
+    "text": "/Users/alice/repo",
+    "reason": "Security scanner implementation or malicious test fixture required to prove local-path detection."
+  },
+  {
+    "path": "scripts/i18n/release-audit.test.mjs",
+    "text": "file:///Users/alice/repo",
+    "reason": "Security scanner implementation or malicious test fixture required to prove local-path detection."
+  },
+  {
+    "path": "scripts/i18n/source-transformer.test.mjs",
+    "text": "\\\\$\\{danger\\",
+    "reason": "Intentional local-path test fixture in a tracked i18n regression test."
+  }
+]

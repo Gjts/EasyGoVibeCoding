@@ -6,15 +6,26 @@ import test from "node:test"
 
 import {
   auditRelease,
+  classifyHtmlPaths,
+  collectCssReferences,
   collectHtmlReferences,
   extractVisibleText,
   findLocalizationResidue,
   scanSecurityBytes,
+  validateAllowlist,
+  validateLocalizedScriptCoverage,
+  validateManifestProvenance,
+  validateReleasePathIndex,
 } from "./release-audit.mjs"
 
 test("extractVisibleText ignores scripts, styles, comments, and markup", () => {
   const html = '<!doctype html><html><head><style>.x{}</style><script>const x="中文"</script></head><body><!-- 中文 --><p>Hello &amp; bye</p><code>npm run build</code></body></html>'
   assert.equal(extractVisibleText(html), "Hello & bye npm run build")
+})
+
+test("extractVisibleText includes decoded user-visible attributes", () => {
+  const html = '<img alt="\u4e2d&amp;\u6587" title="\u63d0\u793a"><input placeholder="\u8bf7\u8f93\u5165" aria-label="\u59d3\u540d" value="\u9ed8\u8ba4"><div data-label="ignored">Body</div>'
+  assert.equal(extractVisibleText(html), "\u4e2d&\u6587 \u63d0\u793a \u8bf7\u8f93\u5165 \u59d3\u540d \u9ed8\u8ba4 Body")
 })
 
 test("findLocalizationResidue requires an exact allowlist match", () => {
@@ -35,11 +46,51 @@ test("collectHtmlReferences handles local URLs, fragments, srcset, CSS and API e
   assert.equal(result.references.some((item) => item.url === "/en/academy/bg.png"), true)
 })
 
+test("collectHtmlReferences crawls same-origin protocol-relative references", () => {
+  const result = collectHtmlReferences({ html: '<script src="//example.invalid/en/academy/app.js"></script>', route: "/en/academy" })
+  assert.equal(result.references[0].url, "//example.invalid/en/academy/app.js")
+})
+
+test("collectCssReferences covers @import and url references", () => {
+  assert.deepEqual(collectCssReferences('@import "./theme.css"; @import url(\'./print.css\') print; .x{src:url(./font.woff2)}'), ["./theme.css", "./print.css", "./font.woff2"])
+})
+
 test("scanSecurityBytes reports marker names without exposing marker values", () => {
   const marker = Buffer.from("secret-release-marker")
   const hits = scanSecurityBytes({ path: "index.html", bytes: Buffer.from(`prefix ${marker} suffix`), forbiddenMarkers: [{ name: "TRANSLATION_API_KEY", bytes: marker }] })
   assert.deepEqual(hits, [{ path: "index.html", category: "configured-secret", marker: "TRANSLATION_API_KEY" }])
   assert.equal(JSON.stringify(hits).includes(marker.toString()), false)
+})
+
+test("scanSecurityBytes rejects ordinary Windows, UNC, file URL and POSIX local paths", () => {
+  const source = String.raw`const a="C:\\Users\\alice\\repo"; const b="\\\\server\\share\\repo"; const c="file:///Users/alice/repo"; const d="/home/alice/repo"`
+  const hits = scanSecurityBytes({ path: "app.js", bytes: Buffer.from(source), forbiddenMarkers: [], localPathAllowlist: [] })
+  assert.deepEqual([...new Set(hits.map(({ category }) => category))], ["absolute-local-path"])
+})
+
+test("allowlist requires exact locale, route, file, scope, text, and reason", () => {
+  assert.throws(() => validateAllowlist([{ locale: "ja", route: "/ja/academy", scope: "html", text: "\u4e2d\u6587", reason: "x" }]), /file/u)
+  assert.equal(validateAllowlist([{ locale: "ja", route: "/ja/academy", file: "ja/academy/index.html", scope: "html", text: "\u4e2d\u6587", reason: "intentional label" }]).length, 1)
+})
+
+test("release path index rejects NFC and case-fold collisions", () => {
+  assert.throws(() => validateReleasePathIndex([{ path: "A.png", size: 1 }, { path: "a.png", size: 1 }]), /collision/iu)
+  assert.throws(() => validateReleasePathIndex([{ path: "caf\u00e9.png", size: 1 }, { path: "cafe\u0301.png", size: 1 }]), /collision/iu)
+})
+
+test("HTML classification rejects a rogue page outside the frozen system set", () => {
+  assert.throws(() => classifyHtmlPaths({ htmlPaths: ["index.html", "rogue.html"], businessPaths: ["index.html"], systemPaths: [] }), /rogue/iu)
+})
+
+test("manifest provenance rejects a tampered copied PNG", () => {
+  const bytes = Buffer.from("tampered")
+  const manifest = { builds: [{ locale: "zh-CN", copiedFiles: [{ path: "logo.png", source: "zh-CN:logo.png", size: 8, sha256: "0".repeat(64) }] }] }
+  const files = new Map([["logo.png", { path: "logo.png", size: bytes.length, sha256: "bad", bytes }]])
+  assert.throws(() => validateManifestProvenance({ manifest, files, generatedPaths: new Set() }), /provenance/iu)
+})
+
+test("localized script coverage rejects a route with no declared chunk", () => {
+  assert.throws(() => validateLocalizedScriptCoverage([{ locale: "en", route: "/en/academy", file: "en/academy/index.html", scriptPaths: [] }], new Map()), /script coverage/iu)
 })
 
 test("auditRelease rejects a matrix missing any academy page", async () => {
@@ -48,6 +99,6 @@ test("auditRelease rejects a matrix missing any academy page", async () => {
   await writeFile(join(root, "index.html"), "<html><body>ok</body></html>")
   await assert.rejects(
     auditRelease({ deploymentRoot: root, academyRoutes: ["/"], salesLegal: [], siteOrigin: "https://example.invalid", forbiddenMarkers: [], allowlist: [] }),
-    /route matrix/i,
+    /(?:route matrix|HTML classification)/i,
   )
 })
