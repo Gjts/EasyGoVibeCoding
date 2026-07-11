@@ -137,6 +137,9 @@ function scanHeadElements(source, start, end) {
 }
 
 function attribute(element, name) { return element.attributes.find((item) => item.name === name)?.value ?? "" }
+function relTokens(element) {
+  return new Set(attribute(element, "rel").toLowerCase().split(/[\t\n\f\r ]+/u).filter(Boolean))
+}
 function routeFor(locale, logicalRoute) {
   const { basePath } = LOCALES.find((entry) => entry.locale === locale) ?? {}
   if (basePath === undefined) throw new Error(`Unsupported SEO locale: ${locale}`)
@@ -193,7 +196,7 @@ export function transformAcademyHtml({ html, locale, logicalRoute, siteOrigin })
   if (!description) throw new Error(`Academy page has no non-empty localized description: ${locale}:${logicalRoute}`)
   const remove = elements.filter((item) => item.name === "title"
     || (item.name === "meta" && attribute(item, "name").toLowerCase() === "description")
-    || (item.name === "link" && ["canonical", "alternate"].includes(attribute(item, "rel").toLowerCase())))
+    || (item.name === "link" && (relTokens(item).has("canonical") || relTokens(item).has("alternate"))))
   let inner = source.slice(structure.headOpenEnd, structure.headCloseStart)
   for (const item of [...remove].sort((a, b) => b.start - a.start)) {
     inner = inner.slice(0, item.start - structure.headOpenEnd) + inner.slice(item.end - structure.headOpenEnd)
@@ -268,8 +271,8 @@ export async function auditDeploymentSeo({ deploymentRoot, academyRoutes, salesL
     const elements = scanHeadElements(source, structure.headOpenEnd, structure.headCloseStart)
     const titles = elements.filter((item) => item.name === "title" && decodeEntities(item.inner).trim())
     const descriptions = elements.filter((item) => item.name === "meta" && attribute(item, "name").toLowerCase() === "description" && attribute(item, "content").trim())
-    const canonicals = elements.filter((item) => item.name === "link" && attribute(item, "rel").toLowerCase() === "canonical")
-    const alternates = elements.filter((item) => item.name === "link" && attribute(item, "rel").toLowerCase() === "alternate")
+    const canonicals = elements.filter((item) => item.name === "link" && relTokens(item).has("canonical"))
+    const alternates = elements.filter((item) => item.name === "link" && relTokens(item).has("alternate"))
     const expectedCanonical = absoluteRoute(origin, routeFor(locale, logicalRoute))
     if (titles.length !== 1) throw new Error(`Expected exactly one non-empty title for ${locale}:${logicalRoute}`)
     if (descriptions.length !== 1) throw new Error(`Expected exactly one non-empty description for ${locale}:${logicalRoute}`)

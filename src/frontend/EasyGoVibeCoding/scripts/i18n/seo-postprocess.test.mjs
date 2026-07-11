@@ -55,6 +55,31 @@ test("head transform removes stale duplicates, escapes URLs, preserves localized
   assert.match(once, /<script>globalThis\.x="<title>body decoy<\/title><\/head>"<\/script>/)
 })
 
+test("canonical and alternate are ASCII-whitespace rel tokens, not exact rel strings", async () => {
+  const original = html()
+  const closingHead = original.lastIndexOf("</head>")
+  const stale = '<link rel="stylesheet\tCANONICAL" href="https://stale.invalid/c"><link rel="preload\nAlTeRnAtE" hreflang="en" href="https://stale.invalid/a"><link rel="canonical alternate" href="https://stale.invalid/both">'
+  const input = `${original.slice(0, closingHead)}${stale}${original.slice(closingHead)}`
+  const output = transformAcademyHtml({ html: input, locale: "en", logicalRoute: "/deep", siteOrigin: ORIGIN })
+  assert.doesNotMatch(output, /stale\.invalid/u)
+  const root = await mkdtemp(join(tmpdir(), "seo-rel-tokens-"))
+  const academyRoutes = ["/"]
+  const sales = ["/ja"]
+  const locales = [["zh-CN", "index.html"], ["ja", "ja/academy/index.html"], ["en", "en/academy/index.html"], ["fr", "fr/academy/index.html"], ["de", "de/academy/index.html"]]
+  for (const [locale, path] of locales) {
+    await mkdir(join(root, path, ".."), { recursive: true })
+    await writeFile(join(root, path), transformAcademyHtml({ html: html(locale), locale, logicalRoute: "/", siteOrigin: ORIGIN }))
+  }
+  await writeFile(join(root, "ja.html"), html("ja", "Sales", "Sales description"))
+  await writeFile(join(root, "sitemap.xml"), generateSitemap({ academyRoutes, salesLegal: sales, siteOrigin: ORIGIN }))
+  await writeFile(join(root, "robots.txt"), generateRobots(ORIGIN))
+  const enPath = join(root, "en/academy/index.html")
+  const enHtml = await readFile(enPath, "utf8")
+  const enClosingHead = enHtml.lastIndexOf("</head>")
+  await writeFile(enPath, `${enHtml.slice(0, enClosingHead)}<link rel="preload\tCaNoNiCaL alternate" href="https://stale.invalid/x">${enHtml.slice(enClosingHead)}`)
+  await assert.rejects(auditDeploymentSeo({ deploymentRoot: root, academyRoutes, salesLegal: sales, siteOrigin: ORIGIN }), /canonical|alternate/i)
+})
+
 test("academy transform rejects empty title or description and malformed head structure", () => {
   assert.throws(() => transformAcademyHtml({ html: html("en", "", "ok"), locale: "en", logicalRoute: "/", siteOrigin: ORIGIN }), /title/i)
   assert.throws(() => transformAcademyHtml({ html: html("en", "ok", ""), locale: "en", logicalRoute: "/", siteOrigin: ORIGIN }), /description/i)
