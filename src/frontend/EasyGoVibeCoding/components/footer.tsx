@@ -47,6 +47,7 @@ const navigation = {
   resources: [
     { name: "生态导航", href: "/ecosystem" },
     { name: "优质资源", href: "/resources" },
+    { name: "广告合作", href: "/sponsor" },
     { name: "更新日志", href: "#" },
     { name: "关于我们", href: "#" },
   ],
