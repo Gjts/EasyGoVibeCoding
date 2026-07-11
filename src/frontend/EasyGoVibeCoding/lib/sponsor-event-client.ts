@@ -52,6 +52,23 @@ export function getSponsorImpressionStorageKey(
   ].join(":")
 }
 
+export function claimSponsorImpressionOnce(
+  storage: Pick<Storage, "getItem" | "setItem">,
+  campaignId: string,
+  slot: SponsorSlot,
+  path: string,
+): boolean {
+  const storageKey = getSponsorImpressionStorageKey(campaignId, slot, path)
+
+  try {
+    if (storage.getItem(storageKey) !== null) return false
+    storage.setItem(storageKey, "1")
+    return storage.getItem(storageKey) === "1"
+  } catch {
+    return false
+  }
+}
+
 export function createSponsorImpressionGate({
   setTimer,
   clearTimer,

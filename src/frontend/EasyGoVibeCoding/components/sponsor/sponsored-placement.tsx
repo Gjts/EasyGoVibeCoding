@@ -5,9 +5,9 @@ import Image from "next/image"
 import { ExternalLink } from "lucide-react"
 
 import {
+  claimSponsorImpressionOnce,
   createSponsorEventPayload,
   createSponsorImpressionGate,
-  getSponsorImpressionStorageKey,
   sendSponsorEvent,
 } from "@/lib/sponsor-event-client"
 import {
@@ -29,8 +29,6 @@ const THEME_CLASSES: Record<SponsorCampaign["theme"], string> = {
   emerald:
     "border-emerald-300/70 bg-gradient-to-br from-emerald-50 via-teal-50 to-white dark:border-emerald-700 dark:from-emerald-950 dark:via-teal-950 dark:to-gray-950",
 }
-
-const sentImpressions = new Set<string>()
 
 export function SponsoredPlacement({
   slot,
@@ -103,25 +101,17 @@ export function SponsoredPlacement({
       },
       onViewable: () => {
         const path = window.location.pathname
-        const storageKey = getSponsorImpressionStorageKey(
-          campaign.id,
-          slot,
-          path,
-        )
-
-        if (sentImpressions.has(storageKey)) return
-
-        try {
-          if (window.sessionStorage.getItem(storageKey)) {
-            sentImpressions.add(storageKey)
-            return
-          }
-          window.sessionStorage.setItem(storageKey, "1")
-        } catch {
-          // Delivery still works when private browsing disables storage.
+        if (
+          !claimSponsorImpressionOnce(
+            window.sessionStorage,
+            campaign.id,
+            slot,
+            path,
+          )
+        ) {
+          return
         }
 
-        sentImpressions.add(storageKey)
         sendSponsorEvent(
           createSponsorEventPayload({
             eventType: "viewable_impression",

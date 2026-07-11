@@ -3,6 +3,7 @@ import assert from "node:assert/strict"
 
 import { SPONSOR_SLOTS } from "../../lib/sponsor-schema.ts"
 import {
+  claimSponsorImpressionOnce,
   createSponsorEventPayload,
   createSponsorImpressionGate,
   getSponsorImpressionStorageKey,
@@ -95,6 +96,18 @@ async function withPatchedBrowserGlobals(patches, callback) {
   }
 }
 
+function createMemorySponsorStorage(initialEntries = []) {
+  const entries = new Map(initialEntries)
+  return {
+    getItem(key) {
+      return entries.has(key) ? entries.get(key) : null
+    },
+    setItem(key, value) {
+      entries.set(key, value)
+    },
+  }
+}
+
 test("frontend and function slot contracts stay identical", () => {
   assert.deepEqual(SPONSOR_EVENT_SLOTS, SPONSOR_SLOTS)
 })
@@ -155,6 +168,133 @@ test("impression dedupe key changes independently by campaign, slot, and path", 
       "super-individual-home",
       "/super-individual/monetization",
     ),
+  )
+})
+
+test("session impression claim succeeds once and rejects a repeat", () => {
+  const storage = createMemorySponsorStorage()
+
+  assert.equal(
+    claimSponsorImpressionOnce(
+      storage,
+      "campaign-a",
+      "super-individual-home",
+      "/super-individual",
+    ),
+    true,
+  )
+  assert.equal(
+    claimSponsorImpressionOnce(
+      storage,
+      "campaign-a",
+      "super-individual-home",
+      "/super-individual",
+    ),
+    false,
+  )
+})
+
+test("session impression claim rejects an existing stored claim", () => {
+  const storageKey = getSponsorImpressionStorageKey(
+    "campaign-a",
+    "super-individual-home",
+    "/super-individual",
+  )
+  const storage = createMemorySponsorStorage([[storageKey, "1"]])
+
+  assert.equal(
+    claimSponsorImpressionOnce(
+      storage,
+      "campaign-a",
+      "super-individual-home",
+      "/super-individual",
+    ),
+    false,
+  )
+})
+
+test("session impression claims remain independent by campaign, slot, and path", () => {
+  const storage = createMemorySponsorStorage()
+  const claims = [
+    ["campaign-a", "super-individual-home", "/super-individual"],
+    ["campaign-b", "super-individual-home", "/super-individual"],
+    [
+      "campaign-a",
+      "super-individual-monetization",
+      "/super-individual",
+    ],
+    [
+      "campaign-a",
+      "super-individual-home",
+      "/super-individual/monetization",
+    ],
+  ]
+
+  for (const [campaignId, slot, path] of claims) {
+    assert.equal(
+      claimSponsorImpressionOnce(storage, campaignId, slot, path),
+      true,
+    )
+  }
+})
+
+test("session impression claim fails closed when storage reads throw", () => {
+  for (const failingRead of [1, 2]) {
+    let reads = 0
+    const storage = {
+      getItem() {
+        reads += 1
+        if (reads === failingRead) throw new Error("storage read failed")
+        return null
+      },
+      setItem() {},
+    }
+
+    assert.equal(
+      claimSponsorImpressionOnce(
+        storage,
+        "campaign-a",
+        "super-individual-home",
+        "/super-individual",
+      ),
+      false,
+    )
+  }
+})
+
+test("session impression claim fails closed when storage writes throw", () => {
+  const storage = {
+    getItem: () => null,
+    setItem() {
+      throw new Error("storage write failed")
+    },
+  }
+
+  assert.equal(
+    claimSponsorImpressionOnce(
+      storage,
+      "campaign-a",
+      "super-individual-home",
+      "/super-individual",
+    ),
+    false,
+  )
+})
+
+test("session impression claim fails closed when persistence cannot be verified", () => {
+  const storage = {
+    getItem: () => null,
+    setItem() {},
+  }
+
+  assert.equal(
+    claimSponsorImpressionOnce(
+      storage,
+      "campaign-a",
+      "super-individual-home",
+      "/super-individual",
+    ),
+    false,
   )
 })
 
