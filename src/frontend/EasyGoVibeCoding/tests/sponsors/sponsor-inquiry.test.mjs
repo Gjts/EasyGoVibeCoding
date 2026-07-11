@@ -2,6 +2,8 @@ import test from "node:test"
 import assert from "node:assert/strict"
 
 import {
+  SPONSOR_BUDGET_RANGES,
+  SPONSOR_CAMPAIGN_GOALS,
   buildSponsorInquiryHtml,
   parseSponsorInquiry,
 } from "../../functions/_shared/sponsor-inquiry.ts"
@@ -25,6 +27,10 @@ const CONFIGURED_ENV = {
   RESEND_API_KEY: "resend-test-key",
   SPONSOR_INBOX_EMAIL: "sponsors@example.com",
 }
+const EMAIL_AT_MAX = `${"a".repeat(64)}@${"b".repeat(63)}.${"c".repeat(31)}`
+const EMAIL_OVER_MAX = `${"a".repeat(64)}@${"b".repeat(63)}.${"c".repeat(32)}`
+const PRODUCT_URL_AT_MAX = `https://example.com/${"p".repeat(280)}`
+const PRODUCT_URL_OVER_MAX = `https://example.com/${"p".repeat(281)}`
 
 function sponsorRequest({
   body = JSON.stringify(valid),
@@ -145,20 +151,85 @@ test("normalizes C0 controls and CRLF without permitting header injection", () =
   )
 })
 
-test("accepts an omitted or blank optional HTTPS product URL", () => {
-  const withoutOptional = { ...valid }
-  delete withoutOptional.productUrl
-  delete withoutOptional.notes
+test("requires a nonblank HTTPS product URL while keeping notes optional", () => {
+  const withoutProductUrl = { ...valid }
+  delete withoutProductUrl.productUrl
+  assert.equal(parseSponsorInquiry(withoutProductUrl), null)
+  assert.equal(parseSponsorInquiry({ ...valid, productUrl: " \r\n " }), null)
+  assert.equal(
+    parseSponsorInquiry({ ...valid, productUrl: "http://example.com" }),
+    null,
+  )
 
-  assert.deepEqual(parseSponsorInquiry(withoutOptional), {
+  const withoutNotes = { ...valid }
+  delete withoutNotes.notes
+  assert.deepEqual(parseSponsorInquiry(withoutNotes), {
     ...valid,
-    productUrl: "",
     notes: "",
   })
-  assert.deepEqual(parseSponsorInquiry({ ...valid, productUrl: "" }), {
+})
+
+test("accepts exact normalized maxima and rejects max plus one", () => {
+  assert.equal(EMAIL_AT_MAX.length, 160)
+  assert.equal(EMAIL_OVER_MAX.length, 161)
+  assert.equal(PRODUCT_URL_AT_MAX.length, 300)
+  assert.equal(PRODUCT_URL_OVER_MAX.length, 301)
+
+  const boundaries = [
+    ["contactName", "名".repeat(80), "名".repeat(81)],
+    ["email", EMAIL_AT_MAX, EMAIL_OVER_MAX],
+    ["company", "司".repeat(120), "司".repeat(121)],
+    ["productName", "品".repeat(120), "品".repeat(121)],
+    ["productUrl", PRODUCT_URL_AT_MAX, PRODUCT_URL_OVER_MAX],
+    ["notes", "注".repeat(1200), "注".repeat(1201)],
+  ]
+
+  for (const [field, atMax, overMax] of boundaries) {
+    const parsed = parseSponsorInquiry({ ...valid, [field]: atMax })
+    assert.ok(parsed, `${field} at max`)
+    assert.equal(parsed[field], atMax, field)
+    assert.equal(
+      parseSponsorInquiry({ ...valid, [field]: overMax }),
+      null,
+      `${field} over max`,
+    )
+  }
+})
+
+test("normalizes controls and whitespace before enforcing length", () => {
+  const rawContactName = `${"名".repeat(39)}  ${"字".repeat(40)}`
+  const normalizedContactName = `${"名".repeat(39)} ${"字".repeat(40)}`
+  assert.equal(rawContactName.length, 81)
+  assert.equal(normalizedContactName.length, 80)
+
+  const parsed = parseSponsorInquiry({
     ...valid,
-    productUrl: "",
+    contactName: rawContactName,
+    email: `${EMAIL_AT_MAX}\r\n`,
   })
+  assert.ok(parsed)
+  assert.equal(parsed.contactName, normalizedContactName)
+  assert.equal(parsed.email, EMAIL_AT_MAX)
+})
+
+test("accepts only declared budget and goal enums", () => {
+  for (const budgetRange of SPONSOR_BUDGET_RANGES) {
+    assert.equal(
+      parseSponsorInquiry({ ...valid, budgetRange })?.budgetRange,
+      budgetRange,
+    )
+  }
+  for (const campaignGoal of SPONSOR_CAMPAIGN_GOALS) {
+    assert.equal(
+      parseSponsorInquiry({ ...valid, campaignGoal })?.campaignGoal,
+      campaignGoal,
+    )
+  }
+
+  for (const field of ["budgetRange", "campaignGoal"]) {
+    assert.equal(parseSponsorInquiry({ ...valid, [field]: "x".repeat(40) }), null)
+    assert.equal(parseSponsorInquiry({ ...valid, [field]: "x".repeat(41) }), null)
+  }
 })
 
 test("rejects invalid email, non-HTTPS URL, and unknown enums", () => {
@@ -390,6 +461,31 @@ test("rejects missing or non-boolean consent without fetching", async () => {
       400,
     )
   }
+})
+
+test("rejects missing, blank, and non-HTTPS product URLs without fetching", async () => {
+  const withoutProductUrl = { ...valid }
+  delete withoutProductUrl.productUrl
+
+  for (const body of [
+    withoutProductUrl,
+    { ...valid, productUrl: " \r\n " },
+    { ...valid, productUrl: "http://example.com/product" },
+  ]) {
+    await assertRejected(
+      sponsorRequest({ body: JSON.stringify(body) }),
+      400,
+    )
+  }
+})
+
+test("rejects an overlimit inquiry without fetching", async () => {
+  await assertRejected(
+    sponsorRequest({
+      body: JSON.stringify({ ...valid, productName: "品".repeat(121) }),
+    }),
+    400,
+  )
 })
 
 test("returns the same generic 500 for absent or invalid email configuration", async () => {

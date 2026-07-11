@@ -38,11 +38,12 @@ function normalizeText(
   if (input === undefined && optional) return ""
   if (typeof input !== "string") return null
 
-  return input
+  const normalized = input
     .replace(/[\u0000-\u001f\u007f]/g, " ")
     .replace(/\s+/g, " ")
     .trim()
-    .slice(0, maxLength)
+
+  return normalized.length <= maxLength ? normalized : null
 }
 
 export function isValidSponsorEmail(value: string): boolean {
@@ -100,7 +101,7 @@ export function parseSponsorInquiry(input: unknown): SponsorInquiry | null {
   const normalizedEmail = normalizeText(input.email, 160)
   const company = normalizeText(input.company, 120)
   const productName = normalizeText(input.productName, 120)
-  const productUrl = normalizeText(input.productUrl, 300, true)
+  const productUrl = normalizeText(input.productUrl, 300)
   const budgetRange = normalizeText(input.budgetRange, 40)
   const campaignGoal = normalizeText(input.campaignGoal, 40)
   const notes = normalizeText(input.notes, 1200, true)
@@ -110,7 +111,7 @@ export function parseSponsorInquiry(input: unknown): SponsorInquiry | null {
     !normalizedEmail ||
     !company ||
     !productName ||
-    productUrl === null ||
+    !productUrl ||
     !budgetRange ||
     !campaignGoal ||
     notes === null ||
@@ -121,7 +122,7 @@ export function parseSponsorInquiry(input: unknown): SponsorInquiry | null {
 
   const email = normalizedEmail.toLowerCase()
   if (!isValidSponsorEmail(email)) return null
-  if (productUrl && !isHttpsUrl(productUrl)) return null
+  if (!isHttpsUrl(productUrl)) return null
   if (
     !SPONSOR_BUDGET_RANGES.includes(
       budgetRange as SponsorInquiry["budgetRange"],
