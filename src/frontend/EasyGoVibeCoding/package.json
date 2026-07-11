@@ -13,6 +13,7 @@
     "i18n:extract": "node scripts/i18n/source-extractor.mjs",
     "i18n:build:all": "node scripts/i18n/build-static-deployment.mjs",
     "i18n:merge": "node scripts/i18n/static-deployment.mjs",
+    "i18n:audit:seo": "node scripts/i18n/audit-static-seo.mjs",
     "i18n:translate:pilot": "node --env-file=.env.local scripts/i18n/translate-catalog.mjs",
     "i18n:translate:all": "node --env-file=.env.local scripts/i18n/translate-full-catalog.mjs",
     "typecheck:functions": "tsc --project tsconfig.functions.json",

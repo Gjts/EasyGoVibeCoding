@@ -4,6 +4,7 @@ import { dirname, isAbsolute, join, relative, resolve, sep } from "node:path"
 import { pathToFileURL } from "node:url"
 
 import { collectForbiddenMarkers } from "./deployment-secrets.mjs"
+import { postprocessDeploymentSeo, validateSiteOrigin } from "./seo-postprocess.mjs"
 
 export const BUILD_MATRIX = Object.freeze([
   Object.freeze({ locale: "zh-CN", basePath: "" }),
@@ -130,7 +131,7 @@ function validateSourceProvenance({ projectRoot, sourceRoot, sourceLabel, locale
   return normalized
 }
 
-export async function mergeStaticOutputs({ projectRoot, sourceLabels, forbiddenMarkers, builds, output, academyRoutes, publishRename = rename, mapDestination } = {}) {
+export async function mergeStaticOutputs({ projectRoot, sourceLabels, forbiddenMarkers, builds, output, academyRoutes, siteOrigin, publishRename = rename, mapDestination } = {}) {
   if (!Array.isArray(academyRoutes) || academyRoutes.length === 0) throw new Error("academyRoutes must be non-empty")
   const matrix = buildBusinessRouteMatrix(academyRoutes)
   const absoluteOutput = resolve(output)
@@ -205,7 +206,10 @@ export async function mergeStaticOutputs({ projectRoot, sourceLabels, forbiddenM
       }
       if (matrix.total !== 400) throw new Error(`Business route matrix must total 400; found ${matrix.total}`)
     }
-    const manifest = { version: 1, builds: manifestBuilds, collisions: [], businessRouteMatrix: matrix }
+    const seo = siteOrigin
+      ? await postprocessDeploymentSeo({ deploymentRoot: temporary, academyRoutes, salesLegal: matrix.salesLegal, siteOrigin })
+      : null
+    const manifest = { version: 2, builds: manifestBuilds, collisions: [], businessRouteMatrix: matrix, seo }
     const manifestBytes = Buffer.from(`${JSON.stringify(manifest, null, 2)}\n`)
     const manifestSha256 = sha256(manifestBytes)
     await writeFile(join(temporary, "i18n-merge-manifest.json"), manifestBytes)
@@ -227,7 +231,8 @@ async function cli() {
   const builds = { "zh-CN": join(projectRoot, "out"), ...Object.fromEntries(BUILD_MATRIX.slice(1).map(({ locale }) => [locale, join(projectRoot, ".cache", "i18n-build", locale, "out")])) }
   const sourceLabels = { "zh-CN": "out", ...Object.fromEntries(BUILD_MATRIX.slice(1).map(({ locale }) => [locale, `.cache/i18n-build/${locale}/out`])) }
   const forbiddenMarkers = await collectForbiddenMarkers(projectRoot)
-  const result = await mergeStaticOutputs({ projectRoot, sourceLabels, forbiddenMarkers, builds, output: join(projectRoot, ".cache", "i18n-deploy"), academyRoutes })
+  const siteOrigin = validateSiteOrigin(process.env.I18N_SITE_ORIGIN)
+  const result = await mergeStaticOutputs({ projectRoot, sourceLabels, forbiddenMarkers, builds, output: join(projectRoot, ".cache", "i18n-deploy"), academyRoutes, siteOrigin })
   console.log(JSON.stringify({ output: slash(relative(projectRoot, result.output)), academyRoutes: academyRoutes.length, businessHtml: result.manifest.businessRouteMatrix.total, manifestSha256: result.manifestSha256 }))
 }
 

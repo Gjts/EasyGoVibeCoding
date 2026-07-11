@@ -5,6 +5,7 @@ import { pathToFileURL } from "node:url"
 import { createLocaleBuildTree } from "./create-locale-worktree.mjs"
 import { collectForbiddenMarkers, createSecretFreeEnvironment } from "./deployment-secrets.mjs"
 import { BUILD_MATRIX, deriveAcademyRoutes, mergeStaticOutputs, validateBuildPair } from "./static-deployment.mjs"
+import { validateSiteOrigin } from "./seo-postprocess.mjs"
 
 export { collectForbiddenMarkers } from "./deployment-secrets.mjs"
 
@@ -46,8 +47,9 @@ function runBuild({ command, args, cwd, env, shell }) {
   })
 }
 
-export async function buildStaticDeployment(projectRoot = process.cwd()) {
+export async function buildStaticDeployment(projectRoot = process.cwd(), { siteOrigin = process.env.I18N_SITE_ORIGIN } = {}) {
   const root = resolve(projectRoot)
+  const validatedSiteOrigin = validateSiteOrigin(siteOrigin)
   const forbiddenMarkers = await collectForbiddenMarkers(root)
   for (const { locale } of BUILD_MATRIX.slice(1)) await createLocaleBuildTree({ projectRoot: root, locale })
   const plan = createBuildPlan(root)
@@ -55,7 +57,7 @@ export async function buildStaticDeployment(projectRoot = process.cwd()) {
   const academyRoutes = await deriveAcademyRoutes(root)
   const builds = Object.fromEntries(plan.map(({ locale, cwd }) => [locale, join(cwd, "out")]))
   const sourceLabels = Object.fromEntries(plan.map(({ locale }) => [locale, locale === "zh-CN" ? "out" : `.cache/i18n-build/${locale}/out`]))
-  const merge = await mergeStaticOutputs({ projectRoot: root, sourceLabels, forbiddenMarkers, builds, output: join(root, ".cache", "i18n-deploy"), academyRoutes })
+  const merge = await mergeStaticOutputs({ projectRoot: root, sourceLabels, forbiddenMarkers, builds, output: join(root, ".cache", "i18n-deploy"), academyRoutes, siteOrigin: validatedSiteOrigin })
   return { buildResults, academyRoutes, ...merge }
 }
 

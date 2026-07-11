@@ -93,6 +93,20 @@ test("merge mounts localized roots, deep pages and nested _next assets", async (
   assert.ok(result.manifest.builds.find(({ locale }) => locale === "en").excludedGlobalFiles.includes("Functions/api.js"))
 })
 
+test("SEO is completed in the temporary merge before atomic publication", async () => {
+  const root = await mkdtemp(join(tmpdir(), "static-seo-"))
+  const output = join(root, "deploy")
+  const builds = Object.fromEntries(BUILD_MATRIX.map(({ locale }) => [locale, join(root, locale)]))
+  const page = (locale) => `<!doctype html><html lang="${locale}"><head><title>${locale} title</title><meta name="description" content="${locale} description"></head><body>body</body></html>`
+  for (const [locale, path] of Object.entries(builds)) await file(path, "index.html", page(locale))
+  const result = await mergeStaticOutputs({ builds, output, academyRoutes: ["/"], siteOrigin: "https://example.invalid" })
+  assert.equal(result.manifest.seo.academyPageCount, 5)
+  assert.equal(result.manifest.seo.originKind, "non-production")
+  assert.match(await readFile(join(output, "en/academy/index.html"), "utf8"), /rel="canonical" href="https:\/\/example\.invalid\/en\/academy"/)
+  assert.match(await readFile(join(output, "robots.txt"), "utf8"), /https:\/\/example\.invalid\/sitemap\.xml/)
+  assert.equal((await readFile(join(output, "sitemap.xml"), "utf8")).match(/<url>/g)?.length, 10)
+})
+
 test("rejects configured secret marker bytes without echoing their values", async () => {
   const root = await mkdtemp(join(tmpdir(), "static-secret-leak-"))
   const output = join(root, "deploy")
