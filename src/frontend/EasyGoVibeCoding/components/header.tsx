@@ -12,6 +12,7 @@ import {
 import { SearchDialog } from "@/components/search-dialog"
 import { LocalLearnerProfileDialog } from "@/components/learning/local-learner-profile-dialog"
 import { useLocalLearnerProfile } from "@/lib/use-local-learner-profile"
+import { LanguageSwitcher } from "@/components/language-switcher"
 
 interface CourseLink {
   name: string
@@ -179,6 +180,7 @@ export function Header() {
         </div>
 
         <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-3">
+          <LanguageSwitcher className="mr-1 max-w-[150px] justify-end" />
           <Button
             variant="ghost"
             size="sm"
@@ -295,6 +297,7 @@ export function Header() {
                     ))}
                 </div>
                 <div className="py-6 space-y-3">
+                  <LanguageSwitcher className="px-3" />
                   <Button
                     variant="ghost"
                     onClick={() => {

@@ -6,6 +6,8 @@
  * - 用于首页"下一步推荐"等个性化展示
  */
 
+import { stripLocaleBasePath } from "@/lib/i18n-routing"
+
 const STORAGE_KEY = "egvc:learning-progress:v1"
 export const LEARNING_PROGRESS_EVENT = "egvc:learning-progress-change"
 
@@ -151,8 +153,9 @@ function emptyProgress(): LearningProgress {
 }
 
 export function normalizePath(path: string): string {
-  if (path === "/") return path
-  return path.replace(/\/+$/, "")
+  const canonicalPath = stripLocaleBasePath(path)
+  if (canonicalPath === "/") return canonicalPath
+  return canonicalPath.replace(/\/+$/, "")
 }
 
 export function classifyPath(path: string): LearningCategory | null {
@@ -188,11 +191,43 @@ export function getLearningTitle(path: string): string {
 function normalizeProgress(input: unknown): LearningProgress {
   if (!input || typeof input !== "object") return emptyProgress()
   const value = input as Partial<LearningProgress>
+  const visits: Record<string, VisitRecord> = {}
+  const completed: Record<string, CompletionRecord> = {}
+
+  if (value.visits && typeof value.visits === "object") {
+    for (const [storedPath, rawRecord] of Object.entries(value.visits)) {
+      if (!rawRecord || typeof rawRecord !== "object") continue
+      const record = rawRecord as VisitRecord
+      const path = normalizePath(record.path || storedPath)
+      const previous = visits[path]
+      visits[path] = {
+        ...record,
+        path,
+        firstSeen: previous
+          ? Math.min(previous.firstSeen, record.firstSeen)
+          : record.firstSeen,
+        lastSeen: previous ? Math.max(previous.lastSeen, record.lastSeen) : record.lastSeen,
+        visits: (previous?.visits ?? 0) + record.visits,
+      }
+    }
+  }
+
+  if (value.completed && typeof value.completed === "object") {
+    for (const [storedPath, rawRecord] of Object.entries(value.completed)) {
+      if (!rawRecord || typeof rawRecord !== "object") continue
+      const record = rawRecord as CompletionRecord
+      const path = normalizePath(record.path || storedPath)
+      const previous = completed[path]
+      if (!previous || record.completedAt >= previous.completedAt) {
+        completed[path] = { ...record, path }
+      }
+    }
+  }
+
   return {
     version: 2,
-    visits: value.visits && typeof value.visits === "object" ? value.visits : {},
-    completed:
-      value.completed && typeof value.completed === "object" ? value.completed : {},
+    visits,
+    completed,
     updatedAt: typeof value.updatedAt === "number" ? value.updatedAt : 0,
   }
 }
@@ -204,7 +239,10 @@ export function loadProgress(): LearningProgress {
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY)
     if (!raw) return emptyProgress()
-    return normalizeProgress(JSON.parse(raw))
+    const parsed = normalizeProgress(JSON.parse(raw))
+    const normalized = JSON.stringify(parsed)
+    if (normalized !== raw) window.localStorage.setItem(STORAGE_KEY, normalized)
+    return parsed
   } catch {
     return emptyProgress()
   }

@@ -28,6 +28,8 @@ import {
 import { Button } from "@/components/ui/button"
 import { CourseLayout } from "@/components/course/course-layout"
 import { advancedChapters } from "@/components/course/chapters"
+import { LocalizedFrameworkDiagram } from "@/components/course/localized-framework-diagram"
+import { siteLocale } from "@/lib/i18n-routing"
 
 type Framework = {
   id: "langchain" | "autogpt" | "metagpt" | "llamaindex" | "langgraph"
@@ -315,14 +317,21 @@ export default function AIFrameworksPage() {
               </span>
             </div>
             <div className="relative w-full overflow-hidden rounded-xl border border-border bg-secondary/30">
-              <Image
-                src="/images/ai-frameworks-overview.png"
-                alt="LangChain / AutoGPT / MetaGPT / LlamaIndex 四大 AI 框架核心功能与 Code Map 全景图"
-                width={2048}
-                height={1365}
-                priority
-                className="h-auto w-full"
-              />
+              {siteLocale !== "zh-CN" ? (
+                <LocalizedFrameworkDiagram
+                  title="AI Frameworks"
+                  labels={["LangChain", "LlamaIndex", "LangGraph", "AutoGPT", "MetaGPT"]}
+                />
+              ) : (
+                <Image
+                  src="/images/ai-frameworks-overview.png"
+                  alt="LangChain / AutoGPT / MetaGPT / LlamaIndex 四大 AI 框架核心功能与 Code Map 全景图"
+                  width={2048}
+                  height={1365}
+                  priority
+                  className="h-auto w-full"
+                />
+              )}
             </div>
             <p className="mt-3 text-sm text-muted-foreground">
               下文将逐个拆解每个框架的核心逻辑、代码结构、核心能力与适合场景，并给出对比表和选型指南。
@@ -466,13 +475,17 @@ export default function AIFrameworksPage() {
                       href={fw.detailHref}
                       className="group block overflow-hidden rounded-lg border border-violet-200 bg-white"
                     >
-                      <Image
-                        src="/images/ai-frameworks/langgraph.png"
-                        alt="LangGraph 核心概念与执行流程详解图"
-                        width={1600}
-                        height={900}
-                        className="h-auto w-full transition-transform duration-300 group-hover:scale-[1.01]"
-                      />
+                      {siteLocale !== "zh-CN" ? (
+                        <LocalizedFrameworkDiagram title="LangGraph" />
+                      ) : (
+                        <Image
+                          src="/images/ai-frameworks/langgraph.png"
+                          alt="LangGraph 核心概念与执行流程详解图"
+                          width={1600}
+                          height={900}
+                          className="h-auto w-full transition-transform duration-300 group-hover:scale-[1.01]"
+                        />
+                      )}
                     </Link>
                     <p className="mt-2 text-xs text-muted-foreground">
                       点击图片或下方「查看 LangGraph 详解」进入详解页查看高清原图与逐节解析。

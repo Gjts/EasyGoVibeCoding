@@ -3,6 +3,8 @@ import Image from "next/image"
 import Link from "next/link"
 import { ArrowLeft, ArrowRight, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { LocalizedFrameworkDiagram } from "@/components/course/localized-framework-diagram"
+import { siteLocale } from "@/lib/i18n-routing"
 
 type NavItem = { title: string; href: string; label?: string } | null
 
@@ -42,14 +44,22 @@ export function FrameworkHero({
 
       <div className="overflow-hidden rounded-2xl border border-border bg-card p-4 sm:p-6">
         <div className="relative w-full overflow-hidden rounded-xl border border-border bg-secondary/30">
-          <Image
-            src={imageSrc}
-            alt={imageAlt}
-            width={2048}
-            height={1365}
-            priority
-            className="h-auto w-full"
-          />
+          {siteLocale !== "zh-CN" ? (
+            <LocalizedFrameworkDiagram
+              title={title}
+              subtitle={subtitle}
+              labels={[tagline]}
+            />
+          ) : (
+            <Image
+              src={imageSrc}
+              alt={imageAlt}
+              width={2048}
+              height={1365}
+              priority
+              className="h-auto w-full"
+            />
+          )}
         </div>
       </div>
 

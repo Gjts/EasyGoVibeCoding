@@ -16,6 +16,8 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useFrameworksRecommendation } from "@/lib/use-learning-progress"
+import { LocalizedFrameworkDiagram } from "@/components/course/localized-framework-diagram"
+import { siteLocale } from "@/lib/i18n-routing"
 
 type FrameworkCard = {
   key: string
@@ -261,16 +263,21 @@ export function AIFrameworksSpotlight() {
                   )}
                 >
                   <div className="relative aspect-[16/9] w-full overflow-hidden border-b-2 border-white/60 bg-white">
-                    <Image
-                      src={fw.image}
-                      alt={`${fw.name} 详解信息图`}
-                      fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]"
-                      // OCR 系など一部ブラウザ拡張が img に data-* を注入して
-                      // hydration mismatch を起こすため、画像だけ警告を抑制
-                      suppressHydrationWarning
-                    />
+                    {siteLocale !== "zh-CN" ? (
+                      <LocalizedFrameworkDiagram
+                        title={fw.name}
+                        subtitle={fw.tagline}
+                      />
+                    ) : (
+                      <Image
+                        src={fw.image}
+                        alt={`${fw.name} 详解信息图`}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]"
+                        suppressHydrationWarning
+                      />
+                    )}
                     <div
                       className={cn(
                         "absolute top-3 left-3 flex h-10 w-10 items-center justify-center rounded-xl shadow-lg",

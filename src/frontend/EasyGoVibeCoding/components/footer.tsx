@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { Clock3, Eye, LoaderCircle, Users } from "lucide-react";
+import { siteLocale, stripLocaleBasePath } from "@/lib/i18n-routing";
 
 const LAST_UPDATED_ISO = process.env.NEXT_PUBLIC_LAST_UPDATED;
 
@@ -123,7 +124,7 @@ export function Footer() {
       try {
         setStatsLoading(true);
 
-        const path = window.location.pathname || "/";
+        const path = stripLocaleBasePath(window.location.pathname || "/");
 
         const trackResponse = await fetch("/api/site-stats", {
           method: "POST",
@@ -204,7 +205,7 @@ export function Footer() {
             ? statsLoading
               ? "加载中"
               : "--"
-            : statsData.pageViews.toLocaleString("zh-CN"),
+            : statsData.pageViews.toLocaleString(siteLocale),
         icon: Eye,
         iconClassName: "text-purple-500",
       },
@@ -216,7 +217,7 @@ export function Footer() {
             ? statsLoading
               ? "加载中"
               : "--"
-            : statsData.visitors.toLocaleString("zh-CN"),
+            : statsData.visitors.toLocaleString(siteLocale),
         icon: Users,
         iconClassName: "text-pink-500",
       },

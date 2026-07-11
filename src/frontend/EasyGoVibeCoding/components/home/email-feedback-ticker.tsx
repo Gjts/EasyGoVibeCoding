@@ -6,6 +6,7 @@ import {
   emailFeedbackItems,
   type EmailFeedbackItem,
 } from "@/data/email-feedback"
+import { siteLocale } from "@/lib/i18n-routing"
 
 type FeedbackTickerItem = Omit<EmailFeedbackItem, "source"> & {
   source: "email" | "status"
@@ -160,10 +161,14 @@ function buildFeedbackRow(
 }
 
 export function EmailFeedbackTicker() {
-  const [remoteFeedback, setRemoteFeedback] = useState<EmailFeedbackItem[]>([])
-  const [isLoading, setIsLoading] = useState(true)
+  const isLocalizedAcademy = siteLocale !== "zh-CN"
+  const [remoteFeedback, setRemoteFeedback] = useState<EmailFeedbackItem[]>(
+    isLocalizedAcademy ? dedupeFeedbackItems(emailFeedbackItems) : [],
+  )
+  const [isLoading, setIsLoading] = useState(!isLocalizedAcademy)
 
   useEffect(() => {
+    if (isLocalizedAcademy) return
     let isMounted = true
 
     async function loadFeedback() {
@@ -196,7 +201,7 @@ export function EmailFeedbackTicker() {
     return () => {
       isMounted = false
     }
-  }, [])
+  }, [isLocalizedAcademy])
 
   const confirmedFeedback =
     remoteFeedback.length > 0

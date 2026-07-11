@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { VisitTracker } from '@/components/learning/visit-tracker'
 import { LearningProgressControl } from '@/components/learning/learning-progress-control'
+import { siteLocale } from '@/lib/i18n-routing'
 import './globals.css'
 
 const geist = Geist({
@@ -35,7 +36,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang={siteLocale}>
       <body className={`${geist.variable} ${geistMono.variable} font-sans antialiased`}>
         {children}
         <VisitTracker />

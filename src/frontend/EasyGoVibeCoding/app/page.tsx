@@ -12,11 +12,12 @@ import { LearningDashboard } from "@/components/home/learning-dashboard"
 import { ProjectTrustSection } from "@/components/home/project-trust-section"
 import { EnrollmentCTA } from "@/components/home/enrollment-cta"
 import { ContactSection } from "@/components/contact-section"
+import { siteLocale } from "@/lib/i18n-routing"
 
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50">
-      <JaMarketBanner />
+      {siteLocale === "zh-CN" ? <JaMarketBanner /> : null}
       <Header />
       <main>
         {/* Screen 1: Slim hero + live summary strip (课程数 · 工具数 · GitHub 精选 · 模型动态时间) */}

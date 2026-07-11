@@ -5,6 +5,7 @@ import {
   type ModelsPayload,
   type NewsEntry,
 } from "@/lib/model-schema"
+import { siteLocale } from "@/lib/i18n-routing"
 
 const API_ENDPOINT = "/api/models"
 const REFRESH_ENDPOINT = "/api/models/refresh"
@@ -25,6 +26,9 @@ export async function getLatestModels(
   signal?: AbortSignal,
 ): Promise<GetLatestResult> {
   const fetchedAt = new Date().toISOString()
+  if (siteLocale !== "zh-CN") {
+    return { payload: seedPayload, from: "seed", fetchedAt }
+  }
   try {
     const res = await fetch(API_ENDPOINT, {
       signal,
@@ -53,6 +57,9 @@ export async function refreshLatestModels(
   signal?: AbortSignal,
 ): Promise<GetLatestResult> {
   const fetchedAt = new Date().toISOString()
+  if (siteLocale !== "zh-CN") {
+    return { payload: seedPayload, from: "seed", fetchedAt }
+  }
   const res = await fetch(REFRESH_ENDPOINT, {
     method: "POST",
     signal,
@@ -101,7 +108,7 @@ export function formatUpdatedAt(iso: string): string {
   try {
     const date = new Date(iso)
     if (Number.isNaN(date.getTime())) return iso
-    return new Intl.DateTimeFormat("zh-CN", {
+    return new Intl.DateTimeFormat(siteLocale, {
       year: "numeric",
       month: "2-digit",
       day: "2-digit",

@@ -7,6 +7,29 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Mail, Github, Send, CheckCircle, AlertCircle, ArrowRight } from "lucide-react"
+import { siteLocale } from "@/lib/i18n-routing"
+
+interface ContactErrorResponse {
+  error?: string
+  details?: string
+}
+
+export function getContactHttpErrorMessage(
+  responseData: ContactErrorResponse | null,
+): string {
+  if (siteLocale !== "zh-CN") return "发送失败"
+  const errorMessage = responseData?.error || "发送失败"
+  return responseData?.details
+    ? `${errorMessage}: ${responseData.details}`
+    : errorMessage
+}
+
+export function getContactNetworkErrorMessage(error: unknown): string {
+  if (siteLocale !== "zh-CN") return "网络错误，请检查网络连接后重试"
+  return error instanceof Error
+    ? error.message
+    : "网络错误，请检查网络连接后重试"
+}
 
 export function ContactSection() {
   const [formState, setFormState] = useState({
@@ -65,7 +88,7 @@ export function ContactSection() {
         // 尝试解析服务器返回的错误信息
         const errorMsg = responseData?.error || "发送失败"
         const errorDetails = responseData?.details || ""
-        const fullErrorMsg = errorDetails ? `${errorMsg}: ${errorDetails}` : errorMsg
+        const fullErrorMsg = getContactHttpErrorMessage(responseData)
         
         console.error("Email send error:", {
           status: response.status,
@@ -96,7 +119,7 @@ export function ContactSection() {
       setErrorMessage("")
     } catch (error) {
       console.error("Email send error:", error)
-      const errorMsg = error instanceof Error ? error.message : "网络错误，请检查网络连接后重试"
+      const errorMsg = getContactNetworkErrorMessage(error)
       setErrorMessage(errorMsg)
       setStatus("error")
     }
