@@ -15,24 +15,51 @@ export function sanitizeCommandLabel(label) {
   return label
 }
 
+export function parseBuildEvidence(stdout) {
+  const completed = [...String(stdout).matchAll(/Generating static pages[^\r\n]*\((\d+)\/(\d+)\)(?:\s+in\s+[^\r\n]+)?/gu)]
+    .map((match) => [Number(match[1]), Number(match[2])])
+    .filter(([done, total]) => done === total)
+    .map(([, total]) => total)
+  const expected = [87, 82, 82, 82, 82]
+  if (JSON.stringify(completed) !== JSON.stringify(expected)) throw new Error(`Fresh build route-unit evidence is incomplete: ${JSON.stringify(completed)}`)
+  const marker = String(stdout).lastIndexOf('{\n  "builds": [')
+  if (marker < 0) throw new Error("Fresh build merge summary is missing")
+  let summary
+  try { summary = JSON.parse(String(stdout).slice(marker).trim()) } catch { throw new Error("Fresh build merge summary is invalid JSON") }
+  const locales = ["zh-CN", "ja", "en", "fr", "de"]
+  if (summary.businessHtml !== 400 || summary.academyRouteCount !== 79 || !Array.isArray(summary.builds) || summary.builds.length !== 5 || summary.builds.some((build, index) => build.locale !== locales[index] || build.exitCode !== 0) || !/^[a-f\d]{64}$/u.test(summary.manifestSha256)) {
+    throw new Error("Fresh build merge summary failed exact validation")
+  }
+  return { routeUnits: Object.fromEntries(locales.map((locale, index) => [locale, expected[index]])), academyRouteCount: 79, businessHtml: 400, manifestSha256: summary.manifestSha256, localeExitCodes: Object.fromEntries(summary.builds.map(({ locale, exitCode }) => [locale, exitCode])) }
+}
+
+export function parseTapEvidence(stdout) {
+  const read = (label) => Number(new RegExp(`(?:ℹ\\s+)?${label}\\s+(\\d+)`, "u").exec(String(stdout))?.[1])
+  const result = { total: read("tests"), pass: read("pass"), fail: read("fail") }
+  if (result.total !== 115 || result.pass !== 115 || result.fail !== 0) throw new Error(`TAP evidence failed exact validation: ${JSON.stringify(result)}`)
+  return result
+}
+
 async function runCommandEvidence({ name, command, file, args, cwd, env = process.env }) {
   const startedAt = new Date().toISOString()
   const stdoutHash = createHash("sha256")
   const stderrHash = createHash("sha256")
   let stdoutBytes = 0
   let stderrBytes = 0
+  const stdoutChunks = []
   let spawnErrorCode
   const exitCode = await new Promise((resolveExit) => {
     const isCommandShim = process.platform === "win32" && file.toLowerCase().endsWith(".cmd")
     const child = spawn(isCommandShim ? process.env.ComSpec : file, isCommandShim ? ["/d", "/s", "/c", file, ...args] : args, { cwd, env, shell: false, windowsHide: true })
     child.on("error", (error) => { spawnErrorCode = error.code ?? "SPAWN_ERROR"; resolveExit(-1) })
-    child.stdout.on("data", (chunk) => { stdoutHash.update(chunk); stdoutBytes += chunk.length; process.stdout.write(chunk) })
+    child.stdout.on("data", (chunk) => { stdoutHash.update(chunk); stdoutBytes += chunk.length; stdoutChunks.push(chunk); process.stdout.write(chunk) })
     child.stderr.on("data", (chunk) => { stderrHash.update(chunk); stderrBytes += chunk.length; process.stderr.write(chunk) })
     child.on("close", resolveExit)
   })
   return {
     name,
     command: sanitizeCommandLabel(command),
+    operationKind: "process",
     exitCode,
     startedAt,
     endedAt: new Date().toISOString(),
@@ -41,6 +68,7 @@ async function runCommandEvidence({ name, command, file, args, cwd, env = proces
     stdoutSha256: stdoutHash.digest("hex"),
     stderrSha256: stderrHash.digest("hex"),
     ...(spawnErrorCode ? { errorCode: spawnErrorCode } : {}),
+    stdoutText: Buffer.concat(stdoutChunks).toString("utf8"),
   }
 }
 
@@ -54,11 +82,13 @@ async function main() {
   let failure
   async function command(spec) {
     const evidence = await runCommandEvidence({ ...spec, cwd: projectRoot })
+    if (spec.parse && evidence.exitCode === 0) evidence.result = spec.parse(evidence.stdoutText)
+    delete evidence.stdoutText
     commands.push(evidence)
     if (evidence.exitCode !== 0) throw new Error(`${spec.name} exited ${evidence.exitCode}`)
   }
   try {
-    await command({ name: "fresh-five-build-release", command: "I18N_SITE_ORIGIN=https://example.invalid pnpm i18n:build:all", file: executable("pnpm"), args: ["i18n:build:all"], env: { ...process.env, I18N_SITE_ORIGIN: siteOrigin } })
+    await command({ name: "fresh-five-build-release", command: "I18N_SITE_ORIGIN=https://example.invalid pnpm i18n:build:all", file: executable("pnpm"), args: ["i18n:build:all"], env: { ...process.env, I18N_SITE_ORIGIN: siteOrigin }, parse: parseBuildEvidence })
     const auditStarted = new Date().toISOString()
     report = await auditProjectRelease({ projectRoot, siteOrigin })
     const auditSummary = {
@@ -71,9 +101,9 @@ async function main() {
       manifestSha256: report.buildEvidence.manifestSha256,
     }
     const summaryBytes = Buffer.from(JSON.stringify(auditSummary))
-    commands.push({ name: "release-audit", command: "I18N_SITE_ORIGIN=https://example.invalid pnpm i18n:audit:release", exitCode: report.nonBrowserStatus === "PASS" ? 0 : 1, startedAt: auditStarted, endedAt: new Date().toISOString(), stdoutBytes: summaryBytes.length, stderrBytes: 0, stdoutSha256: sha256(summaryBytes), stderrSha256: sha256(Buffer.alloc(0)), result: auditSummary })
+    commands.push({ name: "release-audit", command: "in-process release audit", operationKind: "in-process", exitCode: report.nonBrowserStatus === "PASS" ? 0 : 1, startedAt: auditStarted, endedAt: new Date().toISOString(), stdoutBytes: summaryBytes.length, stderrBytes: 0, stdoutSha256: sha256(summaryBytes), stderrSha256: sha256(Buffer.alloc(0)), result: auditSummary })
     if (report.nonBrowserStatus !== "PASS") throw new Error("release-audit failed")
-    await command({ name: "full-i18n-tests", command: "pnpm test:i18n", file: executable("pnpm"), args: ["test:i18n"] })
+    await command({ name: "full-i18n-tests", command: "pnpm test:i18n", file: executable("pnpm"), args: ["test:i18n"], parse: parseTapEvidence })
     await command({ name: "application-typecheck", command: "pnpm exec tsc --noEmit", file: executable("pnpm"), args: ["exec", "tsc", "--noEmit"] })
     await command({ name: "functions-typecheck", command: "pnpm typecheck:functions", file: executable("pnpm"), args: ["typecheck:functions"] })
     await command({ name: "focused-eslint", command: "pnpm exec eslint scripts/i18n/release-audit.mjs scripts/i18n/release-audit.test.mjs scripts/i18n/finalize-release-audit.mjs scripts/i18n/finalize-release-audit.test.mjs --max-warnings=0", file: executable("pnpm"), args: ["exec", "eslint", "scripts/i18n/release-audit.mjs", "scripts/i18n/release-audit.test.mjs", "scripts/i18n/finalize-release-audit.mjs", "scripts/i18n/finalize-release-audit.test.mjs", "--max-warnings=0"] })

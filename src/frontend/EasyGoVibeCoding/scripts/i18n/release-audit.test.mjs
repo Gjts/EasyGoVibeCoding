@@ -6,16 +6,20 @@ import test from "node:test"
 
 import {
   auditRelease,
+  buildFrozenSeoProcessedSet,
   classifyHtmlPaths,
   collectCssReferences,
   collectHtmlReferences,
   extractVisibleText,
   findLocalizationResidue,
+  findLocalPaths,
   scanSecurityBytes,
   validateAllowlist,
   validateLocalizedScriptCoverage,
+  validateLocalPathAllowlist,
   validateManifestProvenance,
   validateReleasePathIndex,
+  validateSeoProcessedSet,
 } from "./release-audit.mjs"
 
 test("extractVisibleText ignores scripts, styles, comments, and markup", () => {
@@ -63,9 +67,12 @@ test("scanSecurityBytes reports marker names without exposing marker values", ()
 })
 
 test("scanSecurityBytes rejects ordinary Windows, UNC, file URL and POSIX local paths", () => {
-  const source = String.raw`const a="C:\\Users\\alice\\repo"; const b="\\\\server\\share\\repo"; const c="file:///Users/alice/repo"; const d="/home/alice/repo"`
+  const source = String.raw`const a="C:\\Users\\alice\\repo"; const b="D:\\build\\output"; const c="C:\\temp\\x"; const d="\\\\server\\share\\repo"; const e="file:///var/tmp/repo"; const f="/home/alice/repo"; const g="/workspace/app"; const h="/opt/tool"; const i="/tmp/build"`
   const hits = scanSecurityBytes({ path: "app.js", bytes: Buffer.from(source), forbiddenMarkers: [], localPathAllowlist: [] })
   assert.deepEqual([...new Set(hits.map(({ category }) => category))], ["absolute-local-path"])
+  assert.deepEqual(findLocalPaths('"/workspace" "/opt"'), ["/workspace", "/opt"])
+  assert.equal(findLocalPaths(String.raw`const escaped = /\\\\[^\\s]+\\share/u`).length, 0)
+  assert.throws(() => validateLocalPathAllowlist([{ path: "app.js", text: "/workspace/app", reason: "fixture" }, { path: "app.js", text: "/workspace/app", reason: "duplicate" }]), /duplicate/iu)
 })
 
 test("allowlist requires exact locale, route, file, scope, text, and reason", () => {
@@ -84,9 +91,19 @@ test("HTML classification rejects a rogue page outside the frozen system set", (
 
 test("manifest provenance rejects a tampered copied PNG", () => {
   const bytes = Buffer.from("tampered")
-  const manifest = { builds: [{ locale: "zh-CN", copiedFiles: [{ path: "logo.png", source: "zh-CN:logo.png", size: 8, sha256: "0".repeat(64) }] }] }
+  const manifest = { builds: [{ locale: "zh-CN", basePath: "", sourceOutput: "out", logicalRouteCount: 79, copiedFileCount: 1, copiedFiles: [{ path: "logo.png", source: "zh-CN:logo.png", size: 8, sha256: "0".repeat(64) }] }] }
   const files = new Map([["logo.png", { path: "logo.png", size: bytes.length, sha256: "bad", bytes }]])
   assert.throws(() => validateManifestProvenance({ manifest, files, generatedPaths: new Set() }), /provenance/iu)
+  const wrongSource = structuredClone(manifest)
+  wrongSource.builds[0].copiedFiles[0].source = "zh-CN:../logo.png"
+  assert.throws(() => validateManifestProvenance({ manifest: wrongSource, files, generatedPaths: new Set() }), /source|unsafe/iu)
+  const wrongCount = structuredClone(manifest)
+  wrongCount.builds[0].copiedFileCount = 2
+  assert.throws(() => validateManifestProvenance({ manifest: wrongCount, files, generatedPaths: new Set() }), /count/iu)
+  const academyRoutes = ["/"]
+  const frozen = buildFrozenSeoProcessedSet(academyRoutes)
+  const seoManifest = { seo: { processedFiles: [...frozen, "logo.png"] } }
+  assert.throws(() => validateSeoProcessedSet({ manifest: seoManifest, academyRoutes }), /processed/iu)
 })
 
 test("localized script coverage rejects a route with no declared chunk", () => {

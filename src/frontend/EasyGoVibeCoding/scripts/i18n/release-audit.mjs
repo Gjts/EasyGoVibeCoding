@@ -196,13 +196,27 @@ export function validateManifestProvenance({ manifest, files, generatedPaths }) 
   let checked = 0
   let generatedCheckedSeparately = 0
   for (const build of manifest.builds ?? []) {
+    const expectedBuild = BUILD_MATRIX.find(({ locale }) => locale === build.locale)
+    if (!expectedBuild || build.basePath !== expectedBuild.basePath) throw new Error(`Manifest provenance has invalid build locale/base path: ${build.locale}`)
+    const expectedSourceOutput = build.locale === "zh-CN" ? "out" : `.cache/i18n-build/${build.locale}/out`
+    if (build.sourceOutput !== expectedSourceOutput) throw new Error(`Manifest provenance has invalid source output for ${build.locale}`)
+    if (build.logicalRouteCount !== 79) throw new Error(`Manifest provenance logical route count must be 79 for ${build.locale}`)
+    if (build.copiedFileCount !== build.copiedFiles?.length) throw new Error(`Manifest provenance copied file count mismatch for ${build.locale}`)
     for (const copied of build.copiedFiles ?? []) {
+      const sourcePrefix = `${build.locale}:`
+      if (typeof copied.source !== "string" || !copied.source.startsWith(sourcePrefix) || copied.source.indexOf(":", sourcePrefix.length) >= 0) throw new Error(`Manifest provenance has invalid source for ${copied.path}`)
+      const sourceRelative = copied.source.slice(sourcePrefix.length)
+      const safeRelative = (value) => typeof value === "string" && value && value === value.normalize("NFC") && !value.includes("\\") && !value.startsWith("/") && !value.includes("\0") && value.split("/").every((part) => part && part !== "." && part !== "..")
+      if (!safeRelative(sourceRelative) || !safeRelative(copied.path)) throw new Error(`Manifest provenance contains unsafe source or destination: ${copied.path}`)
+      const expectedDestination = build.locale === "zh-CN" ? sourceRelative : `${build.basePath.slice(1)}/${sourceRelative}`
+      if (copied.path !== expectedDestination) throw new Error(`Manifest provenance destination/source mapping mismatch: ${copied.path}`)
+      if (!Number.isInteger(copied.size) || copied.size <= 0 || !/^[a-f\d]{64}$/u.test(copied.sha256)) throw new Error(`Manifest provenance contains invalid size/hash: ${copied.path}`)
       const identity = releaseIdentity(copied.path)
       if (claimed.has(identity)) throw new Error(`Manifest provenance contains duplicate destination: ${copied.path}`)
       claimed.add(identity)
-      if (typeof copied.source !== "string" || !copied.source.startsWith(`${build.locale}:`)) throw new Error(`Manifest provenance has invalid source for ${copied.path}`)
       const actual = files.get(identity)
       if (!actual) throw new Error(`Manifest provenance target is missing: ${copied.path}`)
+      if (actual.path !== copied.path) throw new Error(`Manifest provenance path casing/normalization mismatch: ${copied.path}`)
       if (generated.has(identity)) { generatedCheckedSeparately += 1; continue }
       if (actual.size !== copied.size || actual.sha256 !== copied.sha256) throw new Error(`Manifest provenance mismatch for ${copied.path}`)
       checked += 1
@@ -212,7 +226,19 @@ export function validateManifestProvenance({ manifest, files, generatedPaths }) 
     if (path === "i18n-merge-manifest.json" || generated.has(path)) continue
     if (!claimed.has(path)) throw new Error(`Deployment file is absent from manifest provenance: ${files.get(path).path}`)
   }
-  return { copiedFileCount: claimed.size, byteVerifiedCopiedFiles: checked, seoGeneratedFiles: generatedCheckedSeparately }
+  return { copiedFileCount: claimed.size, byteVerifiedCopiedFiles: checked, seoMutatedCopiedFiles: generatedCheckedSeparately }
+}
+
+export function buildFrozenSeoProcessedSet(academyRoutes) {
+  const paths = BUILD_MATRIX.flatMap(({ locale }) => academyRoutes.map((logicalRoute) => academyHtmlPath(locale, logicalRoute)))
+  return [...paths, "robots.txt", "sitemap.xml"].sort(compare)
+}
+
+export function validateSeoProcessedSet({ manifest, academyRoutes }) {
+  const expected = buildFrozenSeoProcessedSet(academyRoutes)
+  const actual = manifest.seo?.processedFiles
+  if (!Array.isArray(actual) || JSON.stringify(actual) !== JSON.stringify(expected)) throw new Error("SEO processed files do not exactly match the frozen academy/robots/sitemap set")
+  return new Set(expected)
 }
 
 export function validateLocalizedScriptCoverage(records, files) {
@@ -292,32 +318,42 @@ function cssReferenceRecords({ cssFiles }) {
 
 export function findLocalPaths(text) {
   const patterns = [
-    /[a-z]:[\\/](?:Users|Documents and Settings)[\\/][^\s"'`<>|]+/giu,
-    /\\\\[^\\\s"'`<>|]+\\[^\\\s"'`<>|]+(?:\\[^\s"'`<>|]+)*/gu,
-    /file:\/\/\/(?:Users|home)\/[^\s"'`<>]+/giu,
-    /(?<![\p{L}\p{N}:])\/(?:Users|home)\/[^\s"'`<>]+/gu,
+    /(?<![\p{L}\p{N}])[a-z]:[\\/](?![\\/])[^\s"'`<>|]+/giu,
+    /(?<!\\)\\\\(?!\\)[a-z\d][a-z\d._-]+\\[a-z\d][a-z\d._-]+(?:\\[^\s"'`<>|]+)*/giu,
+    /file:\/\/\/(?:[a-z]:\/)?[^\s"'`<>]+/giu,
+    /(?<![\p{L}\p{N}:])\/(?:Users|home|workspace|opt|tmp|var\/tmp)(?![\p{L}\p{N}|)\\])(?:\/[^\s"'`<>|]+)?/gu,
   ]
   return [...new Set(patterns.flatMap((pattern) => [...text.matchAll(pattern)].map(([match]) => match.replace(/[),.;\]}]+$/gu, ""))))]
 }
 
-function validateLocalPathAllowlist(allowlist) {
+export function validateLocalPathAllowlist(allowlist) {
   if (!Array.isArray(allowlist)) throw new Error("Local-path allowlist must be an array")
+  const keys = new Set()
   for (const [index, entry] of allowlist.entries()) for (const field of ["path", "text", "reason"]) {
     if (typeof entry?.[field] !== "string" || !entry[field].trim()) throw new Error(`Local-path allowlist entry ${index} requires exact ${field}`)
+  }
+  for (const [index, entry] of allowlist.entries()) {
+    const key = `${entry.path}\0${entry.text}`
+    if (keys.has(key)) throw new Error(`Local-path allowlist contains duplicate entry ${index}`)
+    keys.add(key)
   }
   return allowlist
 }
 
-export function scanSecurityBytes({ path, bytes, forbiddenMarkers, localPathAllowlist = [] }) {
+export function scanSecurityBytes({ path, bytes, forbiddenMarkers, localPathAllowlist = [], localPathUsage }) {
   const hits = []
   for (const marker of forbiddenMarkers) if (marker.bytes?.length && bytes.includes(marker.bytes)) hits.push({ path, category: marker.name === "LOCAL_PROJECT_PATH" ? "absolute-local-path" : "configured-secret", marker: marker.name })
   const lower = path.toLowerCase()
   if (lower.endsWith(".map")) hits.push({ path, category: "source-map" })
   if (/(?:^|\/)(?:\.env(?:\.local)?|\.cache|node_modules|\.git)(?:\/|$)/u.test(lower)) hits.push({ path, category: "forbidden-artifact" })
-  if (TEXT_EXTENSIONS.has(extname(lower))) {
+  if (TEXT_EXTENSIONS.has(extname(lower)) && lower !== "scripts/i18n/release-audit-local-path-allowlist.json") {
     const text = bytes.toString("utf8")
     for (const value of findLocalPaths(text)) {
-      const allowed = localPathAllowlist.some((entry) => entry.path === path && entry.text === value && entry.reason.trim())
+      const allowed = localPathAllowlist.find((entry) => entry.path === path && entry.text === value && entry.reason.trim())
+      if (allowed && localPathUsage) {
+        const key = `${allowed.path}\0${allowed.text}`
+        localPathUsage.set(key, (localPathUsage.get(key) ?? 0) + 1)
+      }
       if (!allowed) hits.push({ path, category: "absolute-local-path" })
     }
     if (/\bat\s+(?:async\s+)?(?:file:\/\/\/)?(?:[a-z]:\\users\\|\/home\/[^/]+\/|\/Users\/[^/]+\/)[^\r\n]+:\d+:\d+/iu.test(text)) hits.push({ path, category: "local-stack-trace" })
@@ -325,13 +361,13 @@ export function scanSecurityBytes({ path, bytes, forbiddenMarkers, localPathAllo
   return hits
 }
 
-async function trackedSecurity({ projectRoot, forbiddenMarkers, localPathAllowlist }) {
+async function trackedSecurity({ projectRoot, forbiddenMarkers, localPathAllowlist, localPathUsage }) {
   const { stdout } = await execFileAsync("git", ["ls-files", "-z"], { cwd: projectRoot, encoding: "buffer", maxBuffer: 20 * 1024 * 1024 })
   const paths = stdout.toString("utf8").split("\0").filter(Boolean)
   const hits = []
   for (const path of paths) {
     const bytes = await readFile(join(projectRoot, ...slash(path).split("/")))
-    hits.push(...scanSecurityBytes({ path, bytes, forbiddenMarkers, localPathAllowlist }))
+    hits.push(...scanSecurityBytes({ path, bytes, forbiddenMarkers, localPathAllowlist, localPathUsage }))
   }
   return { fileCount: paths.length, hits }
 }
@@ -392,13 +428,14 @@ export async function auditRelease({ deploymentRoot, projectRoot, academyRoutes,
   if (JSON.stringify(actualBuilds) !== JSON.stringify(expectedBuilds) || mergeManifest.businessRouteMatrix?.total !== 400 || mergeManifest.seo?.siteOrigin !== origin) {
     throw new Error("Release manifest provenance does not match the audited build matrix and origin")
   }
-  const generatedPaths = new Set(mergeManifest.seo?.processedFiles ?? [])
+  const generatedPaths = validateSeoProcessedSet({ manifest: mergeManifest, academyRoutes })
   const provenance = validateManifestProvenance({ manifest: mergeManifest, files: filePaths, generatedPaths })
   const buildEvidence = {
     manifestSha256: sha256(mergeManifestBytes),
     sourceBuilds: mergeManifest.builds.map(({ locale, basePath, sourceOutput, logicalRouteCount, copiedFileCount }) => ({ locale, basePath, sourceOutput, logicalRouteCount, copiedFileCount })),
     seoOriginKind: mergeManifest.seo.originKind,
     seoSiteOrigin: mergeManifest.seo.siteOrigin,
+    frozenSeoProcessedFileCount: generatedPaths.size,
     provenance,
   }
 
@@ -477,12 +514,14 @@ export async function auditRelease({ deploymentRoot, projectRoot, academyRoutes,
   ] : []
   const securityHits = []
   const deploymentContentEvidence = []
+  const localPathUsage = new Map()
   for (const file of files) {
-    securityHits.push(...scanSecurityBytes({ path: file.path, bytes: file.bytes, forbiddenMarkers: [...forbiddenMarkers, ...localPathMarkers], localPathAllowlist }))
+    securityHits.push(...scanSecurityBytes({ path: file.path, bytes: file.bytes, forbiddenMarkers: [...forbiddenMarkers, ...localPathMarkers], localPathAllowlist, localPathUsage }))
     deploymentContentEvidence.push(`${file.path}\0${file.sha256}\0${file.bytes.length}\n`)
   }
-  const tracked = projectRoot ? await trackedSecurity({ projectRoot, forbiddenMarkers: [...forbiddenMarkers, ...localPathMarkers], localPathAllowlist }) : { fileCount: 0, hits: [] }
-  const security = { deploymentFileCount: files.length, trackedFileCount: tracked.fileCount, localPathAllowlistEntries: localPathAllowlist.length, deploymentHits: securityHits, trackedHits: tracked.hits }
+  const tracked = projectRoot ? await trackedSecurity({ projectRoot, forbiddenMarkers: [...forbiddenMarkers, ...localPathMarkers], localPathAllowlist, localPathUsage }) : { fileCount: 0, hits: [] }
+  const unusedLocalPathAllowlist = localPathAllowlist.filter((entry) => (localPathUsage.get(`${entry.path}\0${entry.text}`) ?? 0) !== 1).map(({ path, text }) => ({ path, textSha256: sha256(Buffer.from(text)), usageCount: localPathUsage.get(`${path}\0${text}`) ?? 0 }))
+  const security = { deploymentFileCount: files.length, trackedFileCount: tracked.fileCount, localPathAllowlistEntries: localPathAllowlist.length, localPathAllowlistUsedExactlyOnce: localPathAllowlist.length - unusedLocalPathAllowlist.length, unusedLocalPathAllowlist, deploymentHits: securityHits, trackedHits: tracked.hits }
   const seo = await auditDeploymentSeo({ deploymentRoot: root, academyRoutes, salesLegal, siteOrigin: origin })
   for (const field of ["academyHtmlSha256", "sitemapSha256", "robotsSha256", "academyPageCount", "canonicalCount", "alternateCount", "sitemapUrlCount"]) {
     if (seo[field] !== mergeManifest.seo[field]) throw new Error(`SEO-generated provenance mismatch: ${field}`)
@@ -490,7 +529,7 @@ export async function auditRelease({ deploymentRoot, projectRoot, academyRoutes,
   const failures = {
     localization: localization.unexplainedCount,
     links: links.failures.length,
-    security: security.deploymentHits.length + security.trackedHits.length,
+    security: security.deploymentHits.length + security.trackedHits.length + security.unusedLocalPathAllowlist.length,
     emptyFiles: emptyFiles.length,
   }
   const nonBrowserPass = Object.values(failures).every((count) => count === 0)
@@ -508,7 +547,7 @@ export async function auditRelease({ deploymentRoot, projectRoot, academyRoutes,
       localization: localization.unexplainedCount === 0 ? "PASS" : "FAIL",
       linksAndAssets: links.failures.length === 0 ? "PASS" : "FAIL",
       seo: seo.businessPageCount === 400 && seo.sitemapUrlCount === 400 ? "PASS" : "FAIL",
-      security: security.deploymentHits.length + security.trackedHits.length === 0 ? "PASS" : "FAIL",
+      security: security.deploymentHits.length + security.trackedHits.length + security.unusedLocalPathAllowlist.length === 0 ? "PASS" : "FAIL",
       browser: browserEvidence?.status ?? "pending",
     },
     buildEvidence,
