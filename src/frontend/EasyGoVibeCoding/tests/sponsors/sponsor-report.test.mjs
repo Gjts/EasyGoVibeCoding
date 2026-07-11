@@ -120,8 +120,8 @@ test("builds one sampling-aware fixed-window query with the locked schema", () =
       "  AND timestamp >= toDateTime('2026-07-31 16:00:00', 'Etc/UTC')",
       "  AND timestamp < toDateTime('2026-08-15 04:00:00', 'Etc/UTC')",
       "  AND blob1 IN ('viewable_impression', 'click')",
-      "  AND blob2 IN ('super-individual-home', 'super-individual-monetization')",
-      "  AND blob3 IN ('/super-individual', '/super-individual/monetization')",
+      "  AND ((blob2 = 'super-individual-home' AND blob3 = '/super-individual')",
+      "    OR (blob2 = 'super-individual-monetization' AND blob3 = '/super-individual/monetization'))",
       "GROUP BY day, event_type, slot, path",
       "ORDER BY day ASC, event_type ASC, slot ASC, path ASC",
       "FORMAT JSON",
@@ -138,13 +138,45 @@ test("query includes only the selected campaign placements and paths", () => {
 
   assert.match(
     query,
-    /blob2 IN \('super-individual-monetization'\)/,
+    /blob2 = 'super-individual-monetization' AND blob3 = '\/super-individual\/monetization'/,
+  )
+  assert.doesNotMatch(query, /'super-individual-home'/)
+})
+
+test("couples every allowed slot to its canonical path in SQL", () => {
+  const query = buildSponsorReportQuery(
+    campaign(),
+    "2026-08-15T12:00:00+08:00",
+  )
+
+  assert.match(
+    query,
+    /\(blob2 = 'super-individual-home' AND blob3 = '\/super-individual'\)/,
   )
   assert.match(
     query,
-    /blob3 IN \('\/super-individual\/monetization'\)/,
+    /\(blob2 = 'super-individual-monetization' AND blob3 = '\/super-individual\/monetization'\)/,
   )
-  assert.doesNotMatch(query, /'super-individual-home'/)
+  assert.doesNotMatch(query, /blob2 IN|blob3 IN/)
+  assert.doesNotMatch(
+    query,
+    /blob2 = 'super-individual-home' AND blob3 = '\/super-individual\/monetization'/,
+  )
+  assert.doesNotMatch(
+    query,
+    /blob2 = 'super-individual-monetization' AND blob3 = '\/super-individual'/,
+  )
+})
+
+test("package report command suppresses only the known module-type warning", () => {
+  const packageJson = JSON.parse(
+    readFileSync(new URL("../../package.json", import.meta.url), "utf8"),
+  )
+
+  assert.equal(
+    packageJson.scripts["report:sponsor"],
+    "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/export-sponsor-report.mjs",
+  )
 })
 
 test("rejects cutoffs outside the contracted half-open window", () => {

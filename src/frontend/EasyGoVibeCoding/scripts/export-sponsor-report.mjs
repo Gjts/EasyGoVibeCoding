@@ -163,7 +163,16 @@ function quoteSqlList(values) {
 export function buildSponsorReportQuery(campaign, cutoff) {
   const { startsAt, reportEnd } = validateReportWindow(campaign, cutoff)
   const slots = SLOT_ORDER.filter((slot) => campaign.placements.includes(slot))
-  const paths = slots.map((slot) => SLOT_PATHS[slot])
+  const placementPredicate = slots
+    .map((slot, index) => {
+      const prefix = index === 0 ? "  AND (" : "    OR "
+      const suffix = index === slots.length - 1 ? ")" : ""
+      return (
+        `${prefix}(blob2 = '${slot}' AND blob3 = '${SLOT_PATHS[slot]}')` +
+        suffix
+      )
+    })
+    .join("\n")
 
   return [
     "SELECT",
@@ -177,8 +186,7 @@ export function buildSponsorReportQuery(campaign, cutoff) {
     `  AND timestamp >= toDateTime('${formatUtcSqlLiteral(startsAt.milliseconds)}', 'Etc/UTC')`,
     `  AND timestamp < toDateTime('${formatUtcSqlLiteral(reportEnd.milliseconds)}', 'Etc/UTC')`,
     `  AND blob1 IN (${quoteSqlList(EVENT_TYPES)})`,
-    `  AND blob2 IN (${quoteSqlList(slots)})`,
-    `  AND blob3 IN (${quoteSqlList(paths)})`,
+    placementPredicate,
     "GROUP BY day, event_type, slot, path",
     "ORDER BY day ASC, event_type ASC, slot ASC, path ASC",
     "FORMAT JSON",
