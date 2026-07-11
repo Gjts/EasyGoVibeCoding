@@ -1395,6 +1395,8 @@ Expected: GitNexus reports the two LOW-risk page functions and the new sponsor m
 - Response: <code>202</code> accepted, <code>400</code> invalid, <code>403</code> cross-origin, <code>413</code> oversized, <code>500</code> missing Resend configuration, <code>502</code> upstream Resend failure.
 - Does not consume or modify <code>functions/api/send-email.ts</code>.
 
+> **Final implementation note:** The initial sketch below showed an inbox fallback. Review hardening removed that fallback: production requires a valid server-only <code>SPONSOR_INBOX_EMAIL</code>, and the endpoint returns the generic configuration <code>500</code> when it is absent or invalid.
+
 - [ ] **Step 1: Write failing inquiry tests**
 
 Create <code>tests/sponsors/sponsor-inquiry.test.mjs</code>:
@@ -2181,8 +2183,10 @@ Expected: GitNexus reports the new sponsor route, form, and offer data only.
 **Interfaces:**
 
 - Consumes: Analytics Engine column mapping from Task 3.
-- Produces: <code>buildSponsorReportQuery(campaignId, days)</code> and operator command <code>pnpm report:sponsor -- campaign-id 30</code>.
+- Produces: the hardened <code>buildSponsorReportQuery(campaign, cutoff)</code> contract and operator command <code>pnpm report:sponsor -- campaign-id --cutoff &lt;fixed-ISO-timestamp&gt; --output &lt;absolute-path-outside-repository.json&gt;</code>.
 - Required operator environment: <code>CF_ACCOUNT_ID</code> and a <code>CF_API_TOKEN</code> limited to Account Analytics Read.
+
+> **Final implementation note:** Steps 1–5 below preserve the original TDD sketch. The reviewed CLI does not use a rolling day window or stdout redirection: it requires an explicit whole-second, contract-bounded <code>--cutoff</code> and an absolute <code>--output</code> path outside the repository.
 
 - [ ] **Step 1: Write failing report-query tests**
 
@@ -2371,7 +2375,7 @@ Create <code>docs/bussiness/Sponsor_Operations_Runbook.md</code>:
 - Wrangler binding: SPONSOR_ANALYTICS
 - Dataset: easy_go_vibe_sponsor_events
 - Secret: RESEND_API_KEY
-- Optional variable: SPONSOR_INBOX_EMAIL
+- Required server-only variable: SPONSOR_INBOX_EMAIL
 - Operator-only local environment: CF_ACCOUNT_ID
 - Operator-only local secret: CF_API_TOKEN with Account Analytics Read
 
@@ -2383,7 +2387,7 @@ In PowerShell, set the operator-only variables for the current process:
 
     $env:CF_ACCOUNT_ID="<the 32-character account ID from Cloudflare>"
     $env:CF_API_TOKEN="<an Account Analytics Read token>"
-    pnpm report:sponsor -- vendor-product-2026-08 30 > sponsor-report.json
+    pnpm report:sponsor -- vendor-product-2026-08 --cutoff 2026-08-31T16:00:00Z --output "<absolute-path-outside-repository>\vendor-product-2026-08.json"
 
 The JSON groups server-timestamped events by day, event type, slot and path. Counts use _sample_interval * double1 so Cloudflare sampling is represented.
 
@@ -2502,10 +2506,10 @@ Test-Path out/super-individual.html
 Test-Path out/super-individual/monetization.html
 Test-Path out/functions/api/sponsor-events.ts
 Test-Path out/functions/api/sponsor-inquiry.ts
-Select-String -LiteralPath out/sponsor.html -Pattern "开发者工具广告合作"
+Select-String -LiteralPath out/sponsor.html -Pattern "读者能看清的位置"
 ~~~
 
-Expected: all paths return <code>True</code> and the sponsor heading is found.
+Expected: all paths return <code>True</code> and the current H1 copy <code>读者能看清的位置</code> is found.
 
 - [ ] **Step 5: Perform manual UX and accessibility checks**
 
@@ -2546,7 +2550,7 @@ Do not run this step automatically. Deployment is allowed only after explicit us
 
 - Cloudflare binding <code>SPONSOR_ANALYTICS</code> → <code>easy_go_vibe_sponsor_events</code>;
 - secret <code>RESEND_API_KEY</code>;
-- optional <code>SPONSOR_INBOX_EMAIL</code>;
+- required server-only <code>SPONSOR_INBOX_EMAIL</code>;
 - signed pilot or an explicit decision to launch the media kit before the first sponsor.
 
 Authorized command:
@@ -2559,7 +2563,7 @@ Expected: Cloudflare Pages deployment succeeds and returns the project deploymen
 
 - [ ] **Step 8: Run production-only smoke tests after an authorized deploy**
 
-Open the deployed <code>/super-individual</code> page and run this exact browser-console request:
+Use only a campaign that is already present in <code>data/sponsor-campaigns.json</code> and is authorized either as a non-billable smoke campaign or by a signed order. Open its deployed eligible page and run this browser-console request with that exact configured ID, slot, and path; an unconfigured literal such as <code>smoke-test</code> cannot be exported by the hardened reporter:
 
 ~~~javascript
 const smokeResponse = await fetch("/api/sponsor-events", {
@@ -2568,7 +2572,7 @@ const smokeResponse = await fetch("/api/sponsor-events", {
   body: JSON.stringify({
     schemaVersion: 1,
     eventType: "click",
-    campaignId: "smoke-test",
+    campaignId: "configured-authorized-campaign-id",
     slot: "super-individual-home",
     path: "/super-individual",
   }),
@@ -2578,12 +2582,12 @@ console.log(smokeResponse.status)
 
 Expected: console prints <code>204</code>.
 
-Submit one real sponsor inquiry owned by the operator through <code>/sponsor</code>. Verify the endpoint returns <code>202</code> in browser network tools and the inbox receives exactly one escaped message. Then export the smoke campaign:
+Submit one sponsor inquiry owned by the operator through <code>/sponsor</code>. Verify the endpoint returns <code>202</code> in browser network tools and the required configured inbox receives exactly one escaped message. Then export the same configured campaign with an explicit fixed cutoff inside its contract window and an absolute output path outside the repository:
 
 ~~~powershell
 $env:CF_ACCOUNT_ID="<the 32-character account ID from Cloudflare>"
 $env:CF_API_TOKEN="<an Account Analytics Read token>"
-pnpm report:sponsor -- smoke-test 1
+pnpm report:sponsor -- configured-authorized-campaign-id --cutoff 2026-08-31T16:00:00Z --output "<absolute-path-outside-repository>\configured-authorized-campaign-id.json"
 ~~~
 
 Expected: the report contains the smoke event in the correct event-type, slot, and path columns. Do not include the smoke row in advertiser delivery totals.
@@ -2644,4 +2648,3 @@ Plan implementation has two supported paths:
 2. **Inline Execution:** use <code>superpowers:executing-plans</code>, execute tasks in order with review checkpoints after Tasks 2, 4, 6, and 8.
 
 Do not start Task 8 production deployment or real Campaign activation without the explicit authorization gates written above.
-
