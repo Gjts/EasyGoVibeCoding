@@ -316,15 +316,25 @@ function cssReferenceRecords({ cssFiles }) {
   }))
 }
 
-export function findLocalPaths(text) {
+export function findLocalPathOccurrences(text, { includeGenericPosix = true } = {}) {
   const patterns = [
-    /(?<![\p{L}\p{N}])[a-z]:[\\/](?![\\/])[^\s"'`<>|]+/giu,
-    /(?<!\\)\\\\(?!\\)[a-z\d][a-z\d._-]+\\[a-z\d][a-z\d._-]+(?:\\[^\s"'`<>|]+)*/giu,
-    /file:\/\/\/(?:[a-z]:\/)?[^\s"'`<>]+/giu,
-    /(?<![\p{L}\p{N}:])\/(?:Users|home|workspace|opt|tmp|var\/tmp)(?![\p{L}\p{N}|)\\])(?:\/[^\s"'`<>|]+)?/gu,
+    { kind: "explicit", pattern: /(?<![\p{L}\p{N}])[a-z]:[\\/](?![\\/])[^\s"'`<>|]+/giu },
+    { kind: "explicit", pattern: /(?<!\\)\\\\(?!\\)(?![nrtbfv0]\\(?:u[\da-f]{4}|x[\da-f]{2}))[a-z\d][a-z\d._-]*\\[a-z\d$][a-z\d$._-]*(?:\\[^\s"'`<>|]+)*/giu },
+    { kind: "explicit", pattern: /file:\/\/\/(?:[a-z]:\/)?[^\s"'`<>]+/giu },
+    { kind: "explicit", pattern: /(?<![\p{L}\p{N}:\/\\])\/(?:Users|home|workspace|opt|tmp|var\/tmp|root|mnt|etc|srv|usr|bin|build|Applications|Library|\.gradle|\.cargo|\.m2|\.pip)(?![\p{L}\p{N}|)\\])(?:\/[^\s"'`<>|]+)?/gu },
+    ...(includeGenericPosix ? [{ kind: "generic", pattern: /(?<![\p{L}\p{N}:\/\\])\/(?:\.\.)?\/?[a-z\d._~-]+(?:\/[a-z\d._~+@%=-]+)*\/[a-z\d._~+@%=-]+\.[a-z\d]{1,12}(?![\p{L}\p{N}])/giu }] : []),
   ]
-  return [...new Set(patterns.flatMap((pattern) => [...text.matchAll(pattern)].map(([match]) => match.replace(/[),.;\]}]+$/gu, ""))))]
+  const source = String(text)
+  const occurrences = patterns.flatMap(({ kind, pattern }) => [...source.matchAll(pattern)].map((match) => ({ text: match[0].replace(/[),.;\]}]+$/gu, ""), offset: match.index, kind })))
+    .filter(({ kind, offset, text: value }) => {
+      if (kind !== "generic") return true
+      const context = `${source.slice(Math.max(0, offset - 120), offset)} ${source.slice(offset + value.length, offset + value.length + 120)}`
+      return /(?:\b(?:path|file|filename|filepath|directory|dir|root|workspace|filesystem|cwd|readfile|writefile|mkdir|realpath|resolve|join)\b|\bfs\s*\.|\u8def\u5f84|\u6587\u4ef6|\u76ee\u5f55)/iu.test(context)
+    })
+  return [...new Map(occurrences.map((item) => [`${item.offset}\0${item.text}`, item])).values()].sort((left, right) => left.offset - right.offset || compare(left.text, right.text))
 }
+
+export function findLocalPaths(text, options) { return findLocalPathOccurrences(text, options).map(({ text: value }) => value) }
 
 export function validateLocalPathAllowlist(allowlist) {
   if (!Array.isArray(allowlist)) throw new Error("Local-path allowlist must be an array")
@@ -333,14 +343,21 @@ export function validateLocalPathAllowlist(allowlist) {
     if (typeof entry?.[field] !== "string" || !entry[field].trim()) throw new Error(`Local-path allowlist entry ${index} requires exact ${field}`)
   }
   for (const [index, entry] of allowlist.entries()) {
-    const key = `${entry.path}\0${entry.text}`
+    if (entry.offset !== undefined && (!Number.isInteger(entry.offset) || entry.offset < 0)) throw new Error(`Local-path allowlist entry ${index} has invalid offset`)
+    const key = `${entry.path}\0${entry.text}\0${entry.offset ?? "*"}`
     if (keys.has(key)) throw new Error(`Local-path allowlist contains duplicate entry ${index}`)
     keys.add(key)
   }
   return allowlist
 }
 
-export function scanSecurityBytes({ path, bytes, forbiddenMarkers, localPathAllowlist = [], localPathUsage }) {
+export function validateLocalPathAllowlistUsage(allowlist, usage) {
+  const mismatches = allowlist.map((entry) => ({ entry, count: usage.get(`${entry.path}\0${entry.text}\0${entry.offset ?? "*"}`) ?? 0 })).filter(({ count }) => count !== 1)
+  if (mismatches.length) throw new Error(`Every local-path allowlist entry must be used exactly once; mismatches: ${mismatches.map(({ entry, count }) => `${entry.path}:${sha256(Buffer.from(entry.text))}:${count}`).join(",")}`)
+  return { entries: allowlist.length, usedExactlyOnce: allowlist.length }
+}
+
+export function scanSecurityBytes({ path, bytes, forbiddenMarkers, localPathAllowlist = [], localPathUsage, includeGenericPosix = true }) {
   const hits = []
   for (const marker of forbiddenMarkers) if (marker.bytes?.length && bytes.includes(marker.bytes)) hits.push({ path, category: marker.name === "LOCAL_PROJECT_PATH" ? "absolute-local-path" : "configured-secret", marker: marker.name })
   const lower = path.toLowerCase()
@@ -348,14 +365,16 @@ export function scanSecurityBytes({ path, bytes, forbiddenMarkers, localPathAllo
   if (/(?:^|\/)(?:\.env(?:\.local)?|\.cache|node_modules|\.git)(?:\/|$)/u.test(lower)) hits.push({ path, category: "forbidden-artifact" })
   if (TEXT_EXTENSIONS.has(extname(lower)) && lower !== "scripts/i18n/release-audit-local-path-allowlist.json") {
     const text = bytes.toString("utf8")
-    for (const value of findLocalPaths(text)) {
-      const allowed = localPathAllowlist.find((entry) => entry.path === path && entry.text === value && entry.reason.trim())
+    let localPathFinding = false
+    for (const { text: value, offset } of findLocalPathOccurrences(text, { includeGenericPosix })) {
+      const allowed = localPathAllowlist.find((entry) => entry.path === path && entry.text === value && (entry.offset === undefined || entry.offset === offset) && entry.reason.trim())
       if (allowed && localPathUsage) {
-        const key = `${allowed.path}\0${allowed.text}`
+        const key = `${allowed.path}\0${allowed.text}\0${allowed.offset ?? "*"}`
         localPathUsage.set(key, (localPathUsage.get(key) ?? 0) + 1)
       }
-      if (!allowed) hits.push({ path, category: "absolute-local-path" })
+      if (!allowed) localPathFinding = true
     }
+    if (localPathFinding) hits.push({ path, category: "absolute-local-path" })
     if (/\bat\s+(?:async\s+)?(?:file:\/\/\/)?(?:[a-z]:\\users\\|\/home\/[^/]+\/|\/Users\/[^/]+\/)[^\r\n]+:\d+:\d+/iu.test(text)) hits.push({ path, category: "local-stack-trace" })
   }
   return hits
@@ -516,11 +535,11 @@ export async function auditRelease({ deploymentRoot, projectRoot, academyRoutes,
   const deploymentContentEvidence = []
   const localPathUsage = new Map()
   for (const file of files) {
-    securityHits.push(...scanSecurityBytes({ path: file.path, bytes: file.bytes, forbiddenMarkers: [...forbiddenMarkers, ...localPathMarkers], localPathAllowlist, localPathUsage }))
+    securityHits.push(...scanSecurityBytes({ path: file.path, bytes: file.bytes, forbiddenMarkers: [...forbiddenMarkers, ...localPathMarkers], localPathAllowlist, localPathUsage, includeGenericPosix: false }))
     deploymentContentEvidence.push(`${file.path}\0${file.sha256}\0${file.bytes.length}\n`)
   }
   const tracked = projectRoot ? await trackedSecurity({ projectRoot, forbiddenMarkers: [...forbiddenMarkers, ...localPathMarkers], localPathAllowlist, localPathUsage }) : { fileCount: 0, hits: [] }
-  const unusedLocalPathAllowlist = localPathAllowlist.filter((entry) => (localPathUsage.get(`${entry.path}\0${entry.text}`) ?? 0) !== 1).map(({ path, text }) => ({ path, textSha256: sha256(Buffer.from(text)), usageCount: localPathUsage.get(`${path}\0${text}`) ?? 0 }))
+  const unusedLocalPathAllowlist = localPathAllowlist.filter((entry) => (localPathUsage.get(`${entry.path}\0${entry.text}\0${entry.offset ?? "*"}`) ?? 0) !== 1).map(({ path, text, offset }) => ({ path, offset, textSha256: sha256(Buffer.from(text)), usageCount: localPathUsage.get(`${path}\0${text}\0${offset ?? "*"}`) ?? 0 }))
   const security = { deploymentFileCount: files.length, trackedFileCount: tracked.fileCount, localPathAllowlistEntries: localPathAllowlist.length, localPathAllowlistUsedExactlyOnce: localPathAllowlist.length - unusedLocalPathAllowlist.length, unusedLocalPathAllowlist, deploymentHits: securityHits, trackedHits: tracked.hits }
   const seo = await auditDeploymentSeo({ deploymentRoot: root, academyRoutes, salesLegal, siteOrigin: origin })
   for (const field of ["academyHtmlSha256", "sitemapSha256", "robotsSha256", "academyPageCount", "canonicalCount", "alternateCount", "sitemapUrlCount"]) {

@@ -12,11 +12,13 @@ import {
   collectHtmlReferences,
   extractVisibleText,
   findLocalizationResidue,
+  findLocalPathOccurrences,
   findLocalPaths,
   scanSecurityBytes,
   validateAllowlist,
   validateLocalizedScriptCoverage,
   validateLocalPathAllowlist,
+  validateLocalPathAllowlistUsage,
   validateManifestProvenance,
   validateReleasePathIndex,
   validateSeoProcessedSet,
@@ -67,12 +69,20 @@ test("scanSecurityBytes reports marker names without exposing marker values", ()
 })
 
 test("scanSecurityBytes rejects ordinary Windows, UNC, file URL and POSIX local paths", () => {
-  const source = String.raw`const a="C:\\Users\\alice\\repo"; const b="D:\\build\\output"; const c="C:\\temp\\x"; const d="\\\\server\\share\\repo"; const e="file:///var/tmp/repo"; const f="/home/alice/repo"; const g="/workspace/app"; const h="/opt/tool"; const i="/tmp/build"`
+  const source = String.raw`const a="C:\\Users\\alice\\repo"; const b="D:\\build\\output"; const c="C:\\temp\\x"; const d="\\\\server\\share\\repo"; const e="file:///var/tmp/repo"; const f="/home/alice/repo"; const g="/workspace/app"; const h="/opt/tool"; const i="/tmp/build"; const j="\\\\a\\b\\secret.txt"; const k="\\\\127.0.0.1\\C$\\secret.txt"; const l="/root/secret"; const m="/mnt/data"; const n="/etc/passwd"; const filePath="/custom/build/file.txt"`
   const hits = scanSecurityBytes({ path: "app.js", bytes: Buffer.from(source), forbiddenMarkers: [], localPathAllowlist: [] })
   assert.deepEqual([...new Set(hits.map(({ category }) => category))], ["absolute-local-path"])
   assert.deepEqual(findLocalPaths('"/workspace" "/opt"'), ["/workspace", "/opt"])
   assert.equal(findLocalPaths(String.raw`const escaped = /\\\\[^\\s]+\\share/u`).length, 0)
   assert.throws(() => validateLocalPathAllowlist([{ path: "app.js", text: "/workspace/app", reason: "fixture" }, { path: "app.js", text: "/workspace/app", reason: "duplicate" }]), /duplicate/iu)
+  const repeatedPath = `/${"root"}/secret`
+  const repeated = `const a="${repeatedPath}"; const b="${repeatedPath}"`
+  const occurrences = findLocalPathOccurrences(repeated)
+  assert.equal(occurrences.filter(({ text }) => text === "/root/secret").length, 2)
+  const usage = new Map()
+  const repeatedAllowlist = validateLocalPathAllowlist([{ path: "repeat.js", text: repeatedPath, reason: "fixture" }])
+  scanSecurityBytes({ path: "repeat.js", bytes: Buffer.from(repeated), forbiddenMarkers: [], localPathAllowlist: repeatedAllowlist, localPathUsage: usage })
+  assert.throws(() => validateLocalPathAllowlistUsage(repeatedAllowlist, usage), /exactly once/iu)
 })
 
 test("allowlist requires exact locale, route, file, scope, text, and reason", () => {
