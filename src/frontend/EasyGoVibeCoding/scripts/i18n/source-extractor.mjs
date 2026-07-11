@@ -36,6 +36,7 @@ function createOccurrence({
   kind,
   source,
   expressions = [],
+  expressionRanges = [],
   collapseWhitespace = false,
 }) {
   const normalizedSource = normalizeMessage(source, collapseWhitespace)
@@ -49,6 +50,7 @@ function createOccurrence({
     kind,
     source: normalizedSource,
     expressions,
+    expressionRanges,
   }
 }
 
@@ -204,9 +206,14 @@ function extractTypeScriptOccurrences({ file, source }) {
 
       let pattern = node.head.text
       const expressions = []
+      const expressionRanges = []
       for (const [index, span] of node.templateSpans.entries()) {
         pattern += `{p${index}}${span.literal.text}`
         expressions.push(span.expression.getText(sourceFile))
+        expressionRanges.push({
+          start: span.expression.getStart(sourceFile),
+          end: span.expression.end,
+        })
       }
       const occurrence = createOccurrence({
         file,
@@ -215,11 +222,9 @@ function extractTypeScriptOccurrences({ file, source }) {
         kind: "template",
         source: pattern,
         expressions,
+        expressionRanges,
       })
-      if (occurrence) {
-        occurrences.push(occurrence)
-        return
-      }
+      if (occurrence) occurrences.push(occurrence)
 
       for (const span of node.templateSpans) visit(span.expression)
       return
@@ -372,6 +377,11 @@ async function collectExtraction({ projectRoot, roots = DEFAULT_ROOTS }) {
   const occurrences = []
   for (const file of files) {
     const source = await readFile(file.absolutePath, "utf8")
+    if (source.includes("\r")) {
+      throw new Error(
+        `Scanned source ${file.relativePath} must use LF-only line endings; found a carriage return`,
+      )
+    }
     occurrences.push(
       ...extractTranslationUnitsFromText({ file: file.relativePath, source }),
     )

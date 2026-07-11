@@ -19,12 +19,14 @@ test("extracts Chinese JSX text, display strings, and template patterns", async 
 
   const source = [
     '"use client"',
+    '"顶层中文指令"',
     'import guide from "./中文模块"',
     '// 被忽略的中文注释',
     'export { guide } from "./中文导出"',
     'const labels = { "中文键": "展示文案", plain: "辅助说明" }',
     'type Topic = "中文类型"',
     'export function Welcome({ name }) {',
+    '  "函数中文指令"',
     '  return (',
     '    <section aria-label="课程卡片">',
     '      <h1>欢迎学习</h1>',
@@ -51,6 +53,11 @@ test("extracts Chinese JSX text, display strings, and template patterns", async 
   assert.equal(bySource.get("展示文案").kind, "string")
   assert.equal(bySource.get("欢迎，{p0}").kind, "template")
   assert.deepEqual(bySource.get("欢迎，{p0}").expressions, ["name"])
+  const templateStart = source.indexOf("`欢迎")
+  const expressionStart = source.indexOf("name", templateStart)
+  assert.deepEqual(bySource.get("欢迎，{p0}").expressionRanges, [
+    { start: expressionStart, end: expressionStart + "name".length },
+  ])
 
   for (const occurrence of occurrences) {
     assert.equal(occurrence.file, "app/page.tsx")
@@ -58,7 +65,10 @@ test("extracts Chinese JSX text, display strings, and template patterns", async 
     assert.equal(Number.isInteger(occurrence.end), true)
     assert.equal(occurrence.end > occurrence.start, true)
     assert.equal(source.slice(occurrence.start, occurrence.end).length > 0, true)
-    if (occurrence.kind !== "template") assert.deepEqual(occurrence.expressions, [])
+    if (occurrence.kind !== "template") {
+      assert.deepEqual(occurrence.expressions, [])
+      assert.deepEqual(occurrence.expressionRanges, [])
+    }
   }
   assert.equal(
     source.slice(bySource.get("展示文案").start, bySource.get("展示文案").end),
@@ -70,7 +80,10 @@ test("extracts Chinese JSX text, display strings, and template patterns", async 
   )
 
   const excludedSource = occurrences.map((occurrence) => occurrence.source).join("\n")
-  assert.doesNotMatch(excludedSource, /use client|中文模块|中文导出|中文键|中文类型|中文注释/)
+  assert.doesNotMatch(
+    excludedSource,
+    /use client|顶层中文指令|函数中文指令|中文模块|中文导出|中文键|中文类型|中文注释/,
+  )
 })
 
 test("extracts JSON string values recursively but never JSON keys", async () => {
@@ -89,6 +102,7 @@ test("extracts JSON string values recursively but never JSON keys", async () => 
   )
   assert.equal(occurrences.every((occurrence) => occurrence.kind === "json-string"), true)
   assert.equal(occurrences.every((occurrence) => occurrence.expressions.length === 0), true)
+  for (const occurrence of occurrences) assert.deepEqual(occurrence.expressionRanges, [])
   assert.equal(
     occurrences.every(
       (occurrence) => source.slice(occurrence.start, occurrence.end) === `"${occurrence.source}"`,
@@ -109,6 +123,38 @@ test("assigns one content-addressed ID to repeated identical messages", async ()
   assert.equal(occurrences.length, 2)
   assert.equal(occurrences[0].id, occurrences[1].id)
   assert.match(occurrences[0].id, /^[a-f0-9]{64}$/)
+  for (const occurrence of occurrences) assert.deepEqual(occurrence.expressionRanges, [])
+})
+
+test("extracts Han literals nested inside a Han-bearing template expression", async () => {
+  const { extractTranslationUnitsFromText } = await loadExtractor()
+  assert.equal(typeof extractTranslationUnitsFromText, "function")
+
+  const expression = 'allowed ? "是" : "否"'
+  const source = `export const message = \`状态：\${${expression}}\``
+  const occurrences = extractTranslationUnitsFromText({
+    file: "app/api/example/route.ts",
+    source,
+  })
+
+  assert.deepEqual(
+    occurrences.map((occurrence) => occurrence.source),
+    ["状态：{p0}", "是", "否"],
+  )
+  const parent = occurrences[0]
+  const expressionStart = source.indexOf(expression)
+  assert.deepEqual(parent.expressions, [expression])
+  assert.deepEqual(parent.expressionRanges, [
+    { start: expressionStart, end: expressionStart + expression.length },
+  ])
+  assert.equal(
+    occurrences.slice(1).every(
+      (occurrence) =>
+        occurrence.start >= parent.expressionRanges[0].start &&
+        occurrence.end <= parent.expressionRanges[0].end,
+    ),
+    true,
+  )
 })
 
 test("preserves meaningful template layout while normalizing line endings", async () => {
@@ -220,5 +266,24 @@ test("fails a full extraction when no translation entries are found", async (t) 
   await assert.rejects(
     extractTranslationUnits({ projectRoot, roots: ["app"] }),
     /no translatable Chinese messages/i,
+  )
+})
+
+test("fails a full extraction when a scanned source contains CRLF", async (t) => {
+  const { extractTranslationUnits } = await loadExtractor()
+  assert.equal(typeof extractTranslationUnits, "function")
+
+  const projectRoot = await mkdtemp(join(tmpdir(), "egvc-crlf-extractor-"))
+  t.after(() => rm(projectRoot, { recursive: true, force: true }))
+  await mkdir(join(projectRoot, "app"), { recursive: true })
+  await writeFile(
+    join(projectRoot, "app", "page.tsx"),
+    "export default function Page() {\r\n  return <p>换行文案</p>\r\n}\r\n",
+    "utf8",
+  )
+
+  await assert.rejects(
+    extractTranslationUnits({ projectRoot, roots: ["app"] }),
+    /app\/page\.tsx.*LF-only/i,
   )
 })

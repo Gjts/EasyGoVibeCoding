@@ -1,0 +1,21 @@
+# Academy source scanned by scripts/i18n/source-extractor.mjs must keep stable offsets.
+/src/frontend/EasyGoVibeCoding/app/**/*.[jt]s text eol=lf
+/src/frontend/EasyGoVibeCoding/app/**/*.[jt]sx text eol=lf
+/src/frontend/EasyGoVibeCoding/app/**/*.json text eol=lf
+/src/frontend/EasyGoVibeCoding/components/**/*.[jt]s text eol=lf
+/src/frontend/EasyGoVibeCoding/components/**/*.[jt]sx text eol=lf
+/src/frontend/EasyGoVibeCoding/components/**/*.json text eol=lf
+/src/frontend/EasyGoVibeCoding/lib/**/*.[jt]s text eol=lf
+/src/frontend/EasyGoVibeCoding/lib/**/*.[jt]sx text eol=lf
+/src/frontend/EasyGoVibeCoding/lib/**/*.json text eol=lf
+/src/frontend/EasyGoVibeCoding/data/**/*.[jt]s text eol=lf
+/src/frontend/EasyGoVibeCoding/data/**/*.[jt]sx text eol=lf
+/src/frontend/EasyGoVibeCoding/data/**/*.json text eol=lf
+
+# The existing Japanese sales surface is outside academy extraction.
+/src/frontend/EasyGoVibeCoding/app/ja/** !text !eol
+/src/frontend/EasyGoVibeCoding/components/ja/** !text !eol
+/src/frontend/EasyGoVibeCoding/lib/ja/** !text !eol
+
+# Generated catalogs are hashed byte-for-byte in deterministic extraction checks.
+/src/frontend/EasyGoVibeCoding/i18n/catalog/*.json text eol=lf
