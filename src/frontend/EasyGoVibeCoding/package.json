@@ -11,6 +11,7 @@
     "postbuild": "node scripts/copy-functions.js",
     "dev": "next dev",
     "lint": "eslint .",
+    "report:sponsor": "node scripts/export-sponsor-report.mjs",
     "start": "next start",
     "test:sponsors": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test tests/sponsors/*.test.mjs",
     "typecheck": "tsc --noEmit",
