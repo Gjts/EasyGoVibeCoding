@@ -38,8 +38,8 @@ const FORBIDDEN_PATH_PARTS = new Set([
   "out",
 ])
 const SECRET_ENV_NAMES = [
-  "I18N_RELAY_API_KEY",
-  "I18N_RELAY_BASE_URL",
+  "TRANSLATION_API_BASE_URL",
+  "TRANSLATION_API_KEY",
   "OPENAI_API_KEY",
   "RESEND_API_KEY",
 ]
@@ -84,26 +84,113 @@ async function assertOrdinaryDirectory(path, label) {
   }
 }
 
-async function safeRemoveContained(root, target, label) {
+async function lstatIfExists(path) {
+  try {
+    return await lstat(path)
+  } catch (error) {
+    if (error?.code === "ENOENT") return null
+    throw error
+  }
+}
+
+async function validateExistingCacheAncestors(projectRoot, cacheRoot, requireCacheRoot) {
+  const expectedCacheRoot = resolve(projectRoot, ".cache", "i18n-build")
+  if (!isSamePath(expectedCacheRoot, cacheRoot)) {
+    throw new Error("cacheRoot must resolve to <projectRoot>/.cache/i18n-build")
+  }
+  const realProjectRoot = await realpath(projectRoot)
+  const ancestors = [resolve(projectRoot, ".cache"), expectedCacheRoot]
+  for (const ancestor of ancestors) {
+    const details = await lstatIfExists(ancestor)
+    if (!details) {
+      if (requireCacheRoot && isSamePath(ancestor, expectedCacheRoot)) {
+        throw new Error("Locale cache root must exist")
+      }
+      continue
+    }
+    if (!details.isDirectory() || details.isSymbolicLink()) {
+      throw new Error("Locale cache ancestors must be ordinary directories")
+    }
+    const expectedRealPath = resolve(realProjectRoot, relative(projectRoot, ancestor))
+    if (!isSamePath(await realpath(ancestor), expectedRealPath)) {
+      throw new Error("Locale cache root real path must stay inside projectRoot")
+    }
+  }
+}
+
+async function assertCacheRootIdentity(projectRoot, cacheRoot) {
+  await validateExistingCacheAncestors(projectRoot, cacheRoot, true)
+}
+
+async function assertContainedDirectoryIfExists(root, target, label) {
   const absoluteTarget = assertStrictlyContained(root, target, label)
-  await rm(absoluteTarget, { recursive: true, force: true, maxRetries: 3 })
+  const details = await lstatIfExists(absoluteTarget)
+  if (!details) return { absoluteTarget, exists: false }
+  if (!details.isDirectory() || details.isSymbolicLink()) {
+    throw new Error(label + " must be an ordinary directory")
+  }
+  const [realRoot, realTarget] = await Promise.all([
+    realpath(root),
+    realpath(absoluteTarget),
+  ])
+  assertStrictlyContained(realRoot, realTarget, "Resolved " + label)
+  return { absoluteTarget, exists: true }
+}
+
+async function safeRemoveContained(
+  root,
+  target,
+  label,
+  { projectRoot, cacheRoot } = {},
+) {
+  const retryableCodes = new Set(["EACCES", "EBUSY", "ENOTEMPTY", "EPERM"])
+  for (let attempt = 0; attempt < 6; attempt += 1) {
+    if (projectRoot) await assertCacheRootIdentity(projectRoot, cacheRoot)
+    const { absoluteTarget } = await assertContainedDirectoryIfExists(root, target, label)
+    if (projectRoot) await assertCacheRootIdentity(projectRoot, cacheRoot)
+    try {
+      await rm(absoluteTarget, { recursive: true, force: true, maxRetries: 0 })
+      if (projectRoot) await assertCacheRootIdentity(projectRoot, cacheRoot)
+      return
+    } catch (error) {
+      if (!retryableCodes.has(error?.code) || attempt === 5) throw error
+      await wait(50 * 2 ** attempt)
+    }
+  }
 }
 
 function wait(milliseconds) {
   return new Promise((resolveWait) => setTimeout(resolveWait, milliseconds))
 }
 
-async function renameContainedWithRetries(root, source, target) {
+async function renameContainedWithRetries({
+  projectRoot,
+  root,
+  source,
+  target,
+  renameOperation = rename,
+  sourceLabel,
+  targetLabel,
+}) {
   const retryableCodes = new Set(["EACCES", "EBUSY", "EPERM"])
   for (let attempt = 0; attempt < 6; attempt += 1) {
-    const absoluteSource = assertStrictlyContained(
+    await assertCacheRootIdentity(projectRoot, root)
+    const sourceState = await assertContainedDirectoryIfExists(
       root,
       source,
-      "Temporary locale staging target",
+      sourceLabel,
     )
-    const absoluteTarget = assertStrictlyContained(root, target, "Locale staging target")
+    if (!sourceState.exists) throw new Error(sourceLabel + " does not exist")
+    const targetState = await assertContainedDirectoryIfExists(
+      root,
+      target,
+      targetLabel,
+    )
+    if (targetState.exists) throw new Error(targetLabel + " already exists")
+    await assertCacheRootIdentity(projectRoot, root)
     try {
-      await rename(absoluteSource, absoluteTarget)
+      await renameOperation(sourceState.absoluteTarget, targetState.absoluteTarget)
+      await assertCacheRootIdentity(projectRoot, root)
       return
     } catch (error) {
       if (!retryableCodes.has(error?.code) || attempt === 5) throw error
@@ -244,8 +331,9 @@ function assertEligibleRelativePath(relativePath) {
     throw new Error(`Git selected a forbidden cache/build path: ${relativePath}`)
   }
   const fileName = parts.at(-1) ?? ""
-  if (fileName.startsWith(".env")) {
-    if (fileName === ".env.example") return null
+  const lowerFileName = fileName.toLowerCase()
+  if (lowerFileName.startsWith(".env")) {
+    if (lowerFileName === ".env.example") return null
     throw new Error(`Git selected a forbidden environment file: ${relativePath}`)
   }
   if (/\.(?:key|p12|pfx|pem)$/iu.test(fileName)) {
@@ -391,7 +479,7 @@ async function auditStagingTree(stagingRoot) {
     if (parts[0] === "app" && parts[1] === "ja") {
       throw new Error("Staging tree still contains app/ja")
     }
-    if (fileName.startsWith(".env")) {
+    if (fileName.toLowerCase().startsWith(".env")) {
       throw new Error(`Staging tree contains an environment file: ${relativePath}`)
     }
     if (
@@ -402,7 +490,7 @@ async function auditStagingTree(stagingRoot) {
   }
 
   const secretValues = SECRET_ENV_NAMES.map((name) => process.env[name])
-    .filter((value) => typeof value === "string" && value.length >= 8)
+    .filter((value) => typeof value === "string" && value.length > 0)
     .map((value) => Buffer.from(value))
   if (secretValues.length > 0) {
     for (const { absolutePath, entry, relativePath } of paths) {
@@ -437,25 +525,26 @@ async function prepareSafeCacheRoot(projectRoot, cacheRoot) {
   if (!isSamePath(expectedCacheRoot, resolvedCacheRoot)) {
     throw new Error("cacheRoot must resolve to <projectRoot>/.cache/i18n-build")
   }
+  await validateExistingCacheAncestors(projectRoot, resolvedCacheRoot, false)
   await mkdir(resolvedCacheRoot, { recursive: true })
-  await assertOrdinaryDirectory(resolvedCacheRoot, "Locale cache root")
-  const [realProjectRoot, realCacheRoot] = await Promise.all([
-    realpath(projectRoot),
-    realpath(resolvedCacheRoot),
-  ])
-  const expectedRealCacheRoot = resolve(realProjectRoot, ".cache", "i18n-build")
-  if (!isSamePath(realCacheRoot, expectedRealCacheRoot)) {
-    throw new Error("Locale cache root real path must stay inside projectRoot")
-  }
+  await assertCacheRootIdentity(projectRoot, resolvedCacheRoot)
   return resolvedCacheRoot
 }
 
-export async function createLocaleBuildTree({ projectRoot, locale, cacheRoot } = {}) {
+export async function createLocaleBuildTree({
+  projectRoot,
+  locale,
+  cacheRoot,
+  publishRename = rename,
+} = {}) {
   if (typeof projectRoot !== "string" || projectRoot.length === 0) {
     throw new TypeError("projectRoot must be a non-empty string")
   }
   if (!SUPPORTED_LOCALES.has(locale)) {
     throw new Error(`locale must be a supported locale: ${[...SUPPORTED_LOCALES].join(", ")}`)
+  }
+  if (typeof publishRename !== "function") {
+    throw new TypeError("publishRename must be a function")
   }
   const absoluteProjectRoot = resolve(projectRoot)
   await assertOrdinaryDirectory(absoluteProjectRoot, "projectRoot")
@@ -467,8 +556,13 @@ export async function createLocaleBuildTree({ projectRoot, locale, cacheRoot } =
   )
   const temporaryRoot = assertStrictlyContained(
     absoluteCacheRoot,
-    resolve(absoluteCacheRoot, `.${locale}-${process.pid}-${randomUUID()}`),
+    resolve(absoluteCacheRoot, `.${locale}-build-${process.pid}-${randomUUID()}`),
     "Temporary locale staging target",
+  )
+  const backupRoot = assertStrictlyContained(
+    absoluteCacheRoot,
+    resolve(absoluteCacheRoot, `.${locale}-backup-${process.pid}-${randomUUID()}`),
+    "Locale staging backup",
   )
 
   const release = await loadCatalogRelease({ projectRoot: absoluteProjectRoot, locale })
@@ -476,11 +570,16 @@ export async function createLocaleBuildTree({ projectRoot, locale, cacheRoot } =
     compareText,
   )
   const canonicalHashes = await hashCanonicalFiles(absoluteProjectRoot, occurrenceFiles)
+  let backupCreated = false
+  let newTargetCreated = false
+  let publicationComplete = false
 
   try {
     const eligibleFiles = await listEligibleFiles(absoluteProjectRoot)
     const eligibleFileSet = new Set(eligibleFiles)
+    await assertCacheRootIdentity(absoluteProjectRoot, absoluteCacheRoot)
     await mkdir(temporaryRoot, { recursive: false })
+    await assertCacheRootIdentity(absoluteProjectRoot, absoluteCacheRoot)
     await copyEligibleFiles({
       projectRoot: absoluteProjectRoot,
       stagingRoot: temporaryRoot,
@@ -492,7 +591,12 @@ export async function createLocaleBuildTree({ projectRoot, locale, cacheRoot } =
       resolve(temporaryRoot, "app", "ja"),
       "Staging app/ja",
     )
-    await safeRemoveContained(temporaryRoot, jaRoot, "Staging app/ja")
+    await safeRemoveContained(
+      temporaryRoot,
+      jaRoot,
+      "Staging app/ja",
+      { projectRoot: absoluteProjectRoot, cacheRoot: absoluteCacheRoot },
+    )
 
     const counts = await transformOccurrenceFiles({
       stagingRoot: temporaryRoot,
@@ -522,26 +626,97 @@ export async function createLocaleBuildTree({ projectRoot, locale, cacheRoot } =
     await writeFile(join(temporaryRoot, BUILD_MANIFEST_FILE), stagingManifestBytes, "utf8")
     await assertCanonicalHashes(absoluteProjectRoot, canonicalHashes)
 
-    assertStrictlyContained(absoluteCacheRoot, temporaryRoot, "Temporary locale staging target")
-    assertStrictlyContained(absoluteCacheRoot, stagingRoot, "Locale staging target")
-    try {
-      const existing = await lstat(stagingRoot)
-      if (existing.isSymbolicLink()) {
-        throw new Error("Existing locale staging target must not be a symbolic link")
-      }
-    } catch (error) {
-      if (error?.code !== "ENOENT") throw error
+    const existingTarget = await assertContainedDirectoryIfExists(
+      absoluteCacheRoot,
+      stagingRoot,
+      "Current locale staging target",
+    )
+    if (existingTarget.exists) {
+      await renameContainedWithRetries({
+        projectRoot: absoluteProjectRoot,
+        root: absoluteCacheRoot,
+        source: stagingRoot,
+        target: backupRoot,
+        renameOperation: publishRename,
+        sourceLabel: "Current locale staging target",
+        targetLabel: "Locale staging backup",
+      })
+      backupCreated = true
     }
-    await safeRemoveContained(absoluteCacheRoot, stagingRoot, "Locale staging target")
-    await renameContainedWithRetries(absoluteCacheRoot, temporaryRoot, stagingRoot)
+    await renameContainedWithRetries({
+      projectRoot: absoluteProjectRoot,
+      root: absoluteCacheRoot,
+      source: temporaryRoot,
+      target: stagingRoot,
+      renameOperation: publishRename,
+      sourceLabel: "Temporary locale staging target",
+      targetLabel: "Locale staging target",
+    })
+    newTargetCreated = true
     await assertCanonicalHashes(absoluteProjectRoot, canonicalHashes)
+    publicationComplete = true
+    if (backupCreated) {
+      await safeRemoveContained(
+        absoluteCacheRoot,
+        backupRoot,
+        "Locale staging backup",
+        { projectRoot: absoluteProjectRoot, cacheRoot: absoluteCacheRoot },
+      )
+      backupCreated = false
+    }
     return stagingRoot
   } catch (error) {
-    await safeRemoveContained(
-      absoluteCacheRoot,
-      temporaryRoot,
-      "Temporary locale staging target",
-    ).catch(() => {})
+    const recoveryErrors = []
+    if (!publicationComplete) {
+      if (newTargetCreated) {
+        try {
+          await renameContainedWithRetries({
+            projectRoot: absoluteProjectRoot,
+            root: absoluteCacheRoot,
+            source: stagingRoot,
+            target: temporaryRoot,
+            renameOperation: publishRename,
+            sourceLabel: "Failed locale staging target",
+            targetLabel: "Temporary locale cleanup target",
+          })
+          newTargetCreated = false
+        } catch (recoveryError) {
+          recoveryErrors.push(recoveryError)
+        }
+      }
+      if (backupCreated) {
+        try {
+          await renameContainedWithRetries({
+            projectRoot: absoluteProjectRoot,
+            root: absoluteCacheRoot,
+            source: backupRoot,
+            target: stagingRoot,
+            renameOperation: publishRename,
+            sourceLabel: "Locale staging backup",
+            targetLabel: "Restored locale staging target",
+          })
+          backupCreated = false
+        } catch (recoveryError) {
+          recoveryErrors.push(recoveryError)
+        }
+      }
+    }
+    try {
+      await safeRemoveContained(
+        absoluteCacheRoot,
+        temporaryRoot,
+        "Temporary locale staging target",
+        { projectRoot: absoluteProjectRoot, cacheRoot: absoluteCacheRoot },
+      )
+    } catch (recoveryError) {
+      recoveryErrors.push(recoveryError)
+    }
+    if (recoveryErrors.length > 0) {
+      throw new AggregateError(
+        [error, ...recoveryErrors],
+        "Locale publication failed and recovery was incomplete",
+      )
+    }
     throw error
   }
 }

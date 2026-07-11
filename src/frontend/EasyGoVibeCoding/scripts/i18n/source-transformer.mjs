@@ -273,20 +273,43 @@ function sameNumberArray(left, right) {
   return left.length === right.length && left.every((value, index) => value === right[index])
 }
 
-function escapeJsxText(value) {
+function isValidNumericEntity(entity) {
+  if (!entity.startsWith("&#")) return true
+  const hexadecimal = entity[2]?.toLowerCase() === "x"
+  const digits = entity.slice(hexadecimal ? 3 : 2, -1)
+  const codePoint = Number.parseInt(digits, hexadecimal ? 16 : 10)
+  return (
+    codePoint !== 0 &&
+    codePoint <= 0x10ffff &&
+    !(codePoint >= 0xd800 && codePoint <= 0xdfff)
+  )
+}
+
+function escapeJsxValue(value, attribute) {
   return value.replace(
-    /&(?:#\d+|#x[\da-f]+|[a-z][\da-z]+);|[&<>{}]/giu,
+    /&(?:#\d+|#x[\da-f]+|[a-z][\da-z]+);|[&<>{}"]/giu,
     (token) => {
-      if (token.startsWith("&") && token.endsWith(";")) return token
+      if (token.startsWith("&") && token.endsWith(";")) {
+        return isValidNumericEntity(token) ? token : "&amp;" + token.slice(1)
+      }
       return {
         "&": "&amp;",
         "<": "&lt;",
         ">": "&gt;",
         "{": "&#123;",
         "}": "&#125;",
+        '"': attribute ? "&quot;" : '"',
       }[token]
     },
   )
+}
+
+function escapeJsxText(value) {
+  return escapeJsxValue(value, false)
+}
+
+function escapeJsxAttribute(value) {
+  return escapeJsxValue(value, true)
 }
 
 function escapeTemplateSegment(value) {
@@ -324,7 +347,7 @@ function renderOccurrence({ fullSource, occurrence, occurrences, messages, appli
   switch (occurrence.kind) {
     case "string": {
       const literal = JSON.stringify(translated)
-      return occurrence.isJsxAttribute ? `{${literal}}` : literal
+      return occurrence.isJsxAttribute ? '"' + escapeJsxAttribute(translated) + '"' : literal
     }
     case "json-string":
       return JSON.stringify(translated)

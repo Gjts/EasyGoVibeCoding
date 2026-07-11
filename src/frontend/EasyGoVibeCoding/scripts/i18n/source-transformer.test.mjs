@@ -6,16 +6,19 @@ import {
   mkdir,
   mkdtemp,
   readFile,
+  readdir,
   realpath,
+  rename,
   rm,
   stat,
   symlink,
   writeFile,
 } from "node:fs/promises"
 import { tmpdir } from "node:os"
-import { dirname, join, resolve } from "node:path"
+import { basename, dirname, isAbsolute, join, relative, resolve } from "node:path"
 import { promisify } from "node:util"
 import test from "node:test"
+import ts from "typescript"
 
 import { extractTranslationUnitsFromText } from "./source-extractor.mjs"
 
@@ -51,6 +54,49 @@ function messagesFor(occurrences, translations) {
   return Object.fromEntries(
     occurrences.map((occurrence, index) => [occurrence.id, translations[index]]),
   )
+}
+
+function transpileJsxPropValue(source, component, prop) {
+  const output = ts.transpileModule(source, {
+    compilerOptions: {
+      jsx: ts.JsxEmit.React,
+      module: ts.ModuleKind.None,
+      target: ts.ScriptTarget.ES2022,
+    },
+  }).outputText
+  const React = {
+    createElement(type, props) {
+      return { type, props }
+    },
+  }
+  return Function(
+    "React",
+    component,
+    `${output}\nreturn View().props[${JSON.stringify(prop)}]`,
+  )(React, function Component() {})
+}
+
+function injectedError(message) {
+  return Object.assign(new Error(message), { code: "EIO" })
+}
+
+function assertContainedPath(root, target) {
+  const nested = relative(resolve(root), resolve(target))
+  assert.equal(nested.length > 0 && nested !== ".." && !nested.startsWith("../"), true)
+  assert.equal(isAbsolute(nested), false)
+}
+
+function setTestEnvironment(t, values) {
+  const previous = Object.fromEntries(
+    Object.keys(values).map((name) => [name, process.env[name]]),
+  )
+  Object.assign(process.env, values)
+  t.after(() => {
+    for (const [name, value] of Object.entries(previous)) {
+      if (value === undefined) delete process.env[name]
+      else process.env[name] = value
+    }
+  })
 }
 
 test("rewrites plain, JSON, JSX, and both template literal forms safely", async () => {
@@ -122,22 +168,28 @@ test("escapes quotes, slashes, newlines, backticks, literal interpolation, and J
   assert.match(output, /<p>A &amp; &lt;B&gt; &#123;C&#125;<\/p>/)
 })
 
-test("moves quoted JSX attribute translations into a JavaScript string expression", async () => {
+test("preserves JSX entity semantics in quoted attributes with raw syntax characters", async () => {
   const { applyTranslationsToText } = await loadTransformer()
   assert.equal(typeof applyTranslationsToText, "function")
 
-  const source = 'export const View = () => <Hero summary="中文摘要" />'
+  const source = 'const View = () => <Hero summary="中文摘要" />'
   const occurrences = occurrencesFor("components/hero.tsx", source)
   const output = applyTranslationsToText({
     source,
     occurrences,
-    messages: messagesFor(occurrences, ['AI from a "Q&A bot" to an "autonomous executor"']),
+    messages: messagesFor(occurrences, [
+      'English &amp; tools "quoted" & raw <tag> {braces}',
+    ]),
     file: "components/hero.tsx",
   })
 
-  assert.equal(
+  assert.match(
     output,
-    'export const View = () => <Hero summary={"AI from a \\"Q&A bot\\" to an \\"autonomous executor\\""} />',
+    /summary="English &amp; tools &quot;quoted&quot; &amp; raw &lt;tag&gt; &#123;braces&#125;"/,
+  )
+  assert.equal(
+    transpileJsxPropValue(output, "Hero", "summary"),
+    'English & tools "quoted" & raw <tag> {braces}',
   )
 })
 
@@ -156,6 +208,32 @@ test("preserves existing JSX character entities without double encoding them", a
 
   assert.equal(output, "export const View = () => <p>Cases &amp; tools &lt;tips&gt;</p>")
   assert.doesNotMatch(output, /&amp;(?:amp|lt|gt);/)
+})
+
+test("preserves valid numeric JSX entities and escapes invalid Unicode scalars", async () => {
+  const { applyTranslationsToText } = await loadTransformer()
+  assert.equal(typeof applyTranslationsToText, "function")
+
+  const source = 'const View = () => <Hero summary="数字实体" />'
+  const occurrences = occurrencesFor("components/numeric-entities.tsx", source)
+  const output = applyTranslationsToText({
+    source,
+    occurrences,
+    messages: messagesFor(occurrences, [
+      "valid &#65; &#x1F600; invalid &#0; &#1114112; &#x110000; &#55296; &#xD800;",
+    ]),
+    file: "components/numeric-entities.tsx",
+  })
+
+  assert.match(output, /valid &#65; &#x1F600;/)
+  assert.match(
+    output,
+    /invalid &amp;#0; &amp;#1114112; &amp;#x110000; &amp;#55296; &amp;#xD800;/,
+  )
+  assert.equal(
+    transpileJsxPropValue(output, "Hero", "summary"),
+    "valid A 😀 invalid &#0; &#1114112; &#x110000; &#55296; &#xD800;",
+  )
 })
 
 test("allows target languages to reorder template placeholders", async () => {
@@ -398,7 +476,11 @@ async function createFixtureRepository(t) {
   await execFileAsync("git", ["add", "--", "."], { cwd: projectRoot })
 
   await writeFixtureFile(projectRoot, "eligible-untracked.txt", "eligible untracked file\n")
-  await writeFixtureFile(projectRoot, ".env.local", "I18N_RELAY_API_KEY=fixture-secret\n")
+  await writeFixtureFile(
+    projectRoot,
+    ".env.local",
+    "TRANSLATION_API_BASE_URL=https://fixture.invalid\nTRANSLATION_API_KEY=fixture-secret\n",
+  )
   await writeFixtureFile(projectRoot, ".cache/translations/batch.json", '{"secret":"fixture-secret"}\n')
   await writeFixtureFile(projectRoot, ".next/server/app.js", "compiled output")
   await writeFixtureFile(projectRoot, "out/index.html", "built output")
@@ -419,6 +501,10 @@ test("creates an eligible-only 79-page staging tree, junction, and deterministic
   assert.equal(typeof createLocaleBuildTree, "function")
   const fixture = await createFixtureRepository(t)
   const canonicalHash = sha256(await readFile(join(fixture.projectRoot, fixture.sourceFile)))
+  await writeFixtureFile(fixture.projectRoot, ".ENV.EXAMPLE", "PUBLIC_UPPERCASE=placeholder\n")
+  await execFileAsync("git", ["add", "-f", "--", ".ENV.EXAMPLE"], {
+    cwd: fixture.projectRoot,
+  })
 
   const stagingRoot = await createLocaleBuildTree({
     projectRoot: fixture.projectRoot,
@@ -427,6 +513,7 @@ test("creates an eligible-only 79-page staging tree, junction, and deterministic
   assert.equal(stagingRoot, join(fixture.projectRoot, ".cache/i18n-build/en"))
   assert.equal(await readFile(join(stagingRoot, "eligible-untracked.txt"), "utf8"), "eligible untracked file\n")
   await assert.rejects(stat(join(stagingRoot, ".env.example")))
+  await assert.rejects(stat(join(stagingRoot, ".ENV.EXAMPLE")))
   await assert.rejects(stat(join(stagingRoot, ".env.local")))
   await assert.rejects(stat(join(stagingRoot, ".cache/translations/batch.json")))
   await assert.rejects(stat(join(stagingRoot, ".next/server/app.js")))
@@ -548,7 +635,127 @@ test("rejects a cache root that escapes through a parent directory junction", as
 
   await assert.rejects(
     createLocaleBuildTree({ projectRoot: fixture.projectRoot, locale: "en" }),
-    /cache root|real path|junction|symbolic/i,
+    /cache root|cache ancestors|real path|junction|symbolic/i,
   )
   assert.equal(await readFile(sentinel, "utf8"), "outside cache must remain untouched")
+  await assert.rejects(stat(join(outsideRoot, "i18n-build")))
+})
+
+test("rejects case-insensitive selected environment files", async (t) => {
+  const { createLocaleBuildTree } = await loadWorktreeCreator()
+  assert.equal(typeof createLocaleBuildTree, "function")
+  const fixture = await createFixtureRepository(t)
+  await writeFixtureFile(fixture.projectRoot, ".ENV", "TRANSLATION_API_KEY=selected-secret\n")
+  await execFileAsync("git", ["add", "-f", "--", ".ENV"], { cwd: fixture.projectRoot })
+
+  await assert.rejects(
+    createLocaleBuildTree({ projectRoot: fixture.projectRoot, locale: "en" }),
+    /environment file/i,
+  )
+})
+
+test("rejects every non-empty configured translation credential found in an eligible file", async (t) => {
+  const { createLocaleBuildTree } = await loadWorktreeCreator()
+  assert.equal(typeof createLocaleBuildTree, "function")
+  const fixture = await createFixtureRepository(t)
+  setTestEnvironment(t, {
+    TRANSLATION_API_BASE_URL: "¤",
+    TRANSLATION_API_KEY: "§",
+  })
+  await writeFixtureFile(
+    fixture.projectRoot,
+    "config-leak.txt",
+    "base=¤\nkey=§\n",
+  )
+
+  await assert.rejects(
+    createLocaleBuildTree({ projectRoot: fixture.projectRoot, locale: "en" }),
+    /relay URL|API key|credential/i,
+  )
+  await assert.rejects(stat(join(fixture.projectRoot, ".cache/i18n-build/en")))
+})
+
+test("preserves the old locale tree when old-to-backup publication fails", async (t) => {
+  const { createLocaleBuildTree } = await loadWorktreeCreator()
+  assert.equal(typeof createLocaleBuildTree, "function")
+  const fixture = await createFixtureRepository(t)
+  const stagingRoot = await createLocaleBuildTree({
+    projectRoot: fixture.projectRoot,
+    locale: "en",
+  })
+  const marker = join(stagingRoot, "old-tree-marker.txt")
+  await writeFile(marker, "old bytes")
+  const outsideRoot = await mkdtemp(join(tmpdir(), "egvc-publish-outside-"))
+  t.after(() => rm(outsideRoot, { recursive: true, force: true }))
+  const outsideSentinel = join(outsideRoot, "sentinel.txt")
+  await writeFile(outsideSentinel, "outside bytes")
+  const cacheRoot = join(fixture.projectRoot, ".cache/i18n-build")
+  const moves = []
+
+  await assert.rejects(
+    createLocaleBuildTree({
+      projectRoot: fixture.projectRoot,
+      locale: "en",
+      publishRename: async (source, target) => {
+        moves.push({ source, target })
+        if (resolve(source) === resolve(stagingRoot) && basename(target).startsWith(".en-backup-")) {
+          throw injectedError("injected old-to-backup failure")
+        }
+        await rename(source, target)
+      },
+    }),
+    /injected old-to-backup failure/,
+  )
+
+  assert.equal(await readFile(marker, "utf8"), "old bytes")
+  assert.equal(await readFile(outsideSentinel, "utf8"), "outside bytes")
+  for (const move of moves) {
+    assertContainedPath(cacheRoot, move.source)
+    assertContainedPath(cacheRoot, move.target)
+  }
+  assert.deepEqual((await readdir(cacheRoot)).sort(), ["en"])
+})
+
+test("rolls the old locale tree back when temp-to-target publication fails", async (t) => {
+  const { createLocaleBuildTree } = await loadWorktreeCreator()
+  assert.equal(typeof createLocaleBuildTree, "function")
+  const fixture = await createFixtureRepository(t)
+  const stagingRoot = await createLocaleBuildTree({
+    projectRoot: fixture.projectRoot,
+    locale: "en",
+  })
+  const marker = join(stagingRoot, "old-tree-marker.txt")
+  await writeFile(marker, "old bytes")
+  const outsideRoot = await mkdtemp(join(tmpdir(), "egvc-rollback-outside-"))
+  t.after(() => rm(outsideRoot, { recursive: true, force: true }))
+  const outsideSentinel = join(outsideRoot, "sentinel.txt")
+  await writeFile(outsideSentinel, "outside bytes")
+  const cacheRoot = join(fixture.projectRoot, ".cache/i18n-build")
+  const moves = []
+
+  await assert.rejects(
+    createLocaleBuildTree({
+      projectRoot: fixture.projectRoot,
+      locale: "en",
+      publishRename: async (source, target) => {
+        moves.push({ source, target })
+        if (
+          basename(source).startsWith(".en-build-") &&
+          resolve(target) === resolve(stagingRoot)
+        ) {
+          throw injectedError("injected temp-to-target failure")
+        }
+        await rename(source, target)
+      },
+    }),
+    /injected temp-to-target failure/,
+  )
+
+  assert.equal(await readFile(marker, "utf8"), "old bytes")
+  assert.equal(await readFile(outsideSentinel, "utf8"), "outside bytes")
+  for (const move of moves) {
+    assertContainedPath(cacheRoot, move.source)
+    assertContainedPath(cacheRoot, move.target)
+  }
+  assert.deepEqual((await readdir(cacheRoot)).sort(), ["en"])
 })
