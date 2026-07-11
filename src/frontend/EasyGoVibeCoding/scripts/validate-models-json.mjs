@@ -29,6 +29,8 @@ const REQUIRED_NEWS_KEYS = ["date", "provider", "title", "summary", "url"];
 
 const DATE_REGEX = /^\d{4}-\d{2}-\d{2}$/;
 const ISO_REGEX = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/;
+const SITE_LOCALE = process.env.NEXT_PUBLIC_SITE_LOCALE ?? "zh-CN";
+const NEWS_SUMMARY_MAX_LENGTH = SITE_LOCALE === "zh-CN" ? 240 : 320;
 
 function fail(msg) {
   console.error(`\u274c ${msg}`);
@@ -98,8 +100,8 @@ payload.news.forEach((n, i) => {
   if (!DATE_REGEX.test(n.date)) {
     fail(`news[${i}].date must be YYYY-MM-DD, got "${n.date}"`);
   }
-  if (n.summary.length > 240) {
-    fail(`news[${i}].summary exceeds 240 chars`);
+  if (n.summary.length > NEWS_SUMMARY_MAX_LENGTH) {
+    fail(`news[${i}].summary exceeds ${NEWS_SUMMARY_MAX_LENGTH} chars`);
   }
 });
 

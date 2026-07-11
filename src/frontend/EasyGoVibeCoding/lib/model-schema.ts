@@ -37,6 +37,12 @@ export const MODEL_CATEGORIES = [
   "model",
 ] as const
 
+const NEWS_SUMMARY_MAX_LENGTH =
+  process.env.NEXT_PUBLIC_SITE_LOCALE === undefined ||
+  process.env.NEXT_PUBLIC_SITE_LOCALE === "zh-CN"
+    ? 240
+    : 320
+
 export const ModelEntrySchema = z.object({
   provider: z.string().min(1),
   name: z.string().min(1),
@@ -59,7 +65,7 @@ export const NewsEntrySchema = z.object({
     .regex(/^\d{4}-\d{2}-\d{2}$/, "news date must be YYYY-MM-DD"),
   provider: z.string().min(1),
   title: z.string().min(1).max(120),
-  summary: z.string().min(1).max(240),
+  summary: z.string().min(1).max(NEWS_SUMMARY_MAX_LENGTH),
   url: z.string().url(),
 })
 
