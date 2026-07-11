@@ -85,3 +85,26 @@ export function localizedAcademyPath(
   if (pathname === "/") return `${basePath}${suffix}`
   return `${basePath}${pathname}${suffix}`
 }
+
+function normalizeSearch(value: string): string {
+  if (!value) return ""
+  return value.startsWith("?") ? value : `?${value}`
+}
+
+function normalizeHash(value: string): string {
+  if (!value) return ""
+  return value.startsWith("#") ? value : `#${value}`
+}
+
+export function localizedAcademyHref(
+  locale: SiteLocale,
+  pathname: string,
+  search = "",
+  hash = "",
+): string {
+  const pathOnly = splitPathSuffix(pathname).pathname
+  return localizedAcademyPath(
+    locale,
+    `${pathOnly}${normalizeSearch(search)}${normalizeHash(hash)}`,
+  )
+}

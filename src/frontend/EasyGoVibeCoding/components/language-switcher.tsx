@@ -1,10 +1,10 @@
 "use client"
 
 import { usePathname } from "next/navigation"
+import { useEffect, useState } from "react"
 import {
-  localizedAcademyPath,
+  localizedAcademyHref,
   siteLocale,
-  stripLocaleBasePath,
   type SiteLocale,
 } from "@/lib/i18n-routing"
 
@@ -18,7 +18,29 @@ const languageOptions: { locale: SiteLocale; label: string }[] = [
 
 export function LanguageSwitcher({ className = "" }: { className?: string }) {
   const pathname = usePathname() || "/"
-  const canonicalPath = stripLocaleBasePath(pathname)
+  const [locationSuffix, setLocationSuffix] = useState({ search: "", hash: "" })
+
+  useEffect(() => {
+    const syncLocationSuffix = () => {
+      const nextSuffix = {
+        search: window.location.search,
+        hash: window.location.hash,
+      }
+      setLocationSuffix((current) =>
+        current.search === nextSuffix.search && current.hash === nextSuffix.hash
+          ? current
+          : nextSuffix,
+      )
+    }
+
+    syncLocationSuffix()
+    window.addEventListener("hashchange", syncLocationSuffix)
+    window.addEventListener("popstate", syncLocationSuffix)
+    return () => {
+      window.removeEventListener("hashchange", syncLocationSuffix)
+      window.removeEventListener("popstate", syncLocationSuffix)
+    }
+  }, [pathname])
 
   return (
     <nav
@@ -28,7 +50,12 @@ export function LanguageSwitcher({ className = "" }: { className?: string }) {
       {languageOptions.map(({ locale, label }) => (
         <a
           key={locale}
-          href={localizedAcademyPath(locale, canonicalPath)}
+          href={localizedAcademyHref(
+            locale,
+            pathname,
+            locationSuffix.search,
+            locationSuffix.hash,
+          )}
           hrefLang={locale}
           lang={locale}
           aria-current={locale === siteLocale ? "page" : undefined}

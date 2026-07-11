@@ -97,6 +97,31 @@ test("routes every locale without double prefixes and preserves the Japanese sal
   })
 })
 
+test("language switch destinations preserve pathname, query, and hash for every locale", () => {
+  withBuildEnv("en", "/en/academy", () => {
+    const routing = loadTypeScript("lib/i18n-routing.ts")
+    const pathname = "/en/academy/en/academy/tools"
+    const search = "?filter=cli&sort=recent"
+    const hash = "#pricing"
+    assert.deepEqual(
+      routing.siteLocales.map((locale) =>
+        routing.localizedAcademyHref(locale, pathname, search, hash),
+      ),
+      [
+        "/tools?filter=cli&sort=recent#pricing",
+        "/ja/academy/tools?filter=cli&sort=recent#pricing",
+        "/en/academy/tools?filter=cli&sort=recent#pricing",
+        "/fr/academy/tools?filter=cli&sort=recent#pricing",
+        "/de/academy/tools?filter=cli&sort=recent#pricing",
+      ],
+    )
+    assert.equal(
+      routing.localizedAcademyHref("fr", "/tools", "filter=cli", "pricing"),
+      "/fr/academy/tools?filter=cli#pricing",
+    )
+  })
+})
+
 test("validates locale/base-path pairs", () => {
   assert.throws(
     () => withBuildEnv("en", "/fr/academy", () => loadTypeScript("lib/i18n-routing.ts")),
@@ -115,8 +140,7 @@ test("language switcher uses five cross-app anchors and canonical route mapping"
   }
   assert.match(switcher, /<a\s/)
   assert.doesNotMatch(switcher, /<Link\s/)
-  assert.match(switcher, /stripLocaleBasePath/)
-  assert.match(switcher, /localizedAcademyPath/)
+  assert.match(switcher, /localizedAcademyHref/)
 })
 
 test("progress canonicalizes locale paths and re-keys legacy records", () => {
