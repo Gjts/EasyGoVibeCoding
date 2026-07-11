@@ -9,13 +9,23 @@ function cachePath(cacheDir, key) {
   return join(cacheDir, `${key}.json`)
 }
 
-export async function readTranslationCache({ cacheDir, key }) {
+export async function readTranslationCache({ cacheDir, key, rejectCorrupt = false }) {
   try {
     const raw = await readFile(cachePath(cacheDir, key), "utf8")
     const parsed = JSON.parse(raw)
-    return parsed && typeof parsed === "object" && !Array.isArray(parsed) ? parsed : null
+    if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) return parsed
+    if (rejectCorrupt) {
+      throw new Error(`Translation cache entry ${key} must contain a JSON object`)
+    }
+    return null
   } catch (error) {
-    if (error?.code === "ENOENT" || error instanceof SyntaxError) return null
+    if (error?.code === "ENOENT") return null
+    if (error instanceof SyntaxError) {
+      if (rejectCorrupt) {
+        throw new Error(`Translation cache entry ${key} is not valid JSON`)
+      }
+      return null
+    }
     throw error
   }
 }

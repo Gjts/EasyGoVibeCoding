@@ -12,6 +12,7 @@
     "test:i18n": "node --test scripts/i18n/*.test.mjs",
     "i18n:extract": "node scripts/i18n/source-extractor.mjs",
     "i18n:translate:pilot": "node --env-file=.env.local scripts/i18n/translate-catalog.mjs",
+    "i18n:translate:all": "node --env-file=.env.local scripts/i18n/translate-full-catalog.mjs",
     "typecheck:functions": "tsc --project tsconfig.functions.json",
     "validate:models": "node scripts/validate-models-json.mjs",
     "pages:deploy": "npm run build && wrangler pages deploy out --project-name=easy-go-vibe-coding"
