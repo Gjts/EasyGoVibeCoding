@@ -1,13 +1,15 @@
 import { createHash, randomUUID } from "node:crypto"
 import {
   mkdir,
+  open,
   readFile,
+  readdir,
   rename,
   rm,
+  stat,
   unlink,
-  writeFile,
 } from "node:fs/promises"
-import { basename, dirname, join, resolve } from "node:path"
+import { basename, dirname, isAbsolute, join, relative, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 
 import {
@@ -22,6 +24,8 @@ import { splitCatalogByLocale, validateSourceCatalog } from "./translation-catal
 
 const DEFAULT_MAX_ENTRIES = 20
 const DEFAULT_MAX_CHARACTERS = 6_000
+const MAX_BATCH_ENTRIES = 40
+const MAX_BATCH_CHARACTERS = 6_000
 const DEFAULT_PROGRESS_EVERY = 25
 const DEFAULT_CONCURRENCY = 4
 const FRESH_VALIDATION_MAX_ATTEMPTS = 3
@@ -82,10 +86,9 @@ function assertNoSensitiveMaterial(value, settings) {
 
 async function exists(path) {
   try {
-    await readFile(path)
+    await stat(path)
     return true
   } catch (error) {
-    if (error?.code === "EISDIR") return true
     if (error?.code === "ENOENT") return false
     throw error
   }
@@ -97,66 +100,197 @@ async function removeIfPresent(path) {
   })
 }
 
-async function writeReleaseAtomically({ outputDir, manifestPath, localeFiles, manifestRaw }) {
-  const outputParent = dirname(outputDir)
+async function writeFileDurably(path, raw) {
+  const handle = await open(path, "wx")
+  try {
+    await handle.writeFile(raw, "utf8")
+    await handle.sync()
+  } finally {
+    await handle.close()
+  }
+}
+
+async function syncDirectory(path) {
+  let handle
+  try {
+    handle = await open(path, "r")
+    await handle.sync()
+  } catch (error) {
+    if (!["EISDIR", "EINVAL", "ENOTSUP", "EPERM"].includes(error?.code)) throw error
+  } finally {
+    await handle?.close()
+  }
+}
+
+function validatePublication({ localeFiles, manifest }) {
+  if (!manifest || typeof manifest !== "object" || Array.isArray(manifest)) {
+    throw new Error("Publication manifest must be a JSON object")
+  }
+  if (!Array.isArray(manifest.targetLocales) || manifest.targetLocales.length === 0) {
+    throw new Error("Publication manifest targetLocales must be a non-empty array")
+  }
+
+  const targetLocales = [...manifest.targetLocales]
+  if (new Set(targetLocales).size !== targetLocales.length) {
+    throw new Error("Publication manifest targetLocales must be unique")
+  }
+  for (const locale of targetLocales) {
+    if (typeof locale !== "string" || !/^[A-Za-z0-9][A-Za-z0-9._-]*$/.test(locale)) {
+      throw new Error(`Publication locale is not a safe file name: ${String(locale)}`)
+    }
+  }
+
+  const expectedLocales = [...targetLocales].sort()
+  const fileLocales = Object.keys(localeFiles ?? {}).sort()
+  const outputLocales = Object.keys(manifest.outputs ?? {}).sort()
+  if (JSON.stringify(fileLocales) !== JSON.stringify(expectedLocales)) {
+    throw new Error("Publication locale files must exactly match targetLocales")
+  }
+  if (JSON.stringify(outputLocales) !== JSON.stringify(expectedLocales)) {
+    throw new Error("Publication manifest outputs must exactly match targetLocales")
+  }
+
+  for (const locale of targetLocales) {
+    const raw = localeFiles[locale]
+    const output = manifest.outputs[locale]
+    if (typeof raw !== "string") {
+      throw new Error(`Publication locale ${locale} must be serialized text`)
+    }
+    if (output?.sha256 !== sha256(raw)) {
+      throw new Error(`Publication hash does not match locale ${locale}`)
+    }
+    let parsed
+    try {
+      parsed = JSON.parse(raw)
+    } catch {
+      throw new Error(`Publication locale ${locale} is not valid JSON`)
+    }
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
+      throw new Error(`Publication locale ${locale} must contain a JSON object`)
+    }
+    if (output.count !== Object.keys(parsed).length) {
+      throw new Error(`Publication count does not match locale ${locale}`)
+    }
+  }
+
+  return targetLocales
+}
+
+function releaseIdFor(localeFiles, targetLocales) {
+  return sha256(
+    JSON.stringify(
+      [...targetLocales]
+        .sort()
+        .map((locale) => ({ locale, sha256: sha256(localeFiles[locale]) })),
+    ),
+  )
+}
+
+async function verifyImmutableSnapshot(snapshotDir, localeFiles, targetLocales) {
+  const expectedNames = targetLocales.map((locale) => `${locale}.json`).sort()
+  const actualNames = (await readdir(snapshotDir)).sort()
+  if (JSON.stringify(actualNames) !== JSON.stringify(expectedNames)) {
+    throw new Error(`Immutable snapshot ${basename(snapshotDir)} file set does not match`)
+  }
+
+  for (const locale of targetLocales) {
+    const actual = await readFile(join(snapshotDir, `${locale}.json`))
+    if (sha256(actual) !== sha256(localeFiles[locale])) {
+      throw new Error(
+        `Immutable snapshot ${basename(snapshotDir)} locale ${locale} does not match`,
+      )
+    }
+  }
+}
+
+function manifestPathFor(manifestParent, snapshotDir, locale) {
+  const nativePath = relative(manifestParent, join(snapshotDir, `${locale}.json`))
+  if (isAbsolute(nativePath) || nativePath.split(/[\\/]/u).includes("..")) {
+    throw new Error("Published snapshot must be inside the manifest directory")
+  }
+  return nativePath.replaceAll("\\", "/")
+}
+
+export async function publishReleaseSnapshot({
+  outputDir,
+  manifestPath,
+  localeFiles,
+  manifest,
+  faultInjector = () => {},
+}) {
+  const targetLocales = validatePublication({ localeFiles, manifest })
   const manifestParent = dirname(manifestPath)
+  const releaseId = releaseIdFor(localeFiles, targetLocales)
+  const snapshotDir = join(outputDir, releaseId)
   const token = `${process.pid}.${randomUUID()}`
-  const stagingDir = join(outputParent, `.${basename(outputDir)}.${token}.staging`)
-  const backupDir = join(outputParent, `.${basename(outputDir)}.${token}.backup`)
+  const stagingDir = join(outputDir, `.${releaseId}.${token}.staging`)
   const temporaryManifest = join(
     manifestParent,
     `.${basename(manifestPath)}.${token}.tmp`,
   )
-  const backupManifest = join(
-    manifestParent,
-    `.${basename(manifestPath)}.${token}.backup`,
-  )
-  let outputBackedUp = false
-  let stagedOutputPublished = false
-  let manifestBackedUp = false
+  let stagingCreated = false
 
-  await mkdir(stagingDir, { recursive: true })
+  await mkdir(outputDir, { recursive: true })
   await mkdir(manifestParent, { recursive: true })
 
   try {
-    await Promise.all(
-      Object.entries(localeFiles).map(([locale, raw]) =>
-        writeFile(join(stagingDir, `${locale}.json`), raw, "utf8"),
+    if (await exists(snapshotDir)) {
+      await verifyImmutableSnapshot(snapshotDir, localeFiles, targetLocales)
+    } else {
+      await mkdir(stagingDir)
+      stagingCreated = true
+      await Promise.all(
+        targetLocales.map((locale) =>
+          writeFileDurably(join(stagingDir, `${locale}.json`), localeFiles[locale]),
+        ),
+      )
+      await syncDirectory(stagingDir)
+      await faultInjector("after-snapshot-files-flushed")
+
+      try {
+        await rename(stagingDir, snapshotDir)
+        stagingCreated = false
+      } catch (error) {
+        if (!(await exists(snapshotDir))) throw error
+        await verifyImmutableSnapshot(snapshotDir, localeFiles, targetLocales)
+      }
+      await syncDirectory(outputDir)
+      await faultInjector("after-snapshot-commit")
+    }
+
+    const publishedManifest = {
+      ...manifest,
+      outputs: Object.fromEntries(
+        targetLocales.map((locale) => [
+          locale,
+          {
+            path: manifestPathFor(manifestParent, snapshotDir, locale),
+            sha256: manifest.outputs[locale].sha256,
+            count: manifest.outputs[locale].count,
+          },
+        ]),
       ),
-    )
-    await writeFile(temporaryManifest, manifestRaw, "utf8")
+    }
+    const manifestRaw = serializeJson(publishedManifest)
 
     if (await exists(manifestPath)) {
-      await rename(manifestPath, backupManifest)
-      manifestBackedUp = true
-    }
-    if (await exists(outputDir)) {
-      await rename(outputDir, backupDir)
-      outputBackedUp = true
+      const currentManifest = await readFile(manifestPath, "utf8")
+      if (currentManifest === manifestRaw) {
+        return { releaseId, manifest: publishedManifest, manifestRaw }
+      }
     }
 
-    await rename(stagingDir, outputDir)
-    stagedOutputPublished = true
+    await writeFileDurably(temporaryManifest, manifestRaw)
+    await faultInjector("before-manifest-commit")
     await rename(temporaryManifest, manifestPath)
-
-    await rm(backupDir, { recursive: true, force: true }).catch(() => {})
-    await removeIfPresent(backupManifest).catch(() => {})
-  } catch (error) {
-    if (stagedOutputPublished) {
-      await rm(outputDir, { recursive: true, force: true }).catch(() => {})
-    }
-    if (outputBackedUp) {
-      await rename(backupDir, outputDir).catch(() => {})
-    }
-    if (manifestBackedUp) {
-      await rename(backupManifest, manifestPath).catch(() => {})
-    }
-    throw error
+    await syncDirectory(manifestParent)
+    await faultInjector("after-manifest-commit")
+    return { releaseId, manifest: publishedManifest, manifestRaw }
   } finally {
-    await rm(stagingDir, { recursive: true, force: true }).catch(() => {})
-    await rm(backupDir, { recursive: true, force: true }).catch(() => {})
+    if (stagingCreated) {
+      await rm(stagingDir, { recursive: true, force: true }).catch(() => {})
+    }
     await removeIfPresent(temporaryManifest).catch(() => {})
-    await removeIfPresent(backupManifest).catch(() => {})
   }
 }
 
@@ -166,6 +300,12 @@ export function chunkEntries(
 ) {
   assertPositiveInteger(maxEntries, "maxEntries")
   assertPositiveInteger(maxCharacters, "maxCharacters")
+  if (maxEntries > MAX_BATCH_ENTRIES) {
+    throw new Error(`maxEntries must be at most ${MAX_BATCH_ENTRIES}`)
+  }
+  if (maxCharacters > MAX_BATCH_CHARACTERS) {
+    throw new Error(`maxCharacters must be at most ${MAX_BATCH_CHARACTERS}`)
+  }
   if (!entries || typeof entries !== "object" || Array.isArray(entries)) {
     throw new Error("entries must be a JSON object")
   }
@@ -578,15 +718,21 @@ export async function translateFullCatalog({
     },
     outputs,
   }
-  const manifestRaw = serializeJson(manifest)
   assertNoSensitiveMaterial(localeFiles, settings)
-  assertNoSensitiveMaterial(manifestRaw, settings)
-  await writeReleaseAtomically({ outputDir, manifestPath, localeFiles, manifestRaw })
+  assertNoSensitiveMaterial(manifest, settings)
+  const publication = await publishReleaseSnapshot({
+    outputDir,
+    manifestPath,
+    localeFiles,
+    manifest,
+  })
+  assertNoSensitiveMaterial(publication.manifestRaw, settings)
 
   return {
     inputPath,
     outputDir,
     manifestPath,
+    releaseId: publication.releaseId,
     sourceEntryCount: manifest.sourceEntryCount,
     sourceCatalogSha256: manifest.sourceCatalogSha256,
     batchCount: batches.length,

@@ -71,6 +71,42 @@ test("parses a complete translation catalog from chat completions", async () => 
   assert.deepEqual(parsed, catalog)
 })
 
+test("rejects literal duplicate root alias keys before JSON.parse can collapse them", async () => {
+  const { parseTranslationResponse } = await import("./translation-client.mjs")
+  const duplicateRootAliases =
+    '{"m000":{"ja":"題名","en":"Title","fr":"Titre","de":"Titel"},"m000":{"ja":"別題","en":"Other title","fr":"Autre titre","de":"Anderer Titel"}}'
+
+  assert.throws(
+    () =>
+      parseTranslationResponse({
+        responseBody: {
+          choices: [{ message: { content: duplicateRootAliases } }],
+        },
+        entries: { m000: "标题" },
+        targetLocales: ["ja", "en", "fr", "de"],
+      }),
+    /duplicate JSON key.*m000/i,
+  )
+})
+
+test("rejects literal duplicate nested locale keys before JSON.parse can collapse them", async () => {
+  const { parseTranslationResponse } = await import("./translation-client.mjs")
+  const duplicateNestedLocale =
+    '{"m000":{"ja":"題名","en":"Title","en":"Other title","fr":"Titre","de":"Titel"}}'
+
+  assert.throws(
+    () =>
+      parseTranslationResponse({
+        responseBody: {
+          choices: [{ message: { content: duplicateNestedLocale } }],
+        },
+        entries: { m000: "标题" },
+        targetLocales: ["ja", "en", "fr", "de"],
+      }),
+    /duplicate JSON key.*en/i,
+  )
+})
+
 test("rejects translations that drop source placeholders", async () => {
   const { parseTranslationResponse } = await import("./translation-client.mjs")
 

@@ -1,4 +1,5 @@
 import assert from "node:assert/strict"
+import { spawnSync } from "node:child_process"
 import { createHash } from "node:crypto"
 import {
   access,
@@ -10,7 +11,7 @@ import {
   writeFile,
 } from "node:fs/promises"
 import { tmpdir } from "node:os"
-import { dirname, join } from "node:path"
+import { dirname, isAbsolute, join, resolve } from "node:path"
 import test from "node:test"
 
 import { createTranslationCacheKey } from "./translation-client.mjs"
@@ -93,6 +94,174 @@ async function pathExists(path) {
   }
 }
 
+async function readPublishedRelease(fixture) {
+  const manifestRaw = await readFile(fixture.manifestPath)
+  const manifest = JSON.parse(manifestRaw)
+  const localePaths = TARGET_LOCALES.map((locale) => {
+    const relativePath = manifest.outputs[locale].path
+    assert.equal(typeof relativePath, "string")
+    assert.equal(isAbsolute(relativePath), false)
+    assert.equal(relativePath.includes("\\"), false)
+    assert.equal(relativePath.split("/").includes(".."), false)
+    assert.match(relativePath, new RegExp(`^messages/[a-f0-9]{64}/${locale}\\.json$`))
+    return resolve(dirname(fixture.manifestPath), relativePath)
+  })
+
+  return {
+    manifest,
+    manifestRaw,
+    localePaths,
+    releasePaths: [...localePaths, fixture.manifestPath],
+  }
+}
+
+async function readPublishedLocale(fixture, locale) {
+  const release = await readPublishedRelease(fixture)
+  const index = TARGET_LOCALES.indexOf(locale)
+  return JSON.parse(await readFile(release.localePaths[index], "utf8"))
+}
+
+function publicationFixture(label) {
+  const localeFiles = Object.fromEntries(
+    TARGET_LOCALES.map((locale) => [
+      locale,
+      `${JSON.stringify({ message: `${locale}-${label}` }, null, 2)}\n`,
+    ]),
+  )
+  return {
+    localeFiles,
+    manifest: {
+      schemaVersion: 1,
+      marker: label,
+      targetLocales: TARGET_LOCALES,
+      outputs: Object.fromEntries(
+        TARGET_LOCALES.map((locale) => [
+          locale,
+          { sha256: sha256(localeFiles[locale]), count: 1 },
+        ]),
+      ),
+    },
+  }
+}
+
+async function assertPublishedManifest(manifestPath, expectedMarker) {
+  const raw = await readFile(manifestPath, "utf8")
+  const manifest = JSON.parse(raw)
+  assert.equal(manifest.marker, expectedMarker)
+  for (const locale of TARGET_LOCALES) {
+    const output = manifest.outputs[locale]
+    assert.match(output.path, new RegExp(`^messages/[a-f0-9]{64}/${locale}\\.json$`))
+    assert.equal(isAbsolute(output.path), false)
+    assert.equal(output.path.includes("\\"), false)
+    assert.equal(output.path.split("/").includes(".."), false)
+    const content = await readFile(resolve(dirname(manifestPath), output.path))
+    assert.equal(sha256(content), output.sha256)
+    assert.equal(Object.keys(JSON.parse(content)).length, output.count)
+    assert.equal(JSON.parse(content).message, `${locale}-${expectedMarker}`)
+  }
+  return manifest
+}
+
+test("reuses and verifies an immutable same-content snapshot before manifest publication", async (t) => {
+  const { publishReleaseSnapshot } = await loadRunner()
+  assert.equal(typeof publishReleaseSnapshot, "function")
+
+  const root = await mkdtemp(join(tmpdir(), "egvc-publication-reuse-"))
+  t.after(() => rm(root, { recursive: true, force: true }))
+  const outputDir = join(root, "catalog", "messages")
+  const manifestPath = join(root, "catalog", "manifest.json")
+  const publication = publicationFixture("same")
+
+  const first = await publishReleaseSnapshot({ outputDir, manifestPath, ...publication })
+  const firstManifestRaw = await readFile(manifestPath)
+  assert.match(first.releaseId, /^[a-f0-9]{64}$/)
+  assert.deepEqual(await readdir(outputDir), [first.releaseId])
+  await assertPublishedManifest(manifestPath, "same")
+
+  const second = await publishReleaseSnapshot({ outputDir, manifestPath, ...publication })
+  assert.equal(second.releaseId, first.releaseId)
+  assert.deepEqual(await readFile(manifestPath), firstManifestRaw)
+  assert.deepEqual(await readdir(outputDir), [first.releaseId])
+
+  await writeFile(join(outputDir, first.releaseId, "en.json"), "corrupted\n", "utf8")
+  await assert.rejects(
+    publishReleaseSnapshot({ outputDir, manifestPath, ...publication }),
+    /immutable snapshot.*en.*does not match/i,
+  )
+  assert.deepEqual(await readFile(manifestPath), firstManifestRaw)
+})
+
+test("keeps the manifest entirely old or entirely new across publication faults", async (t) => {
+  const { publishReleaseSnapshot } = await loadRunner()
+  assert.equal(typeof publishReleaseSnapshot, "function")
+  const boundaries = [
+    "after-snapshot-files-flushed",
+    "after-snapshot-commit",
+    "before-manifest-commit",
+    "after-manifest-commit",
+  ]
+  const runnerUrl = new URL("./translate-full-catalog.mjs", import.meta.url).href
+  const childScript = `
+    import { readFile } from "node:fs/promises"
+    const payload = JSON.parse(await readFile(process.argv[1], "utf8"))
+    const { publishReleaseSnapshot } = await import(payload.runnerUrl)
+    await publishReleaseSnapshot({
+      outputDir: payload.outputDir,
+      manifestPath: payload.manifestPath,
+      localeFiles: payload.localeFiles,
+      manifest: payload.manifest,
+      faultInjector(boundary) {
+        if (boundary === payload.boundary) process.exit(86)
+      },
+    })
+  `
+
+  for (const boundary of boundaries) {
+    await t.test(boundary, async (t) => {
+      const root = await mkdtemp(join(tmpdir(), "egvc-publication-fault-"))
+      t.after(() => rm(root, { recursive: true, force: true }))
+      const outputDir = join(root, "catalog", "messages")
+      const manifestPath = join(root, "catalog", "manifest.json")
+
+      const oldPublication = publicationFixture("old")
+      const oldResult = await publishReleaseSnapshot({
+        outputDir,
+        manifestPath,
+        ...oldPublication,
+      })
+      const oldManifest = await assertPublishedManifest(manifestPath, "old")
+      const payloadPath = join(root, "fault-payload.json")
+      await writeFile(
+        payloadPath,
+        JSON.stringify({
+          runnerUrl,
+          outputDir,
+          manifestPath,
+          ...publicationFixture("new"),
+          boundary,
+        }),
+        "utf8",
+      )
+
+      const child = spawnSync(
+        process.execPath,
+        ["--input-type=module", "-e", childScript, payloadPath],
+        { encoding: "utf8" },
+      )
+      assert.equal(child.status, 86, child.stderr)
+      const expectedMarker = boundary === "after-manifest-commit" ? "new" : "old"
+      await assertPublishedManifest(manifestPath, expectedMarker)
+
+      assert.equal(await pathExists(join(outputDir, oldResult.releaseId)), true)
+      for (const locale of TARGET_LOCALES) {
+        const oldOutput = oldManifest.outputs[locale]
+        const oldContent = await readFile(resolve(dirname(manifestPath), oldOutput.path))
+        assert.equal(sha256(oldContent), oldOutput.sha256)
+      }
+    })
+  }
+})
+
 test("chunks deterministically at exact entry and Unicode character boundaries", async () => {
   const { chunkEntries } = await loadRunner()
   assert.equal(typeof chunkEntries, "function")
@@ -129,6 +298,10 @@ test("rejects invalid batch limits and an oversized single entry", async () => {
   const { chunkEntries } = await loadRunner()
   assert.equal(typeof chunkEntries, "function")
 
+  assert.doesNotThrow(() =>
+    chunkEntries({ title: "字".repeat(6_000) }, { maxEntries: 40, maxCharacters: 6_000 }),
+  )
+
   for (const maxEntries of [0, -1, 1.5, Number.NaN]) {
     assert.throws(
       () => chunkEntries({ title: "标题" }, { maxEntries, maxCharacters: 6_000 }),
@@ -141,6 +314,14 @@ test("rejects invalid batch limits and an oversized single entry", async () => {
       /maxCharacters.*positive integer/i,
     )
   }
+  assert.throws(
+    () => chunkEntries({ title: "标题" }, { maxEntries: 41, maxCharacters: 6_000 }),
+    /maxEntries.*at most 40/i,
+  )
+  assert.throws(
+    () => chunkEntries({ title: "标题" }, { maxEntries: 40, maxCharacters: 6_001 }),
+    /maxCharacters.*at most 6000/i,
+  )
 
   assert.throws(
     () =>
@@ -150,6 +331,41 @@ test("rejects invalid batch limits and an oversized single entry", async () => {
       ),
     /oversized.*6001.*6000/i,
   )
+})
+
+test("runner rejects limits above hard caps before cache or relay access", async (t) => {
+  const { translateFullCatalog } = await loadRunner()
+  const fixture = await createFixture(t, { title: "标题" })
+  let requests = 0
+
+  await assert.rejects(
+    translateFullCatalog(
+      runnerOptions(fixture, {
+        maxEntries: 41,
+        translateImpl: async () => {
+          requests += 1
+          return {}
+        },
+      }),
+    ),
+    /maxEntries.*at most 40/i,
+  )
+  await assert.rejects(
+    translateFullCatalog(
+      runnerOptions(fixture, {
+        maxCharacters: 6_001,
+        translateImpl: async () => {
+          requests += 1
+          return {}
+        },
+      }),
+    ),
+    /maxCharacters.*at most 6000/i,
+  )
+
+  assert.equal(requests, 0)
+  assert.equal(await pathExists(fixture.cacheDir), false)
+  assert.equal(await pathExists(fixture.manifestPath), false)
 })
 
 test("aliases fresh IDs deterministically and restores exact original-ID parity", async () => {
@@ -321,14 +537,12 @@ test("hashes override provenance and republishes byte-identically from cache", a
   })
 
   await translateFullCatalog(options)
-  const releasePaths = [
-    ...TARGET_LOCALES.map((locale) => join(fixture.outputDir, `${locale}.json`)),
-    fixture.manifestPath,
-  ]
+  const firstRelease = await readPublishedRelease(fixture)
+  const releasePaths = firstRelease.releasePaths
   const firstBytes = await Promise.all(releasePaths.map((path) => readFile(path)))
   const english = JSON.parse(firstBytes[1].toString("utf8"))
   const french = JSON.parse(firstBytes[2].toString("utf8"))
-  const manifest = JSON.parse(firstBytes.at(-1).toString("utf8"))
+  const manifest = firstRelease.manifest
 
   assert.equal(english.title, "Reviewed title")
   assert.equal(french.greeting, "Bonjour, {name}")
@@ -344,7 +558,8 @@ test("hashes override provenance and republishes byte-identically from cache", a
       throw new Error("override cache-only rerun must not call the relay")
     },
   })
-  const secondBytes = await Promise.all(releasePaths.map((path) => readFile(path)))
+  const secondRelease = await readPublishedRelease(fixture)
+  const secondBytes = await Promise.all(secondRelease.releasePaths.map((path) => readFile(path)))
   assert.equal(rerun.cacheMisses, 0)
   assert.deepEqual(secondBytes, firstBytes)
 })
@@ -443,7 +658,7 @@ test("reuses an original-ID cache without sending aliases to the relay", async (
       },
     }),
   )
-  const english = JSON.parse(await readFile(join(fixture.outputDir, "en.json"), "utf8"))
+  const english = await readPublishedLocale(fixture, "en")
 
   assert.equal(result.cacheHits, 1)
   assert.equal(requests, 0)
@@ -651,7 +866,7 @@ test("recursively halves invalid batches until singleton translations succeed", 
   assert.deepEqual(requestSizes, [4, 4, 4, 2, 2, 2, 1, 1, 2, 2, 2, 1, 1])
   assert.equal(result.cacheMisses, 1)
   assert.equal((await readdir(fixture.cacheDir)).length, 7)
-  const english = JSON.parse(await readFile(join(fixture.outputDir, "en.json"), "utf8"))
+  const english = await readPublishedLocale(fixture, "en")
   assert.deepEqual(Object.keys(english), ["a", "b", "c", "d"])
 })
 
@@ -888,14 +1103,13 @@ test("writes deterministic atomic catalogs and a hashed manifest across two cach
         translatedBatch(entries, targetLocales),
     }),
   )
-  const releasePaths = [
-    ...TARGET_LOCALES.map((locale) => join(fixture.outputDir, `${locale}.json`)),
-    fixture.manifestPath,
-  ]
+  const firstRelease = await readPublishedRelease(fixture)
+  const releasePaths = firstRelease.releasePaths
   const firstBytes = await Promise.all(releasePaths.map((path) => readFile(path)))
-  const manifest = JSON.parse(firstBytes.at(-1).toString("utf8"))
+  const manifest = firstRelease.manifest
 
   assert.equal(first.batchCount, 2)
+  assert.match(first.releaseId, /^[a-f0-9]{64}$/)
   assert.equal(manifest.schemaVersion, 1)
   assert.equal(manifest.sourceLocale, "zh-CN")
   assert.deepEqual(manifest.targetLocales, TARGET_LOCALES)
@@ -911,6 +1125,7 @@ test("writes deterministic atomic catalogs and a hashed manifest across two cach
     const catalog = JSON.parse(firstBytes[index].toString("utf8"))
     assert.deepEqual(Object.keys(catalog), ["alpha", "middle", "zeta"])
     assert.deepEqual(manifest.outputs[locale], {
+      path: `messages/${first.releaseId}/${locale}.json`,
       sha256: sha256(firstBytes[index]),
       count: 3,
     })
@@ -925,16 +1140,28 @@ test("writes deterministic atomic catalogs and a hashed manifest across two cach
     },
   })
   const second = await translateFullCatalog(cacheOnlyOptions)
-  const secondBytes = await Promise.all(releasePaths.map((path) => readFile(path)))
+  const secondRelease = await readPublishedRelease(fixture)
+  const secondBytes = await Promise.all(
+    secondRelease.releasePaths.map((path) => readFile(path)),
+  )
   const third = await translateFullCatalog(cacheOnlyOptions)
-  const thirdBytes = await Promise.all(releasePaths.map((path) => readFile(path)))
+  const thirdRelease = await readPublishedRelease(fixture)
+  const thirdBytes = await Promise.all(
+    thirdRelease.releasePaths.map((path) => readFile(path)),
+  )
 
   assert.equal(second.cacheHits, 2)
   assert.equal(second.cacheMisses, 0)
   assert.equal(third.cacheHits, 2)
   assert.equal(third.cacheMisses, 0)
+  assert.equal(second.releaseId, first.releaseId)
+  assert.equal(third.releaseId, first.releaseId)
   assert.deepEqual(secondBytes, firstBytes)
   assert.deepEqual(thirdBytes, firstBytes)
+  assert.deepEqual(await readdir(fixture.outputDir), [first.releaseId])
+  for (const locale of TARGET_LOCALES) {
+    assert.equal(await pathExists(join(fixture.outputDir, `${locale}.json`)), false)
+  }
 
   const catalogDirectoryEntries = await readdir(dirname(fixture.outputDir))
   assert.equal(
@@ -956,11 +1183,10 @@ test("never exposes the API key or relay URL in release files, logs, or errors",
         translatedBatch(entries, targetLocales),
     }),
   )
+  const release = await readPublishedRelease(fixture)
   const releaseText = (
     await Promise.all([
-      ...TARGET_LOCALES.map((locale) =>
-        readFile(join(fixture.outputDir, `${locale}.json`), "utf8"),
-      ),
+      ...release.localePaths.map((path) => readFile(path, "utf8")),
       readFile(fixture.manifestPath, "utf8"),
     ])
   ).join("\n")

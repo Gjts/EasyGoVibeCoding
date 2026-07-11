@@ -478,18 +478,22 @@
   },
   "outputs": {
     "ja": {
+      "path": "messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/ja.json",
       "sha256": "caabbb97e410477cf5e19063f1f09a3015ac993e80440462fd0e12e38613ddf8",
       "count": 9082
     },
     "en": {
+      "path": "messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/en.json",
       "sha256": "c62c51862c46503c970b94010ef6b99095b5795b9dffec6c2a308300e4747edb",
       "count": 9082
     },
     "fr": {
+      "path": "messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/fr.json",
       "sha256": "7a19040838ce38da6a6f0d1dd5872df0ab94425e5889d08709e9ac266b8a6e07",
       "count": 9082
     },
     "de": {
+      "path": "messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/de.json",
       "sha256": "9152c06ddd70680b785679704824949a938875e2c67b36facb6a674aed1b4cc3",
       "count": 9082
     }

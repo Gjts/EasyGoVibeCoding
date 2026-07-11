@@ -1,4 +1,5 @@
 import { createHash } from "node:crypto"
+import ts from "typescript"
 
 export const TRANSLATION_PROMPT_VERSION = "egvc-i18n-v2"
 const PLACEHOLDER_PATTERN = /\{\{[^{}]+\}\}|\{[A-Za-z_][\w.-]*\}|%\d*\$?[sdif]/g
@@ -23,6 +24,32 @@ function canonicalize(value) {
       .sort()
       .map((key) => [key, canonicalize(value[key])]),
   )
+}
+
+function assertNoDuplicateJsonKeys(content) {
+  const sourceFile = ts.parseJsonText("translation-response.json", content)
+
+  function visit(node) {
+    if (ts.isObjectLiteralExpression(node)) {
+      const keys = new Set()
+      for (const property of node.properties) {
+        if (!ts.isPropertyAssignment(property)) continue
+        const key =
+          ts.isStringLiteral(property.name) || ts.isNumericLiteral(property.name)
+            ? property.name.text
+            : property.name.getText(sourceFile)
+        if (keys.has(key)) {
+          throw new TranslationValidationError(
+            `Translation response contains duplicate JSON key: ${key}`,
+          )
+        }
+        keys.add(key)
+      }
+    }
+    ts.forEachChild(node, visit)
+  }
+
+  visit(sourceFile)
 }
 
 export function loadTranslationSettings(env = process.env) {
@@ -124,6 +151,8 @@ export function parseTranslationResponse({ responseBody, entries, targetLocales 
       "Translation response is missing choices[0].message.content",
     )
   }
+
+  assertNoDuplicateJsonKeys(content)
 
   let catalog
   try {
