@@ -1,0 +1,16 @@
+[
+  {
+    "locale": "ja",
+    "route": "/ja/academy/tools/selection",
+    "scope": "source-identical",
+    "text": "Pro: $19/月 | Team: $39/月",
+    "reason": "Product plan names, prices, currency notation, and the Japanese month unit are intentionally identical to the source."
+  },
+  {
+    "locale": "ja",
+    "route": "/ja/academy/tools/selection",
+    "scope": "source-identical",
+    "text": "Pro: $20/月 | Business: $40/月",
+    "reason": "Product plan names, prices, currency notation, and the Japanese month unit are intentionally identical to the source."
+  }
+]
