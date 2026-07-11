@@ -3,9 +3,10 @@ import { join, resolve } from "node:path"
 import { pathToFileURL } from "node:url"
 
 import { createLocaleBuildTree } from "./create-locale-worktree.mjs"
+import { collectForbiddenMarkers, createSecretFreeEnvironment } from "./deployment-secrets.mjs"
 import { BUILD_MATRIX, deriveAcademyRoutes, mergeStaticOutputs, validateBuildPair } from "./static-deployment.mjs"
 
-const SECRET_NAMES = ["TRANSLATION_API_BASE_URL", "TRANSLATION_API_KEY", "OPENAI_API_KEY", "RESEND_API_KEY"]
+export { collectForbiddenMarkers } from "./deployment-secrets.mjs"
 
 export function createBuildPlan(projectRoot) {
   const root = resolve(projectRoot)
@@ -22,17 +23,15 @@ export function createBuildPlan(projectRoot) {
   }))
 }
 
-function cleanBuildEnvironment(locale, basePath) {
-  const env = { ...process.env, NEXT_PUBLIC_SITE_LOCALE: locale, NEXT_PUBLIC_SITE_BASE_PATH: basePath }
-  for (const name of SECRET_NAMES) delete env[name]
-  return env
+function cleanBuildEnvironment(locale, basePath, parentEnv) {
+  return { ...createSecretFreeEnvironment(parentEnv), NEXT_PUBLIC_SITE_LOCALE: locale, NEXT_PUBLIC_SITE_BASE_PATH: basePath }
 }
 
-export async function executeBuildPlan(plan, runner = runBuild) {
+export async function executeBuildPlan(plan, runner = runBuild, { parentEnv = process.env } = {}) {
   const results = []
   for (const call of plan) {
     validateBuildPair(call.locale, call.basePath)
-    const exitCode = await runner({ ...call, env: cleanBuildEnvironment(call.locale, call.basePath) })
+    const exitCode = await runner({ ...call, env: cleanBuildEnvironment(call.locale, call.basePath, parentEnv) })
     if (exitCode !== 0) throw new Error(`Production build failed for ${call.locale} with exit code ${exitCode}`)
     results.push({ locale: call.locale, basePath: call.basePath, exitCode })
   }
@@ -49,12 +48,14 @@ function runBuild({ command, args, cwd, env, shell }) {
 
 export async function buildStaticDeployment(projectRoot = process.cwd()) {
   const root = resolve(projectRoot)
+  const forbiddenMarkers = await collectForbiddenMarkers(root)
   for (const { locale } of BUILD_MATRIX.slice(1)) await createLocaleBuildTree({ projectRoot: root, locale })
   const plan = createBuildPlan(root)
   const buildResults = await executeBuildPlan(plan)
   const academyRoutes = await deriveAcademyRoutes(root)
   const builds = Object.fromEntries(plan.map(({ locale, cwd }) => [locale, join(cwd, "out")]))
-  const merge = await mergeStaticOutputs({ builds, output: join(root, ".cache", "i18n-deploy"), academyRoutes })
+  const sourceLabels = Object.fromEntries(plan.map(({ locale }) => [locale, locale === "zh-CN" ? "out" : `.cache/i18n-build/${locale}/out`]))
+  const merge = await mergeStaticOutputs({ projectRoot: root, sourceLabels, forbiddenMarkers, builds, output: join(root, ".cache", "i18n-deploy"), academyRoutes })
   return { buildResults, academyRoutes, ...merge }
 }
 

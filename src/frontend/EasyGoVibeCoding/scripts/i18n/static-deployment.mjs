@@ -3,6 +3,8 @@ import { lstat, mkdir, readFile, readdir, realpath, rename, rm, writeFile } from
 import { dirname, isAbsolute, join, relative, resolve, sep } from "node:path"
 import { pathToFileURL } from "node:url"
 
+import { collectForbiddenMarkers } from "./deployment-secrets.mjs"
+
 export const BUILD_MATRIX = Object.freeze([
   Object.freeze({ locale: "zh-CN", basePath: "" }),
   Object.freeze({ locale: "ja", basePath: "/ja/academy" }),
@@ -64,9 +66,10 @@ export function buildBusinessRouteMatrix(academyRoutes) {
 
 function routeHtmlPath(route) { return route === "/" ? "index.html" : `${route.slice(1)}.html` }
 function isLocalizedGlobal(path) {
-  const parts = path.split("/")
+  const parts = path.normalize("NFC").toLowerCase().split("/")
   return parts[0] === "functions" || (parts.length === 1 && GLOBAL_NAMES.has(parts[0]))
 }
+function deploymentKey(path) { return path.normalize("NFC").toLowerCase() }
 function isForbidden(path) {
   const lower = path.toLowerCase()
   return lower.endsWith(".map") || lower.startsWith(".cache/") || lower.includes("/.cache/") || lower.startsWith(".git/") || lower.includes("/.git/") || lower.startsWith("node_modules/") || lower.endsWith("/.env.local") || lower === ".env.local" || /(?:^|\/)(?:[^/]+\.)?(?:pem|p12|pfx|key)$/u.test(lower)
@@ -108,11 +111,32 @@ async function renameWithRetries(operation, source, target) {
   }
 }
 
-export async function mergeStaticOutputs({ builds, output, academyRoutes, publishRename = rename, mapDestination } = {}) {
+function normalizeForbiddenMarkers(markers = []) {
+  return markers
+    .filter(({ value }) => (typeof value === "string" || Buffer.isBuffer(value)) && value.length > 0)
+    .map(({ name, value }) => ({
+      name: typeof name === "string" && /^[A-Z][A-Z0-9_]*$/u.test(name) ? name : "CONFIGURED_SECRET",
+      bytes: Buffer.isBuffer(value) ? value : Buffer.from(value),
+    }))
+}
+
+function validateSourceProvenance({ projectRoot, sourceRoot, sourceLabel, locale }) {
+  if (typeof sourceLabel !== "string" || sourceLabel.length === 0 || isAbsolute(sourceLabel)) throw new Error(`Invalid source label for ${locale}`)
+  const normalized = slash(sourceLabel).replace(/^\.\//u, "")
+  if (normalized === ".." || normalized.startsWith("../") || normalized.includes("\0")) throw new Error(`Invalid source label for ${locale}`)
+  const labeledRoot = resolve(projectRoot, ...normalized.split("/"))
+  if (relative(labeledRoot, sourceRoot) !== "" || relative(sourceRoot, labeledRoot) !== "") throw new Error(`Source label does not match build output for ${locale}`)
+  strictChild(projectRoot, labeledRoot, `Source label for ${locale}`)
+  return normalized
+}
+
+export async function mergeStaticOutputs({ projectRoot, sourceLabels, forbiddenMarkers, builds, output, academyRoutes, publishRename = rename, mapDestination } = {}) {
   if (!Array.isArray(academyRoutes) || academyRoutes.length === 0) throw new Error("academyRoutes must be non-empty")
   const matrix = buildBusinessRouteMatrix(academyRoutes)
   const absoluteOutput = resolve(output)
   const parent = dirname(absoluteOutput)
+  const absoluteProjectRoot = resolve(projectRoot ?? parent)
+  const secretMarkers = normalizeForbiddenMarkers(forbiddenMarkers)
   await mkdir(parent, { recursive: true })
   const temporary = strictChild(parent, join(parent, `.${resolve(output).split(sep).at(-1)}-tmp-${process.pid}-${randomUUID()}`), "Temporary deployment")
   const backup = strictChild(parent, join(parent, `.${resolve(output).split(sep).at(-1)}-backup-${process.pid}-${randomUUID()}`), "Deployment backup")
@@ -125,6 +149,9 @@ export async function mergeStaticOutputs({ builds, output, academyRoutes, publis
     for (const { locale, basePath } of BUILD_MATRIX) {
       validateBuildPair(locale, basePath)
       const sourceRoot = resolve(builds?.[locale] ?? "")
+      const sourceOutput = sourceLabels
+        ? validateSourceProvenance({ projectRoot: absoluteProjectRoot, sourceRoot, sourceLabel: sourceLabels[locale], locale })
+        : slash(relative(absoluteProjectRoot, sourceRoot))
       const stats = await lstat(sourceRoot)
       if (!stats.isDirectory() || stats.isSymbolicLink()) throw new Error(`Build output must be an ordinary directory: ${locale}`)
       const files = await listOrdinaryFiles(sourceRoot)
@@ -133,9 +160,11 @@ export async function mergeStaticOutputs({ builds, output, academyRoutes, publis
       const deduplications = []
       const materializedFiles = await Promise.all(files.map(async (item) => {
         if (isForbidden(item.rel)) throw new Error(`Forbidden build output content: ${locale}:${item.rel}`)
-        if (locale !== "zh-CN" && isLocalizedGlobal(item.rel)) return { ...item, excluded: true }
         const bytes = await readFile(item.absolute)
         if (bytes.length === 0) throw new Error(`Build output file is empty: ${locale}:${item.rel}`)
+        const marker = secretMarkers.find(({ bytes: markerBytes }) => bytes.includes(markerBytes))
+        if (marker) throw new Error(`Forbidden secret marker ${marker.name} in ${locale}:${item.rel}`)
+        if (locale !== "zh-CN" && isLocalizedGlobal(item.rel)) return { ...item, bytes, excluded: true }
         return { ...item, bytes, hash: sha256(bytes), excluded: false }
       }))
       const writes = []
@@ -145,33 +174,34 @@ export async function mergeStaticOutputs({ builds, output, academyRoutes, publis
         if (mapDestination) destination = mapDestination({ locale, basePath, relativePath: item.rel, destination })
         destination = slash(destination).replace(/^\/+/, "")
         if (!destination || destination.startsWith("../") || isAbsolute(destination)) throw new Error(`Unsafe merge destination: ${destination}`)
-        const previous = destinations.get(destination)
+        const destinationIdentity = deploymentKey(destination)
+        const previous = destinations.get(destinationIdentity)
         if (previous) {
-          if (previous.sha256 !== item.hash) throw new Error(`Non-identical collision at ${destination}: ${previous.source} vs ${locale}:${item.rel}`)
-          deduplications.push({ destination, source: `${locale}:${item.rel}`, sha256: item.hash })
+          if (previous.sha256 !== item.hash) throw new Error(`Non-identical collision at ${previous.path} / ${destination}: ${previous.source} vs ${locale}:${item.rel}`)
+          deduplications.push({ destination: previous.path, incomingDestination: destination, source: `${locale}:${item.rel}`, sha256: item.hash })
           continue
         }
         const target = strictChild(temporary, join(temporary, ...destination.split("/")), "Merged file")
         writes.push((async () => { await mkdir(dirname(target), { recursive: true }); await writeFile(target, item.bytes) })())
         const record = { path: destination, sha256: item.hash, size: item.bytes.length, source: `${locale}:${item.rel}` }
-        destinations.set(destination, record)
+        destinations.set(destinationIdentity, record)
         copied.push(record)
       }
       await Promise.all(writes)
-      manifestBuilds.push({ locale, basePath, sourceOutput: `${locale}/out`, logicalRouteCount: academyRoutes.length, copiedFileCount: copied.length, copiedFiles: copied.sort((a, b) => compare(a.path, b.path)), excludedGlobalFiles: excluded.sort(compare), deduplications: deduplications.sort((a, b) => compare(a.destination, b.destination)) })
+      manifestBuilds.push({ locale, basePath, sourceOutput, logicalRouteCount: academyRoutes.length, copiedFileCount: copied.length, copiedFiles: copied.sort((a, b) => compare(a.path, b.path)), excludedGlobalFiles: excluded.sort(compare), deduplications: deduplications.sort((a, b) => compare(a.destination, b.destination)) })
     }
 
     for (const { locale, basePath } of BUILD_MATRIX) {
       for (const route of academyRoutes) {
         const logical = routeHtmlPath(route)
         const path = locale === "zh-CN" ? logical : `${basePath.slice(1)}/${logical}`
-        if (!destinations.has(path)) throw new Error(`Missing academy route output: ${locale}:${route} (${path})`)
+        if (!destinations.has(deploymentKey(path))) throw new Error(`Missing academy route output: ${locale}:${route} (${path})`)
       }
     }
     if (academyRoutes.length === 79) {
       for (const route of SALES_LEGAL) {
         const path = routeHtmlPath(route)
-        if (!destinations.has(path)) throw new Error(`Missing Japanese sales/legal route output: ${route}`)
+        if (!destinations.has(deploymentKey(path))) throw new Error(`Missing Japanese sales/legal route output: ${route}`)
       }
       if (matrix.total !== 400) throw new Error(`Business route matrix must total 400; found ${matrix.total}`)
     }
@@ -195,7 +225,9 @@ async function cli() {
   const projectRoot = resolve(process.cwd())
   const academyRoutes = await deriveAcademyRoutes(projectRoot)
   const builds = { "zh-CN": join(projectRoot, "out"), ...Object.fromEntries(BUILD_MATRIX.slice(1).map(({ locale }) => [locale, join(projectRoot, ".cache", "i18n-build", locale, "out")])) }
-  const result = await mergeStaticOutputs({ builds, output: join(projectRoot, ".cache", "i18n-deploy"), academyRoutes })
+  const sourceLabels = { "zh-CN": "out", ...Object.fromEntries(BUILD_MATRIX.slice(1).map(({ locale }) => [locale, `.cache/i18n-build/${locale}/out`])) }
+  const forbiddenMarkers = await collectForbiddenMarkers(projectRoot)
+  const result = await mergeStaticOutputs({ projectRoot, sourceLabels, forbiddenMarkers, builds, output: join(projectRoot, ".cache", "i18n-deploy"), academyRoutes })
   console.log(JSON.stringify({ output: slash(relative(projectRoot, result.output)), academyRoutes: academyRoutes.length, businessHtml: result.manifest.businessRouteMatrix.total, manifestSha256: result.manifestSha256 }))
 }
 

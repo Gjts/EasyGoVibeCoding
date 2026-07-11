@@ -11,7 +11,7 @@ import {
   mergeStaticOutputs,
   validateBuildPair,
 } from "./static-deployment.mjs"
-import { createBuildPlan, executeBuildPlan } from "./build-static-deployment.mjs"
+import { collectForbiddenMarkers, createBuildPlan, executeBuildPlan } from "./build-static-deployment.mjs"
 
 async function file(root, path, contents = path) {
   const target = join(root, ...path.split("/"))
@@ -40,7 +40,22 @@ test("build orchestrator emits five explicit cwd/env pairs without shell strings
   assert.equal(calls.length, 5)
   assert.ok(calls.every(({ args }) => Array.isArray(args) && args.slice(-2).join(" ") === "run build"))
   assert.ok(calls.every(({ shell }) => shell === false))
+  assert.ok(calls.every(({ env }) => ["TRANSLATION_API_BASE_URL", "TRANSLATION_API_KEY", "OPENAI_API_KEY", "RESEND_API_KEY"].every((name) => env[name] === "")))
   await assert.rejects(executeBuildPlan([{ ...plan[1], basePath: "/wrong" }], async () => 0), /Invalid/)
+})
+
+test("reads configured secret markers without exposing dotenv values to child builds", async () => {
+  const root = await mkdtemp(join(tmpdir(), "static-secrets-"))
+  await file(root, ".env.local", "TRANSLATION_API_KEY=dotenv-only-marker\n")
+  const markers = await collectForbiddenMarkers(root, {
+    OPENAI_API_KEY: "environment-only-marker",
+  })
+  assert.deepEqual(markers.map(({ name }) => name).sort(), ["OPENAI_API_KEY", "TRANSLATION_API_KEY"])
+  const calls = []
+  await executeBuildPlan(createBuildPlan(root), async (call) => { calls.push(call); return 0 }, {
+    parentEnv: { TRANSLATION_API_KEY: "environment-would-override", OPENAI_API_KEY: "environment-only-marker" },
+  })
+  assert.ok(calls.every(({ env }) => env.TRANSLATION_API_KEY === "" && env.OPENAI_API_KEY === ""))
 })
 
 test("derives exactly 79 canonical routes and a 316-pair localized matrix", async () => {
@@ -68,14 +83,66 @@ test("merge mounts localized roots, deep pages and nested _next assets", async (
     await file(builds[locale], "_next/static/chunks/app.js", locale)
   }
   await file(builds["zh-CN"], "functions/api.js", "root")
-  await file(builds.en, "functions/api.js", "localized")
+  await file(builds.en, "Functions/api.js", "localized")
   await file(builds.en, "robots.txt", "localized")
   const result = await mergeStaticOutputs({ builds, output, academyRoutes: ["/", "/deep/page"] })
   assert.equal(await readFile(join(output, "en/academy/index.html"), "utf8"), "en")
   assert.equal(await readFile(join(output, "en/academy/deep/page.html"), "utf8"), "en")
   assert.equal(await readFile(join(output, "en/academy/_next/static/chunks/app.js"), "utf8"), "en")
   assert.equal(await readFile(join(output, "functions/api.js"), "utf8"), "root")
-  assert.ok(result.manifest.builds.find(({ locale }) => locale === "en").excludedGlobalFiles.includes("functions/api.js"))
+  assert.ok(result.manifest.builds.find(({ locale }) => locale === "en").excludedGlobalFiles.includes("Functions/api.js"))
+})
+
+test("rejects configured secret marker bytes without echoing their values", async () => {
+  const root = await mkdtemp(join(tmpdir(), "static-secret-leak-"))
+  const output = join(root, "deploy")
+  const builds = Object.fromEntries(BUILD_MATRIX.map(({ locale }) => [locale, join(root, locale)]))
+  for (const path of Object.values(builds)) await file(path, "index.html", "ok")
+  const markerValue = "test-only-secret-marker"
+  await file(builds.en, "leak.txt", `prefix:${markerValue}:suffix`)
+  let caught
+  try {
+    await mergeStaticOutputs({ builds, output, academyRoutes: ["/"], forbiddenMarkers: [{ name: "TRANSLATION_API_KEY", value: markerValue }] })
+  } catch (error) {
+    caught = error
+  }
+  assert.match(caught?.message ?? "", /TRANSLATION_API_KEY.*en:leak\.txt/)
+  assert.doesNotMatch(caught?.message ?? "", new RegExp(markerValue))
+})
+
+test("uses case-equivalent destination keys for collisions and honest deduplications", async () => {
+  const root = await mkdtemp(join(tmpdir(), "static-casefold-"))
+  const builds = Object.fromEntries(BUILD_MATRIX.map(({ locale }) => [locale, join(root, locale)]))
+  for (const path of Object.values(builds)) {
+    await file(path, "index.html", "route")
+    await file(path, "asset.txt", "same")
+  }
+  const mapDestination = ({ locale, relativePath, destination }) => relativePath !== "asset.txt"
+    ? destination
+    : locale === "zh-CN" ? "Foo.txt" : locale === "ja" ? "foo.txt" : destination
+  const result = await mergeStaticOutputs({ builds, output: join(root, "same"), academyRoutes: ["/"], mapDestination })
+  const jaDedup = result.manifest.builds.find(({ locale }) => locale === "ja").deduplications
+  assert.equal(jaDedup.length, 1)
+  assert.deepEqual({ ...jaDedup[0], sha256: undefined }, { destination: "Foo.txt", incomingDestination: "foo.txt", source: "ja:asset.txt", sha256: undefined })
+  assert.match(jaDedup[0].sha256, /^[a-f0-9]{64}$/u)
+  await file(builds.ja, "asset.txt", "different")
+  await assert.rejects(mergeStaticOutputs({ builds, output: join(root, "different"), academyRoutes: ["/"], mapDestination }), /collision.*Foo\.txt.*foo\.txt/i)
+})
+
+test("records stable project-relative source output provenance", async () => {
+  const root = await mkdtemp(join(tmpdir(), "static-provenance-"))
+  const labels = {
+    "zh-CN": "out",
+    ja: ".cache/i18n-build/ja/out",
+    en: ".cache/i18n-build/en/out",
+    fr: ".cache/i18n-build/fr/out",
+    de: ".cache/i18n-build/de/out",
+  }
+  const builds = Object.fromEntries(Object.entries(labels).map(([locale, label]) => [locale, join(root, ...label.split("/"))]))
+  for (const path of Object.values(builds)) await file(path, "index.html", "route")
+  const result = await mergeStaticOutputs({ projectRoot: root, sourceLabels: labels, builds, output: join(root, ".cache/deploy"), academyRoutes: ["/"] })
+  assert.deepEqual(Object.fromEntries(result.manifest.builds.map(({ locale, sourceOutput }) => [locale, sourceOutput])), labels)
+  await assert.rejects(mergeStaticOutputs({ projectRoot: root, sourceLabels: { ...labels, en: "../outside" }, builds, output: join(root, ".cache/bad"), academyRoutes: ["/"] }), /source label/i)
 })
 
 test("accepts identical duplicates but rejects non-identical collisions", async () => {
