@@ -1237,12 +1237,6 @@
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/de.json",
-    "text": "/scripts/buildsystems/vcpkg.cmake",
-    "offset": 402054,
-    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
-  },
-  {
-    "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/de.json",
     "text": "/.gradle/init.gradle",
     "offset": 625832,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
@@ -1311,12 +1305,6 @@
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/en.json",
     "text": "/.cargo",
     "offset": 330347,
-    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
-  },
-  {
-    "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/en.json",
-    "text": "/scripts/buildsystems/vcpkg.cmake",
-    "offset": 380860,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
@@ -1393,12 +1381,6 @@
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/fr.json",
-    "text": "/scripts/buildsystems/vcpkg.cmake",
-    "offset": 414183,
-    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
-  },
-  {
-    "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/fr.json",
     "text": "/.gradle/init.gradle",
     "offset": 644050,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
@@ -1467,12 +1449,6 @@
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/ja.json",
     "text": "/.cargo",
     "offset": 266290,
-    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
-  },
-  {
-    "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/ja.json",
-    "text": "/scripts/buildsystems/vcpkg.cmake",
-    "offset": 306655,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
@@ -1573,12 +1549,6 @@
   },
   {
     "path": "i18n/catalog/occurrences.json",
-    "text": "/scripts/buildsystems/vcpkg.cmake",
-    "offset": 631396,
-    "reason": "Source-extraction metadata occurrence containing an intentional academy filesystem example."
-  },
-  {
-    "path": "i18n/catalog/occurrences.json",
     "text": "/Applications/Xcode.app",
     "offset": 702972,
     "reason": "Source-extraction metadata occurrence containing an intentional academy filesystem example."
@@ -1623,12 +1593,6 @@
     "path": "i18n/catalog/source.zh-CN.json",
     "text": "/.cargo",
     "offset": 252696,
-    "reason": "Reviewed Chinese source-catalog occurrence containing an intentional academy filesystem example."
-  },
-  {
-    "path": "i18n/catalog/source.zh-CN.json",
-    "text": "/scripts/buildsystems/vcpkg.cmake",
-    "offset": 291090,
     "reason": "Reviewed Chinese source-catalog occurrence containing an intentional academy filesystem example."
   },
   {
@@ -2030,104 +1994,110 @@
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "file:///var/tmp/repo",
-    "offset": 4258,
+    "offset": 4294,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "/home/alice/repo",
-    "offset": 4290,
+    "offset": 4326,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "/workspace/app",
-    "offset": 4318,
+    "offset": 4354,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "/opt/tool",
-    "offset": 4344,
+    "offset": 4380,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "/tmp/build",
-    "offset": 4365,
+    "offset": 4401,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "/root/secret",
-    "offset": 4460,
+    "offset": 4496,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "/mnt/data",
-    "offset": 4484,
+    "offset": 4520,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "/etc/passwd",
-    "offset": 4505,
+    "offset": 4541,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "/custom/build/file.txt",
-    "offset": 4535,
+    "offset": 4571,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "/workspace",
-    "offset": 4819,
+    "offset": 4855,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "/opt",
-    "offset": 4832,
+    "offset": 4868,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "/workspace",
-    "offset": 4843,
+    "offset": 4879,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "/opt",
-    "offset": 4857,
+    "offset": 4893,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "/workspace/app",
-    "offset": 5032,
+    "offset": 5068,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "/workspace/app",
-    "offset": 5095,
+    "offset": 5131,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "/root/secret",
-    "offset": 5384,
+    "offset": 5420,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
-    "path": "scripts/i18n/source-transformer.test.mjs",
-    "text": "/../outside.json",
-    "offset": 20486,
-    "reason": "Tracked i18n regression fixture containing an intentional filesystem example."
+    "path": "scripts/i18n/release-audit.test.mjs",
+    "text": "/custom/build/file.txt",
+    "offset": 5891,
+    "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
+  },
+  {
+    "path": "scripts/i18n/release-audit.test.mjs",
+    "text": "/custom/build/output",
+    "offset": 5937,
+    "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/static-deployment.test.mjs",
@@ -2139,18 +2109,6 @@
     "path": "scripts/i18n/static-deployment.test.mjs",
     "text": "C:/project",
     "offset": 1310,
-    "reason": "Tracked i18n regression fixture containing an intentional filesystem example."
-  },
-  {
-    "path": "scripts/i18n/translate-full-catalog.test.mjs",
-    "text": "/../package.json",
-    "offset": 39605,
-    "reason": "Tracked i18n regression fixture containing an intentional filesystem example."
-  },
-  {
-    "path": "scripts/validate-models-json.mjs",
-    "text": "/data/models.json",
-    "offset": 484,
     "reason": "Tracked i18n regression fixture containing an intentional filesystem example."
   }
 ]

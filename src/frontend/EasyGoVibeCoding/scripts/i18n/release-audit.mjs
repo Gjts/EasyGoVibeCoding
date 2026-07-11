@@ -322,19 +322,27 @@ export function findLocalPathOccurrences(text, { includeGenericPosix = true } = 
     { kind: "explicit", pattern: /(?<!\\)\\\\(?!\\)(?![nrtbfv0]\\(?:u[\da-f]{4}|x[\da-f]{2}))[a-z\d][a-z\d._-]*\\[a-z\d$][a-z\d$._-]*(?:\\[^\s"'`<>|]+)*/giu },
     { kind: "explicit", pattern: /file:\/\/\/(?:[a-z]:\/)?[^\s"'`<>]+/giu },
     { kind: "explicit", pattern: /(?<![\p{L}\p{N}:\/\\])\/(?:Users|home|workspace|opt|tmp|var\/tmp|root|mnt|etc|srv|usr|bin|build|Applications|Library|\.gradle|\.cargo|\.m2|\.pip)(?![\p{L}\p{N}|)\\])(?:\/[^\s"'`<>|]+)?/gu },
-    ...(includeGenericPosix ? [{ kind: "generic", pattern: /(?<![\p{L}\p{N}:\/\\])\/(?:\.\.)?\/?[a-z\d._~-]+(?:\/[a-z\d._~+@%=-]+)*\/[a-z\d._~+@%=-]+\.[a-z\d]{1,12}(?![\p{L}\p{N}])/giu }] : []),
+    ...(includeGenericPosix ? [{ kind: "generic", pattern: /(?<![\p{L}\p{N}:\/\\.])\/[a-z\d._~-]+(?:\/[a-z\d._~+@%=-]+)+(?![\p{L}\p{N}])/giu }] : []),
   ]
   const source = String(text)
   const occurrences = patterns.flatMap(({ kind, pattern }) => [...source.matchAll(pattern)].map((match) => ({ text: match[0].replace(/[),.;\]}]+$/gu, ""), offset: match.index, kind })))
-    .filter(({ kind, offset, text: value }) => {
+    .filter(({ kind, offset }) => {
       if (kind !== "generic") return true
-      const context = `${source.slice(Math.max(0, offset - 120), offset)} ${source.slice(offset + value.length, offset + value.length + 120)}`
-      return /(?:\b(?:path|file|filename|filepath|directory|dir|root|workspace|filesystem|cwd|readfile|writefile|mkdir|realpath|resolve|join)\b|\bfs\s*\.|\u8def\u5f84|\u6587\u4ef6|\u76ee\u5f55)/iu.test(context)
+      const prefix = source.slice(Math.max(0, offset - 120), offset)
+      const binding = prefix.match(/([\p{L}\p{N}_$]+)\s*(?:=|:)\s*["'`]?\s*$/u)
+      const identifier = binding?.[1]?.toLowerCase() ?? ""
+      const semanticBinding = binding && !["path", "paths", "pathname", "basepath"].includes(identifier) && !/(?:route|url|href)/u.test(identifier) && /(?:file|path|dir|directory|root|workspace|build|\u8def\u5f84|\u6587\u4ef6|\u76ee\u5f55)/iu.test(identifier)
+      const filesystemCall = /(?:\b(?:readfile|writefile|mkdir|realpath|resolve|join)\s*\(|\bfs\s*\.\s*[\p{L}\p{N}_$]+\s*\()\s*["'`]?\s*$/iu
+      return Boolean(semanticBinding) || filesystemCall.test(prefix)
     })
   return [...new Map(occurrences.map((item) => [`${item.offset}\0${item.text}`, item])).values()].sort((left, right) => left.offset - right.offset || compare(left.text, right.text))
 }
 
 export function findLocalPaths(text, options) { return findLocalPathOccurrences(text, options).map(({ text: value }) => value) }
+
+export function shouldScanDeploymentGenericPosix(path) {
+  return new Set([".js", ".mjs", ".json", ".txt"]).has(extname(path).toLowerCase())
+}
 
 export function validateLocalPathAllowlist(allowlist) {
   if (!Array.isArray(allowlist)) throw new Error("Local-path allowlist must be an array")
@@ -535,7 +543,7 @@ export async function auditRelease({ deploymentRoot, projectRoot, academyRoutes,
   const deploymentContentEvidence = []
   const localPathUsage = new Map()
   for (const file of files) {
-    securityHits.push(...scanSecurityBytes({ path: file.path, bytes: file.bytes, forbiddenMarkers: [...forbiddenMarkers, ...localPathMarkers], localPathAllowlist, localPathUsage, includeGenericPosix: false }))
+    securityHits.push(...scanSecurityBytes({ path: file.path, bytes: file.bytes, forbiddenMarkers: [...forbiddenMarkers, ...localPathMarkers], localPathAllowlist, localPathUsage, includeGenericPosix: shouldScanDeploymentGenericPosix(file.path) }))
     deploymentContentEvidence.push(`${file.path}\0${file.sha256}\0${file.bytes.length}\n`)
   }
   const tracked = projectRoot ? await trackedSecurity({ projectRoot, forbiddenMarkers: [...forbiddenMarkers, ...localPathMarkers], localPathAllowlist, localPathUsage }) : { fileCount: 0, hits: [] }

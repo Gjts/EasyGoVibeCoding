@@ -15,6 +15,7 @@ import {
   findLocalPathOccurrences,
   findLocalPaths,
   scanSecurityBytes,
+  shouldScanDeploymentGenericPosix,
   validateAllowlist,
   validateLocalizedScriptCoverage,
   validateLocalPathAllowlist,
@@ -83,6 +84,13 @@ test("scanSecurityBytes rejects ordinary Windows, UNC, file URL and POSIX local 
   const repeatedAllowlist = validateLocalPathAllowlist([{ path: "repeat.js", text: repeatedPath, reason: "fixture" }])
   scanSecurityBytes({ path: "repeat.js", bytes: Buffer.from(repeated), forbiddenMarkers: [], localPathAllowlist: repeatedAllowlist, localPathUsage: usage })
   assert.throws(() => validateLocalPathAllowlistUsage(repeatedAllowlist, usage), /exactly once/iu)
+  const deploymentSource = 'const filePath="/custom/build/file.txt"; const workspaceRoot="/custom/build/output"'
+  assert.deepEqual(findLocalPaths(deploymentSource), ["/custom/build/file.txt", "/custom/build/output"])
+  assert.deepEqual(["bundle.js", "worker.mjs", "data.json", "route/__next._full.txt"].map(shouldScanDeploymentGenericPosix), [true, true, true, true])
+  assert.deepEqual(["index.html", "styles.css", "image.svg"].map(shouldScanDeploymentGenericPosix), [false, false, false])
+  assert.equal(scanSecurityBytes({ path: "bundle.js", bytes: Buffer.from(deploymentSource), forbiddenMarkers: [], includeGenericPosix: shouldScanDeploymentGenericPosix("bundle.js") }).some(({ category }) => category === "absolute-local-path"), true)
+  assert.equal(scanSecurityBytes({ path: "index.html", bytes: Buffer.from(deploymentSource), forbiddenMarkers: [], includeGenericPosix: shouldScanDeploymentGenericPosix("index.html") }).some(({ category }) => category === "absolute-local-path"), false)
+  assert.equal(findLocalPaths('const route="/custom/build/output"; const url="/custom/build/file.txt"; const href="/custom/build/file.txt"; const path="/custom/build/output"; const pathname="/custom/build/output"; const basePath="/custom/build/output"; paths: "/api/tasks"').length, 0)
 })
 
 test("allowlist requires exact locale, route, file, scope, text, and reason", () => {
