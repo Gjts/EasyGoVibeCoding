@@ -112,7 +112,7 @@ export function SponsorInquiryForm() {
             disabled={disabled}
             value={form.contactName}
             onChange={(event) => update("contactName", event.target.value)}
-            className="border-slate-300 bg-white text-slate-950 placeholder:text-slate-500"
+            className="h-11 border-slate-300 bg-white text-slate-950 placeholder:text-slate-500"
           />
         </Field>
 
@@ -127,7 +127,7 @@ export function SponsorInquiryForm() {
             disabled={disabled}
             value={form.email}
             onChange={(event) => update("email", event.target.value)}
-            className="border-slate-300 bg-white text-slate-950 placeholder:text-slate-500"
+            className="h-11 border-slate-300 bg-white text-slate-950 placeholder:text-slate-500"
           />
         </Field>
 
@@ -141,7 +141,7 @@ export function SponsorInquiryForm() {
             disabled={disabled}
             value={form.company}
             onChange={(event) => update("company", event.target.value)}
-            className="border-slate-300 bg-white text-slate-950 placeholder:text-slate-500"
+            className="h-11 border-slate-300 bg-white text-slate-950 placeholder:text-slate-500"
           />
         </Field>
 
@@ -154,7 +154,7 @@ export function SponsorInquiryForm() {
             disabled={disabled}
             value={form.productName}
             onChange={(event) => update("productName", event.target.value)}
-            className="border-slate-300 bg-white text-slate-950 placeholder:text-slate-500"
+            className="h-11 border-slate-300 bg-white text-slate-950 placeholder:text-slate-500"
           />
         </Field>
       </div>
@@ -181,7 +181,7 @@ export function SponsorInquiryForm() {
             disabled={disabled}
             value={form.productUrl}
             onChange={(event) => update("productUrl", event.target.value)}
-            className="border-slate-300 bg-white text-slate-950 placeholder:text-slate-500"
+            className="h-11 border-slate-300 bg-white text-slate-950 placeholder:text-slate-500"
           />
         </Field>
       </div>
@@ -200,7 +200,7 @@ export function SponsorInquiryForm() {
                 event.target.value as SponsorInquiryFormState["budgetRange"],
               )
             }
-            className="h-10 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-950 outline-none focus-visible:border-violet-600 focus-visible:ring-[3px] focus-visible:ring-violet-200 disabled:cursor-not-allowed disabled:opacity-50"
+            className="h-11 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-950 outline-none focus-visible:border-violet-600 focus-visible:ring-[3px] focus-visible:ring-violet-200 disabled:cursor-not-allowed disabled:opacity-50"
           >
             {SPONSOR_BUDGET_OPTIONS.map((option) => (
               <option key={option.value} value={option.value}>
@@ -223,7 +223,7 @@ export function SponsorInquiryForm() {
                 event.target.value as SponsorInquiryFormState["campaignGoal"],
               )
             }
-            className="h-10 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-950 outline-none focus-visible:border-violet-600 focus-visible:ring-[3px] focus-visible:ring-violet-200 disabled:cursor-not-allowed disabled:opacity-50"
+            className="h-11 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-950 outline-none focus-visible:border-violet-600 focus-visible:ring-[3px] focus-visible:ring-violet-200 disabled:cursor-not-allowed disabled:opacity-50"
           >
             {SPONSOR_CAMPAIGN_GOAL_OPTIONS.map((option) => (
               <option key={option.value} value={option.value}>
@@ -318,6 +318,9 @@ export function SponsorInquiryForm() {
               className="mx-1 font-semibold underline underline-offset-4"
             >
               项目 GitHub 联系入口
+              <span className="ml-1 font-normal">
+                {SPONSOR_INQUIRY_COPY.newWindowCue}
+              </span>
             </a>
             询问其他非公开联系方式。
           </p>
@@ -372,7 +375,7 @@ export function SponsorInquiryForm() {
         <Button
           type="submit"
           disabled={disabled}
-          className="w-full rounded-md bg-violet-700 text-white hover:bg-violet-800 focus-visible:ring-violet-300 sm:w-auto"
+          className="h-11 w-full rounded-md bg-violet-700 text-white hover:bg-violet-800 focus-visible:ring-violet-300 sm:w-auto"
         >
           <Send aria-hidden="true" className="h-4 w-4" />
           {disabled ? "提交中…" : "提交合作需求"}

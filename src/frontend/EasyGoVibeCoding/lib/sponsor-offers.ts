@@ -19,6 +19,9 @@ export const SPONSOR_OFFERS = [
   },
 ] as const
 
+export const SPONSOR_CUSTOM_CONTENT_CLARIFICATION =
+  "品牌实战挑战属于需单独评估和实现的定制内容，并非第三个现有广告位；本轮卡片库存仍仅限上方两个页面。"
+
 export const SPONSOR_PILOT_INVENTORY = [
   {
     slot: "super-individual-home",

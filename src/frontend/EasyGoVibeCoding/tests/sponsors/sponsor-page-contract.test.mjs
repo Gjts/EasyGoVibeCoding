@@ -16,10 +16,9 @@ import {
   getSponsorInquiryErrorMessage,
   submitSponsorInquiry,
 } from "../../lib/sponsor-inquiry-client.ts"
-import {
-  SPONSOR_OFFERS,
-  SPONSOR_PILOT_INVENTORY,
-} from "../../lib/sponsor-offers.ts"
+import * as sponsorOfferContract from "../../lib/sponsor-offers.ts"
+
+const { SPONSOR_OFFERS, SPONSOR_PILOT_INVENTORY } = sponsorOfferContract
 
 const validInquiry = {
   contactName: "张三",
@@ -34,26 +33,33 @@ const validInquiry = {
   website: "",
 }
 
-test("publishes only the three approved pilot offers", () => {
-  assert.deepEqual(
-    SPONSOR_OFFERS.map(({ id, name, price }) => ({ id, name, price })),
-    [
-      {
-        id: "context-card",
-        name: "上下文赞助卡",
-        price: "¥1,500–3,000 / 30 天",
-      },
-      {
-        id: "module-exclusive",
-        name: "超级个体模块独家赞助",
-        price: "¥4,000–8,000 / 30 天",
-      },
-      {
-        id: "sponsored-challenge",
-        name: "品牌实战挑战",
-        price: "¥8,000–15,000 / 期",
-      },
-    ],
+test("publishes only the three approved pilot offers without rewriting them", () => {
+  assert.deepEqual(SPONSOR_OFFERS, [
+    {
+      id: "context-card",
+      name: "上下文赞助卡",
+      price: "¥1,500–3,000 / 30 天",
+      description: "在一个约定的高相关页面获得独占赞助卡和聚合交付报告。",
+    },
+    {
+      id: "module-exclusive",
+      name: "超级个体模块独家赞助",
+      price: "¥4,000–8,000 / 30 天",
+      description: "覆盖最多两个约定页面，同类竞品不在同一排期展示。",
+    },
+    {
+      id: "sponsored-challenge",
+      name: "品牌实战挑战",
+      price: "¥8,000–15,000 / 期",
+      description: "共创一期明确标注广告的开发实践、模板或挑战，并提供结项报告。",
+    },
+  ])
+})
+
+test("separates the custom challenge from the two existing card slots", () => {
+  assert.equal(
+    sponsorOfferContract.SPONSOR_CUSTOM_CONTENT_CLARIFICATION,
+    "品牌实战挑战属于需单独评估和实现的定制内容，并非第三个现有广告位；本轮卡片库存仍仅限上方两个页面。",
   )
 })
 
@@ -128,6 +134,7 @@ test("maps every endpoint failure to fixed Chinese copy", () => {
   )
   assert.match(SPONSOR_INQUIRY_COPY.noScript, /JavaScript/)
   assert.match(SPONSOR_INQUIRY_COPY.noScriptWarning, /请勿.*公开/)
+  assert.equal(SPONSOR_INQUIRY_COPY.newWindowCue, "（新窗口打开）")
   assert.equal(
     SPONSOR_GITHUB_CONTACT_URL,
     "https://github.com/Gjts/EasyGoVibeCoding/issues/new",

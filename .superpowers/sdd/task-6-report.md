@@ -102,3 +102,34 @@ The full sponsor suite passed 65 tests, 0 failed.
 - The successful UI path is backed by the pure 202/reset implementation and static inspection; the browser exercise used a mocked provider failure to avoid an external message.
 - The successful build retains known repository warnings about optional Prettier resolution in `@react-email/render` and stale baseline-browser data. No dependency was added to address unrelated baseline warnings.
 - Full-repository lint remains outside Task 6 because the documented baseline is not clean; all touched code passed targeted lint.
+
+## Reviewer remediation
+
+Follow-up commit scope is limited to the five Task 6 page/form/contract/test files plus this report. The locked `SPONSOR_OFFERS` IDs, names, prices, and descriptions remain byte-for-byte unchanged and are now asserted in full.
+
+### Impact
+
+Upstream GitNexus lookups were run before editing the existing `SponsorInquiryForm` and `SponsorPage` symbols with the repository and branch specified. Both returned `UNKNOWN` / target not found because the loaded index predates the new Task 6 symbols. No HIGH or CRITICAL result was returned; direct diff review confirms no Footer, Header, layout, `CourseLayout`, Function, or campaign change in this remediation.
+
+### RED and GREEN
+
+The focused contract command first exited 1 with 7 passing and 2 expected failures: the custom-content inventory clarification and visible new-window cue were both undefined. After the minimal implementation, the same command passed 9 tests, 0 failed.
+
+The new contract test distinguishes the three unchanged commercial offers from existing card inventory. The page now prominently states immediately after the offers: “品牌实战挑战属于需单独评估和实现的定制内容，并非第三个现有广告位；本轮卡片库存仍仅限上方两个页面。”
+
+### Accessibility and polish
+
+- The no-JS GitHub link retains `target="_blank"` and `rel="noopener noreferrer"` and now includes the visible, accessible cue `（新窗口打开）` inside the link.
+- All five visible text/email/URL inputs, both selects, and the submit button use `h-11` (44px). The textarea remains larger, and the checkbox retains its full label hit area.
+- The Impeccable detector returned no findings for the updated page and form.
+
+### Verification
+
+- Focused contract tests: 9 passed, 0 failed.
+- Full sponsor suite: 66 passed, 0 failed.
+- Frontend and Functions typechecks: exit 0.
+- Targeted page/form/contract/test ESLint: exit 0.
+- Static production build: exit 0; `/sponsor` remains static and Functions were copied.
+- Built HTML contains the exact clarification and the no-JS external link with target, rel, and new-window cue.
+- Source inspection found 8 visible `h-11` controls and zero remaining visible `h-10` controls in the form.
+- `git diff --check`: exit 0.

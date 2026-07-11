@@ -37,6 +37,7 @@ export const SPONSOR_INQUIRY_COPY = {
   noScript: "此表单需要 JavaScript 才能安全提交。",
   noScriptWarning:
     "请勿在公开 GitHub Issue 中发布未公开报价、联系人信息或其他私密商业材料。",
+  newWindowCue: "（新窗口打开）",
 } as const
 
 export const SPONSOR_GITHUB_CONTACT_URL =

@@ -5,7 +5,11 @@ import { ArrowRight, Check, ShieldCheck } from "lucide-react"
 import { Footer } from "@/components/footer"
 import { Header } from "@/components/header"
 import { SponsorInquiryForm } from "@/components/sponsor/sponsor-inquiry-form"
-import { SPONSOR_OFFERS, SPONSOR_PILOT_INVENTORY } from "@/lib/sponsor-offers"
+import {
+  SPONSOR_CUSTOM_CONTENT_CLARIFICATION,
+  SPONSOR_OFFERS,
+  SPONSOR_PILOT_INVENTORY,
+} from "@/lib/sponsor-offers"
 
 export const metadata: Metadata = {
   title: "赞助合作试运行 | EasyGoVibeCoding",
@@ -144,6 +148,13 @@ export default function SponsorPage() {
                 </article>
               ))}
             </div>
+
+            <aside
+              aria-label="品牌实战挑战库存说明"
+              className="mt-6 rounded-lg border border-amber-300 bg-amber-50 px-4 py-3 text-sm font-semibold leading-6 text-amber-950"
+            >
+              {SPONSOR_CUSTOM_CONTENT_CLARIFICATION}
+            </aside>
 
             <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <p className="max-w-[72ch] text-sm leading-6 text-slate-700">
