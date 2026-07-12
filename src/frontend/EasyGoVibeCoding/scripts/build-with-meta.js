@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 const { spawnSync } = require("node:child_process");
 const path = require("node:path");
 
@@ -18,13 +19,17 @@ function main() {
     "next",
   );
 
-  const result = spawnSync(process.execPath, [nextBin, "build"], {
+  const buildArgs = [nextBin, "build"];
+  if (env.NEXT_BUILD_ENGINE === "webpack") {
+    buildArgs.push("--webpack");
+  }
+
+  const result = spawnSync(process.execPath, buildArgs, {
     stdio: "inherit",
     env,
   });
 
   if (result.error) {
-    // eslint-disable-next-line no-console
     console.error(result.error);
   }
 

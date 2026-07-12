@@ -2,19 +2,19 @@
   {
     "path": "advanced/deployment.html",
     "text": "/bin/bash\\\\n#",
-    "offset": 109199,
+    "offset": 109296,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "advanced/deployment.txt",
     "text": "/bin/bash\\n#",
-    "offset": 43150,
+    "offset": 43149,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "advanced/deployment/__next._full.txt",
     "text": "/bin/bash\\n#",
-    "offset": 43150,
+    "offset": 43149,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
@@ -26,199 +26,199 @@
   {
     "path": "advanced/environment.html",
     "text": "/.m2/settings.xml",
-    "offset": 44149,
+    "offset": 44247,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "advanced/environment.html",
     "text": "/.gradle/gradle.properties",
-    "offset": 44201,
+    "offset": 44299,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "advanced/environment.html",
     "text": "/.m2/repository",
-    "offset": 45349,
+    "offset": 45447,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "advanced/environment.html",
     "text": "/.m2/settings.xml",
-    "offset": 227122,
+    "offset": 227219,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "advanced/environment.html",
     "text": "/.gradle/gradle.properties",
-    "offset": 227205,
+    "offset": 227302,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "advanced/environment.html",
     "text": "/.m2/repository",
-    "offset": 228978,
+    "offset": 229075,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "advanced/environment.html",
     "text": "/Applications/Xcode.app",
-    "offset": 282914,
+    "offset": 283011,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "advanced/environment.html",
     "text": "/Applications/Xcode-15.0.app",
-    "offset": 302721,
+    "offset": 302818,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "advanced/environment.html",
     "text": "/.pip/pip.conf",
-    "offset": 327415,
+    "offset": 327512,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "advanced/environment.html",
     "text": "/.cargo/config.toml",
-    "offset": 344515,
+    "offset": 344612,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "advanced/environment.html",
     "text": "/.cargo",
-    "offset": 344713,
+    "offset": 344810,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "advanced/environment.html",
     "text": "/.gradle/init.gradle",
-    "offset": 369434,
+    "offset": 369531,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "advanced/environment.html",
     "text": "/.gradle/init.gradle",
-    "offset": 377348,
+    "offset": 377445,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "advanced/environment.txt",
     "text": "/.m2/settings.xml",
-    "offset": 124973,
+    "offset": 124972,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "advanced/environment.txt",
     "text": "/.gradle/gradle.properties",
-    "offset": 125044,
+    "offset": 125043,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "advanced/environment.txt",
     "text": "/.m2/repository",
-    "offset": 126559,
+    "offset": 126558,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "advanced/environment.txt",
     "text": "/Applications/Xcode.app",
-    "offset": 174174,
+    "offset": 174173,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "advanced/environment.txt",
     "text": "/Applications/Xcode-15.0.app",
-    "offset": 191666,
+    "offset": 191665,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "advanced/environment.txt",
     "text": "/.pip/pip.conf",
-    "offset": 212900,
+    "offset": 212899,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "advanced/environment.txt",
     "text": "/.cargo/config.toml",
-    "offset": 227777,
+    "offset": 227776,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "advanced/environment.txt",
     "text": "/.cargo",
-    "offset": 227951,
+    "offset": 227950,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "advanced/environment.txt",
     "text": "/.gradle/init.gradle",
-    "offset": 249491,
+    "offset": 249490,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "advanced/environment.txt",
     "text": "/.gradle/init.gradle",
-    "offset": 256350,
+    "offset": 256349,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "advanced/environment/__next._full.txt",
     "text": "/.m2/settings.xml",
-    "offset": 124973,
+    "offset": 124972,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "advanced/environment/__next._full.txt",
     "text": "/.gradle/gradle.properties",
-    "offset": 125044,
+    "offset": 125043,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "advanced/environment/__next._full.txt",
     "text": "/.m2/repository",
-    "offset": 126559,
+    "offset": 126558,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "advanced/environment/__next._full.txt",
     "text": "/Applications/Xcode.app",
-    "offset": 174174,
+    "offset": 174173,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "advanced/environment/__next._full.txt",
     "text": "/Applications/Xcode-15.0.app",
-    "offset": 191666,
+    "offset": 191665,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "advanced/environment/__next._full.txt",
     "text": "/.pip/pip.conf",
-    "offset": 212900,
+    "offset": 212899,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "advanced/environment/__next._full.txt",
     "text": "/.cargo/config.toml",
-    "offset": 227777,
+    "offset": 227776,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "advanced/environment/__next._full.txt",
     "text": "/.cargo",
-    "offset": 227951,
+    "offset": 227950,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "advanced/environment/__next._full.txt",
     "text": "/.gradle/init.gradle",
-    "offset": 249491,
+    "offset": 249490,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "advanced/environment/__next._full.txt",
     "text": "/.gradle/init.gradle",
-    "offset": 256350,
+    "offset": 256349,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
@@ -362,1225 +362,1513 @@
   {
     "path": "de/academy/advanced/deployment.html",
     "text": "/bin/bash\\\\n#",
-    "offset": 128130,
+    "offset": 128277,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/advanced/deployment.txt",
     "text": "/bin/bash\\n#",
-    "offset": 54489,
+    "offset": 54522,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/advanced/deployment/__next._full.txt",
     "text": "/bin/bash\\n#",
-    "offset": 54489,
+    "offset": 54522,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/advanced/deployment/__next.advanced/deployment/__PAGE__.txt",
     "text": "/bin/bash\\n#",
-    "offset": 49341,
+    "offset": 49385,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/advanced/environment.html",
     "text": "/.m2/settings.xml",
-    "offset": 46266,
+    "offset": 46373,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/advanced/environment.html",
     "text": "/.gradle/gradle.properties",
-    "offset": 46333,
+    "offset": 46440,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/advanced/environment.html",
     "text": "/.m2/repository",
-    "offset": 47680,
+    "offset": 47787,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/advanced/environment.html",
     "text": "/.m2/settings.xml",
-    "offset": 208137,
+    "offset": 208273,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/advanced/environment.html",
     "text": "/.gradle/gradle.properties",
-    "offset": 208235,
+    "offset": 208371,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/advanced/environment.html",
     "text": "/.m2/repository",
-    "offset": 210207,
+    "offset": 210343,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/advanced/environment.html",
     "text": "/Applications/Xcode.app",
-    "offset": 263264,
+    "offset": 263419,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/advanced/environment.html",
     "text": "/Applications/Xcode-15.0.app",
-    "offset": 281990,
+    "offset": 282139,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/advanced/environment.html",
     "text": "/.pip/pip.conf",
-    "offset": 316661,
+    "offset": 316864,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/advanced/environment.html",
     "text": "/.cargo/config.toml",
-    "offset": 336882,
+    "offset": 337076,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/advanced/environment.html",
     "text": "/.cargo",
-    "offset": 337145,
+    "offset": 337339,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/advanced/environment.html",
     "text": "/.gradle/init.gradle",
-    "offset": 367326,
+    "offset": 367516,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/advanced/environment.html",
     "text": "/.gradle/init.gradle",
-    "offset": 376824,
+    "offset": 377014,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/advanced/environment.txt",
     "text": "/.m2/settings.xml",
-    "offset": 103932,
+    "offset": 103957,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/advanced/environment.txt",
     "text": "/.gradle/gradle.properties",
-    "offset": 104018,
+    "offset": 104043,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/advanced/environment.txt",
     "text": "/.m2/repository",
-    "offset": 105732,
+    "offset": 105757,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/advanced/environment.txt",
     "text": "/Applications/Xcode.app",
-    "offset": 152947,
+    "offset": 152991,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/advanced/environment.txt",
     "text": "/Applications/Xcode-15.0.app",
-    "offset": 169642,
+    "offset": 169680,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/advanced/environment.txt",
     "text": "/.pip/pip.conf",
-    "offset": 200138,
+    "offset": 200230,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/advanced/environment.txt",
     "text": "/.cargo/config.toml",
-    "offset": 217850,
+    "offset": 217933,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/advanced/environment.txt",
     "text": "/.cargo",
-    "offset": 218089,
+    "offset": 218172,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/advanced/environment.txt",
     "text": "/.gradle/init.gradle",
-    "offset": 244557,
+    "offset": 244636,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/advanced/environment.txt",
     "text": "/.gradle/init.gradle",
-    "offset": 252882,
+    "offset": 252961,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/advanced/environment/__next._full.txt",
     "text": "/.m2/settings.xml",
-    "offset": 103932,
+    "offset": 103957,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/advanced/environment/__next._full.txt",
     "text": "/.gradle/gradle.properties",
-    "offset": 104018,
+    "offset": 104043,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/advanced/environment/__next._full.txt",
     "text": "/.m2/repository",
-    "offset": 105732,
+    "offset": 105757,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/advanced/environment/__next._full.txt",
     "text": "/Applications/Xcode.app",
-    "offset": 152947,
+    "offset": 152991,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/advanced/environment/__next._full.txt",
     "text": "/Applications/Xcode-15.0.app",
-    "offset": 169642,
+    "offset": 169680,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/advanced/environment/__next._full.txt",
     "text": "/.pip/pip.conf",
-    "offset": 200138,
+    "offset": 200230,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/advanced/environment/__next._full.txt",
     "text": "/.cargo/config.toml",
-    "offset": 217850,
+    "offset": 217933,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/advanced/environment/__next._full.txt",
     "text": "/.cargo",
-    "offset": 218089,
+    "offset": 218172,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/advanced/environment/__next._full.txt",
     "text": "/.gradle/init.gradle",
-    "offset": 244557,
+    "offset": 244636,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/advanced/environment/__next._full.txt",
     "text": "/.gradle/init.gradle",
-    "offset": 252882,
+    "offset": 252961,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/advanced/environment/__next.advanced/environment/__PAGE__.txt",
     "text": "/.m2/settings.xml",
-    "offset": 124897,
+    "offset": 124963,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/advanced/environment/__next.advanced/environment/__PAGE__.txt",
     "text": "/.gradle/gradle.properties",
-    "offset": 124983,
+    "offset": 125049,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/advanced/environment/__next.advanced/environment/__PAGE__.txt",
     "text": "/.m2/repository",
-    "offset": 126678,
+    "offset": 126744,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/advanced/environment/__next.advanced/environment/__PAGE__.txt",
     "text": "/Applications/Xcode.app",
-    "offset": 173465,
+    "offset": 173550,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/advanced/environment/__next.advanced/environment/__PAGE__.txt",
     "text": "/Applications/Xcode-15.0.app",
-    "offset": 190004,
+    "offset": 190083,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/advanced/environment/__next.advanced/environment/__PAGE__.txt",
     "text": "/.pip/pip.conf",
-    "offset": 221238,
+    "offset": 221342,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/advanced/environment/__next.advanced/environment/__PAGE__.txt",
     "text": "/.cargo/config.toml",
-    "offset": 238798,
+    "offset": 238893,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/advanced/environment/__next.advanced/environment/__PAGE__.txt",
     "text": "/.cargo",
-    "offset": 239037,
+    "offset": 239132,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/advanced/environment/__next.advanced/environment/__PAGE__.txt",
     "text": "/.gradle/init.gradle",
-    "offset": 265277,
+    "offset": 265368,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/advanced/environment/__next.advanced/environment/__PAGE__.txt",
     "text": "/.gradle/init.gradle",
-    "offset": 273526,
+    "offset": 273617,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/practice/efficiency.html",
     "text": "/bin/bash",
-    "offset": 30425,
+    "offset": 30488,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/practice/efficiency.html",
     "text": "/bin/bash\\\\n#",
-    "offset": 89064,
+    "offset": 89110,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/practice/efficiency.txt",
     "text": "/bin/bash\\n#",
-    "offset": 32980,
+    "offset": 32940,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/practice/efficiency/__next._full.txt",
     "text": "/bin/bash\\n#",
-    "offset": 32980,
+    "offset": 32940,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "de/academy/practice/efficiency/__next.practice/efficiency/__PAGE__.txt",
     "text": "/bin/bash\\n#",
-    "offset": 27849,
+    "offset": 27810,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/advanced/deployment.html",
     "text": "/bin/bash\\\\n#",
-    "offset": 125371,
+    "offset": 125477,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/advanced/deployment.txt",
     "text": "/bin/bash\\n#",
-    "offset": 52961,
+    "offset": 52968,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/advanced/deployment/__next._full.txt",
     "text": "/bin/bash\\n#",
-    "offset": 52961,
+    "offset": 52968,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/advanced/deployment/__next.advanced/deployment/__PAGE__.txt",
     "text": "/bin/bash\\n#",
-    "offset": 47824,
+    "offset": 47832,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/advanced/environment.html",
     "text": "/.m2/settings.xml",
-    "offset": 45950,
+    "offset": 46048,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/advanced/environment.html",
     "text": "/.gradle/gradle.properties",
-    "offset": 46016,
+    "offset": 46114,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/advanced/environment.html",
     "text": "/.m2/repository",
-    "offset": 47335,
+    "offset": 47433,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/advanced/environment.html",
     "text": "/.m2/settings.xml",
-    "offset": 205941,
+    "offset": 206050,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/advanced/environment.html",
     "text": "/.gradle/gradle.properties",
-    "offset": 206038,
+    "offset": 206147,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/advanced/environment.html",
     "text": "/.m2/repository",
-    "offset": 207982,
+    "offset": 208091,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/advanced/environment.html",
     "text": "/Applications/Xcode.app",
-    "offset": 261238,
+    "offset": 261352,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/advanced/environment.html",
     "text": "/Applications/Xcode-15.0.app",
-    "offset": 279988,
+    "offset": 280102,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/advanced/environment.html",
     "text": "/.pip/pip.conf",
-    "offset": 314970,
+    "offset": 315115,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/advanced/environment.html",
     "text": "/.cargo/config.toml",
-    "offset": 334483,
+    "offset": 334624,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/advanced/environment.html",
     "text": "/.cargo",
-    "offset": 334721,
+    "offset": 334862,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/advanced/environment.html",
     "text": "/.gradle/init.gradle",
-    "offset": 363658,
+    "offset": 363802,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/advanced/environment.html",
     "text": "/.gradle/init.gradle",
-    "offset": 372877,
+    "offset": 373021,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/advanced/environment.txt",
     "text": "/.m2/settings.xml",
-    "offset": 102769,
+    "offset": 102758,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/advanced/environment.txt",
     "text": "/.gradle/gradle.properties",
-    "offset": 102854,
+    "offset": 102843,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/advanced/environment.txt",
     "text": "/.m2/repository",
-    "offset": 104540,
+    "offset": 104529,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/advanced/environment.txt",
     "text": "/Applications/Xcode.app",
-    "offset": 151883,
+    "offset": 151877,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/advanced/environment.txt",
     "text": "/Applications/Xcode-15.0.app",
-    "offset": 168574,
+    "offset": 168568,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/advanced/environment.txt",
     "text": "/.pip/pip.conf",
-    "offset": 199259,
+    "offset": 199284,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/advanced/environment.txt",
     "text": "/.cargo/config.toml",
-    "offset": 216341,
+    "offset": 216362,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/advanced/environment.txt",
     "text": "/.cargo",
-    "offset": 216555,
+    "offset": 216576,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/advanced/environment.txt",
     "text": "/.gradle/init.gradle",
-    "offset": 241948,
+    "offset": 241972,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/advanced/environment.txt",
     "text": "/.gradle/init.gradle",
-    "offset": 250010,
+    "offset": 250034,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/advanced/environment/__next._full.txt",
     "text": "/.m2/settings.xml",
-    "offset": 102769,
+    "offset": 102758,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/advanced/environment/__next._full.txt",
     "text": "/.gradle/gradle.properties",
-    "offset": 102854,
+    "offset": 102843,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/advanced/environment/__next._full.txt",
     "text": "/.m2/repository",
-    "offset": 104540,
+    "offset": 104529,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/advanced/environment/__next._full.txt",
     "text": "/Applications/Xcode.app",
-    "offset": 151883,
+    "offset": 151877,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/advanced/environment/__next._full.txt",
     "text": "/Applications/Xcode-15.0.app",
-    "offset": 168574,
+    "offset": 168568,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/advanced/environment/__next._full.txt",
     "text": "/.pip/pip.conf",
-    "offset": 199259,
+    "offset": 199284,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/advanced/environment/__next._full.txt",
     "text": "/.cargo/config.toml",
-    "offset": 216341,
+    "offset": 216362,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/advanced/environment/__next._full.txt",
     "text": "/.cargo",
-    "offset": 216555,
+    "offset": 216576,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/advanced/environment/__next._full.txt",
     "text": "/.gradle/init.gradle",
-    "offset": 241948,
+    "offset": 241972,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/advanced/environment/__next._full.txt",
     "text": "/.gradle/init.gradle",
-    "offset": 250010,
+    "offset": 250034,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/advanced/environment/__next.advanced/environment/__PAGE__.txt",
     "text": "/.m2/settings.xml",
-    "offset": 71393,
+    "offset": 71383,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/advanced/environment/__next.advanced/environment/__PAGE__.txt",
     "text": "/.gradle/gradle.properties",
-    "offset": 71478,
+    "offset": 71468,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/advanced/environment/__next.advanced/environment/__PAGE__.txt",
     "text": "/.m2/repository",
-    "offset": 73145,
+    "offset": 73135,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/advanced/environment/__next.advanced/environment/__PAGE__.txt",
     "text": "/Applications/Xcode.app",
-    "offset": 120070,
+    "offset": 120065,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/advanced/environment/__next.advanced/environment/__PAGE__.txt",
     "text": "/Applications/Xcode-15.0.app",
-    "offset": 136609,
+    "offset": 136604,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/advanced/environment/__next.advanced/environment/__PAGE__.txt",
     "text": "/.pip/pip.conf",
-    "offset": 192648,
+    "offset": 192674,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/advanced/environment/__next.advanced/environment/__PAGE__.txt",
     "text": "/.cargo/config.toml",
-    "offset": 209578,
+    "offset": 209600,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/advanced/environment/__next.advanced/environment/__PAGE__.txt",
     "text": "/.cargo",
-    "offset": 209792,
+    "offset": 209814,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/advanced/environment/__next.advanced/environment/__PAGE__.txt",
     "text": "/.gradle/init.gradle",
-    "offset": 234957,
+    "offset": 234982,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/advanced/environment/__next.advanced/environment/__PAGE__.txt",
     "text": "/.gradle/init.gradle",
-    "offset": 242943,
+    "offset": 242968,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/practice/efficiency.html",
     "text": "/bin/bash",
-    "offset": 29595,
+    "offset": 29658,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/practice/efficiency.html",
     "text": "/bin/bash\\\\n#",
-    "offset": 86920,
+    "offset": 86967,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/practice/efficiency.txt",
     "text": "/bin/bash\\n#",
-    "offset": 32086,
+    "offset": 32043,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/practice/efficiency/__next._full.txt",
     "text": "/bin/bash\\n#",
-    "offset": 32086,
+    "offset": 32043,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "en/academy/practice/efficiency/__next.practice/efficiency/__PAGE__.txt",
     "text": "/bin/bash\\n#",
-    "offset": 26966,
+    "offset": 26934,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/advanced/deployment.html",
     "text": "/bin/bash\\\\n#",
-    "offset": 130583,
+    "offset": 130642,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/advanced/deployment.txt",
     "text": "/bin/bash\\n#",
-    "offset": 55864,
+    "offset": 55857,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/advanced/deployment/__next._full.txt",
     "text": "/bin/bash\\n#",
-    "offset": 55864,
+    "offset": 55857,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/advanced/deployment/__next.advanced/deployment/__PAGE__.txt",
     "text": "/bin/bash\\n#",
-    "offset": 50716,
+    "offset": 50710,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/advanced/environment.html",
     "text": "/.m2/settings.xml",
-    "offset": 46452,
+    "offset": 46554,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/advanced/environment.html",
     "text": "/.gradle/gradle.properties",
-    "offset": 46525,
+    "offset": 46627,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/advanced/environment.html",
     "text": "/.m2/repository",
-    "offset": 47875,
+    "offset": 47977,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/advanced/environment.html",
     "text": "/.m2/settings.xml",
-    "offset": 209392,
+    "offset": 209550,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/advanced/environment.html",
     "text": "/.gradle/gradle.properties",
-    "offset": 209496,
+    "offset": 209654,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/advanced/environment.html",
     "text": "/.m2/repository",
-    "offset": 211471,
+    "offset": 211629,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/advanced/environment.html",
     "text": "/Applications/Xcode.app",
-    "offset": 264564,
+    "offset": 264781,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/advanced/environment.html",
     "text": "/Applications/Xcode-15.0.app",
-    "offset": 283290,
+    "offset": 283543,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/advanced/environment.html",
     "text": "/.pip/pip.conf",
-    "offset": 317913,
+    "offset": 318128,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/advanced/environment.html",
     "text": "/.cargo/config.toml",
-    "offset": 338213,
+    "offset": 338440,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/advanced/environment.html",
     "text": "/.cargo",
-    "offset": 338462,
+    "offset": 338689,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/advanced/environment.html",
     "text": "/.gradle/init.gradle",
-    "offset": 368733,
+    "offset": 368978,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/advanced/environment.html",
     "text": "/.gradle/init.gradle",
-    "offset": 378254,
+    "offset": 378505,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/advanced/environment.txt",
     "text": "/.m2/settings.xml",
-    "offset": 104570,
+    "offset": 104617,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/advanced/environment.txt",
     "text": "/.gradle/gradle.properties",
-    "offset": 104662,
+    "offset": 104709,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/advanced/environment.txt",
     "text": "/.m2/repository",
-    "offset": 106379,
+    "offset": 106426,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/advanced/environment.txt",
     "text": "/Applications/Xcode.app",
-    "offset": 153630,
+    "offset": 153736,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/advanced/environment.txt",
     "text": "/Applications/Xcode-15.0.app",
-    "offset": 170325,
+    "offset": 170467,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/advanced/environment.txt",
     "text": "/.pip/pip.conf",
-    "offset": 200817,
+    "offset": 200919,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/advanced/environment.txt",
     "text": "/.cargo/config.toml",
-    "offset": 218608,
+    "offset": 218722,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/advanced/environment.txt",
     "text": "/.cargo",
-    "offset": 218833,
+    "offset": 218947,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/advanced/environment.txt",
     "text": "/.gradle/init.gradle",
-    "offset": 245391,
+    "offset": 245523,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/advanced/environment.txt",
     "text": "/.gradle/init.gradle",
-    "offset": 253739,
+    "offset": 253877,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/advanced/environment/__next._full.txt",
     "text": "/.m2/settings.xml",
-    "offset": 104570,
+    "offset": 104617,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/advanced/environment/__next._full.txt",
     "text": "/.gradle/gradle.properties",
-    "offset": 104662,
+    "offset": 104709,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/advanced/environment/__next._full.txt",
     "text": "/.m2/repository",
-    "offset": 106379,
+    "offset": 106426,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/advanced/environment/__next._full.txt",
     "text": "/Applications/Xcode.app",
-    "offset": 153630,
+    "offset": 153736,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/advanced/environment/__next._full.txt",
     "text": "/Applications/Xcode-15.0.app",
-    "offset": 170325,
+    "offset": 170467,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/advanced/environment/__next._full.txt",
     "text": "/.pip/pip.conf",
-    "offset": 200817,
+    "offset": 200919,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/advanced/environment/__next._full.txt",
     "text": "/.cargo/config.toml",
-    "offset": 218608,
+    "offset": 218722,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/advanced/environment/__next._full.txt",
     "text": "/.cargo",
-    "offset": 218833,
+    "offset": 218947,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/advanced/environment/__next._full.txt",
     "text": "/.gradle/init.gradle",
-    "offset": 245391,
+    "offset": 245523,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/advanced/environment/__next._full.txt",
     "text": "/.gradle/init.gradle",
-    "offset": 253739,
+    "offset": 253877,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/advanced/environment/__next.advanced/environment/__PAGE__.txt",
     "text": "/.m2/settings.xml",
-    "offset": 125438,
+    "offset": 125404,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/advanced/environment/__next.advanced/environment/__PAGE__.txt",
     "text": "/.gradle/gradle.properties",
-    "offset": 125530,
+    "offset": 125496,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/advanced/environment/__next.advanced/environment/__PAGE__.txt",
     "text": "/.m2/repository",
-    "offset": 127228,
+    "offset": 127194,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/advanced/environment/__next.advanced/environment/__PAGE__.txt",
     "text": "/Applications/Xcode.app",
-    "offset": 174051,
+    "offset": 174076,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/advanced/environment/__next.advanced/environment/__PAGE__.txt",
     "text": "/Applications/Xcode-15.0.app",
-    "offset": 190590,
+    "offset": 190651,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/advanced/environment/__next.advanced/environment/__PAGE__.txt",
     "text": "/.pip/pip.conf",
-    "offset": 222589,
+    "offset": 222821,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/advanced/environment/__next.advanced/environment/__PAGE__.txt",
     "text": "/.cargo/config.toml",
-    "offset": 240228,
+    "offset": 240472,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/advanced/environment/__next.advanced/environment/__PAGE__.txt",
     "text": "/.cargo",
-    "offset": 240453,
+    "offset": 240697,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/advanced/environment/__next.advanced/environment/__PAGE__.txt",
     "text": "/.gradle/init.gradle",
-    "offset": 266783,
+    "offset": 267045,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/advanced/environment/__next.advanced/environment/__PAGE__.txt",
     "text": "/.gradle/init.gradle",
-    "offset": 275055,
+    "offset": 275323,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/practice/efficiency.html",
     "text": "/bin/bash",
-    "offset": 30907,
+    "offset": 31029,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/practice/efficiency.html",
     "text": "/bin/bash\\\\n#",
-    "offset": 90576,
+    "offset": 90691,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/practice/efficiency.txt",
     "text": "/bin/bash\\n#",
-    "offset": 33509,
+    "offset": 33439,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/practice/efficiency/__next._full.txt",
     "text": "/bin/bash\\n#",
-    "offset": 33509,
+    "offset": 33439,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "fr/academy/practice/efficiency/__next.practice/efficiency/__PAGE__.txt",
     "text": "/bin/bash\\n#",
-    "offset": 28398,
+    "offset": 28319,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/de.json",
     "text": "/bin/bash\\n#",
-    "offset": 110034,
+    "offset": 110859,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/de.json",
     "text": "/.pip/pip.conf",
-    "offset": 120841,
+    "offset": 121745,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/de.json",
     "text": "/.cargo",
-    "offset": 348717,
+    "offset": 351333,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/de.json",
     "text": "/.gradle/init.gradle",
-    "offset": 625832,
+    "offset": 630508,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/de.json",
     "text": "/.m2/settings.xml",
-    "offset": 804948,
+    "offset": 810993,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/de.json",
     "text": "/.m2/repository",
-    "offset": 836259,
+    "offset": 842535,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/de.json",
     "text": "/Applications/Xcode-15.0.app",
-    "offset": 849900,
+    "offset": 856275,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/de.json",
     "text": "/Applications/Xcode.app",
-    "offset": 954412,
+    "offset": 961537,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/de.json",
     "text": "/.cargo/config.toml",
-    "offset": 962805,
+    "offset": 969994,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/de.json",
     "text": "/.gradle/gradle.properties",
-    "offset": 1067629,
+    "offset": 1075638,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/de.json",
     "text": "/.gradle/init.gradle",
-    "offset": 1177438,
+    "offset": 1186239,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/de.json",
     "text": "/bin/bash\\n#",
-    "offset": 1194252,
+    "offset": 1203167,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/en.json",
     "text": "/bin/bash\\n#",
-    "offset": 104530,
+    "offset": 105355,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/en.json",
     "text": "/.pip/pip.conf",
-    "offset": 114938,
+    "offset": 115842,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/en.json",
     "text": "/.cargo",
-    "offset": 330347,
+    "offset": 332963,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/en.json",
     "text": "/.gradle/init.gradle",
-    "offset": 591790,
+    "offset": 596466,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/en.json",
     "text": "/.m2/settings.xml",
-    "offset": 761068,
+    "offset": 767113,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/en.json",
     "text": "/.m2/repository",
-    "offset": 790598,
+    "offset": 796874,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/en.json",
     "text": "/Applications/Xcode-15.0.app",
-    "offset": 803482,
+    "offset": 809857,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/en.json",
     "text": "/Applications/Xcode.app",
-    "offset": 902483,
+    "offset": 909608,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/en.json",
     "text": "/.cargo/config.toml",
-    "offset": 910345,
+    "offset": 917534,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/en.json",
     "text": "/.gradle/gradle.properties",
-    "offset": 1010099,
+    "offset": 1018108,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/en.json",
     "text": "/.gradle/init.gradle",
-    "offset": 1113934,
+    "offset": 1122735,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/en.json",
     "text": "/bin/bash\\n#",
-    "offset": 1129667,
+    "offset": 1138582,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/fr.json",
     "text": "/bin/bash\\n#",
-    "offset": 113394,
+    "offset": 114219,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/fr.json",
     "text": "/.pip/pip.conf",
-    "offset": 124639,
+    "offset": 125543,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/fr.json",
     "text": "/.cargo",
-    "offset": 359558,
+    "offset": 362174,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/fr.json",
     "text": "/.gradle/init.gradle",
-    "offset": 644050,
+    "offset": 648726,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/fr.json",
     "text": "/.m2/settings.xml",
-    "offset": 828486,
+    "offset": 834531,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/fr.json",
     "text": "/.m2/repository",
-    "offset": 860708,
+    "offset": 866984,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/fr.json",
     "text": "/Applications/Xcode-15.0.app",
-    "offset": 874739,
+    "offset": 881114,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/fr.json",
     "text": "/Applications/Xcode.app",
-    "offset": 982197,
+    "offset": 989322,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/fr.json",
     "text": "/.cargo/config.toml",
-    "offset": 990789,
+    "offset": 997978,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/fr.json",
     "text": "/.gradle/gradle.properties",
-    "offset": 1099274,
+    "offset": 1107283,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/fr.json",
     "text": "/.gradle/init.gradle",
-    "offset": 1212438,
+    "offset": 1221239,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/fr.json",
     "text": "/bin/bash\\n#",
-    "offset": 1229568,
+    "offset": 1238483,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/ja.json",
     "text": "/bin/bash\\n#",
-    "offset": 84209,
+    "offset": 85034,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/ja.json",
     "text": "/.pip/pip.conf",
-    "offset": 92775,
+    "offset": 93679,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/ja.json",
     "text": "/.cargo",
-    "offset": 266290,
+    "offset": 268906,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/ja.json",
     "text": "/.gradle/init.gradle",
-    "offset": 476133,
+    "offset": 480809,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/ja.json",
     "text": "/.m2/settings.xml",
-    "offset": 612667,
+    "offset": 618712,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/ja.json",
     "text": "/.m2/repository",
-    "offset": 636822,
+    "offset": 643098,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/ja.json",
     "text": "/Applications/Xcode-15.0.app",
-    "offset": 647253,
+    "offset": 653628,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/ja.json",
     "text": "/Applications/Xcode.app",
-    "offset": 727694,
+    "offset": 734819,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/ja.json",
     "text": "/.cargo/config.toml",
-    "offset": 734071,
+    "offset": 741260,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/ja.json",
     "text": "/.gradle/gradle.properties",
-    "offset": 814558,
+    "offset": 822567,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/ja.json",
     "text": "/.gradle/init.gradle",
-    "offset": 898167,
+    "offset": 906968,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/messages/5d3a0d6c6bdf452d10596d7baf4abad25fd99535b1a46cf4ac83a74495eacdd9/ja.json",
     "text": "/bin/bash\\n#",
-    "offset": 910710,
+    "offset": 919625,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/de.json",
+    "text": "/bin/bash\\n#",
+    "offset": 112124,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/de.json",
+    "text": "/.pip/pip.conf",
+    "offset": 122953,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/de.json",
+    "text": "/.cargo",
+    "offset": 355403,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/de.json",
+    "text": "/.gradle/init.gradle",
+    "offset": 641243,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/de.json",
+    "text": "/.m2/settings.xml",
+    "offset": 824086,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/de.json",
+    "text": "/.m2/repository",
+    "offset": 855658,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/de.json",
+    "text": "/Applications/Xcode-15.0.app",
+    "offset": 869654,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/de.json",
+    "text": "/Applications/Xcode.app",
+    "offset": 975384,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/de.json",
+    "text": "/.cargo/config.toml",
+    "offset": 984103,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/de.json",
+    "text": "/.gradle/gradle.properties",
+    "offset": 1092805,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/de.json",
+    "text": "/.gradle/init.gradle",
+    "offset": 1204633,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/de.json",
+    "text": "/bin/bash\\n#",
+    "offset": 1222569,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/en.json",
+    "text": "/bin/bash\\n#",
+    "offset": 106161,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/en.json",
+    "text": "/.pip/pip.conf",
+    "offset": 116477,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/en.json",
+    "text": "/.cargo",
+    "offset": 335787,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/en.json",
+    "text": "/.gradle/init.gradle",
+    "offset": 605283,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/en.json",
+    "text": "/.m2/settings.xml",
+    "offset": 777811,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/en.json",
+    "text": "/.m2/repository",
+    "offset": 807565,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/en.json",
+    "text": "/Applications/Xcode-15.0.app",
+    "offset": 820755,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/en.json",
+    "text": "/Applications/Xcode.app",
+    "offset": 920860,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/en.json",
+    "text": "/.cargo/config.toml",
+    "offset": 929044,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/en.json",
+    "text": "/.gradle/gradle.properties",
+    "offset": 1032248,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/en.json",
+    "text": "/.gradle/init.gradle",
+    "offset": 1137825,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/en.json",
+    "text": "/bin/bash\\n#",
+    "offset": 1154640,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/fr.json",
+    "text": "/bin/bash\\n#",
+    "offset": 115561,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/fr.json",
+    "text": "/.pip/pip.conf",
+    "offset": 126668,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/fr.json",
+    "text": "/.cargo",
+    "offset": 365758,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/fr.json",
+    "text": "/.gradle/init.gradle",
+    "offset": 659284,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/fr.json",
+    "text": "/.m2/settings.xml",
+    "offset": 847397,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/fr.json",
+    "text": "/.m2/repository",
+    "offset": 879872,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/fr.json",
+    "text": "/Applications/Xcode-15.0.app",
+    "offset": 894246,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/fr.json",
+    "text": "/Applications/Xcode.app",
+    "offset": 1002965,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/fr.json",
+    "text": "/.cargo/config.toml",
+    "offset": 1011904,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/fr.json",
+    "text": "/.gradle/gradle.properties",
+    "offset": 1124307,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/fr.json",
+    "text": "/.gradle/init.gradle",
+    "offset": 1239511,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/fr.json",
+    "text": "/bin/bash\\n#",
+    "offset": 1257814,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/ja.json",
+    "text": "/bin/bash\\n#",
+    "offset": 85564,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/ja.json",
+    "text": "/.pip/pip.conf",
+    "offset": 94056,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/ja.json",
+    "text": "/.cargo",
+    "offset": 270557,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/ja.json",
+    "text": "/.gradle/init.gradle",
+    "offset": 486559,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/ja.json",
+    "text": "/.m2/settings.xml",
+    "offset": 625729,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/ja.json",
+    "text": "/.m2/repository",
+    "offset": 650108,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/ja.json",
+    "text": "/Applications/Xcode-15.0.app",
+    "offset": 660768,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/ja.json",
+    "text": "/Applications/Xcode.app",
+    "offset": 742128,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/ja.json",
+    "text": "/.cargo/config.toml",
+    "offset": 748708,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/ja.json",
+    "text": "/.gradle/gradle.properties",
+    "offset": 831852,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/ja.json",
+    "text": "/.gradle/init.gradle",
+    "offset": 916902,
+    "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
+  },
+  {
+    "path": "i18n/catalog/messages/ff487e20463918975262a2867525bf688b62d957e26e245b1397f589d96c0370/ja.json",
+    "text": "/bin/bash\\n#",
+    "offset": 930281,
     "reason": "Reviewed localized catalog occurrence preserving an intentional academy filesystem example."
   },
   {
@@ -1658,409 +1946,409 @@
   {
     "path": "i18n/catalog/source.zh-CN.json",
     "text": "/bin/bash\\n#",
-    "offset": 80011,
+    "offset": 81132,
     "reason": "Reviewed Chinese source-catalog occurrence containing an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/source.zh-CN.json",
     "text": "/.pip/pip.conf",
-    "offset": 88215,
+    "offset": 89248,
     "reason": "Reviewed Chinese source-catalog occurrence containing an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/source.zh-CN.json",
     "text": "/.cargo",
-    "offset": 252696,
+    "offset": 256345,
     "reason": "Reviewed Chinese source-catalog occurrence containing an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/source.zh-CN.json",
     "text": "/.gradle/init.gradle",
-    "offset": 451667,
+    "offset": 461001,
     "reason": "Reviewed Chinese source-catalog occurrence containing an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/source.zh-CN.json",
     "text": "/.m2/settings.xml",
-    "offset": 581324,
+    "offset": 592941,
     "reason": "Reviewed Chinese source-catalog occurrence containing an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/source.zh-CN.json",
     "text": "/.m2/repository",
-    "offset": 604251,
+    "offset": 616108,
     "reason": "Reviewed Chinese source-catalog occurrence containing an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/source.zh-CN.json",
     "text": "/Applications/Xcode-15.0.app",
-    "offset": 614121,
+    "offset": 626172,
     "reason": "Reviewed Chinese source-catalog occurrence containing an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/source.zh-CN.json",
     "text": "/Applications/Xcode.app",
-    "offset": 690337,
+    "offset": 703221,
     "reason": "Reviewed Chinese source-catalog occurrence containing an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/source.zh-CN.json",
     "text": "/.cargo/config.toml",
-    "offset": 696361,
+    "offset": 709432,
     "reason": "Reviewed Chinese source-catalog occurrence containing an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/source.zh-CN.json",
     "text": "/.gradle/gradle.properties",
-    "offset": 772897,
+    "offset": 788367,
     "reason": "Reviewed Chinese source-catalog occurrence containing an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/source.zh-CN.json",
     "text": "/.gradle/init.gradle",
-    "offset": 852315,
+    "offset": 869077,
     "reason": "Reviewed Chinese source-catalog occurrence containing an intentional academy filesystem example."
   },
   {
     "path": "i18n/catalog/source.zh-CN.json",
     "text": "/bin/bash\\n#",
-    "offset": 864094,
+    "offset": 881658,
     "reason": "Reviewed Chinese source-catalog occurrence containing an intentional academy filesystem example."
   },
   {
     "path": "ja/academy/advanced/deployment.html",
     "text": "/bin/bash\\\\n#",
-    "offset": 113298,
+    "offset": 113412,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/advanced/deployment.txt",
     "text": "/bin/bash\\n#",
-    "offset": 45616,
+    "offset": 45626,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/advanced/deployment/__next._full.txt",
     "text": "/bin/bash\\n#",
-    "offset": 45616,
+    "offset": 45626,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/advanced/deployment/__next.advanced/deployment/__PAGE__.txt",
     "text": "/bin/bash\\n#",
-    "offset": 40408,
+    "offset": 40419,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/advanced/environment.html",
     "text": "/.m2/settings.xml",
-    "offset": 44972,
+    "offset": 45071,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/advanced/environment.html",
     "text": "/.gradle/gradle.properties",
-    "offset": 45026,
+    "offset": 45125,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/advanced/environment.html",
     "text": "/.m2/repository",
-    "offset": 46234,
+    "offset": 46333,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/advanced/environment.html",
     "text": "/.m2/settings.xml",
-    "offset": 198573,
+    "offset": 198714,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/advanced/environment.html",
     "text": "/.gradle/gradle.properties",
-    "offset": 198658,
+    "offset": 198799,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/advanced/environment.html",
     "text": "/.m2/repository",
-    "offset": 200491,
+    "offset": 200632,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/advanced/environment.html",
     "text": "/Applications/Xcode.app",
-    "offset": 253801,
+    "offset": 253948,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/advanced/environment.html",
     "text": "/Applications/Xcode-15.0.app",
-    "offset": 272845,
+    "offset": 273350,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/advanced/environment.html",
     "text": "/.pip/pip.conf",
-    "offset": 308735,
+    "offset": 309230,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/advanced/environment.html",
     "text": "/.cargo/config.toml",
-    "offset": 326387,
+    "offset": 326878,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/advanced/environment.html",
     "text": "/.cargo",
-    "offset": 326599,
+    "offset": 327090,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/advanced/environment.html",
     "text": "/.gradle/init.gradle",
-    "offset": 353577,
+    "offset": 354057,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/advanced/environment.html",
     "text": "/.gradle/init.gradle",
-    "offset": 361942,
+    "offset": 362082,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/advanced/environment.txt",
     "text": "/.m2/settings.xml",
-    "offset": 99012,
+    "offset": 99050,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/advanced/environment.txt",
     "text": "/.gradle/gradle.properties",
-    "offset": 99085,
+    "offset": 99123,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/advanced/environment.txt",
     "text": "/.m2/repository",
-    "offset": 100660,
+    "offset": 100698,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/advanced/environment.txt",
     "text": "/Applications/Xcode.app",
-    "offset": 147908,
+    "offset": 147952,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/advanced/environment.txt",
     "text": "/Applications/Xcode-15.0.app",
-    "offset": 164793,
+    "offset": 165143,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/advanced/environment.txt",
     "text": "/.pip/pip.conf",
-    "offset": 196005,
+    "offset": 196345,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/advanced/environment.txt",
     "text": "/.cargo/config.toml",
-    "offset": 211402,
+    "offset": 211738,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/advanced/environment.txt",
     "text": "/.cargo",
-    "offset": 211590,
+    "offset": 211926,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/advanced/environment.txt",
     "text": "/.gradle/init.gradle",
-    "offset": 235140,
+    "offset": 235465,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/advanced/environment.txt",
     "text": "/.gradle/init.gradle",
-    "offset": 242407,
+    "offset": 242435,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/advanced/environment/__next._full.txt",
     "text": "/.m2/settings.xml",
-    "offset": 99012,
+    "offset": 99050,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/advanced/environment/__next._full.txt",
     "text": "/.gradle/gradle.properties",
-    "offset": 99085,
+    "offset": 99123,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/advanced/environment/__next._full.txt",
     "text": "/.m2/repository",
-    "offset": 100660,
+    "offset": 100698,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/advanced/environment/__next._full.txt",
     "text": "/Applications/Xcode.app",
-    "offset": 147908,
+    "offset": 147952,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/advanced/environment/__next._full.txt",
     "text": "/Applications/Xcode-15.0.app",
-    "offset": 164793,
+    "offset": 165143,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/advanced/environment/__next._full.txt",
     "text": "/.pip/pip.conf",
-    "offset": 196005,
+    "offset": 196345,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/advanced/environment/__next._full.txt",
     "text": "/.cargo/config.toml",
-    "offset": 211402,
+    "offset": 211738,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/advanced/environment/__next._full.txt",
     "text": "/.cargo",
-    "offset": 211590,
+    "offset": 211926,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/advanced/environment/__next._full.txt",
     "text": "/.gradle/init.gradle",
-    "offset": 235140,
+    "offset": 235465,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/advanced/environment/__next._full.txt",
     "text": "/.gradle/init.gradle",
-    "offset": 242407,
+    "offset": 242435,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/advanced/environment/__next.advanced/environment/__PAGE__.txt",
     "text": "/.m2/settings.xml",
-    "offset": 70642,
+    "offset": 70660,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/advanced/environment/__next.advanced/environment/__PAGE__.txt",
     "text": "/.gradle/gradle.properties",
-    "offset": 70715,
+    "offset": 70733,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/advanced/environment/__next.advanced/environment/__PAGE__.txt",
     "text": "/.m2/repository",
-    "offset": 72271,
+    "offset": 72289,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/advanced/environment/__next.advanced/environment/__PAGE__.txt",
     "text": "/Applications/Xcode.app",
-    "offset": 119233,
+    "offset": 119257,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/advanced/environment/__next.advanced/environment/__PAGE__.txt",
     "text": "/Applications/Xcode-15.0.app",
-    "offset": 136242,
+    "offset": 136258,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/advanced/environment/__next.advanced/environment/__PAGE__.txt",
     "text": "/.pip/pip.conf",
-    "offset": 189996,
+    "offset": 190023,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/advanced/environment/__next.advanced/environment/__PAGE__.txt",
     "text": "/.cargo/config.toml",
-    "offset": 205260,
+    "offset": 205283,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/advanced/environment/__next.advanced/environment/__PAGE__.txt",
     "text": "/.cargo",
-    "offset": 205448,
+    "offset": 205471,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/advanced/environment/__next.advanced/environment/__PAGE__.txt",
     "text": "/.gradle/init.gradle",
-    "offset": 228372,
+    "offset": 228384,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/advanced/environment/__next.advanced/environment/__PAGE__.txt",
     "text": "/.gradle/init.gradle",
-    "offset": 235317,
+    "offset": 235316,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/practice/efficiency.html",
     "text": "/bin/bash",
-    "offset": 27172,
+    "offset": 27266,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/practice/efficiency.html",
     "text": "/bin/bash\\\\n#",
-    "offset": 80044,
+    "offset": 80085,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/practice/efficiency.txt",
     "text": "/bin/bash\\n#",
-    "offset": 29559,
+    "offset": 29512,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/practice/efficiency/__next._full.txt",
     "text": "/bin/bash\\n#",
-    "offset": 29559,
+    "offset": 29512,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "ja/academy/practice/efficiency/__next.practice/efficiency/__PAGE__.txt",
     "text": "/bin/bash\\n#",
-    "offset": 24390,
+    "offset": 24394,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "practice/efficiency.html",
     "text": "/bin/bash",
-    "offset": 26081,
+    "offset": 26179,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "practice/efficiency.html",
     "text": "/bin/bash\\\\n#",
-    "offset": 77302,
+    "offset": 77399,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "practice/efficiency.txt",
     "text": "/bin/bash\\n#",
-    "offset": 28462,
+    "offset": 28461,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
     "path": "practice/efficiency/__next._full.txt",
     "text": "/bin/bash\\n#",
-    "offset": 28462,
+    "offset": 28461,
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
@@ -2072,199 +2360,199 @@
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "file:///var/tmp/repo",
-    "offset": 4294,
+    "offset": 4366,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "/home/alice/repo",
-    "offset": 4326,
+    "offset": 4398,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "/workspace/app",
-    "offset": 4354,
+    "offset": 4426,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "/opt/tool",
-    "offset": 4380,
+    "offset": 4452,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "/tmp/build",
-    "offset": 4401,
+    "offset": 4473,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "/root/secret",
-    "offset": 4496,
+    "offset": 4568,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "/mnt/data",
-    "offset": 4520,
+    "offset": 4592,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "/etc/passwd",
-    "offset": 4541,
+    "offset": 4613,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "/custom/build/file.txt",
-    "offset": 4571,
+    "offset": 4643,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "/workspace",
-    "offset": 4855,
+    "offset": 4930,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "/opt",
-    "offset": 4868,
+    "offset": 4943,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "/workspace",
-    "offset": 4879,
+    "offset": 4954,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "/opt",
-    "offset": 4893,
+    "offset": 4968,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "/workspace/app",
-    "offset": 5068,
+    "offset": 5145,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "/workspace/app",
-    "offset": 5131,
+    "offset": 5208,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "/root/secret",
-    "offset": 5420,
+    "offset": 5501,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "/custom/build/file.txt",
-    "offset": 5891,
+    "offset": 5977,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "/custom/build/output",
-    "offset": 5937,
+    "offset": 6023,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "/custom/build/file.txt",
-    "offset": 6929,
+    "offset": 7021,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "/custom/build/output",
-    "offset": 7139,
+    "offset": 7232,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "/custom/build/readme.txt",
-    "offset": 7339,
+    "offset": 7433,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "/custom/build/file.txt",
-    "offset": 7551,
+    "offset": 7646,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "/home/user",
-    "offset": 8164,
+    "offset": 8264,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "/build/output",
-    "offset": 8177,
+    "offset": 8277,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "/root/secret",
-    "offset": 8193,
+    "offset": 8293,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "/tmp/file",
-    "offset": 8208,
+    "offset": 8308,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "/home/user",
-    "offset": 8224,
+    "offset": 8324,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "/build/output",
-    "offset": 8238,
+    "offset": 8338,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "/root/secret",
-    "offset": 8255,
+    "offset": 8355,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "/tmp/file",
-    "offset": 8271,
+    "offset": 8371,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "\\\\\\\\a\\\\b\\\\secret.txt",
-    "offset": 8623,
+    "offset": 8725,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/release-audit.test.mjs",
     "text": "\\\\\\\\127.0.0.1\\\\C$\\\\secret.txt",
-    "offset": 8699,
+    "offset": 8802,
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/static-deployment.test.mjs",
     "text": "C:/project",
-    "offset": 1310,
+    "offset": 1344,
     "reason": "Tracked i18n regression fixture containing an intentional filesystem example."
   }
 ]

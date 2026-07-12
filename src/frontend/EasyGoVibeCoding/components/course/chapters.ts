@@ -53,10 +53,9 @@ export const advancedChapters = [
  */
 export const superIndividualChapters = [
   { title: "超级个体概述", href: "/super-individual" },
-  { title: "定位与策略", href: "/super-individual/strategy" },
-  { title: "产品化与商业化", href: "/super-individual/monetization" },
-  { title: "系统与自动化", href: "/super-individual/systems" },
-  { title: "增长与渠道", href: "/super-individual/growth" },
-  { title: "案例与复盘", href: "/super-individual/cases" },
+  { title: "定位与策略 · 需求验证", href: "/super-individual/strategy" },
+  { title: "产品化 · MVP 定义", href: "/super-individual/monetization" },
+  { title: "开发、部署与支付", href: "/super-individual/systems" },
+  { title: "数据分析与自动运营", href: "/super-individual/growth" },
+  { title: "复盘与迭代决策", href: "/super-individual/cases" },
 ] as const;
-

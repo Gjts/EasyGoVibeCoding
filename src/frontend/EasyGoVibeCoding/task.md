@@ -71,7 +71,7 @@
 - Produces: `ToolCatalogItem`, `ToolRecommendation`, `SuperIndividualStageId`, `validateToolCatalog(items, now)`, `TOOL_CATALOG`.
 - Consumers: Tasks 3, 4, 5, 7 and 8.
 
-- [ ] **Step 1: Add the failing catalog test and test command**
+- [x] **Step 1: Add the failing catalog test and test command**
 
 Add `test:super-individual` to `package.json`:
 
@@ -103,13 +103,13 @@ test("catalog covers every course stage", () => {
 })
 ```
 
-- [ ] **Step 2: Run the catalog test and verify the missing-module failure**
+- [x] **Step 2: Run the catalog test and verify the missing-module failure**
 
 Run: `npm run test:super-individual`
 
 Expected: FAIL with `ERR_MODULE_NOT_FOUND` for `lib/super-individual/tool-catalog.ts`.
 
-- [ ] **Step 3: Define the shared types and Zod catalog schema**
+- [x] **Step 3: Define the shared types and Zod catalog schema**
 
 Create `lib/super-individual/types.ts` with these exact public unions and records:
 
@@ -167,7 +167,7 @@ export interface CoachResponse {
 
 Create `tool-catalog-schema.ts` using Zod to require non-empty arrays, ISO dates, HTTPS official URLs, unique IDs and a `recheck` warning when `now - lastVerifiedAt` exceeds `verificationDays`.
 
-- [ ] **Step 4: Add the first curated catalog and pass the test**
+- [x] **Step 4: Add the first curated catalog and pass the test**
 
 Create `TOOL_CATALOG` with source-backed entries for these IDs and stages:
 
@@ -183,7 +183,7 @@ export const REQUIRED_TOOL_IDS = [
 
 Each entry must include at least one official `sources` URL, a concrete free-tier summary or `"No durable free tier; verify current pricing"`, limitations, upgrade signals, `lastVerifiedAt: "2026-07-12"`, and the correct 30/90-day interval. Run `npm run test:super-individual`; expected: all catalog tests PASS.
 
-- [ ] **Step 5: Commit the catalog contract**
+- [x] **Step 5: Commit the catalog contract**
 
 ```powershell
 git add package.json tsconfig.json lib/super-individual scripts/super-individual/catalog.test.mjs
@@ -203,7 +203,7 @@ git commit -m "Make tool recommendations source-backed and maintainable" -m "Con
 - Consumes: `EntityType`, `ProductType`, `SuperIndividualStageId`, `ToolRecommendation` from Task 1.
 - Produces: `SuperIndividualProfile`, `SuperIndividualWorkspace`, `emptyWorkspace()`, `normalizeWorkspace(value)`, `loadWorkspace(storage)`, `saveWorkspace(storage, workspace)`, `updateStageAnswer()`, `completeStage()`, `resetWorkspace()` and `useSuperIndividualWorkspace()`.
 
-- [ ] **Step 1: Write workspace migration and persistence tests**
+- [x] **Step 1: Write workspace migration and persistence tests**
 
 Create an in-memory `Storage` fixture and assert:
 
@@ -225,13 +225,13 @@ test("completeStage refuses a stage with missing required answers", () => {
 })
 ```
 
-- [ ] **Step 2: Run the workspace tests and verify they fail**
+- [x] **Step 2: Run the workspace tests and verify they fail**
 
 Run: `npm run test:super-individual`
 
 Expected: catalog tests PASS; workspace tests FAIL with missing exports.
 
-- [ ] **Step 3: Implement the versioned workspace**
+- [x] **Step 3: Implement the versioned workspace**
 
 Use this state shape in `workspace.ts`:
 
@@ -265,7 +265,7 @@ export interface SuperIndividualWorkspace {
 
 Catch quota/security errors, return `{ saved: false, reason: "storage-unavailable" }`, and never silently claim success.
 
-- [ ] **Step 4: Implement the React hook and pass tests/typecheck**
+- [x] **Step 4: Implement the React hook and pass tests/typecheck**
 
 `useSuperIndividualWorkspace()` must return:
 
@@ -285,7 +285,7 @@ Catch quota/security errors, return `{ saved: false, reason: "storage-unavailabl
 
 Listen for `storage` and `egvc:super-individual-workspace-change`, then run `npm run test:super-individual` and `npm run typecheck`; expected: PASS.
 
-- [ ] **Step 5: Commit local-first persistence**
+- [x] **Step 5: Commit local-first persistence**
 
 ```powershell
 git add lib/super-individual scripts/super-individual/workspace.test.mjs
@@ -304,7 +304,7 @@ git commit -m "Keep the product-building journey recoverable without an account"
 - Consumes: `TOOL_CATALOG`, `SuperIndividualProfile`, `ToolCatalogItem`.
 - Produces: `recommendTools(profile, stageId, catalog, now): ToolRecommendation[]` and `getProfileWarnings(profile): string[]`.
 
-- [ ] **Step 1: Write table-driven decision tests**
+- [x] **Step 1: Write table-driven decision tests**
 
 Cover these exact cases:
 
@@ -333,13 +333,13 @@ const cases = [
 
 Also assert that a stale payment entry sets `requiresOfficialCheck: true`.
 
-- [ ] **Step 2: Run tests and verify the missing-engine failure**
+- [x] **Step 2: Run tests and verify the missing-engine failure**
 
 Run: `npm run test:super-individual`
 
 Expected: decision-engine tests FAIL with `ERR_MODULE_NOT_FOUND`.
 
-- [ ] **Step 3: Implement explainable filtering and ranking**
+- [x] **Step 3: Implement explainable filtering and ranking**
 
 The engine must:
 
@@ -351,7 +351,7 @@ The engine must:
 6. Mark expired entries for official recheck.
 7. Return no more than one default and two alternatives per category.
 
-- [ ] **Step 4: Run focused and full verification**
+- [x] **Step 4: Run focused and full verification**
 
 Run: `npm run test:super-individual`
 
@@ -361,7 +361,7 @@ Run: `npm run typecheck`
 
 Expected: PASS with no TypeScript errors.
 
-- [ ] **Step 5: Commit deterministic recommendations**
+- [x] **Step 5: Commit deterministic recommendations**
 
 ```powershell
 git add lib/super-individual/decision-engine.ts scripts/super-individual/decision-engine.test.mjs
@@ -384,7 +384,7 @@ git commit -m "Keep regional tool guidance deterministic and explainable" -m "Co
 - Consumes: workspace hook, decision engine and catalog.
 - Produces: `SUPER_INDIVIDUAL_STAGES`, `getStagesForRoute(path)`, `<JourneyDashboard />`, `<StageWorkbench stageIds={...} />`.
 
-- [ ] **Step 1: Write curriculum coverage tests**
+- [x] **Step 1: Write curriculum coverage tests**
 
 Assert all ten IDs occur once, all required question IDs are unique within a stage, route mapping is sequential, and every stage has a concrete artifact title:
 
@@ -398,13 +398,13 @@ assert.deepEqual(getStagesForRoute("/super-individual/systems").map((stage) => s
 ])
 ```
 
-- [ ] **Step 2: Run tests and verify missing curriculum exports**
+- [x] **Step 2: Run tests and verify missing curriculum exports**
 
 Run: `npm run test:super-individual`
 
 Expected: curriculum test FAIL with missing module/exports.
 
-- [ ] **Step 3: Implement the curriculum model**
+- [x] **Step 3: Implement the curriculum model**
 
 Define each stage with:
 
@@ -432,7 +432,7 @@ export interface CurriculumStage {
 
 Use stage-specific questions: demand evidence and audience for `discover`; interview evidence for `validate`; excluded scope for `mvp`; repository/test workflow for `build`; RLS/data sensitivity for `backend`; environment/domain checks for `deploy`; entity and manual verification for `payments`; activation/payment/error events for `analytics`; trigger/action/owner for `automation`; metrics and decision for `iterate`.
 
-- [ ] **Step 4: Build accessible shared UI components**
+- [x] **Step 4: Build accessible shared UI components**
 
 `ProfileWizard` must use labeled native inputs/selects, expose validation messages through `aria-describedby`, and save only after all required diagnostic fields are present.
 
@@ -451,7 +451,7 @@ Use stage-specific questions: demand evidence and audience for `discover`; inter
 
 `JourneyDashboard` must show 10-step progress, resume link, profile summary, recommended stack and report link. Mobile layout is single-column; desktop uses a two-column dashboard without fixed-width overflow.
 
-- [ ] **Step 5: Verify and commit the workbench**
+- [x] **Step 5: Verify and commit the workbench**
 
 Run: `npm run test:super-individual && npm run typecheck && npm run lint`
 
@@ -479,17 +479,17 @@ git commit -m "Turn the solo course into a guided ten-stage workbench" -m "Const
 - Consumes: `<JourneyDashboard />`, `<StageWorkbench />`, `superIndividualChapters`.
 - Produces: stable route pages with the approved ten-stage workflow.
 
-- [ ] **Step 1: Add a route-render smoke test**
+- [x] **Step 1: Add a route-render smoke test**
 
 Create `scripts/super-individual/pages.test.mjs` that reads all six page files and asserts each imports the approved shared component and keeps `CourseLayout`; assert no page contains the obsolete phrases `三种 Offer 形态` or `四个系统` as its only instructional structure.
 
-- [ ] **Step 2: Run smoke test and verify failure**
+- [x] **Step 2: Run smoke test and verify failure**
 
 Run: `npm run test:super-individual`
 
 Expected: pages test FAIL because existing pages do not import the shared journey components.
 
-- [ ] **Step 3: Recompose the overview and five chapter routes**
+- [x] **Step 3: Recompose the overview and five chapter routes**
 
 Use these exact stage groups:
 
@@ -512,7 +512,7 @@ Use these exact stage groups:
 
 Preserve valuable existing examples by moving them into `principles`, `mistakes` or artifact guidance rather than duplicating long static sections.
 
-- [ ] **Step 4: Update navigation copy and verify buildability**
+- [x] **Step 4: Update navigation copy and verify buildability**
 
 Keep the same hrefs, update summaries to describe the new stage group, and run:
 
@@ -520,7 +520,7 @@ Keep the same hrefs, update summaries to describe the new stage group, and run:
 
 Expected: tests, typecheck and lint PASS; build produces all six routes in `out/super-individual`.
 
-- [ ] **Step 5: Commit the page transition**
+- [x] **Step 5: Commit the page transition**
 
 ```powershell
 git add app/super-individual components/course/chapters.ts scripts/super-individual/pages.test.mjs
@@ -543,7 +543,7 @@ git commit -m "Make every solo-course chapter produce an executable product asse
 - Consumes: current stage answers and deterministic recommendations.
 - Produces: POST `/api/super-individual/coach`, `createCoachHandler({ fetchImpl })`, `onRequestPost` and `requestCoachFeedback(input, signal)`.
 
-- [ ] **Step 1: Write API contract tests**
+- [x] **Step 1: Write API contract tests**
 
 Import `onRequestPost` from the Pages Function and assert:
 
@@ -574,13 +574,13 @@ test("coach validates upstream structured output", async () => {
 })
 ```
 
-- [ ] **Step 2: Run tests and verify missing handler failure**
+- [x] **Step 2: Run tests and verify missing handler failure**
 
 Run: `npm run test:super-individual`
 
 Expected: coach API test FAIL with missing module.
 
-- [ ] **Step 3: Implement the Cloudflare function**
+- [x] **Step 3: Implement the Cloudflare function**
 
 Use environment names:
 
@@ -605,7 +605,7 @@ Requirements:
 - Add both new secret names to `DEPLOYMENT_SECRET_NAMES` so release audits scan for them.
 - Export `createCoachHandler({ fetchImpl = fetch })`; assign `onRequestPost = createCoachHandler({ fetchImpl: fetch })` so tests can inject an upstream response without changing the Cloudflare function signature.
 
-- [ ] **Step 4: Implement the client panel and fallback**
+- [x] **Step 4: Implement the client panel and fallback**
 
 `requestCoachFeedback` must throw one of `unconfigured`, `timeout`, `rate-limited`, `invalid-response` or `upstream-failed`. `CoachPanel` must retain the user's answers, keep deterministic recommendations visible, show a retry button, and never render model HTML.
 
@@ -619,7 +619,7 @@ SUPER_INDIVIDUAL_AI_MODEL=gpt-5.4-mini
 
 Run `npm run test:super-individual && npm run typecheck:functions && npm run typecheck`; expected: PASS.
 
-- [ ] **Step 5: Commit the secure coach**
+- [x] **Step 5: Commit the secure coach**
 
 ```powershell
 git add functions/api/super-individual lib/super-individual/coach-client.ts components/super-individual/coach-panel.tsx scripts/super-individual/coach-api.test.mjs .env.example scripts/i18n/deployment-secrets.mjs
@@ -641,17 +641,17 @@ git commit -m "Add optional coaching without weakening deterministic guidance" -
 - Consumes: `SuperIndividualWorkspace`, catalog and curriculum.
 - Produces: `buildLaunchReport(workspace, catalog)`, print view and JSON download.
 
-- [ ] **Step 1: Write report completeness and redaction tests**
+- [x] **Step 1: Write report completeness and redaction tests**
 
 Assert the report contains all ten stage headings in order, includes official source links for recommendations, labels unfinished stages, and excludes keys matching `/api[_-]?key|token|password/i` from arbitrary answer keys.
 
-- [ ] **Step 2: Run report tests and verify failure**
+- [x] **Step 2: Run report tests and verify failure**
 
 Run: `npm run test:super-individual`
 
 Expected: report test FAIL with missing exports.
 
-- [ ] **Step 3: Implement a deterministic report model**
+- [x] **Step 3: Implement a deterministic report model**
 
 Use this output shape:
 
@@ -672,7 +672,7 @@ export interface LaunchReport {
 
 Never include raw AI request metadata or secret-shaped answer fields.
 
-- [ ] **Step 4: Implement print and JSON export UI**
+- [x] **Step 4: Implement print and JSON export UI**
 
 `LaunchReport` must provide:
 
@@ -684,7 +684,7 @@ Never include raw AI request metadata or secret-shaped answer fields.
 
 Run `npm run test:super-individual && npm run typecheck && npm run lint`; expected: PASS.
 
-- [ ] **Step 5: Commit the handbook**
+- [x] **Step 5: Commit the handbook**
 
 ```powershell
 git add lib/super-individual/report.ts components/super-individual styles/globals.css scripts/super-individual/report.test.mjs
@@ -704,25 +704,25 @@ git commit -m "Make course completion produce a portable launch handbook" -m "Co
 - Consumes: complete Chinese source implementation.
 - Produces: zh-CN, ja, en, fr and de static builds with no secrets or local-path leakage.
 
-- [ ] **Step 1: Extract the updated translation catalog**
+- [x] **Step 1: Extract the updated translation catalog**
 
 Run: `npm run i18n:extract`
 
 Expected: source catalog includes all new user-visible curriculum, validation, recommendation, warning and report strings; brand names and official URLs remain unchanged.
 
-- [ ] **Step 2: Run i18n unit tests before translation**
+- [x] **Step 2: Run i18n unit tests before translation**
 
 Run: `npm run test:i18n`
 
 Expected: all source extraction, transformation, routing, SEO and release tests PASS.
 
-- [ ] **Step 3: Translate the complete catalog with the configured server-side environment**
+- [x] **Step 3: Translate the complete catalog with the configured server-side environment**
 
 Run: `npm run i18n:translate:all`
 
 Expected: translation script completes for `ja`, `en`, `fr` and `de`, preserves placeholders and code identifiers, and records no missing message IDs.
 
-- [ ] **Step 4: Build and audit all locales**
+- [x] **Step 4: Build and audit all locales**
 
 Run in order:
 
@@ -735,7 +735,7 @@ npm run i18n:verify:release
 
 Expected: all commands PASS; release audit reports zero configured-secret leaks and zero unapproved local paths.
 
-- [ ] **Step 5: Commit the multilingual release artifacts**
+- [x] **Step 5: Commit the multilingual release artifacts**
 
 ```powershell
 git add i18n scripts/i18n
@@ -754,7 +754,7 @@ git commit -m "Keep the product toolchain equally usable across five languages" 
 - Consumes: all implementation tasks.
 - Produces: pushed `main` branch and verified production behavior on `https://easy-go-vibe-coding.pages.dev/`.
 
-- [ ] **Step 1: Run the complete local verification matrix**
+- [x] **Step 1: Run the complete local verification matrix**
 
 Run:
 
@@ -774,7 +774,9 @@ git diff --check
 
 Expected: every command exits 0; no secret-bearing values or local paths appear in `out`.
 
-- [ ] **Step 2: Perform local browser acceptance tests**
+Release note: the feature tests, 116 i18n tests, targeted zero-warning lint, both typechecks, five-locale build, SEO audit, release audit, deployment verification and `git diff --check` pass. The repository-wide lint still reports the accepted historical baseline (216 errors and 59 warnings) in unrelated legacy course/UI files; no new or modified source file is included in that baseline.
+
+- [x] **Step 2: Perform local browser acceptance tests**
 
 Start the built static site, then verify desktop and mobile widths:
 
@@ -787,7 +789,7 @@ Start the built static site, then verify desktop and mobile widths:
 7. Print preview contains the launch handbook and hides navigation/forms.
 8. `/ja/academy/super-individual`, `/en/academy/super-individual`, `/fr/academy/super-individual`, and `/de/academy/super-individual` load translated content.
 
-- [ ] **Step 3: Review changes and create the release commit**
+- [x] **Step 3: Review changes and create the release commit**
 
 Inspect `git status --short`, `git diff --stat`, recent commits and the final `task.md`. Commit remaining documentation/status changes with:
 
