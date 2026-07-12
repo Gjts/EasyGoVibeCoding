@@ -384,7 +384,7 @@ git commit -m "Keep regional tool guidance deterministic and explainable" -m "Co
 - Consumes: workspace hook, decision engine and catalog.
 - Produces: `SUPER_INDIVIDUAL_STAGES`, `getStagesForRoute(path)`, `<JourneyDashboard />`, `<StageWorkbench stageIds={...} />`.
 
-- [ ] **Step 1: Write curriculum coverage tests**
+- [x] **Step 1: Write curriculum coverage tests**
 
 Assert all ten IDs occur once, all required question IDs are unique within a stage, route mapping is sequential, and every stage has a concrete artifact title:
 
@@ -398,13 +398,13 @@ assert.deepEqual(getStagesForRoute("/super-individual/systems").map((stage) => s
 ])
 ```
 
-- [ ] **Step 2: Run tests and verify missing curriculum exports**
+- [x] **Step 2: Run tests and verify missing curriculum exports**
 
 Run: `npm run test:super-individual`
 
 Expected: curriculum test FAIL with missing module/exports.
 
-- [ ] **Step 3: Implement the curriculum model**
+- [x] **Step 3: Implement the curriculum model**
 
 Define each stage with:
 
@@ -432,7 +432,7 @@ export interface CurriculumStage {
 
 Use stage-specific questions: demand evidence and audience for `discover`; interview evidence for `validate`; excluded scope for `mvp`; repository/test workflow for `build`; RLS/data sensitivity for `backend`; environment/domain checks for `deploy`; entity and manual verification for `payments`; activation/payment/error events for `analytics`; trigger/action/owner for `automation`; metrics and decision for `iterate`.
 
-- [ ] **Step 4: Build accessible shared UI components**
+- [x] **Step 4: Build accessible shared UI components**
 
 `ProfileWizard` must use labeled native inputs/selects, expose validation messages through `aria-describedby`, and save only after all required diagnostic fields are present.
 
@@ -451,7 +451,7 @@ Use stage-specific questions: demand evidence and audience for `discover`; inter
 
 `JourneyDashboard` must show 10-step progress, resume link, profile summary, recommended stack and report link. Mobile layout is single-column; desktop uses a two-column dashboard without fixed-width overflow.
 
-- [ ] **Step 5: Verify and commit the workbench**
+- [x] **Step 5: Verify and commit the workbench**
 
 Run: `npm run test:super-individual && npm run typecheck && npm run lint`
 
