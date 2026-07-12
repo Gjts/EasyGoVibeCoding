@@ -10,8 +10,11 @@ const languageSwitcherSource = await readFile(
 
 test("desktop navigation waits for the wide breakpoint and keeps medium widths compact", () => {
   assert.match(headerSource, /flex xl:hidden/)
-  assert.match(headerSource, /hidden xl:flex xl:gap-x-2 2xl:gap-x-6/)
-  assert.match(headerSource, /hidden xl:flex xl:flex-1 xl:items-center/)
+  assert.match(headerSource, /flex xl:shrink-0/)
+  assert.match(headerSource, /hidden xl:flex xl:flex-1 xl:justify-center xl:gap-x-2/)
+  assert.doesNotMatch(headerSource, /2xl:gap-x-6/)
+  assert.doesNotMatch(headerSource, /2xl:px-3/)
+  assert.match(headerSource, /hidden xl:flex xl:flex-none xl:items-center/)
   assert.match(headerSource, /sr-only 2xl:not-sr-only/)
   assert.match(headerSource, /hidden 2xl:block/)
 })

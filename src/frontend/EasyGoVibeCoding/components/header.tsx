@@ -87,7 +87,7 @@ export function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b-2 border-white/50 shadow-[0_4px_16px_0_rgba(0,0,0,0.1)]">
       <nav className="mx-auto flex max-w-[1536px] items-center justify-between px-6 py-4 xl:px-8">
-        <div className="flex xl:flex-1">
+        <div className="flex xl:shrink-0">
           <Link href="/" className="-m-1.5 p-1.5 flex items-center gap-2 group">
             <div className="h-8 w-8 rounded-xl bg-gradient-to-br from-pink-500 via-purple-500 to-blue-500 flex items-center justify-center shadow-lg group-hover:shadow-xl transform group-hover:scale-110 transition-all duration-200">
               <span className="text-white font-bold text-sm">AI</span>
@@ -107,17 +107,17 @@ export function Header() {
           </button>
         </div>
 
-        <div className="hidden xl:flex xl:gap-x-2 2xl:gap-x-6">
+        <div className="hidden xl:flex xl:flex-1 xl:justify-center xl:gap-x-2">
           <Link
             href="/"
-            className="whitespace-nowrap text-sm font-semibold text-gray-700 hover:text-purple-600 transition-colors px-2 2xl:px-3 py-2 rounded-lg hover:bg-purple-50"
+            className="whitespace-nowrap text-sm font-semibold text-gray-700 hover:text-purple-600 transition-colors px-2 py-2 rounded-lg hover:bg-purple-50"
           >
             首页
           </Link>
 
           {/* 课程 mega menu */}
           <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center gap-1 whitespace-nowrap text-sm font-semibold text-gray-700 hover:text-purple-600 transition-colors px-2 2xl:px-3 py-2 rounded-lg hover:bg-purple-50">
+            <DropdownMenuTrigger className="flex items-center gap-1 whitespace-nowrap text-sm font-semibold text-gray-700 hover:text-purple-600 transition-colors px-2 py-2 rounded-lg hover:bg-purple-50">
               课程
               <ChevronDown className="h-4 w-4" />
             </DropdownMenuTrigger>
@@ -172,14 +172,14 @@ export function Header() {
               <Link
                 key={link.name}
                 href={link.href}
-                className="whitespace-nowrap text-sm font-semibold text-gray-700 hover:text-purple-600 transition-colors px-2 2xl:px-3 py-2 rounded-lg hover:bg-purple-50"
+                className="whitespace-nowrap text-sm font-semibold text-gray-700 hover:text-purple-600 transition-colors px-2 py-2 rounded-lg hover:bg-purple-50"
               >
                 {link.name}
               </Link>
             ))}
         </div>
 
-        <div className="hidden xl:flex xl:flex-1 xl:items-center xl:justify-end xl:gap-x-1 2xl:gap-x-3">
+        <div className="hidden xl:flex xl:flex-none xl:items-center xl:justify-end xl:gap-x-1 2xl:gap-x-3">
           <LanguageSwitcher className="mr-1 justify-end" />
           <Button
             variant="ghost"
