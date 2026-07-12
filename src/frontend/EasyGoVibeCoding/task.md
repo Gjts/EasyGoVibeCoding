@@ -203,7 +203,7 @@ git commit -m "Make tool recommendations source-backed and maintainable" -m "Con
 - Consumes: `EntityType`, `ProductType`, `SuperIndividualStageId`, `ToolRecommendation` from Task 1.
 - Produces: `SuperIndividualProfile`, `SuperIndividualWorkspace`, `emptyWorkspace()`, `normalizeWorkspace(value)`, `loadWorkspace(storage)`, `saveWorkspace(storage, workspace)`, `updateStageAnswer()`, `completeStage()`, `resetWorkspace()` and `useSuperIndividualWorkspace()`.
 
-- [ ] **Step 1: Write workspace migration and persistence tests**
+- [x] **Step 1: Write workspace migration and persistence tests**
 
 Create an in-memory `Storage` fixture and assert:
 
@@ -225,13 +225,13 @@ test("completeStage refuses a stage with missing required answers", () => {
 })
 ```
 
-- [ ] **Step 2: Run the workspace tests and verify they fail**
+- [x] **Step 2: Run the workspace tests and verify they fail**
 
 Run: `npm run test:super-individual`
 
 Expected: catalog tests PASS; workspace tests FAIL with missing exports.
 
-- [ ] **Step 3: Implement the versioned workspace**
+- [x] **Step 3: Implement the versioned workspace**
 
 Use this state shape in `workspace.ts`:
 
@@ -265,7 +265,7 @@ export interface SuperIndividualWorkspace {
 
 Catch quota/security errors, return `{ saved: false, reason: "storage-unavailable" }`, and never silently claim success.
 
-- [ ] **Step 4: Implement the React hook and pass tests/typecheck**
+- [x] **Step 4: Implement the React hook and pass tests/typecheck**
 
 `useSuperIndividualWorkspace()` must return:
 
@@ -285,7 +285,7 @@ Catch quota/security errors, return `{ saved: false, reason: "storage-unavailabl
 
 Listen for `storage` and `egvc:super-individual-workspace-change`, then run `npm run test:super-individual` and `npm run typecheck`; expected: PASS.
 
-- [ ] **Step 5: Commit local-first persistence**
+- [x] **Step 5: Commit local-first persistence**
 
 ```powershell
 git add lib/super-individual scripts/super-individual/workspace.test.mjs
