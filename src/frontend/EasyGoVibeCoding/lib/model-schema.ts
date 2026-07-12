@@ -37,9 +37,16 @@ export const MODEL_CATEGORIES = [
   "model",
 ] as const
 
+declare const process: {
+  env: { NEXT_PUBLIC_SITE_LOCALE?: string }
+}
+
+const siteLocale =
+  typeof process === "undefined"
+    ? undefined
+    : process.env.NEXT_PUBLIC_SITE_LOCALE
 const NEWS_SUMMARY_MAX_LENGTH =
-  process.env.NEXT_PUBLIC_SITE_LOCALE === undefined ||
-  process.env.NEXT_PUBLIC_SITE_LOCALE === "zh-CN"
+  siteLocale === undefined || siteLocale === "zh-CN"
     ? 240
     : 320
 

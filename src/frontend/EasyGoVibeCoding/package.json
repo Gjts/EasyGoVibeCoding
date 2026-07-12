@@ -10,6 +10,7 @@
     "lint": "eslint .",
     "start": "next start",
     "test:i18n": "node --test scripts/i18n/*.test.mjs",
+    "test:models": "node --experimental-strip-types --test scripts/models/*.test.mjs",
     "test:super-individual": "node --experimental-strip-types --test scripts/super-individual/*.test.mjs",
     "typecheck": "tsc --noEmit && tsc --project tsconfig.functions.json",
     "i18n:extract": "node scripts/i18n/source-extractor.mjs",

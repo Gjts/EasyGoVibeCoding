@@ -81,15 +81,24 @@ function isSeedSource(source: string) {
 }
 
 function sourceLabel(source: string) {
-  if (source === "seed-static-fallback") return "静态校验兜底"
-  if (source === "openrouter-catalog+openai-official") {
-    return "OpenRouter 目录 + OpenAI 官方发布记录"
+  const officialVerified = source.endsWith("+official-verified")
+  const runtimeSource = officialVerified
+    ? source.slice(0, -"+official-verified".length)
+    : source
+  let label = runtimeSource
+
+  if (runtimeSource === "seed-static-fallback") label = "静态校验兜底"
+  if (runtimeSource === "openrouter-catalog+openai-official") {
+    label = "OpenRouter 目录 + OpenAI 官方发布记录"
   }
-  if (source === "openrouter-catalog") return "OpenRouter 模型目录"
-  if (source.startsWith("openrouter-")) return "OpenRouter 实时检索"
-  if (source.startsWith("perplexity-")) return "Perplexity 实时检索"
-  if (source.startsWith("anthropic-")) return "Anthropic 实时检索"
-  return source
+  if (runtimeSource === "openrouter-catalog") label = "OpenRouter 模型目录"
+  if (runtimeSource.startsWith("openrouter-") && label === runtimeSource) {
+    label = "OpenRouter 实时检索"
+  }
+  if (runtimeSource.startsWith("perplexity-")) label = "Perplexity 实时检索"
+  if (runtimeSource.startsWith("anthropic-")) label = "Anthropic 实时检索"
+
+  return officialVerified ? `${label} + 官方校验基线` : label
 }
 
 export function LatestModelsPanel() {

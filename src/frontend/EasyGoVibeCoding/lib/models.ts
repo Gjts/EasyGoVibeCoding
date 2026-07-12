@@ -5,6 +5,7 @@ import {
   type ModelsPayload,
   type NewsEntry,
 } from "@/lib/model-schema"
+import { reconcileModelPayload } from "@/lib/model-reconciliation"
 import { siteLocale } from "@/lib/i18n-routing"
 
 const API_ENDPOINT = "/api/models"
@@ -42,7 +43,11 @@ export async function getLatestModels(
     if (!parsed.success) {
       return { payload: seedPayload, from: "seed", fetchedAt }
     }
-    return { payload: parsed.data, from: "api", fetchedAt }
+    return {
+      payload: reconcileModelPayload(parsed.data, seedPayload),
+      from: "api",
+      fetchedAt,
+    }
   } catch {
     return { payload: seedPayload, from: "seed", fetchedAt }
   }
@@ -86,7 +91,11 @@ export async function refreshLatestModels(
     throw new Error("模型刷新返回的数据未通过校验")
   }
 
-  return { payload: parsed.data, from: "api", fetchedAt }
+  return {
+    payload: reconcileModelPayload(parsed.data, seedPayload),
+    from: "api",
+    fetchedAt,
+  }
 }
 
 export function getModelsByTier(
