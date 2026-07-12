@@ -58,10 +58,10 @@ export function StageWorkbench({ stageIds }: { stageIds: SuperIndividualStageId[
       </nav>
 
       <section aria-labelledby={`${stage.id}-title`} className="space-y-6">
-        <header className="rounded-3xl bg-gradient-to-br from-violet-700 via-fuchsia-700 to-pink-600 p-7 text-white shadow-lg">
-          <p className="text-sm font-semibold text-white/75">第 {stage.order} / 10 阶段</p>
+        <header data-course-tone="dark" className="rounded-3xl bg-gradient-to-br from-violet-700 via-fuchsia-700 to-pink-600 p-7 text-white shadow-lg">
+          <p data-course-tone-text="muted" className="text-sm font-semibold text-white/75">第 {stage.order} / 10 阶段</p>
           <h1 id={`${stage.id}-title`} className="mt-2 text-3xl font-extrabold sm:text-4xl">{stage.title}</h1>
-          <p className="mt-3 max-w-2xl leading-7 text-white/90">{stage.summary}</p>
+          <p data-course-tone-text="muted" className="mt-3 max-w-2xl leading-7 text-white/90">{stage.summary}</p>
         </header>
 
         <div className="grid gap-4 lg:grid-cols-2">

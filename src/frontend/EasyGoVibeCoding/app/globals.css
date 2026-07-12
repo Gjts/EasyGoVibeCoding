@@ -122,6 +122,27 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  /* CourseLayout forces dark text for legacy light pages. Explicit dark
+     surfaces opt back into high-contrast colors with stronger specificity. */
+  [data-course-tone="dark"][data-course-tone="dark"][data-course-tone="dark"],
+  [data-course-tone="dark"][data-course-tone="dark"][data-course-tone="dark"] h1,
+  [data-course-tone="dark"][data-course-tone="dark"][data-course-tone="dark"] h2,
+  [data-course-tone="dark"][data-course-tone="dark"][data-course-tone="dark"] h3,
+  [data-course-tone="dark"][data-course-tone="dark"][data-course-tone="dark"] p,
+  [data-course-tone="dark"][data-course-tone="dark"][data-course-tone="dark"] li,
+  [data-course-tone="dark"][data-course-tone="dark"][data-course-tone="dark"] strong {
+    color: rgb(255 255 255) !important;
+  }
+
+  [data-course-tone="dark"][data-course-tone="dark"] [data-course-tone-text="muted"] {
+    color: rgb(209 213 219) !important;
+  }
+
+  [data-course-tone="dark"][data-course-tone="dark"] [data-course-tone-text="accent"] {
+    color: rgb(240 171 252) !important;
+  }
+
   nextjs-portal {
     left: unset !important;
     top: unset !important;

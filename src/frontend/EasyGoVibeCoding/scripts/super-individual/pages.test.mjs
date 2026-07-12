@@ -57,3 +57,24 @@ test("the global learning progress control stays compact on mobile", async () =>
   assert.match(source, /className="[^"]*\bhidden\b[^"]*\bsm:block\b[^"]*"/)
   assert.match(source, /aria-label="下一章"/)
 })
+
+test("dark super-individual surfaces override the course layout text color", async () => {
+  const cases = [
+    ["components/super-individual/journey-dashboard.tsx", "section", "bg-gray-950"],
+    ["components/super-individual/stage-workbench.tsx", "header", "from-violet-700"],
+  ]
+
+  for (const [file, tag, surfaceClass] of cases) {
+    const source = await readFile(resolve(file), "utf8")
+    const surface = source.match(
+      new RegExp(`<${tag}[^>]*className="[^"]*${surfaceClass}[^"]*"[^>]*>[\\s\\S]*?<\\/${tag}>`),
+    )?.[0]
+
+    assert.ok(surface, `${file} must keep its dark surface`)
+    assert.match(surface, /data-course-tone="dark"/)
+  }
+
+  const globalStyles = await readFile(resolve("app/globals.css"), "utf8")
+  assert.match(globalStyles, /\[data-course-tone="dark"\]\[data-course-tone="dark"\]\[data-course-tone="dark"\][^{]*h1[^{]*\{[^}]*color:\s*rgb\(255 255 255\)\s*!important/s)
+  assert.match(globalStyles, /\[data-course-tone="dark"\]\[data-course-tone="dark"\]\s+\[data-course-tone-text="muted"\][^{]*\{[^}]*color:\s*rgb\(209 213 219\)\s*!important/s)
+})

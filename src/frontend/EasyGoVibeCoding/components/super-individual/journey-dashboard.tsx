@@ -22,15 +22,15 @@ export function JourneyDashboard() {
 
   return (
     <div className="space-y-8">
-      <section className="overflow-hidden rounded-3xl bg-gray-950 p-7 text-white shadow-xl sm:p-10">
+      <section data-course-tone="dark" className="overflow-hidden rounded-3xl bg-gray-950 p-7 text-white shadow-xl sm:p-10">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <p className="text-sm font-semibold text-fuchsia-300">你的个人产品操作系统</p>
+            <p data-course-tone-text="accent" className="text-sm font-semibold text-fuchsia-300">你的个人产品操作系统</p>
             <h1 className="mt-3 max-w-3xl text-3xl font-black tracking-tight sm:text-5xl">从需求信号走到上线、收款和数据决策</h1>
-            <p className="mt-4 max-w-2xl leading-7 text-gray-300">每一步都产出可复用资产；工具推荐根据你的主体、地区、产品、预算和数据敏感度变化。</p>
+            <p data-course-tone-text="muted" className="mt-4 max-w-2xl leading-7 text-gray-300">每一步都产出可复用资产；工具推荐根据你的主体、地区、产品、预算和数据敏感度变化。</p>
           </div>
           <div className="min-w-48 rounded-2xl bg-white/10 p-5 backdrop-blur">
-            <p className="text-sm text-gray-300">课程进度</p>
+            <p data-course-tone-text="muted" className="text-sm text-gray-300">课程进度</p>
             <p className="mt-1 text-3xl font-black">{completeCount} / 10</p>
             <div className="mt-3 h-2 overflow-hidden rounded-full bg-white/15"><div className="h-full rounded-full bg-gradient-to-r from-violet-400 to-fuchsia-400" style={{ width: `${completeCount * 10}%` }} /></div>
           </div>
