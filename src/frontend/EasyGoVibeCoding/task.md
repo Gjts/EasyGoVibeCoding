@@ -71,7 +71,7 @@
 - Produces: `ToolCatalogItem`, `ToolRecommendation`, `SuperIndividualStageId`, `validateToolCatalog(items, now)`, `TOOL_CATALOG`.
 - Consumers: Tasks 3, 4, 5, 7 and 8.
 
-- [ ] **Step 1: Add the failing catalog test and test command**
+- [x] **Step 1: Add the failing catalog test and test command**
 
 Add `test:super-individual` to `package.json`:
 
@@ -103,13 +103,13 @@ test("catalog covers every course stage", () => {
 })
 ```
 
-- [ ] **Step 2: Run the catalog test and verify the missing-module failure**
+- [x] **Step 2: Run the catalog test and verify the missing-module failure**
 
 Run: `npm run test:super-individual`
 
 Expected: FAIL with `ERR_MODULE_NOT_FOUND` for `lib/super-individual/tool-catalog.ts`.
 
-- [ ] **Step 3: Define the shared types and Zod catalog schema**
+- [x] **Step 3: Define the shared types and Zod catalog schema**
 
 Create `lib/super-individual/types.ts` with these exact public unions and records:
 
@@ -167,7 +167,7 @@ export interface CoachResponse {
 
 Create `tool-catalog-schema.ts` using Zod to require non-empty arrays, ISO dates, HTTPS official URLs, unique IDs and a `recheck` warning when `now - lastVerifiedAt` exceeds `verificationDays`.
 
-- [ ] **Step 4: Add the first curated catalog and pass the test**
+- [x] **Step 4: Add the first curated catalog and pass the test**
 
 Create `TOOL_CATALOG` with source-backed entries for these IDs and stages:
 
@@ -183,7 +183,7 @@ export const REQUIRED_TOOL_IDS = [
 
 Each entry must include at least one official `sources` URL, a concrete free-tier summary or `"No durable free tier; verify current pricing"`, limitations, upgrade signals, `lastVerifiedAt: "2026-07-12"`, and the correct 30/90-day interval. Run `npm run test:super-individual`; expected: all catalog tests PASS.
 
-- [ ] **Step 5: Commit the catalog contract**
+- [x] **Step 5: Commit the catalog contract**
 
 ```powershell
 git add package.json tsconfig.json lib/super-individual scripts/super-individual/catalog.test.mjs
