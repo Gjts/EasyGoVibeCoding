@@ -20,7 +20,7 @@
     "i18n:translate:all": "node --env-file=.env.local scripts/i18n/translate-full-catalog.mjs",
     "typecheck:functions": "tsc --project tsconfig.functions.json",
     "validate:models": "node scripts/validate-models-json.mjs",
-    "pages:deploy": "npm run build && wrangler pages deploy out --project-name=easy-go-vibe-coding"
+    "pages:deploy": "pnpm i18n:build:all && wrangler pages deploy .cache/i18n-deploy --project-name=easy-go-vibe-coding"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
