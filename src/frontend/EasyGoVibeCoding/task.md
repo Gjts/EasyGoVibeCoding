@@ -798,7 +798,7 @@ git add task.md CLOUDFLARE_DEPLOY.md
 git commit -m "Record the verified release path for the solo product course" -m "Confidence: high" -m "Scope-risk: narrow" -m "Tested: full local verification matrix and browser acceptance"
 ```
 
-- [ ] **Step 4: Push main and deploy Cloudflare Pages**
+- [x] **Step 4: Push main and deploy Cloudflare Pages**
 
 Run:
 
@@ -811,7 +811,7 @@ Expected: GitHub accepts `main`; Wrangler reports a successful deployment for pr
 
 If the AI secrets are configured for translation but not Pages runtime, set the Cloudflare Pages variables `SUPER_INDIVIDUAL_AI_BASE_URL`, `SUPER_INDIVIDUAL_AI_API_KEY`, and `SUPER_INDIVIDUAL_AI_MODEL` through the authenticated Wrangler/Cloudflare environment without printing their values.
 
-- [ ] **Step 5: Verify production and close the task**
+- [x] **Step 5: Verify production and close the task**
 
 Verify the production URL and localized routes with fresh browser state. Confirm:
 
