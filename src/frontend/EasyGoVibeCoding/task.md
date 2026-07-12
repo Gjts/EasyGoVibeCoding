@@ -304,7 +304,7 @@ git commit -m "Keep the product-building journey recoverable without an account"
 - Consumes: `TOOL_CATALOG`, `SuperIndividualProfile`, `ToolCatalogItem`.
 - Produces: `recommendTools(profile, stageId, catalog, now): ToolRecommendation[]` and `getProfileWarnings(profile): string[]`.
 
-- [ ] **Step 1: Write table-driven decision tests**
+- [x] **Step 1: Write table-driven decision tests**
 
 Cover these exact cases:
 
@@ -333,13 +333,13 @@ const cases = [
 
 Also assert that a stale payment entry sets `requiresOfficialCheck: true`.
 
-- [ ] **Step 2: Run tests and verify the missing-engine failure**
+- [x] **Step 2: Run tests and verify the missing-engine failure**
 
 Run: `npm run test:super-individual`
 
 Expected: decision-engine tests FAIL with `ERR_MODULE_NOT_FOUND`.
 
-- [ ] **Step 3: Implement explainable filtering and ranking**
+- [x] **Step 3: Implement explainable filtering and ranking**
 
 The engine must:
 
@@ -351,7 +351,7 @@ The engine must:
 6. Mark expired entries for official recheck.
 7. Return no more than one default and two alternatives per category.
 
-- [ ] **Step 4: Run focused and full verification**
+- [x] **Step 4: Run focused and full verification**
 
 Run: `npm run test:super-individual`
 
@@ -361,7 +361,7 @@ Run: `npm run typecheck`
 
 Expected: PASS with no TypeScript errors.
 
-- [ ] **Step 5: Commit deterministic recommendations**
+- [x] **Step 5: Commit deterministic recommendations**
 
 ```powershell
 git add lib/super-individual/decision-engine.ts scripts/super-individual/decision-engine.test.mjs
