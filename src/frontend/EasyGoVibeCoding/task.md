@@ -704,25 +704,25 @@ git commit -m "Make course completion produce a portable launch handbook" -m "Co
 - Consumes: complete Chinese source implementation.
 - Produces: zh-CN, ja, en, fr and de static builds with no secrets or local-path leakage.
 
-- [ ] **Step 1: Extract the updated translation catalog**
+- [x] **Step 1: Extract the updated translation catalog**
 
 Run: `npm run i18n:extract`
 
 Expected: source catalog includes all new user-visible curriculum, validation, recommendation, warning and report strings; brand names and official URLs remain unchanged.
 
-- [ ] **Step 2: Run i18n unit tests before translation**
+- [x] **Step 2: Run i18n unit tests before translation**
 
 Run: `npm run test:i18n`
 
 Expected: all source extraction, transformation, routing, SEO and release tests PASS.
 
-- [ ] **Step 3: Translate the complete catalog with the configured server-side environment**
+- [x] **Step 3: Translate the complete catalog with the configured server-side environment**
 
 Run: `npm run i18n:translate:all`
 
 Expected: translation script completes for `ja`, `en`, `fr` and `de`, preserves placeholders and code identifiers, and records no missing message IDs.
 
-- [ ] **Step 4: Build and audit all locales**
+- [x] **Step 4: Build and audit all locales**
 
 Run in order:
 
@@ -735,7 +735,7 @@ npm run i18n:verify:release
 
 Expected: all commands PASS; release audit reports zero configured-secret leaks and zero unapproved local paths.
 
-- [ ] **Step 5: Commit the multilingual release artifacts**
+- [x] **Step 5: Commit the multilingual release artifacts**
 
 ```powershell
 git add i18n scripts/i18n

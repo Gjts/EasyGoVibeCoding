@@ -321,9 +321,9 @@ test("every framework renderer has a localized no-PNG diagram branch", () => {
   }
 })
 
-test("source catalog remains at the immutable Task 3 baseline", () => {
+test("source catalog remains at the immutable Task 8 baseline", () => {
   const bytes = readFileSync(join(projectRoot, "i18n/catalog/source.zh-CN.json"))
   const catalog = JSON.parse(bytes)
-  assert.equal(Object.keys(catalog.entries).length, 9082)
-  assert.equal(createHash("sha256").update(bytes).digest("hex"), "62c474d1ca7bfb0beb2980db79167da08e349698a32a4d01b8388ef38919ee76")
+  assert.equal(Object.keys(catalog.entries).length, 9282)
+  assert.equal(createHash("sha256").update(bytes).digest("hex"), "099041df08522f5a581a45df23337493dd7a2f02d2d5bb9ace1e626f9878ed48")
 })

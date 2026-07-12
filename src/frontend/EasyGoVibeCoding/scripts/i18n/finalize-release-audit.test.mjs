@@ -11,6 +11,6 @@ test("command evidence rejects secret-bearing or unsanitized labels", () => {
   const build = parseBuildEvidence(`x\n ✓ Generating static pages using 19 workers (87/87)\n ✓ Generating static pages using 19 workers (82/82)\n ✓ Generating static pages using 19 workers (82/82)\n ✓ Generating static pages using 19 workers (82/82)\n ✓ Generating static pages using 19 workers (82/82)\n${JSON.stringify({ builds, academyRouteCount: 79, businessHtml: 400, manifestSha256: "a".repeat(64) }, null, 2)}\n`)
   assert.deepEqual(build.routeUnits, { "zh-CN": 87, ja: 82, en: 82, fr: 82, de: 82 })
   assert.equal(build.businessHtml, 400)
-  assert.deepEqual(parseTapEvidence("ℹ tests 115\nℹ pass 115\nℹ fail 0\n"), { total: 115, pass: 115, fail: 0 })
-  assert.throws(() => parseTapEvidence("ℹ tests 115\nℹ pass 114\nℹ fail 1\n"), /TAP/iu)
+  assert.deepEqual(parseTapEvidence("ℹ tests 116\nℹ pass 116\nℹ fail 0\n"), { total: 116, pass: 116, fail: 0 })
+  assert.throws(() => parseTapEvidence("ℹ tests 116\nℹ pass 115\nℹ fail 1\n"), /TAP/iu)
 })

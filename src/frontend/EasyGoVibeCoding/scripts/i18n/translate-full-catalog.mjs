@@ -342,6 +342,46 @@ export function chunkEntries(
   return batches
 }
 
+export async function readPublishedTranslationSeed(manifestPath) {
+  if (!(await exists(manifestPath))) return undefined
+
+  const manifestParent = dirname(manifestPath)
+  const manifest = JSON.parse(await readFile(manifestPath, "utf8"))
+  if (!Array.isArray(manifest.targetLocales) || !manifest.outputs) {
+    throw new Error("Published translation manifest is invalid")
+  }
+
+  const localeCatalogs = {}
+  for (const locale of manifest.targetLocales) {
+    const outputPath = manifest.outputs[locale]?.path
+    if (typeof outputPath !== "string" || isAbsolute(outputPath)) {
+      throw new Error(`Published translation path is invalid for ${locale}`)
+    }
+    const resolvedPath = resolve(manifestParent, outputPath)
+    const relativePath = relative(manifestParent, resolvedPath)
+    if (relativePath.split(/[\\/]/u).includes("..")) {
+      throw new Error(`Published translation path escapes the catalog for ${locale}`)
+    }
+    const catalog = JSON.parse(await readFile(resolvedPath, "utf8"))
+    if (!catalog || typeof catalog !== "object" || Array.isArray(catalog)) {
+      throw new Error(`Published translation catalog is invalid for ${locale}`)
+    }
+    localeCatalogs[locale] = catalog
+  }
+
+  const firstLocale = manifest.targetLocales[0]
+  return Object.fromEntries(
+    Object.keys(localeCatalogs[firstLocale] ?? {}).flatMap((id) => {
+      const translations = Object.fromEntries(
+        manifest.targetLocales.map((locale) => [locale, localeCatalogs[locale][id]]),
+      )
+      return Object.values(translations).every((value) => typeof value === "string")
+        ? [[id, translations]]
+        : []
+    }),
+  )
+}
+
 export function aliasBatchEntries(originalEntries) {
   const entries = {}
   const aliasToOriginalId = {}
@@ -483,6 +523,7 @@ export async function translateFullCatalog({
   progressEvery = DEFAULT_PROGRESS_EVERY,
   timeoutMs = 120_000,
   maxAttempts = 3,
+  seedCatalog,
   validationSleepImpl = (milliseconds) =>
     new Promise((resolve) => setTimeout(resolve, milliseconds)),
 }) {
@@ -528,6 +569,7 @@ export async function translateFullCatalog({
   const translatedBatches = []
   let cacheHits = 0
   let cacheMisses = 0
+  let seededEntries = 0
   let completed = 0
   let nextIndex = 0
   let firstFailure
@@ -567,7 +609,52 @@ export async function translateFullCatalog({
         targetLocales: source.targetLocales,
       })
       assertNoSensitiveMaterial(catalog, settings)
-      return { catalog, cacheHit: true }
+      return { catalog, cacheHit: true, seededEntries: 0 }
+    }
+
+    const seededBatch = {}
+    const missingBatch = {}
+    for (const [id, sourceText] of Object.entries(batchEntries)) {
+      const candidate = seedCatalog?.[id]
+      if (candidate && typeof candidate === "object" && !Array.isArray(candidate)) {
+        try {
+          const validated = validateBatchCatalog({
+            catalog: { [id]: candidate },
+            entries: { [id]: sourceText },
+            targetLocales: source.targetLocales,
+          })
+          seededBatch[id] = validated[id]
+          continue
+        } catch {
+          // A stale or malformed seed is ignored and translated again.
+        }
+      }
+      missingBatch[id] = sourceText
+    }
+
+    if (Object.keys(seededBatch).length > 0) {
+      if (Object.keys(missingBatch).length === 0) {
+        assertNoSensitiveMaterial(seededBatch, settings)
+        await writeTranslationCache({ cacheDir, key: cacheKey, catalog: seededBatch })
+        return {
+          catalog: seededBatch,
+          cacheHit: true,
+          seededEntries: Object.keys(seededBatch).length,
+        }
+      }
+      const translated = await translateOrReuseEntries(missingBatch, rootIndex)
+      catalog = mergeBatchCatalogs({
+        batches: [seededBatch, translated.catalog],
+        entries: batchEntries,
+        targetLocales: source.targetLocales,
+      })
+      assertNoSensitiveMaterial(catalog, settings)
+      await writeTranslationCache({ cacheDir, key: cacheKey, catalog })
+      return {
+        catalog,
+        cacheHit: false,
+        seededEntries: Object.keys(seededBatch).length + translated.seededEntries,
+      }
     }
 
     if (cacheOnly) {
@@ -637,13 +724,14 @@ export async function translateFullCatalog({
 
     assertNoSensitiveMaterial(catalog, settings)
     await writeTranslationCache({ cacheDir, key: cacheKey, catalog })
-    return { catalog, cacheHit: false }
+    return { catalog, cacheHit: false, seededEntries: 0 }
   }
 
   async function processBatch(index) {
     const result = await translateOrReuseEntries(batches[index], index)
     if (result.cacheHit) cacheHits += 1
     else cacheMisses += 1
+    seededEntries += result.seededEntries
 
     const catalog = result.catalog
     translatedBatches[index] = catalog
@@ -741,6 +829,7 @@ export async function translateFullCatalog({
     overrideSha256: manifest.overrides.sha256,
     cacheHits,
     cacheMisses,
+    seededEntries,
     outputSha256: Object.fromEntries(
       source.targetLocales.map((locale) => [locale, outputs[locale].sha256]),
     ),
@@ -751,18 +840,20 @@ const currentFile = fileURLToPath(import.meta.url)
 if (process.argv[1] && resolve(process.argv[1]) === currentFile) {
   const projectRoot = process.cwd()
   try {
+    const manifestPath = join(projectRoot, "i18n", "catalog", "manifest.json")
     const result = await translateFullCatalog({
       inputPath: join(projectRoot, "i18n", "catalog", "source.zh-CN.json"),
       outputDir: join(projectRoot, "i18n", "catalog", "messages"),
-      manifestPath: join(projectRoot, "i18n", "catalog", "manifest.json"),
+      manifestPath,
       overridesPath: join(projectRoot, "i18n", "catalog", "overrides.json"),
       cacheDir: join(projectRoot, ".cache", "translations"),
       concurrency: Number(process.env.TRANSLATION_CONCURRENCY ?? DEFAULT_CONCURRENCY),
       cacheOnly: process.env.I18N_CACHE_ONLY === "1",
+      seedCatalog: await readPublishedTranslationSeed(manifestPath),
       logger: (message) => console.log(message),
     })
     console.log(
-      `Translation complete: ${result.sourceEntryCount} entries in ${result.batchCount} batches (${result.cacheHits} cached, ${result.cacheMisses} requested)`,
+      `Translation complete: ${result.sourceEntryCount} entries in ${result.batchCount} batches (${result.cacheHits} cached, ${result.cacheMisses} requested, ${result.seededEntries} existing entries reused)`,
     )
   } catch (error) {
     console.error(error instanceof Error ? error.message : "Full catalog translation failed")

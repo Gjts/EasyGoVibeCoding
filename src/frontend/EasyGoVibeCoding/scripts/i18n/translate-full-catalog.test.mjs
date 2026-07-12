@@ -666,6 +666,35 @@ test("reuses an original-ID cache without sending aliases to the relay", async (
   assert.equal(english[originalId], "en:标题")
 })
 
+test("reuses a validated published seed and requests only new source IDs", async (t) => {
+  const { translateFullCatalog } = await loadRunner()
+  const existingEntries = {
+    ["a".repeat(64)]: "已有标题",
+    ["b".repeat(64)]: "已有说明",
+  }
+  const newId = "c".repeat(64)
+  const fixture = await createFixture(t, { ...existingEntries, [newId]: "新增文案" })
+  const requests = []
+
+  const result = await translateFullCatalog(
+    runnerOptions(fixture, {
+      maxEntries: 3,
+      seedCatalog: translatedBatch(existingEntries),
+      translateImpl: async ({ entries, targetLocales }) => {
+        requests.push(Object.values(entries))
+        return translatedBatch(entries, targetLocales)
+      },
+    }),
+  )
+  const english = await readPublishedLocale(fixture, "en")
+
+  assert.deepEqual(requests, [["新增文案"]])
+  assert.equal(result.seededEntries, 2)
+  assert.deepEqual(Object.keys(english), Object.keys(fixture.source.entries).sort())
+  assert.equal(english["a".repeat(64)], "en:已有标题")
+  assert.equal(english[newId], "en:新增文案")
+})
+
 test("runs at default concurrency four and honors the configurable 1-4 bound", async (t) => {
   const { translateFullCatalog } = await loadRunner()
   assert.equal(typeof translateFullCatalog, "function")

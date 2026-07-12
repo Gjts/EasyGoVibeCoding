@@ -78413,1862 +78413,182 @@
     "expressionRanges": []
   },
   {
-    "id": "f5e57eb37d18b0d9b78cde1f8e9e810d6a2b54208382e1f3f2e15282b3fcaf29",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 284,
-    "end": 301,
-    "kind": "string",
-    "source": "本周做了什么？哪些是可复用的？",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "7b21cbdb4d60a3a92d95d3307a2a92c735bf4bd0178eb6bc352df9f316eb0524",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 305,
-    "end": 323,
-    "kind": "string",
-    "source": "哪些动作带来了结果？哪些只是忙？",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "d5eb882259ffd7ca3cb450327a8a980c8b0495ea47c8b8df9d503ce7e7189adb",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 327,
-    "end": 349,
-    "kind": "string",
-    "source": "一个「最小改动」是什么？下周只改这一件。",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "6422cdfabb8ffd75e7e95817ffc9400bfe113ce0f4a75032759476cc402c637c",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 353,
-    "end": 387,
-    "kind": "string",
-    "source": "把成果沉淀为：模板 / 清单 / 脚本 / 页面 / 代码片段。",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "3cce2a7e643853e734f9ba3b14af0e54c44a2c559c2be48de985cbf8a7e60882",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 418,
-    "end": 443,
-    "kind": "string",
-    "source": "本月最大的一次「结果」是什么？复盘完整决策链。",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "55056750117cc4910841a2b17b4907412d93fa7cb0ef556946a8c851fb4b0795",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 447,
-    "end": 472,
-    "kind": "string",
-    "source": "哪些客户 / 项目真正赚钱？哪些是赔本赚吆喝？",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "a5c8d7c615adcde92607985901fbebda942101490f9377402fb4763cba493a55",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 476,
-    "end": 505,
-    "kind": "string",
-    "source": "内容 / 产品 / 服务，哪一条线在增长？原因是什么？",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "8afc92b309227c52fce34306e4c681f6bb121f7018d09c9f94dc0276517153a2",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 509,
-    "end": 527,
-    "kind": "string",
-    "source": "下个月只做 3 件事，删掉其余。",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "e3f34cdf7fdcc9d07d0dd57b5da12ae3cd09085871ff936bbe09f48afb49cec9",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 569,
-    "end": 576,
-    "kind": "string",
-    "source": "交付模板库",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "0411a75248a697c31f7f79aea71dd88ee4b5676a55a12b60ef07e86540420f52",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 588,
-    "end": 623,
-    "kind": "string",
-    "source": "PRD / 提案 / 报告 / 合同 / 验收文档 的可复用骨架。",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "c623883b785fe88818e32ad9eb1a6e89c66edc78fb167a3a8ed26c1a8fdc4fe6",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 693,
-    "end": 701,
-    "kind": "string",
-    "source": "代码与脚本仓",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "398b4fea8a881379df83f165e7a0ec9bdf5b53273496ca3723789e0eb26a4ba8",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 713,
-    "end": 746,
-    "kind": "string",
-    "source": "常用自动化脚本、工具函数、Skill 配置、Agent 流程。",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "f69531914cfc6dfd24c1b22f86d59e4068f28547b0288862dc20eafd00229c5e",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 814,
-    "end": 822,
-    "kind": "string",
-    "source": "内容与作品集",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "e587507a2fd1912948a10b1b5cccb796cde1b1912ec9368514d9454d155604ca",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 834,
-    "end": 866,
-    "kind": "string",
-    "source": "博文、视频、Demo、案例研究 — 让下一批客户主动找到你。",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "53d33dd9d1246fa0464f83ef06f7795ffc0dadc18404e3b8fd30a182ec8c3567",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 934,
-    "end": 943,
-    "kind": "string",
-    "source": "SOP 与清单",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "0bd4d4d450f9ec7ee8f166604e7303dfe63a2fb18cae6cf60f8d8f85b27bf281",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 955,
-    "end": 988,
-    "kind": "string",
-    "source": "冷启动 / 项目交付 / 售后跟进 / 复盘 的标准操作流程。",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "ef7fd90ff773e8ecef0883e03a1487e21a312f5977466c33e506d661f7c7de2d",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 1084,
-    "end": 1100,
-    "kind": "string",
-    "source": "Indie Hacker 型",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "9f8605a02d7b54d06d9f46e29b98bb73da64030de1ea1e6b6983fff70a20a5c7",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 1115,
-    "end": 1138,
-    "kind": "string",
-    "source": "一个人 · 一组小产品 · 广告 / 订阅",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "ea6a9f5ba83002d689baa41a567400df9f2247dd615b1ba02809a9c10fc90c9c",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 1150,
-    "end": 1228,
-    "kind": "string",
-    "source": "同时维护多个窄垂类小产品（Nomad List / PhotoAI 等风格），用共享基础设施和模板降低维护成本。核心能力是产品化速度 + SEO 复利。",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "6f5024ae98f5075167f55c9d4b5a2dd94d9b4f335b542bfa4840e2cb064ee7ef",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 1245,
-    "end": 1260,
-    "kind": "string",
-    "source": "月度被动收入 > 运营成本",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "d038c2e916724837a797b2d455050eff3d75993cd07729b303746bbda4beae85",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 1262,
-    "end": 1279,
-    "kind": "string",
-    "source": "3-5 个产品共用同一套技术栈",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "a01a1278abb4fb6a95558dc9c92effd5fdcd81e40c05285d12698ddb0e18a73d",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 1281,
-    "end": 1297,
-    "kind": "string",
-    "source": "高度自动化，人只处理边缘问题",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "b122c0b5f183fd6889cc9cbe7682cab69ce7dc263d5d46869481764ba6ca2df7",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 1368,
-    "end": 1380,
-    "kind": "string",
-    "source": "独立顾问 / 陪跑型",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "56876d6fc0ab0371c1a5b9587077465bd6899c98736937ba2203d24f70cae554",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 1395,
-    "end": 1417,
-    "kind": "string",
-    "source": "单客高客单 · 专业可验证 · 季度交付",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "3667d95113207245dfc64efb0a2829e35113a3ad2a7e46d9604c42050bb8cc06",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 1429,
-    "end": 1495,
-    "kind": "string",
-    "source": "服务少数高价值客户，按月 / 季收费。前期用 1-2 个公开案例建立信任，通过精准内容吸引同类客户。核心能力是可量化的专业结果。",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "5b91b45aa835f80d547f86b3aba1599df73c442501eb31391c0752a59b355130",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 1512,
-    "end": 1525,
-    "kind": "string",
-    "source": "客单价 5-50 万级",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "3996adbdd6809df9309a984ddb5dc04eaa49e899698541055383774f89763feb",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 1527,
-    "end": 1542,
-    "kind": "string",
-    "source": "客户主要来自推荐 / 内容",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "9f79516e900ed1bb92d9361b43f9ce98b7497cd489e832078d016b4070eacac8",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 1544,
-    "end": 1559,
-    "kind": "string",
-    "source": "可持续 3-5 年不换赛道",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "3a096fb4397cd325c8f94d3fa8c0db571a106613e49699ff64bc772d51c1f2ae",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 1628,
-    "end": 1640,
-    "kind": "string",
-    "source": "内容 + 产品组合型",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "38f17c9f864555cc896c7f00d3287298e6a00e10ac09d437e59aef6da3fe27aa",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 1655,
-    "end": 1684,
-    "kind": "string",
-    "source": "写作 / 视频 → 信任 → 课程 / 工具 / 社群",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "0cc427036b076a48c389452da9a7208f42a6df7d1626319c026d9f3796b5bebf",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 1696,
-    "end": 1754,
-    "kind": "string",
-    "source": "以内容为流量入口，建立细分领域话语权，再把经验打包成课程、工具或私域社群。核心能力是持续产出 + 把经验产品化。",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "bb49d6d47047dc19d7d3c9a98c79d03f7c6e7bc4887743e7de85cd41273d5fff",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 1771,
-    "end": 1787,
-    "kind": "string",
-    "source": "内容阅读量 / 订阅稳定增长",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "03a5b4efd7ec5b43339d8204e8f8eb91c32d311608d019677e29c77c995da040",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 1789,
-    "end": 1801,
-    "kind": "string",
-    "source": "多个收入曲线互相导流",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "9aaed671e7e9af8f754b50d05a429c8f51aa4cc96dc68cd948c2bee7e1cf82f9",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 1803,
-    "end": 1814,
-    "kind": "string",
-    "source": "核心资产是读者信任",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
     "id": "2383ff5ea48ebe1fb34beb86615686ae607e2be6b4ae5b3884c7b8b88fd32021",
     "file": "app/super-individual/cases/page.tsx",
-    "start": 1966,
-    "end": 1973,
+    "start": 310,
+    "end": 317,
     "kind": "string",
     "source": "超级个体篇",
     "expressions": [],
     "expressionRanges": []
   },
   {
-    "id": "eb0dbeba1eb293f14c339838d61bb3d11ad9b90077d615d1d4c1964c6b17ffff",
+    "id": "2c37ac291cb4f6e89d7532ce7dd17272eff7ff8789234f6bde8607ab171e0ad5",
     "file": "app/super-individual/cases/page.tsx",
-    "start": 1992,
-    "end": 2006,
-    "kind": "string",
-    "source": "把个人能力产品化与规模化",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "5c7799a15c94be0eb3af1b39a7ad798e8cb65d6702137b87c5341100de4b43cb",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 2069,
-    "end": 2076,
-    "kind": "string",
-    "source": "案例与复盘",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "5c7799a15c94be0eb3af1b39a7ad798e8cb65d6702137b87c5341100de4b43cb",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 2361,
-    "end": 2366,
-    "kind": "jsx-text",
-    "source": "案例与复盘",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "c44f7276c9cb2a6ba915757c35ab309a8fc006035387ad87cfbde97f445f9988",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 2594,
-    "end": 2602,
-    "kind": "jsx-text",
-    "source": "把经验沉淀成资产",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "28a2c30ce550f78aaae0c13918efd49ed2e8266619fdb550305bf015764046bd",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 2719,
-    "end": 2781,
-    "kind": "jsx-text",
-    "source": "复盘不是总结，而是把经验变成\"下次可以直接复用的资产\"。 同时看懂别人走过的路，比自己摸索快 10 倍。",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "04fee635b4b5c38dd4f397577f78d9fe8285644ac3f6953b3bc9c527d2cf6e3c",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 3026,
-    "end": 3034,
-    "kind": "jsx-text",
-    "source": "三类超级个体原型",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "4aee7c1f1ce776622e21ec7369cef7c7cc9b38d3f2c73ae0bb2f7c95cffa8cf9",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 4623,
-    "end": 4635,
-    "kind": "jsx-text",
-    "source": "成果资产化 · 四个仓库",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "1a7abd7686c6a54b89c7093afa6321f6d7cb998448a3ec261b837e31f7b1e04f",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 4711,
-    "end": 4749,
-    "kind": "jsx-text",
-    "source": "把每个项目的产出归位到这四个仓库，3-6 个月后你会有一套\"可复制的系统\"。",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "c6970116fbe669e0be02d5ec6022f18cc2047507979a65c017b63c7dd7574dad",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 6012,
-    "end": 6028,
-    "kind": "jsx-text",
-    "source": "每周复盘清单（建议 30 分钟）",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "89fa1d64ebaa207d925d3bb6e065275b1b59d393f099c6aba952206462bf4b24",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 6800,
-    "end": 6816,
-    "kind": "jsx-text",
-    "source": "每月复盘清单（建议 90 分钟）",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "185ac433f23a26412427f4d753d6a599b4562b413852dbf76984a0999fda3267",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 7495,
-    "end": 7507,
-    "kind": "jsx-text",
-    "source": "今天就做：30 分钟行动",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "149cfbf2ce41a7bd86b21ebbf207860dd3e6fd6683d1033699d4c0bca711889a",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 7613,
-    "end": 7635,
-    "kind": "jsx-text",
-    "source": "在笔记里新建\"资产库\"，分出上方四个文件夹；",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "e9f7ddd5bab0e1a717b28765b9bed1cd6c681d9eeedb9b8a43e92e67608b5058",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 7655,
-    "end": 7682,
-    "kind": "jsx-text",
-    "source": "把最近 2 个月做过的最好一个产出，归位到对应文件夹；",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "c6adfba8ac3a29e418b7524741fb910701a221954c96ada0f2989712163b4d05",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 7702,
-    "end": 7721,
-    "kind": "jsx-text",
-    "source": "写一句话\"这个产出下次可以如何复用\"；",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "f5bed7bdfcb5bc39386a0b6e5a410572bbc1bf54b1f03e974c013ab74556d468",
-    "file": "app/super-individual/cases/page.tsx",
-    "start": 7741,
-    "end": 7761,
-    "kind": "jsx-text",
-    "source": "下周起每周五固定 30 分钟做周度复盘。",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "7a688306423bec17ca6b53aca56e5c4f2b432380ce4b681ad9c1995445fb48a0",
-    "file": "app/super-individual/growth/page.tsx",
-    "start": 250,
-    "end": 254,
-    "kind": "string",
-    "source": "内容",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "1c12cce47f80967a9c6a6b613b72c2e068524e68e01a46f740e65034fd24a88e",
-    "file": "app/super-individual/growth/page.tsx",
-    "start": 281,
-    "end": 286,
-    "kind": "string",
-    "source": "选题库",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "0edaaec4c0c251bd47bb7b03e73f71c761bbf13698033000749b20a1e0382a5f",
-    "file": "app/super-individual/growth/page.tsx",
-    "start": 288,
-    "end": 294,
-    "kind": "string",
-    "source": "内容模板",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "f314afa14eb4e0764151010d48652c89ade24a7f64ea19b66d2094f4cec374cb",
-    "file": "app/super-individual/growth/page.tsx",
-    "start": 296,
-    "end": 302,
-    "kind": "string",
-    "source": "发布节奏",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "952d7bde7527ae9b7359c4c9b7564bbe29515bc47847ccfaed110a442eec09d0",
-    "file": "app/super-individual/growth/page.tsx",
-    "start": 347,
-    "end": 354,
-    "kind": "string",
-    "source": "关键词集群",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "65806df927e9e73f1d3261434a541fa9f57a9763883fabfeb003b514aaa1252c",
-    "file": "app/super-individual/growth/page.tsx",
-    "start": 356,
-    "end": 363,
-    "kind": "string",
-    "source": "落地页结构",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "5298ebbdb723f492fb1c46d589f907c12ecbdaed4f839ad467ef93d7d77a6f27",
-    "file": "app/super-individual/growth/page.tsx",
-    "start": 365,
-    "end": 371,
-    "kind": "string",
-    "source": "持续更新",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "1079dd41f8d20b65ac85092b0a57d4d0e37b797b22e93ea7b7cd4abc315d527e",
-    "file": "app/super-individual/growth/page.tsx",
-    "start": 387,
-    "end": 394,
-    "kind": "string",
-    "source": "社区/合作",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "e969dd74ff2fea8607a713c0d0aadfc5c6f672f27625b950af4568b4718cbaf5",
-    "file": "app/super-individual/growth/page.tsx",
-    "start": 417,
-    "end": 423,
-    "kind": "string",
-    "source": "合作清单",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "2eb28e867043d46e50ff29b898eb8d2b639a6478aae435a92118c8193aa10c70",
-    "file": "app/super-individual/growth/page.tsx",
-    "start": 425,
-    "end": 431,
-    "kind": "string",
-    "source": "互推机制",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "5e401dc121c849c3d776e18baa7ec3ad0791cc4fd0defdd3125012d34788242d",
-    "file": "app/super-individual/growth/page.tsx",
-    "start": 433,
-    "end": 439,
-    "kind": "string",
-    "source": "案例共创",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "2383ff5ea48ebe1fb34beb86615686ae607e2be6b4ae5b3884c7b8b88fd32021",
-    "file": "app/super-individual/growth/page.tsx",
-    "start": 543,
-    "end": 550,
-    "kind": "string",
-    "source": "超级个体篇",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "eb0dbeba1eb293f14c339838d61bb3d11ad9b90077d615d1d4c1964c6b17ffff",
-    "file": "app/super-individual/growth/page.tsx",
-    "start": 569,
-    "end": 583,
-    "kind": "string",
-    "source": "把个人能力产品化与规模化",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "10b95dd32b420777b9159e43db672462fdb38b5f0b241cf7b1137185501b9645",
-    "file": "app/super-individual/growth/page.tsx",
-    "start": 646,
-    "end": 653,
-    "kind": "string",
-    "source": "增长与渠道",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "10b95dd32b420777b9159e43db672462fdb38b5f0b241cf7b1137185501b9645",
-    "file": "app/super-individual/growth/page.tsx",
-    "start": 865,
-    "end": 870,
-    "kind": "jsx-text",
-    "source": "增长与渠道",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "10b95dd32b420777b9159e43db672462fdb38b5f0b241cf7b1137185501b9645",
-    "file": "app/super-individual/growth/page.tsx",
-    "start": 950,
-    "end": 955,
-    "kind": "jsx-text",
-    "source": "增长与渠道",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "e232134a2351f704c90e7a3c44c815c193591c671d34069c29c9fce1d707dae6",
-    "file": "app/super-individual/growth/page.tsx",
-    "start": 1025,
-    "end": 1063,
-    "kind": "jsx-text",
-    "source": "渠道的目标是“可复利”。先做一个你能坚持 3 个月的渠道，再逐步叠加第二个。",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "d00619e8c88a2880b3ba86e8e8c41af16d9b38a1e707f6a4d71f820dcc0dbe63",
-    "file": "app/super-individual/growth/page.tsx",
-    "start": 1268,
-    "end": 1273,
-    "kind": "jsx-text",
-    "source": "三条主渠道",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "0e13321c36a7a41f42cb8075a9baa41ae1af4ffb5907ec1f35a991f43d633ab2",
-    "file": "app/super-individual/monetization/page.tsx",
-    "start": 250,
-    "end": 260,
-    "kind": "string",
-    "source": "服务型（高客单）",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "5dfa67b7d4ef38b6c5018f69ab88639fa56ef88c0e3bd7e84a48974f0e639423",
-    "file": "app/super-individual/monetization/page.tsx",
-    "start": 268,
-    "end": 294,
-    "kind": "string",
-    "source": "咨询/陪跑/交付型项目，先用服务验证需求与价值。",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "8739ce69b6b1508c3c3e330df351b4d89cd30c2ec2de382be33233a9ebd94bc8",
-    "file": "app/super-individual/monetization/page.tsx",
-    "start": 309,
-    "end": 320,
-    "kind": "string",
-    "source": "产品型（可规模化）",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "d6a90700bf0ebb51d9ca1375b7591df8b78449cd32f1f7843c35f2edc48cf4c1",
-    "file": "app/super-individual/monetization/page.tsx",
-    "start": 328,
-    "end": 354,
-    "kind": "string",
-    "source": "模板/课程/工具/订阅，把交付标准化与可复制化。",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "e2da4f6fe12cae079985f85b2fd7336e3e7da5e98c6751bffda86542cde6b68c",
-    "file": "app/super-individual/monetization/page.tsx",
-    "start": 369,
-    "end": 379,
-    "kind": "string",
-    "source": "渠道型（可复利）",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "a87ee12c5303610c482c85db0d79e008326d5a7148928bd2fbe405d729cadd01",
-    "file": "app/super-individual/monetization/page.tsx",
-    "start": 387,
-    "end": 410,
-    "kind": "string",
-    "source": "内容、社区、合作分销，让获客成本持续下降。",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "2383ff5ea48ebe1fb34beb86615686ae607e2be6b4ae5b3884c7b8b88fd32021",
-    "file": "app/super-individual/monetization/page.tsx",
-    "start": 519,
-    "end": 526,
-    "kind": "string",
-    "source": "超级个体篇",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "eb0dbeba1eb293f14c339838d61bb3d11ad9b90077d615d1d4c1964c6b17ffff",
-    "file": "app/super-individual/monetization/page.tsx",
-    "start": 545,
-    "end": 559,
-    "kind": "string",
-    "source": "把个人能力产品化与规模化",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "c4fafd1268bb3ecdec11707ecf508147a1328dc2ee026731178857b6248406b3",
-    "file": "app/super-individual/monetization/page.tsx",
-    "start": 622,
-    "end": 631,
-    "kind": "string",
-    "source": "产品化与商业化",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "c4fafd1268bb3ecdec11707ecf508147a1328dc2ee026731178857b6248406b3",
-    "file": "app/super-individual/monetization/page.tsx",
-    "start": 845,
-    "end": 852,
-    "kind": "jsx-text",
-    "source": "产品化与商业化",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "c4fafd1268bb3ecdec11707ecf508147a1328dc2ee026731178857b6248406b3",
-    "file": "app/super-individual/monetization/page.tsx",
-    "start": 932,
-    "end": 939,
-    "kind": "jsx-text",
-    "source": "产品化与商业化",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "080afc8b3a30327cb935900b33521689eabdf8589ef11a35cf85258bb07e4769",
-    "file": "app/super-individual/monetization/page.tsx",
-    "start": 1009,
-    "end": 1053,
-    "kind": "jsx-text",
-    "source": "目标不是“做更多”，而是把交付变成标准件：更少的沟通成本、更稳定的结果、更可预期的收入。",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "54608cb33352254ddd9653a3d4f7ae8719af40cbeb8fdc0ef99dedb8153fd02c",
-    "file": "app/super-individual/monetization/page.tsx",
-    "start": 1352,
-    "end": 1363,
-    "kind": "jsx-text",
-    "source": "三种 Offer 形态",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "973008d2f12c6e201fd65b7c87577781b4cbe94198425ed7e84e8d734defebc2",
-    "file": "app/super-individual/monetization/page.tsx",
-    "start": 2037,
-    "end": 2048,
-    "kind": "jsx-text",
-    "source": "定价与交付（最小闭环）",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "431324b50db7b990c0af0f35464ecae0d9f5ea0dd80b9ece1f2988ce8166e6b2",
-    "file": "app/super-individual/monetization/page.tsx",
-    "start": 2162,
-    "end": 2184,
-    "kind": "string",
-    "source": "明确交付物：文档/代码/视频/模板/清单",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "7020cb9e94092eb7649669a93397e5479ca0f2ec0c09c95c0d9add8326a7811b",
-    "file": "app/super-individual/monetization/page.tsx",
-    "start": 2200,
-    "end": 2223,
-    "kind": "string",
-    "source": "明确边界：包含什么、不包含什么、次数与周期",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "8fb3826a34872a8f080c93362431a434ffada0a45dc70bea8bf4b9e8202336c4",
-    "file": "app/super-individual/monetization/page.tsx",
-    "start": 2239,
-    "end": 2256,
-    "kind": "string",
-    "source": "明确验收：什么叫完成（DoD）",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "77e85b334ff771c7d91668b0e188c1731ca661856e783d057f52103a5f0d35cf",
-    "file": "app/super-individual/monetization/page.tsx",
-    "start": 2272,
-    "end": 2296,
-    "kind": "string",
-    "source": "明确风险：失败如何处理（退款/补交付/延长）",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "282e48cc0368fa3319ba67d08121b2b31a9f733a4ac06dc6d16575ebfd12578e",
-    "file": "app/super-individual/page.tsx",
-    "start": 302,
-    "end": 309,
-    "kind": "string",
-    "source": "定位与策略",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "acf7fb1bd8c4f73c1939928a1671c37869a7bff12b8a17c2a214836382436c81",
-    "file": "app/super-individual/page.tsx",
-    "start": 328,
+    "start": 336,
     "end": 351,
     "kind": "string",
-    "source": "确定你是谁、为谁创造价值、如何差异化竞争。",
+    "source": "用数据决定继续、转向或停止",
     "expressions": [],
     "expressionRanges": []
   },
   {
-    "id": "c4fafd1268bb3ecdec11707ecf508147a1328dc2ee026731178857b6248406b3",
-    "file": "app/super-individual/page.tsx",
-    "start": 479,
-    "end": 488,
+    "id": "0e10299a4637a10a07dd60a54f9a33bb1ce651ff1e8fd788d7e3c3e8b9f9646d",
+    "file": "app/super-individual/cases/page.tsx",
+    "start": 414,
+    "end": 423,
     "kind": "string",
-    "source": "产品化与商业化",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "5ef62c2f941b9cfc8c8e9b89b36c79c739fa7801a344b014eadf521d0e8c0d10",
-    "file": "app/super-individual/page.tsx",
-    "start": 507,
-    "end": 531,
-    "kind": "string",
-    "source": "把能力打包成产品，设计价格、交付与增长飞轮。",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "8ab11bb0c2a6405504b6a4a2c1249520cd4f355de9bf2ba815e00d7a43bf6963",
-    "file": "app/super-individual/page.tsx",
-    "start": 665,
-    "end": 673,
-    "kind": "string",
-    "source": "系统与自动化",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "4ac8028077312bf64add99632887dff62bb178efd46dc6d21b426c8b04ab2b56",
-    "file": "app/super-individual/page.tsx",
-    "start": 692,
-    "end": 714,
-    "kind": "string",
-    "source": "用系统替代意志力，用自动化替代重复劳动。",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "10b95dd32b420777b9159e43db672462fdb38b5f0b241cf7b1137185501b9645",
-    "file": "app/super-individual/page.tsx",
-    "start": 841,
-    "end": 848,
-    "kind": "string",
-    "source": "增长与渠道",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "ad04ecad613739701208058300648d2fbe5ca28d8b1a5b508e414eb88958c1db",
-    "file": "app/super-individual/page.tsx",
-    "start": 867,
-    "end": 896,
-    "kind": "string",
-    "source": "内容、SEO、社媒、合作与分销，建立可复利的流量来源。",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "5c7799a15c94be0eb3af1b39a7ad798e8cb65d6702137b87c5341100de4b43cb",
-    "file": "app/super-individual/page.tsx",
-    "start": 1021,
-    "end": 1028,
-    "kind": "string",
-    "source": "案例与复盘",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "8e9de5e072a65967455e7f7138b6ed6b3df797039556c5f5c39805ea3572c361",
-    "file": "app/super-individual/page.tsx",
-    "start": 1047,
-    "end": 1071,
-    "kind": "string",
-    "source": "用复盘沉淀可复用的方法论，把成功变成可复制。",
+    "source": "复盘与迭代决策",
     "expressions": [],
     "expressionRanges": []
   },
   {
     "id": "2383ff5ea48ebe1fb34beb86615686ae607e2be6b4ae5b3884c7b8b88fd32021",
-    "file": "app/super-individual/page.tsx",
-    "start": 1271,
-    "end": 1278,
+    "file": "app/super-individual/growth/page.tsx",
+    "start": 311,
+    "end": 318,
     "kind": "string",
     "source": "超级个体篇",
     "expressions": [],
     "expressionRanges": []
   },
   {
-    "id": "eb0dbeba1eb293f14c339838d61bb3d11ad9b90077d615d1d4c1964c6b17ffff",
-    "file": "app/super-individual/page.tsx",
-    "start": 1297,
-    "end": 1311,
+    "id": "ffbe7404a41f78a5f8b6acc96f9396ba73b7cc87afa6784ab0f7e1f4de1fad54",
+    "file": "app/super-individual/growth/page.tsx",
+    "start": 337,
+    "end": 364,
     "kind": "string",
-    "source": "把个人能力产品化与规模化",
+    "source": "用 Analytics 和自动化建立可持续增长闭环",
     "expressions": [],
     "expressionRanges": []
   },
   {
-    "id": "d33da45c498b31186b6d4ee77781a4a5ff55c892b6a4baa4d8ffe6a1a100ca1a",
-    "file": "app/super-individual/page.tsx",
-    "start": 1637,
-    "end": 1650,
-    "kind": "jsx-text",
-    "source": "超级个体篇 · 系统化成长",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "862fbba86d38d092e88e467cee6dfd6a0167dd6ddcdd67d102fac774117f1cc7",
-    "file": "app/super-individual/page.tsx",
-    "start": 1878,
-    "end": 1882,
-    "kind": "jsx-text",
-    "source": "超级个体",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "841701943c56711ac68f9f5354720890a33d06b7002a2da0c29f929b97f66e08",
-    "file": "app/super-individual/page.tsx",
-    "start": 1999,
-    "end": 2049,
-    "kind": "jsx-text",
-    "source": "目标是把你的能力变成可交付、可复制、可复利的系统：定位 → 产品化 → 自动化 → 增长 → 复盘。",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "cbd109c1b432b892e06bb13a6629585f3d8a8fb916dae8dad4f68f211d23ff8f",
-    "file": "app/super-individual/page.tsx",
-    "start": 2299,
-    "end": 2303,
-    "kind": "jsx-text",
-    "source": "适合人群",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "f80ca8b6ee0e6953d68c05d1e6db32e58c433ddcc03de2c289a58b8a37a91ec9",
-    "file": "app/super-individual/page.tsx",
-    "start": 2385,
-    "end": 2400,
+    "id": "a2582bd74371d7ce6db5672dcf491fcbad985edb9c7e023b99a2d5ea65b3a2a4",
+    "file": "app/super-individual/growth/page.tsx",
+    "start": 427,
+    "end": 438,
     "kind": "string",
-    "source": "独立开发者 / 自由职业者",
+    "source": "数据分析与自动运营",
     "expressions": [],
     "expressionRanges": []
   },
   {
-    "id": "6ce4cf2263308b4bb9798ff3fd221f18d4a8e7f0949e5a6855a7fdbc773bd717",
-    "file": "app/super-individual/page.tsx",
-    "start": 2402,
-    "end": 2412,
+    "id": "2383ff5ea48ebe1fb34beb86615686ae607e2be6b4ae5b3884c7b8b88fd32021",
+    "file": "app/super-individual/monetization/page.tsx",
+    "start": 317,
+    "end": 324,
     "kind": "string",
-    "source": "想做副业的工程师",
+    "source": "超级个体篇",
     "expressions": [],
     "expressionRanges": []
   },
   {
-    "id": "ae739170595dcf364d8c20e9fa4d85d9f8e12d718a87540b25b88943aba6b57c",
-    "file": "app/super-individual/page.tsx",
-    "start": 2414,
-    "end": 2423,
+    "id": "28fc109cc3848c60037cbe6d93bcb4c9325e3f1a08b85b13bbab93080e2d3f64",
+    "file": "app/super-individual/monetization/page.tsx",
+    "start": 343,
+    "end": 363,
     "kind": "string",
-    "source": "独立咨询与顾问",
+    "source": "把验证过的问题压缩成可收费的最小产品",
     "expressions": [],
     "expressionRanges": []
   },
   {
-    "id": "9be4834541e56b5b14c0cf3ca6ea0fcfe9a0d3bc9759e950c41fd7ef8a541e04",
-    "file": "app/super-individual/page.tsx",
-    "start": 2425,
-    "end": 2440,
-    "kind": "string",
-    "source": "内容创作者 / 独立创业者",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "5147ba16701d05e7df9f45295f48ab637ea87dbaf0ea75f76647de29baeb0fa6",
-    "file": "app/super-individual/page.tsx",
-    "start": 2969,
-    "end": 2973,
-    "kind": "jsx-text",
-    "source": "学习目标",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "dfa098a24dcf3a604a381614cc75cf8935720295829915d60edfe61d684d8440",
-    "file": "app/super-individual/page.tsx",
-    "start": 3068,
-    "end": 3080,
-    "kind": "string",
-    "source": "定位差异化的个人价值",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "a34870aa572f4b91c3a4d72c3f1cb00a9890cb9ae6df10e774ae63672e83528a",
-    "file": "app/super-individual/page.tsx",
-    "start": 3094,
-    "end": 3107,
-    "kind": "string",
-    "source": "把能力打包成可交付产品",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "75ebc452f84cd32b360e25a7db063e5a9ea4611e389a807da896d0f7b7332f58",
-    "file": "app/super-individual/page.tsx",
-    "start": 3121,
-    "end": 3133,
-    "kind": "string",
-    "source": "建立自动化与复利系统",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "824eedfcc751dc1dea678cdf4cde6e77fe6f2ed502d5d217f093eb95497b4c37",
-    "file": "app/super-individual/page.tsx",
-    "start": 3943,
-    "end": 3947,
-    "kind": "jsx-text",
-    "source": "模块导航",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "2e89c59e8132ded282472692736dc91631c951f81ce1e3ab95513da28b177d36",
-    "file": "app/super-individual/page.tsx",
-    "start": 5068,
-    "end": 5072,
-    "kind": "jsx-text",
-    "source": "进入模块",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "baa45cfdeb2a1e34442e70a333601c67d3b626939612946fac4ff6ec73793978",
-    "file": "app/super-individual/page.tsx",
-    "start": 5376,
-    "end": 5380,
-    "kind": "jsx-text",
-    "source": "章节目录",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "bc3bc21904b55de8643cc53a147855b3f6e1e0bdc02dbe307cba37f2f4a7698b",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 295,
-    "end": 315,
-    "kind": "string",
-    "source": "你要服务的具体人群是谁（越具体越好）",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "a2b6268519407e8d8ec6e924295823c7ed2c64a9963ef39f0badf04bf48bdfec",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 319,
-    "end": 343,
-    "kind": "string",
-    "source": "你提供的核心结果是什么（可验证 / 可交付）",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "d4048e785951a71d054fff0259e4d966812093ee05203fe1ce35e7eb34e28d27",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 347,
-    "end": 386,
-    "kind": "string",
-    "source": "你和同类相比的差异化是什么（速度 / 质量 / 成本 / 风格 / 渠道）",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "47e31ee9dfb0850cf3312430b7ee566a77eaef8c13fba971a9fd21db845d5d77",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 390,
-    "end": 422,
-    "kind": "string",
-    "source": "你选择的切入场景是什么（高频痛点 / 付费意愿 / 可复制）",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "8d290134270b30a47bee0f3031154e01ed6bcb957cb62eda80d36491d74ef679",
-    "file": "app/super-individual/strategy/page.tsx",
+    "id": "4607ada2f4d71bb2307463d8ba510e2316a118a0eae12ad8f455c3f4a5310b4e",
+    "file": "app/super-individual/monetization/page.tsx",
     "start": 426,
-    "end": 461,
+    "end": 440,
     "kind": "string",
-    "source": "你的「10 分钟可展示成果」是什么（作品 / 案例 / Demo）",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "6c30d81cbc5fb9004cf767f2c2116092091aee661476883d739b5ea37dd4020e",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 465,
-    "end": 489,
-    "kind": "string",
-    "source": "你愿意持续投入 12 个月以上吗（复利前提）",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "11462c1179430b62bd9838ce97cfb0d8d72221ea88f447fbe902abfbe3335471",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 526,
-    "end": 543,
-    "kind": "string",
-    "source": "太宽泛：'我帮所有人变得更好'",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "ac61b285d5d1791569fe34a3b924417e9a54fede2a2889eeca3de13822888f88",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 554,
-    "end": 581,
-    "kind": "string",
-    "source": "没有具体人群就没有精准渠道，获客成本永远居高不下。",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "ff4e806038bdae3a78bc482053b923480f210829d1433dda3ab5ba2e759e7f84",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 603,
-    "end": 620,
-    "kind": "string",
-    "source": "太炫技：只展示能力，不展示结果",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "c10015566d36966c2a605e7533583aa5c81fabc398856d7fab0debdfa205385e",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 631,
-    "end": 671,
-    "kind": "string",
-    "source": "买家买的是结果，不是工具链的复杂度。让他「省了多少时间 / 多赚了多少钱」。",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "c2b4964cf609d4479194ee2b2655aa6547eed47c5dbf7afe4e04d5b3419e4d8a",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 693,
-    "end": 709,
-    "kind": "string",
-    "source": "同质化：用和别人一样的关键词",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "6b5488b2631eaa8bdf16deadd5af85402c5a20028b09a3d3f19d598cb71844ff",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 720,
-    "end": 750,
-    "kind": "string",
-    "source": "同质化的结果就是价格战。找一个更窄、更贵、更难的小池塘。",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "e3c14ff5359fee49c0563bf375cb9b8104c0d1cb3c2fa073ec6d567a2be228c7",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 772,
-    "end": 784,
-    "kind": "string",
-    "source": "短视：只做一次性项目",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "6f5b4be9cd9cb427dcb52f2612e588544ff620c110005b9aeba83a83b9fcd8aa",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 795,
-    "end": 832,
-    "kind": "string",
-    "source": "每个项目都从零开始，能力无法沉淀成资产。至少要让 30% 工作可复用。",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "2ef3953c011423dc76b9f412b31eb603b5cd3cf4404c9dde4e8584dc2ac8d976",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 854,
-    "end": 866,
-    "kind": "string",
-    "source": "无边界：来什么做什么",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "bd4e16a2198e6ba39501cfd3cbf890edddf32bd80230495002cd2a833b5e53a4",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 877,
-    "end": 904,
-    "kind": "string",
-    "source": "没有「不做清单」就没有差异化，品牌认知也无法累积。",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "6b12860f7e9ff8ec74a784f81669f180e19421d73075a8477918294f537eb700",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 947,
-    "end": 953,
-    "kind": "string",
-    "source": "目标人群",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "64154c32bd06cba2898d6f7f25ff3150e0eca23321749f8f6ff7663465189747",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 967,
-    "end": 993,
-    "kind": "string",
-    "source": "他们是谁？在哪里出没？付费意愿如何？决策链多长？",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "8996adc3a362e0cd0e19962750abd6ade59fe54cec806c59c79afacd48bb6d0a",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 1061,
-    "end": 1067,
-    "kind": "string",
-    "source": "价值主张",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "f1fce4512f526bc36f7a850a31944605a282b75b3554e0bc241031400fdbd715",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 1081,
-    "end": 1108,
-    "kind": "string",
-    "source": "用一句话说明你解决什么问题、带来什么可量化的结果。",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "b7b739702d5f0c6c09c04333772d8a8f5cec652f2e1590eece5aea496353c9bd",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 1174,
-    "end": 1179,
-    "kind": "string",
-    "source": "差异化",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "8caf13a43714081303f9751cd2bafc0ec093f5aaabc98516aef80c1a65adf89e",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 1193,
-    "end": 1231,
-    "kind": "string",
-    "source": "同类里你独有的：速度 / 质量 / 成本 / 风格 / 渠道 / 组合。",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "d883c636d3f8913e51a7cbbbd649757dccc142d4b4cc9d9a7cae9c2982826c3b",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 1297,
-    "end": 1301,
-    "kind": "string",
-    "source": "证据",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "ccc66afe795031cae5d63404722d5aca0a338f7711a122c5efd22562c4ab29b6",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 1315,
-    "end": 1344,
-    "kind": "string",
-    "source": "作品集 / 案例 / 数据 / 推荐人 / 社会证明。",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "3e15be9b9614a607c25e5cd76173496f5caa305aa4c629bf0bdbdc578a2657ca",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 1439,
-    "end": 1453,
-    "kind": "string",
-    "source": "Week 1-2 · 谈",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "242d4b72ce463af3dd940a84a9cbbf453a10763cf70f9592aded95e01fc421ca",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 1465,
-    "end": 1504,
-    "kind": "string",
-    "source": "找 5 个目标人群做深度访谈，记录他们的原话（痛点、付费意愿、替代方案）。",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "79f5719d59b42fca1557b77f3adc7886189c23a58c87071b3c465257f9a43c42",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 1526,
-    "end": 1540,
-    "kind": "string",
-    "source": "Week 3-4 · 造",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "34d70c638362b9c39523a3b3d97d859a4f406dbcdbdd35dbbc5586b7e8ef1e7e",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 1552,
-    "end": 1592,
-    "kind": "string",
-    "source": "用最小可交付件（MVD）做 1-2 个付费项目，价格放到「略贵于市场」水平。",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "356df5b29b0ce25900db016efe1755fa6f89bc42f6ada5b76fd14e677fcb68fe",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 1614,
-    "end": 1629,
-    "kind": "string",
-    "source": "Month 2-3 · 放",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "def853d6835c2ef5c9cb24fd8a4d3ac5e8d07e4ab58ed55712a603f9cdbd7a26",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 1641,
-    "end": 1681,
-    "kind": "string",
-    "source": "把过程记录为内容（文章 / 视频 / Demo），让下一批客户从内容找到你。",
+    "source": "产品化 · MVP 定义",
     "expressions": [],
     "expressionRanges": []
   },
   {
     "id": "2383ff5ea48ebe1fb34beb86615686ae607e2be6b4ae5b3884c7b8b88fd32021",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 1789,
-    "end": 1796,
+    "file": "app/super-individual/page.tsx",
+    "start": 309,
+    "end": 316,
     "kind": "string",
     "source": "超级个体篇",
     "expressions": [],
     "expressionRanges": []
   },
   {
-    "id": "eb0dbeba1eb293f14c339838d61bb3d11ad9b90077d615d1d4c1964c6b17ffff",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 1815,
-    "end": 1829,
+    "id": "0cb35eead40db064db23ed549402b946dd89512c2dd4d566039140703d73c23b",
+    "file": "app/super-individual/page.tsx",
+    "start": 335,
+    "end": 353,
     "kind": "string",
-    "source": "把个人能力产品化与规模化",
+    "source": "从需求发现到上线、收款与数据迭代",
     "expressions": [],
     "expressionRanges": []
   },
   {
-    "id": "282e48cc0368fa3319ba67d08121b2b31a9f733a4ac06dc6d16575ebfd12578e",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 1892,
-    "end": 1899,
+    "id": "3fed9aaf3bbf3581148bfda71fc2696bcb16e8f100982284c8846566a961a113",
+    "file": "app/super-individual/page.tsx",
+    "start": 416,
+    "end": 424,
     "kind": "string",
-    "source": "定位与策略",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "282e48cc0368fa3319ba67d08121b2b31a9f733a4ac06dc6d16575ebfd12578e",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 2182,
-    "end": 2187,
-    "kind": "jsx-text",
-    "source": "定位与策略",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "eac8b40880c4a953f3200cc6e4b05547af1690200a7b9758242a0fc7233e4ddb",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 2415,
-    "end": 2423,
-    "kind": "jsx-text",
-    "source": "先把你是谁讲清楚",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "e7b4333f214e1427d34aca753042fade942bcc5b9fa2732750be51f00d6f7f8d",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 2540,
-    "end": 2613,
-    "kind": "jsx-text",
-    "source": "先把\"你要解决谁的什么问题\"说清楚，再谈工具、渠道和增长。 定位清晰，后续所有动作才会累积；定位模糊，再多努力也只是原地打转。",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "3ddedc1475f31b026362f672b6b220e76c5669b572cc94abbf977164c8465008",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 2958,
-    "end": 2964,
-    "kind": "jsx-text",
-    "source": "三句定位模板",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "c915fed73da0383cfbd778ac181e2bf646d6a931ab83852a512609b8b2a2ccb9",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 3217,
-    "end": 3220,
-    "kind": "jsx-text",
-    "source": "我帮助",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "636ba72243c986e58409248be350cf4e67300113b7807d1bf8660782fc194cf8",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 3242,
-    "end": 3275,
-    "kind": "jsx-text",
-    "source": "（目标人群）在（场景）里实现（核心结果），通过（方法 / 系统）。",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "05905e3c8029eba915e8cd838f354777a64288c802f194eb7e16eee4e3522f2b",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 3345,
-    "end": 3349,
-    "kind": "jsx-text",
-    "source": "例：我帮",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "c97ddbe3e518e86edabb8c7a602d3a5ad2b705ab5e669a2ad672c7d0d1283e6e",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 3357,
-    "end": 3368,
-    "kind": "jsx-text",
-    "source": "独立 SaaS 创始人",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "12404a0b638172406b8776fd1e1a36bfcd4d3fe200807afca710cf7468db6903",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 3377,
-    "end": 3378,
-    "kind": "jsx-text",
-    "source": "在",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "6880a28c3690e1835048bad36599fb06d08773ccb2b8c5d48d34607847b7deeb",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 3386,
-    "end": 3393,
-    "kind": "jsx-text",
-    "source": "产品冷启动阶段",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "11dd7ef8a80d512f7f9761c5962fb3ecd7e3f53dacb54b7e85c5fadf1a66c83e",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 3417,
-    "end": 3419,
-    "kind": "jsx-text",
-    "source": "实现",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "0cbaaa7c4c52d4fccb2a9a3453d1bdeff9c1514ccb4d2f68b6f8c96cfb44be48",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 3427,
-    "end": 3439,
-    "kind": "jsx-text",
-    "source": "首批 100 个付费用户",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "0f348da36da6510f735744d39a20682759a739655e4db3f7e4dfb1cdcbffb250",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 3448,
-    "end": 3451,
-    "kind": "jsx-text",
-    "source": "，通过",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "5c30b632438c9cc6878701fb2e567c17e8de875a82926851eeb5f82abd54a478",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 3459,
-    "end": 3476,
-    "kind": "jsx-text",
-    "source": "可复用的 SEO + 社区合作系统",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "4226544bd9b999bef1d00a9096e774f511f7070de925e8865468ab6c31b17ef4",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 3682,
-    "end": 3685,
-    "kind": "jsx-text",
-    "source": "我不做",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "51886dc79aa1be8bd5529df91d3a15422a6d6799efc7f4c7cad7b5d71d7f948c",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 3707,
-    "end": 3732,
-    "kind": "jsx-text",
-    "source": "：列出 2-3 个明确的边界，减少干扰与机会成本。",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "2abc28cb8a51243f06337908d01db788d9254efa707043df451d6374ac259c36",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 3802,
-    "end": 3832,
-    "kind": "jsx-text",
-    "source": "例：不接大型企业长周期项目、不做纯咨询不落地、不碰加密货币。",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "074dbb64f6225a79c121beb220a3f87996f6a1a40f603f4e6686e9dc04d493d9",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 4031,
-    "end": 4035,
-    "kind": "jsx-text",
-    "source": "我的优势",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "39cf6eb1179b0de270ae7fc758f42aa2d7a49c39f6c8fb43c604791643977bed",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 4057,
-    "end": 4086,
-    "kind": "jsx-text",
-    "source": "：写下你\"可被验证\"的优势证据（作品、案例、数据、资历）。",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "836af54cad23b0d38f8f8ad7bd964974f6636a1b6cb50c809ee1fca7698915ef",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 4156,
-    "end": 4232,
-    "kind": "jsx-text",
-    "source": "例：过去 12 个月独立交付 8 个 MVP、产品 GitHub 累计 3k+ star、 在某细分领域有 2 篇高引博客。",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "107dc1e51443ae82b401e9543a061dc10dbbb4034a421d5e7c76a478c22e7ccc",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 4506,
-    "end": 4516,
-    "kind": "jsx-text",
-    "source": "定位画布（四格填空）",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "76b236a259a3daef746473134ebfe9ac540a5cd7989f3b80080d44054911f46c",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 5582,
-    "end": 5588,
-    "kind": "jsx-text",
-    "source": "快速检查清单",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "f9602d578e7b7be0c29d983a16124cc79f01b5fb9f710b07e20680ff223952fb",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 6298,
-    "end": 6309,
-    "kind": "jsx-text",
-    "source": "5 个最常见的定位陷阱",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "2074fff08f6c224652772d79e1e32b5b15b4438724da9a3e3663859c347dc283",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 7402,
-    "end": 7427,
-    "kind": "jsx-text",
-    "source": "定位验证 3 步法（从 0 到 1 的 3 个月）",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "f605c601279833c42e786a5b5eaa0965475345a7a3e4a562407eb9d8f71ae9d8",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 7500,
-    "end": 7519,
-    "kind": "jsx-text",
-    "source": "不要在书桌前\"想\"出完美定位，要走出去",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "154723a1aa0a09a4c3f2a99bfa83494e54a27c6b372b3040d68b4a713f12b2f2",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 7527,
-    "end": 7529,
-    "kind": "jsx-text",
-    "source": "验证",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "266f441efda77f7fac7ecb4748f551532c5a32afa53ddbe24c1d448e3010f2c5",
-    "file": "app/super-individual/strategy/page.tsx",
-    "start": 7538,
-    "end": 7541,
-    "kind": "jsx-text",
-    "source": "出来。",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "c9c3c59e6e115dc82afb85b589c2cb847ab27ae21f68b2a8c0f7babff0df7354",
-    "file": "app/super-individual/systems/page.tsx",
-    "start": 234,
-    "end": 263,
-    "kind": "string",
-    "source": "输入系统：收集 → 过滤 → 归档（灵感、需求、素材）",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "131f2c23c990fd32b13de315e9f7fa2f60beedf7a182eaba02022b0000a9c54d",
-    "file": "app/super-individual/systems/page.tsx",
-    "start": 267,
-    "end": 296,
-    "kind": "string",
-    "source": "产出系统：选题 → 草稿 → 交付 → 复用（模板化）",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "a3b0fbad352b0ad784b68836b4526aeb1a87cbd75bdfd4626ca026b5a56db245",
-    "file": "app/super-individual/systems/page.tsx",
-    "start": 300,
-    "end": 326,
-    "kind": "string",
-    "source": "反馈系统：数据 → 复盘 → 调整（周/月节奏）",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "73615894522f7b3ec2ecb2d1eecce1b56367c58f09d32864c48f000e6c7da14d",
-    "file": "app/super-individual/systems/page.tsx",
-    "start": 330,
-    "end": 356,
-    "kind": "string",
-    "source": "自动化系统：脚本/工具/Agent 替代重复劳动",
+    "source": "超级个体概述",
     "expressions": [],
     "expressionRanges": []
   },
   {
     "id": "2383ff5ea48ebe1fb34beb86615686ae607e2be6b4ae5b3884c7b8b88fd32021",
-    "file": "app/super-individual/systems/page.tsx",
-    "start": 458,
-    "end": 465,
+    "file": "app/super-individual/strategy/page.tsx",
+    "start": 313,
+    "end": 320,
     "kind": "string",
     "source": "超级个体篇",
     "expressions": [],
     "expressionRanges": []
   },
   {
-    "id": "eb0dbeba1eb293f14c339838d61bb3d11ad9b90077d615d1d4c1964c6b17ffff",
-    "file": "app/super-individual/systems/page.tsx",
-    "start": 484,
-    "end": 498,
+    "id": "507030950673a1b042e752d6cca457ca282f6d9c5164d10a57585b178473a820",
+    "file": "app/super-individual/strategy/page.tsx",
+    "start": 339,
+    "end": 353,
     "kind": "string",
-    "source": "把个人能力产品化与规模化",
+    "source": "从市场信号到真实需求证据",
     "expressions": [],
     "expressionRanges": []
   },
   {
-    "id": "8ab11bb0c2a6405504b6a4a2c1249520cd4f355de9bf2ba815e00d7a43bf6963",
-    "file": "app/super-individual/systems/page.tsx",
-    "start": 561,
-    "end": 569,
+    "id": "8a42811999e71c4d1ce0ed96aa35a00de08f3349e85cf7d40ef37e97335bf291",
+    "file": "app/super-individual/strategy/page.tsx",
+    "start": 416,
+    "end": 430,
     "kind": "string",
-    "source": "系统与自动化",
+    "source": "定位与策略 · 需求验证",
     "expressions": [],
     "expressionRanges": []
   },
   {
-    "id": "8ab11bb0c2a6405504b6a4a2c1249520cd4f355de9bf2ba815e00d7a43bf6963",
+    "id": "2383ff5ea48ebe1fb34beb86615686ae607e2be6b4ae5b3884c7b8b88fd32021",
     "file": "app/super-individual/systems/page.tsx",
-    "start": 781,
-    "end": 787,
-    "kind": "jsx-text",
-    "source": "系统与自动化",
+    "start": 312,
+    "end": 319,
+    "kind": "string",
+    "source": "超级个体篇",
     "expressions": [],
     "expressionRanges": []
   },
   {
-    "id": "8ab11bb0c2a6405504b6a4a2c1249520cd4f355de9bf2ba815e00d7a43bf6963",
+    "id": "0ee6ddd9bbfc07e8fa6dd5b5d9e38135a87e104f5b5049dc0cf785cae6f7bf6f",
     "file": "app/super-individual/systems/page.tsx",
-    "start": 867,
-    "end": 873,
-    "kind": "jsx-text",
-    "source": "系统与自动化",
+    "start": 338,
+    "end": 362,
+    "kind": "string",
+    "source": "AI 开发、Supabase、部署与海外支付",
     "expressions": [],
     "expressionRanges": []
   },
   {
-    "id": "f5b4a299ddbce9f043ce09b7713710bb1da63dfa5de0b62711dced9df2ceedbe",
+    "id": "7b0082557bea60794bb8de3664312bcdc864e76fe1d39d36fa2c8bfde71f04b4",
     "file": "app/super-individual/systems/page.tsx",
-    "start": 943,
-    "end": 987,
-    "kind": "jsx-text",
-    "source": "让你“持续稳定输出”的不是热情，而是系统：流程、清单、模板、自动化，把不确定性降到最低。",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "1fdd70a7dcb6c11fa8aae1b8ab30803571d98adc88045d926f8e84daa03b05d4",
-    "file": "app/super-individual/systems/page.tsx",
-    "start": 1286,
-    "end": 1290,
-    "kind": "jsx-text",
-    "source": "四个系统",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "42864fdfe6680eedd54bd4acc0f0b670da101d28d1c3ce379d52d52a8b15bd81",
-    "file": "app/super-individual/systems/page.tsx",
-    "start": 1900,
-    "end": 1907,
-    "kind": "jsx-text",
-    "source": "最小可执行建议",
-    "expressions": [],
-    "expressionRanges": []
-  },
-  {
-    "id": "6fdd4b120d934ad532b2fe00b7d57ce5c08718263a616a3596ba0955926bd897",
-    "file": "app/super-individual/systems/page.tsx",
-    "start": 2022,
-    "end": 2110,
-    "kind": "jsx-text",
-    "source": "从一个高频动作开始（例如：每周产出 1 篇文章 / 每周交付 1 个模板），把流程写成清单， 然后用工具与 Agent 自动化其中 30% 的步骤。",
+    "start": 425,
+    "end": 435,
+    "kind": "string",
+    "source": "开发、部署与支付",
     "expressions": [],
     "expressionRanges": []
   },
@@ -103553,52 +101873,52 @@
     "expressionRanges": []
   },
   {
-    "id": "282e48cc0368fa3319ba67d08121b2b31a9f733a4ac06dc6d16575ebfd12578e",
+    "id": "8a42811999e71c4d1ce0ed96aa35a00de08f3349e85cf7d40ef37e97335bf291",
     "file": "components/course/chapters.ts",
     "start": 2369,
-    "end": 2376,
+    "end": 2383,
     "kind": "string",
-    "source": "定位与策略",
+    "source": "定位与策略 · 需求验证",
     "expressions": [],
     "expressionRanges": []
   },
   {
-    "id": "c4fafd1268bb3ecdec11707ecf508147a1328dc2ee026731178857b6248406b3",
+    "id": "4607ada2f4d71bb2307463d8ba510e2316a118a0eae12ad8f455c3f4a5310b4e",
     "file": "components/course/chapters.ts",
-    "start": 2427,
-    "end": 2436,
+    "start": 2434,
+    "end": 2448,
     "kind": "string",
-    "source": "产品化与商业化",
+    "source": "产品化 · MVP 定义",
     "expressions": [],
     "expressionRanges": []
   },
   {
-    "id": "8ab11bb0c2a6405504b6a4a2c1249520cd4f355de9bf2ba815e00d7a43bf6963",
+    "id": "7b0082557bea60794bb8de3664312bcdc864e76fe1d39d36fa2c8bfde71f04b4",
     "file": "components/course/chapters.ts",
-    "start": 2491,
-    "end": 2499,
+    "start": 2503,
+    "end": 2513,
     "kind": "string",
-    "source": "系统与自动化",
+    "source": "开发、部署与支付",
     "expressions": [],
     "expressionRanges": []
   },
   {
-    "id": "10b95dd32b420777b9159e43db672462fdb38b5f0b241cf7b1137185501b9645",
+    "id": "a2582bd74371d7ce6db5672dcf491fcbad985edb9c7e023b99a2d5ea65b3a2a4",
     "file": "components/course/chapters.ts",
-    "start": 2549,
-    "end": 2556,
+    "start": 2563,
+    "end": 2574,
     "kind": "string",
-    "source": "增长与渠道",
+    "source": "数据分析与自动运营",
     "expressions": [],
     "expressionRanges": []
   },
   {
-    "id": "5c7799a15c94be0eb3af1b39a7ad798e8cb65d6702137b87c5341100de4b43cb",
+    "id": "0e10299a4637a10a07dd60a54f9a33bb1ce651ff1e8fd788d7e3c3e8b9f9646d",
     "file": "components/course/chapters.ts",
-    "start": 2605,
-    "end": 2612,
+    "start": 2623,
+    "end": 2632,
     "kind": "string",
-    "source": "案例与复盘",
+    "source": "复盘与迭代决策",
     "expressions": [],
     "expressionRanges": []
   },
@@ -109878,6 +108198,993 @@
     "expressionRanges": []
   },
   {
+    "id": "6e214c9ff4f20b349e75949925c987ac32fbb7a0c1ad8b091ae78f0bcdc710e8",
+    "file": "components/super-individual/coach-panel.tsx",
+    "start": 401,
+    "end": 429,
+    "kind": "string",
+    "source": "AI 教练尚未配置。规则推荐和课程任务仍可正常使用。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "99b5875630b9db3e0f63bf9e63de85bb552a019a0d52c8dba298d7609637a97e",
+    "file": "components/super-individual/coach-panel.tsx",
+    "start": 442,
+    "end": 472,
+    "kind": "string",
+    "source": "AI 响应超时，请稍后重试。你的答案已经保存在浏览器中。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "0c5075e27a8c546a9dedfcdb442fbe325bc349a8129d4a3b5b15cbd7bfce12ad",
+    "file": "components/super-individual/coach-panel.tsx",
+    "start": 492,
+    "end": 518,
+    "kind": "string",
+    "source": "AI 请求过多，请稍后重试。规则推荐不会受影响。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "b07f0bf0219e710b6b3853b7bf5566683fcdbc797cc71beccb83d1c2c7a521cf",
+    "file": "components/super-individual/coach-panel.tsx",
+    "start": 542,
+    "end": 563,
+    "kind": "string",
+    "source": "AI 返回格式不完整，未采用这次结果。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "33fa5ea4b6a38b8d3b61384887db60f5d4f1005ebe762937bd0a6a0a657ed493",
+    "file": "components/super-individual/coach-panel.tsx",
+    "start": 586,
+    "end": 613,
+    "kind": "string",
+    "source": "AI 服务暂时不可用，规则推荐和阶段成果仍可继续。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "1f3b01a4431a4fe8a867b528f1b0da2682b0b8f9e44b4bbb14cd7e520aaa9312",
+    "file": "components/super-individual/coach-panel.tsx",
+    "start": 1877,
+    "end": 1882,
+    "kind": "jsx-text",
+    "source": "AI 教练",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "e72566c86f84165c2f02d18b871781645deed3e24cef6fec17dbb99761938a94",
+    "file": "components/super-individual/coach-panel.tsx",
+    "start": 1955,
+    "end": 1996,
+    "kind": "jsx-text",
+    "source": "规则引擎已经给出基础路线。AI 只负责追问、解释和补齐遗漏，不判断开户或合规资格。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "8d4396958e2dfdcafc1b4ada88a7e553f8bb5124353e40963c6b6109eb7cb67e",
+    "file": "components/super-individual/coach-panel.tsx",
+    "start": 2369,
+    "end": 2374,
+    "kind": "jsx-text",
+    "source": "建议成果：",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "e387a41e61eafd1d0cc2ef836960debb86df81ce4e68ee1cb4f7c41bbabe5a93",
+    "file": "components/super-individual/coach-panel.tsx",
+    "start": 2923,
+    "end": 2931,
+    "kind": "string",
+    "source": "重新获取反馈",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "0a9542163e8c9ba76132457a179d258ebbe3f628263fc7a87c4a6c46b717a71b",
+    "file": "components/super-individual/coach-panel.tsx",
+    "start": 2934,
+    "end": 2947,
+    "kind": "string",
+    "source": "让 AI 检查我的答案",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "ee5c29020f146ec96582deff7728707cca2cdd5438efc24721778259c130314f",
+    "file": "components/super-individual/journey-dashboard.tsx",
+    "start": 1481,
+    "end": 1491,
+    "kind": "jsx-text",
+    "source": "你的个人产品操作系统",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "d551c05b2242984c09100357df4f55288b19a7a18aba4700575df51e3709949a",
+    "file": "components/super-individual/journey-dashboard.tsx",
+    "start": 1586,
+    "end": 1603,
+    "kind": "jsx-text",
+    "source": "从需求信号走到上线、收款和数据决策",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "0ef89d4eb12e23077d0bba634de51f5cd5781a467f33fa2ae90d0ee91b7dfcb8",
+    "file": "components/super-individual/journey-dashboard.tsx",
+    "start": 1675,
+    "end": 1715,
+    "kind": "jsx-text",
+    "source": "每一步都产出可复用资产；工具推荐根据你的主体、地区、产品、预算和数据敏感度变化。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "c5012a838f47ed812d0b19e94b8854782c8379c56dc1650695a8befdabf61703",
+    "file": "components/super-individual/journey-dashboard.tsx",
+    "start": 1865,
+    "end": 1869,
+    "kind": "jsx-text",
+    "source": "课程进度",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "a86627ef0b30c13ca51f4622d7ef6e75e1baa49f83fba01721e716b1f66613a7",
+    "file": "components/super-individual/journey-dashboard.tsx",
+    "start": 2349,
+    "end": 2375,
+    "kind": "jsx-text",
+    "source": "当前浏览器无法使用本地存储。请在离开页面前导出成果。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "4b20c967368d0d8c2619c81291e9296df42efde96e475b62371049009d6887b3",
+    "file": "components/super-individual/journey-dashboard.tsx",
+    "start": 2596,
+    "end": 2600,
+    "kind": "jsx-text",
+    "source": "当前约束",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "6a53149bb22ab05ddc1963d586a81dad1fb98554b1433b92cc94a4044245ade8",
+    "file": "components/super-individual/journey-dashboard.tsx",
+    "start": 2809,
+    "end": 2812,
+    "kind": "jsx-text",
+    "source": "预算：",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "4c58d39047f8fe898af6a04407149bc10d9fa90bea376f1e1e4c9652e92f542a",
+    "file": "components/super-individual/journey-dashboard.tsx",
+    "start": 2846,
+    "end": 2851,
+    "kind": "jsx-text",
+    "source": "· 数据：",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "acfc4e74a650e7dfce69a54bc74065931f029c9d80e78e3e024f1474c5f2950a",
+    "file": "components/super-individual/journey-dashboard.tsx",
+    "start": 3074,
+    "end": 3077,
+    "kind": "jsx-text",
+    "source": "下一步",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "876a7ffdbc3ba8f0e0bea2b5399fd65dde982dfa5b2671d8f1aa60a1e1870a36",
+    "file": "components/super-individual/journey-dashboard.tsx",
+    "start": 3194,
+    "end": 3203,
+    "kind": "string",
+    "source": "十个阶段已完成",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "39be5cf61df987115f01c9e917df7525fea4119cc56c44b9c599e6bc424e6fa6",
+    "file": "components/super-individual/journey-dashboard.tsx",
+    "start": 3364,
+    "end": 3368,
+    "kind": "jsx-text",
+    "source": "继续执行",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "57bc1438299aab27ee73fd7628921408e227da0e10f6eea436653aa466079860",
+    "file": "components/super-individual/journey-dashboard.tsx",
+    "start": 3589,
+    "end": 3595,
+    "kind": "jsx-text",
+    "source": "当前路线提醒",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "1e04578a38dd1460eee846fd887c1f99e855bfec35f9654d7aec07bf095b3301",
+    "file": "components/super-individual/journey-dashboard.tsx",
+    "start": 3898,
+    "end": 3905,
+    "kind": "jsx-text",
+    "source": "十阶段课程地图",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "af50a0fe2a50a3d15556402bca1851972ab7e544877f8404070f044ba8a33285",
+    "file": "components/super-individual/journey-dashboard.tsx",
+    "start": 4405,
+    "end": 4406,
+    "kind": "jsx-text",
+    "source": "第",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "59eb8d03efea005720fdae40892c6af870d97447c154cea57be5dc99a5e69f0a",
+    "file": "components/super-individual/journey-dashboard.tsx",
+    "start": 4421,
+    "end": 4423,
+    "kind": "jsx-text",
+    "source": "阶段",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "c6a0e60a038817000f95c4db44b37401e8c2e9a1bdb5a419f9cd6364cd0692e2",
+    "file": "components/super-individual/journey-dashboard.tsx",
+    "start": 5041,
+    "end": 5047,
+    "kind": "jsx-text",
+    "source": "重新开始课程",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "f28461bb49c8564716309d575f90f72cf15b5c4667e40c2d037434bedb54a01a",
+    "file": "components/super-individual/launch-report.tsx",
+    "start": 299,
+    "end": 304,
+    "kind": "string",
+    "source": "已完成",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "dc9591e56d502b436c29bdd2819998a8460b951a7baff457484a930492c1a9d7",
+    "file": "components/super-individual/launch-report.tsx",
+    "start": 323,
+    "end": 328,
+    "kind": "string",
+    "source": "进行中",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "f6e0d6919f8e55ded60f6a37848bd30272d06879e3fc805eb8d80b09fba82b3a",
+    "file": "components/super-individual/launch-report.tsx",
+    "start": 347,
+    "end": 352,
+    "kind": "string",
+    "source": "未开始",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "a3c70b18ba9c60fb865bf10644be2e84d3f1285f5aa7a069267d80026f97120f",
+    "file": "components/super-individual/launch-report.tsx",
+    "start": 1106,
+    "end": 1111,
+    "kind": "jsx-text",
+    "source": "课程交付物",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "f972754e46b61e8662d3c42ada7be671053a4673f8268e6a079982f4d5023429",
+    "file": "components/super-individual/launch-report.tsx",
+    "start": 1181,
+    "end": 1189,
+    "kind": "jsx-text",
+    "source": "个人产品上线手册",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "5d25163623f2854ea8de25bb662e5f32ba131ec58d83591df6e543b202ac6122",
+    "file": "components/super-individual/launch-report.tsx",
+    "start": 1247,
+    "end": 1252,
+    "kind": "jsx-text",
+    "source": "生成时间：",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "7149bfeab658a66ca84cb5123cd581a36a09b1b8741c7a8ed3b6ed7d1b72c452",
+    "file": "components/super-individual/launch-report.tsx",
+    "start": 1499,
+    "end": 1511,
+    "kind": "jsx-text",
+    "source": "打印 / 保存为 PDF",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "fb48367b485caec56208bb9884fee47ff3baf4cf52bf4103ee7588ccc1124494",
+    "file": "components/super-individual/launch-report.tsx",
+    "start": 1613,
+    "end": 1620,
+    "kind": "jsx-text",
+    "source": "导出 JSON",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "7dbe21d55edec0f751381352e204f37595cb3fa0617e7290c309a23108a1b49b",
+    "file": "components/super-individual/launch-report.tsx",
+    "start": 2131,
+    "end": 2135,
+    "kind": "jsx-text",
+    "source": "全局提醒",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "49e02f4752defb67dcc0b4ac5e22986369fc051476066fc8836f91daca74a713",
+    "file": "components/super-individual/launch-report.tsx",
+    "start": 2808,
+    "end": 2812,
+    "kind": "jsx-text",
+    "source": "阶段成果",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "09e69dda77678c845c4e5e22c3312740b6c3c82d936590e8849c2f6d19e69aa0",
+    "file": "components/super-individual/launch-report.tsx",
+    "start": 3045,
+    "end": 3052,
+    "kind": "jsx-text",
+    "source": "工具与官方来源",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "5a7cf364d926223900747392845c67dfaf9012979661c45b46995a94bc12ba9f",
+    "file": "components/super-individual/launch-report.tsx",
+    "start": 3250,
+    "end": 3253,
+    "kind": "jsx-text",
+    "source": "核验于",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "9e2fa9402200129f12d8db66c19c7ae65ab7f50c6cbadd9397f8fd8ef31ba72d",
+    "file": "components/super-individual/profile-wizard.tsx",
+    "start": 443,
+    "end": 451,
+    "kind": "string",
+    "source": "暂无经营主体",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "0447d1fd02da81a705e7819ca52e8464444f38431990633c78d07446374770ba",
+    "file": "components/super-individual/profile-wizard.tsx",
+    "start": 490,
+    "end": 506,
+    "kind": "string",
+    "source": "中国大陆个人 / 个体经营者",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "c59080d7fd44e3ddf5a53d743e5df5ed6bb4fda6ba8b30b0039e895adcc8bbd7",
+    "file": "components/super-individual/profile-wizard.tsx",
+    "start": 542,
+    "end": 550,
+    "kind": "string",
+    "source": "中国大陆企业",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "7fcbd2b57e25fa85e9e8536f389de132d46c876b63c7490bc453da15cd35cffa",
+    "file": "components/super-individual/profile-wizard.tsx",
+    "start": 586,
+    "end": 592,
+    "kind": "string",
+    "source": "香港公司",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "5e9a4321d8a18bfd3b2378947d4508718f7cbcaea5e8e0d3bf3536fe8e980713",
+    "file": "components/super-individual/profile-wizard.tsx",
+    "start": 628,
+    "end": 635,
+    "kind": "string",
+    "source": "新加坡公司",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "37c1be5c435731b6a1a741268607844ae2f948d5bd8746efb6a54ed5c16602d5",
+    "file": "components/super-individual/profile-wizard.tsx",
+    "start": 671,
+    "end": 677,
+    "kind": "string",
+    "source": "美国公司",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "d7624eb398a56d220ebf523dcc7e581ef310d6523a91c68abae13ecafe308c58",
+    "file": "components/super-individual/profile-wizard.tsx",
+    "start": 716,
+    "end": 724,
+    "kind": "string",
+    "source": "其他地区公司",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "a68d504211445ec89d39e9296611c3e2774012747c7238543b70074e63013697",
+    "file": "components/super-individual/profile-wizard.tsx",
+    "start": 866,
+    "end": 873,
+    "kind": "string",
+    "source": "AI 应用",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "7521c50f0467ef367be4847f82f9f68ec6e596b49eaf547f29f148c89fbe86e1",
+    "file": "components/super-individual/profile-wizard.tsx",
+    "start": 913,
+    "end": 920,
+    "kind": "string",
+    "source": "开发者工具",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "bb57f5b34d2e1f9adea03d51e9741748a86d88a208dd1026c517f8abf7a3b76a",
+    "file": "components/super-individual/profile-wizard.tsx",
+    "start": 961,
+    "end": 969,
+    "kind": "string",
+    "source": "数字下载产品",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "8a713b6555249ddd96307ae9b39037910d08f962fad3588a267d059ff9b424ca",
+    "file": "components/super-individual/profile-wizard.tsx",
+    "start": 1001,
+    "end": 1012,
+    "kind": "string",
+    "source": "课程 / 内容产品",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "e5d7a0b461263b9417317e4eb1a2b38774ae520df019f7e420913838300bc642",
+    "file": "components/super-individual/profile-wizard.tsx",
+    "start": 1048,
+    "end": 1057,
+    "kind": "string",
+    "source": "咨询 / 服务",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "2e4f3376a18be8864358c827e1f6f091b05cd655020bb404545e4aa00e03d1a9",
+    "file": "components/super-individual/profile-wizard.tsx",
+    "start": 2460,
+    "end": 2479,
+    "kind": "string",
+    "source": "请填写常住地区和至少一个目标市场。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "2f3507af306678135be9c8a8f243d2ae7294a79df05d6dc1bf4ef6be0c7d6f58",
+    "file": "components/super-individual/profile-wizard.tsx",
+    "start": 2864,
+    "end": 2873,
+    "kind": "jsx-text",
+    "source": "先建立你的产品约束",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "ea787af65fbc239d987050682f61e34d589bd10c7fe242c635bbc61952d05eb4",
+    "file": "components/super-individual/profile-wizard.tsx",
+    "start": 2954,
+    "end": 2993,
+    "kind": "jsx-text",
+    "source": "系统根据主体、地区、产品和预算推荐工具。这里不收集身份证、银行卡或第三方密钥。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "51352d5cc28fdcd083196654fe24200798f28f7380bb7bb80b802d2ce2a9e156",
+    "file": "components/super-individual/profile-wizard.tsx",
+    "start": 3161,
+    "end": 3167,
+    "kind": "jsx-text",
+    "source": "常住地区代码",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "6f07a6f5b56742de39b15d0cf5782b243e8b33cdc54942433e1118f4a6ea1826",
+    "file": "components/super-individual/profile-wizard.tsx",
+    "start": 3364,
+    "end": 3380,
+    "kind": "string",
+    "source": "例如 CN、HK、SG、US",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "ab2ed5f84a6817ec15069f538a72936b2d357991a0fe9f1e2daac9c106441ac7",
+    "file": "components/super-individual/profile-wizard.tsx",
+    "start": 3507,
+    "end": 3525,
+    "kind": "jsx-text",
+    "source": "用于提示地区可用性，不用于身份验证。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "ea24891dbb8c48aab6ef2b06b48b2c925aa0217ed5ceb77e406b067adbf57429",
+    "file": "components/super-individual/profile-wizard.tsx",
+    "start": 3619,
+    "end": 3623,
+    "kind": "jsx-text",
+    "source": "经营主体",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "0b3894ed2a385e0080158640fbf9fcc066014a4e8d4a1e25634199ed49375afe",
+    "file": "components/super-individual/profile-wizard.tsx",
+    "start": 4138,
+    "end": 4142,
+    "kind": "jsx-text",
+    "source": "产品类型",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "9c8c374f3c8a378b8e71e1d9731ddfe1dc4b4e3ce85ffe66f3b27fc441ac2feb",
+    "file": "components/super-individual/profile-wizard.tsx",
+    "start": 4662,
+    "end": 4666,
+    "kind": "jsx-text",
+    "source": "收费方式",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "4eaf22504838495ccb437302642fd2e4ac5b9695353902659a8f300fdd813b1c",
+    "file": "components/super-individual/profile-wizard.tsx",
+    "start": 4964,
+    "end": 4968,
+    "kind": "jsx-text",
+    "source": "尚未确定",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "c4ae662aaba1f00969e0636ad6cc818712386501948e7c76d13182f499de22aa",
+    "file": "components/super-individual/profile-wizard.tsx",
+    "start": 5015,
+    "end": 5020,
+    "kind": "jsx-text",
+    "source": "一次性付款",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "cf8efc450f718fbfd2ee60e9871ef625b47c2ef58d2e31635ed848de846a79f8",
+    "file": "components/super-individual/profile-wizard.tsx",
+    "start": 5071,
+    "end": 5073,
+    "kind": "jsx-text",
+    "source": "订阅",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "07995429ff515e975fec58772a2ec379b8037814a6e6fdc1555f9c6c6c85eb2b",
+    "file": "components/super-individual/profile-wizard.tsx",
+    "start": 5117,
+    "end": 5121,
+    "kind": "jsx-text",
+    "source": "按量计费",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "f348c7b5cbd312189118360edd82a1ded0739f022af6eb51f243444c5b9d6dc8",
+    "file": "components/super-individual/profile-wizard.tsx",
+    "start": 5165,
+    "end": 5169,
+    "kind": "jsx-text",
+    "source": "人工报价",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "72e3d30c811e1d666db1db28c5bdd08f9d2c19dd2cb52b4c734c6a75c9893220",
+    "file": "components/super-individual/profile-wizard.tsx",
+    "start": 5287,
+    "end": 5291,
+    "kind": "jsx-text",
+    "source": "技术水平",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "9f4d8636b82415c3761332a60c41e11062c40564785228b1db0f0f869239f68e",
+    "file": "components/super-individual/profile-wizard.tsx",
+    "start": 5582,
+    "end": 5584,
+    "kind": "jsx-text",
+    "source": "入门",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "da2a63385466a020e24ad9f7519d821eb0aef111367740e1bfee0fa2a699a598",
+    "file": "components/super-individual/profile-wizard.tsx",
+    "start": 5635,
+    "end": 5637,
+    "kind": "jsx-text",
+    "source": "中级",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "d6e61888b07853ea306f29467275f6718e7d8da499d514cc200e2a09834d7bc1",
+    "file": "components/super-individual/profile-wizard.tsx",
+    "start": 5684,
+    "end": 5686,
+    "kind": "jsx-text",
+    "source": "高级",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "9ea4abb4e54f9bf247c5678b3e5c52aac29bae0c8fc9aa72a78ed033ba5b0057",
+    "file": "components/super-individual/profile-wizard.tsx",
+    "start": 5805,
+    "end": 5811,
+    "kind": "jsx-text",
+    "source": "月度工具预算",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "69c89c6d6a79cc8cc0c1d695cbbde98f0706186a03109592b140db9f9e566fb0",
+    "file": "components/super-individual/profile-wizard.tsx",
+    "start": 6108,
+    "end": 6113,
+    "kind": "jsx-text",
+    "source": "暂时零预算",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "5a6d89e6c09e66ebdb9c989b3d736c43a0c424562dd92e1a8eac084703646786",
+    "file": "components/super-individual/profile-wizard.tsx",
+    "start": 6160,
+    "end": 6167,
+    "kind": "jsx-text",
+    "source": "25 美元以内",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "f31f181b03347c1781bc2588533dafb0df9c45045c936f5e70e37f38db0b68bb",
+    "file": "components/super-individual/profile-wizard.tsx",
+    "start": 6215,
+    "end": 6223,
+    "kind": "jsx-text",
+    "source": "100 美元以内",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "5ffa81746a1cbcd2364cc6a8f4023f0cb08c60fb99d5d7f21af366daaa0b1841",
+    "file": "components/super-individual/profile-wizard.tsx",
+    "start": 6270,
+    "end": 6278,
+    "kind": "jsx-text",
+    "source": "100 美元以上",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "7722f3aceb1ae440102dc6c1d29d7831ae0de736981215b1f5587deced91ead8",
+    "file": "components/super-individual/profile-wizard.tsx",
+    "start": 6398,
+    "end": 6402,
+    "kind": "jsx-text",
+    "source": "目标市场",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "fab83496de260eb16413243778ec3ba3779ebfb9a5190814b8eeef8c336b7bcf",
+    "file": "components/super-individual/profile-wizard.tsx",
+    "start": 6525,
+    "end": 6540,
+    "kind": "string",
+    "source": "例如 US, JP, DE",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "f62db28d9703dfcf9a45549f91f944977727ae9857161a9d7fe62f7f9c5a2940",
+    "file": "components/super-individual/profile-wizard.tsx",
+    "start": 6638,
+    "end": 6644,
+    "kind": "jsx-text",
+    "source": "数据敏感等级",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "7706a103e280477fa7624e0d03e19f03229568b9cd9abedf29026aea58c277e4",
+    "file": "components/super-individual/profile-wizard.tsx",
+    "start": 6954,
+    "end": 6960,
+    "kind": "jsx-text",
+    "source": "普通产品数据",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "51fa4396f04bbabed47cd5c5ddfc868db9364edb6fcd95e5929d858d07491b27",
+    "file": "components/super-individual/profile-wizard.tsx",
+    "start": 7008,
+    "end": 7019,
+    "kind": "jsx-text",
+    "source": "包含敏感业务或个人数据",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "090afb792bc7c0e176e7237af7529bdc24876fe17ec7bbffae3f8be9ed86972b",
+    "file": "components/super-individual/profile-wizard.tsx",
+    "start": 7067,
+    "end": 7076,
+    "kind": "jsx-text",
+    "source": "可能属于受监管数据",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "3ecbd298f64b4217ed39f993ea28ca21a4ee0dae95d7b4ce79052e4096d5fe08",
+    "file": "components/super-individual/profile-wizard.tsx",
+    "start": 7445,
+    "end": 7459,
+    "kind": "jsx-text",
+    "source": "所有答案先保存在当前浏览器。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "41d533b9d61e9273be023ebc39e4cd0ace5c6b4aa2312dfcccd0e8956ae60f6e",
+    "file": "components/super-individual/profile-wizard.tsx",
+    "start": 7494,
+    "end": 7502,
+    "kind": "jsx-text",
+    "source": "生成我的工具路线",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "93883d2f9371976aace12d8fbc28564d4c87e311541a536bff6eef79769d72ba",
+    "file": "components/super-individual/stage-workbench.tsx",
+    "start": 1931,
+    "end": 1939,
+    "kind": "string",
+    "source": "当前模块阶段",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "af50a0fe2a50a3d15556402bca1851972ab7e544877f8404070f044ba8a33285",
+    "file": "components/super-individual/stage-workbench.tsx",
+    "start": 2892,
+    "end": 2893,
+    "kind": "jsx-text",
+    "source": "第",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "372c688c3648b3b706e640a438ead585fe81d4b86761d2f60974cf765bb5a95c",
+    "file": "components/super-individual/stage-workbench.tsx",
+    "start": 2908,
+    "end": 2915,
+    "kind": "jsx-text",
+    "source": "/ 10 阶段",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "21850171e955496a7aecc2f50ef47145afc9ebefab4420632556ed00cc39e2e7",
+    "file": "components/super-individual/stage-workbench.tsx",
+    "start": 3382,
+    "end": 3386,
+    "kind": "jsx-text",
+    "source": "核心原则",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "5b17a229bbac70d099b17c7180b95df66adb30fa8e2c0e29a19bedc247bf8625",
+    "file": "components/super-individual/stage-workbench.tsx",
+    "start": 3752,
+    "end": 3756,
+    "kind": "jsx-text",
+    "source": "常见错误",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "4bb3567dea28e5ab5275a12d6b252bdc02d66ef90e59a60bb446fd3313908d0c",
+    "file": "components/super-individual/stage-workbench.tsx",
+    "start": 4089,
+    "end": 4095,
+    "kind": "jsx-text",
+    "source": "完成当前决策",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "da590a8fe3ce4de05e1fb345174bb46e050fa921c3c8cf47f4a7414cad93813d",
+    "file": "components/super-individual/stage-workbench.tsx",
+    "start": 5110,
+    "end": 5113,
+    "kind": "jsx-text",
+    "source": "请选择",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "fcd139326fa592507dd8cc58586a96bc6b4f2306ba793130eacf687cb9215a6c",
+    "file": "components/super-individual/stage-workbench.tsx",
+    "start": 5692,
+    "end": 5701,
+    "kind": "jsx-text",
+    "source": "适合当前约束的工具",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "82b8268cb269c1e4d1b1fc0986f5ab9fec98e09f1e8630d22071aeb305dca24a",
+    "file": "components/super-individual/stage-workbench.tsx",
+    "start": 6990,
+    "end": 6997,
+    "kind": "jsx-text",
+    "source": "生成并保存成果",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "92eaa4b2fb632b8cc5139dce475313cbbeb8b2c749c1ee5f14a97be1d8faa38d",
+    "file": "components/super-individual/stage-workbench.tsx",
+    "start": 7352,
+    "end": 7404,
+    "kind": "template",
+    "source": "请先完成必填项：{p0}",
+    "expressions": [
+      "caught.message.split(\": \")[1] ?? \"未知字段\""
+    ],
+    "expressionRanges": [
+      {
+        "start": 7363,
+        "end": 7402
+      }
+    ]
+  },
+  {
+    "id": "0f79064ffe34cb3fff0766f1d562b84d844e234572c142c90e1210cb3e76d473",
+    "file": "components/super-individual/stage-workbench.tsx",
+    "start": 7396,
+    "end": 7402,
+    "kind": "string",
+    "source": "未知字段",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "62c8f5df05f8300e0b193fec9aaebcfd1866cb842e79f5680ee302a84cbdd090",
+    "file": "components/super-individual/stage-workbench.tsx",
+    "start": 7407,
+    "end": 7419,
+    "kind": "string",
+    "source": "请先完成全部必填项。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "31b9de56880b5fc25fbf57a1b59015f80f4ce9b4bd8f087b07a1255c036d4988",
+    "file": "components/super-individual/stage-workbench.tsx",
+    "start": 7493,
+    "end": 7498,
+    "kind": "jsx-text",
+    "source": "完成此阶段",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "04fa308c3ced6d97b9d38c766b79c2c2f51eb9bf0788fd1d56adf2cbfaa2aed5",
+    "file": "components/super-individual/tool-recommendation-card.tsx",
+    "start": 625,
+    "end": 631,
+    "kind": "string",
+    "source": "默认建议",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "ca22118c4655ffafd8519f3ff810b1abf7940cb570e93dd6e23fdad83e5af587",
+    "file": "components/super-individual/tool-recommendation-card.tsx",
+    "start": 634,
+    "end": 640,
+    "kind": "string",
+    "source": "备选方案",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "c8c1a2ef21d1b2f7a7daa764f2587ff5dbb6f9d699ba48ae31e7dcd6a30ab69e",
+    "file": "components/super-individual/tool-recommendation-card.tsx",
+    "start": 931,
+    "end": 935,
+    "kind": "jsx-text",
+    "source": "官方资料",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "cff1a432f396ff2e5e58ce5131fac82059cdb4dcca2dd0fba195bf5a344499b2",
+    "file": "components/super-individual/tool-recommendation-card.tsx",
+    "start": 1603,
+    "end": 1608,
+    "kind": "jsx-text",
+    "source": "最后核验：",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
     "id": "9b5ff90a5b96dc0e19116b708d86b8bc659ffa03a4b7f2826593783bfe952899",
     "file": "data/models.json",
     "start": 271,
@@ -112165,6 +111472,2562 @@
     "end": 2336,
     "kind": "string",
     "source": "模型刷新返回的数据未通过校验",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "f4f389ee2ac20fd95e1b6dbff62939ffcef116abe152ae466ad225f0a7c0e73e",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 865,
+    "end": 871,
+    "kind": "string",
+    "source": "发现需求",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "7a8abf0e408de724e25648ad41adb43774478f29a7b057eb5d18c07d1adcdcb7",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 886,
+    "end": 906,
+    "kind": "string",
+    "source": "从真实市场信号中找到值得验证的问题。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "eb8b7bbbb6a4577533f1b37cd5b4e2b32087a4864c10e1ad970131f2e8442de6",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 973,
+    "end": 1000,
+    "kind": "string",
+    "source": "先找重复发生、已经付出成本的问题，再讨论解决方案。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "65a16ffcd234ce7b8717870271c288f669de50cb56e396a1d4e8221c6b3ee8d3",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 1008,
+    "end": 1036,
+    "kind": "string",
+    "source": "趋势、社区和竞品评论只能提供线索，不能代替用户证据。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "213049b7ad1b200ed511ee4187cfac4c2acbec11b034d577160f10462019efcd",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 1060,
+    "end": 1075,
+    "kind": "string",
+    "source": "从自己想做的功能反推需求。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "6f94d516ce2d704b6de31ac5fbb05614027eb01399f35abd5ed9e697cc81c11a",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 1077,
+    "end": 1093,
+    "kind": "string",
+    "source": "用点赞和浏览量代替付费意愿。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "a5b55cd7e5ef5a4719adb6704be66f8e4388546098478ddda80688688ce0579f",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 1133,
+    "end": 1148,
+    "kind": "string",
+    "source": "你准备服务哪一类具体用户？",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "64a27f7a5b215f8e137ebf2fa5e4b12de338601e1dd1680a470b7444702165b1",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 1150,
+    "end": 1175,
+    "kind": "string",
+    "source": "写到职业、场景或业务阶段，避免只写“所有人”。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "d6fc5ae66447bd499439e329f0f8726470d308401f40a989b4f231deb72ac2d5",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 1197,
+    "end": 1210,
+    "kind": "string",
+    "source": "他们反复遇到什么问题？",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "61517b46dd21bba5ce4456cd1127d5fcb2b3f44f6b14b2087e53a781978c444e",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 1212,
+    "end": 1229,
+    "kind": "string",
+    "source": "描述现状、触发场景和负面结果。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "6c7ea6b6dd476b609248ced381bfdd21b38878a86f5806e001be484eba16dece",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 1252,
+    "end": 1266,
+    "kind": "string",
+    "source": "你在哪里观察到这个问题？",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "4d875d24a3d123df09ee5807ce08502e8d046277c009c1ba280dbebfdb3e3bdd",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 1268,
+    "end": 1293,
+    "kind": "string",
+    "source": "记录搜索趋势、社区讨论、评论、工单或亲身经历。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "ffc762036bad980133256b2185aebb4f817ebde4cbb90b4de6c308c3f7174431",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 1326,
+    "end": 1337,
+    "kind": "string",
+    "source": "用户现在如何解决？",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "3e9610c92bc2993d0aa05ba70395ca52923e98c8f434481ae7f4440d77539619",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 1339,
+    "end": 1361,
+    "kind": "string",
+    "source": "列出现有工具、人工流程、外包或放弃处理。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "623a8173427e2086003b1fc2dbe0ed08d1620811510e76802c63695ad3e9bbca",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 1390,
+    "end": 1398,
+    "kind": "string",
+    "source": "需求机会清单",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "635ec05a39f33af52cb7a19b9c8be30d06176b5623fbf1b05fb3961727d8f0c8",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 1422,
+    "end": 1509,
+    "kind": "string",
+    "source": "目标用户：{{audience}}\n核心问题：{{problem}}\n观察证据：{{evidence}}\n现有替代方案：{{currentAlternative}}",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "581a7d2843385db98623c9614bf623023ec6fc3abc31cf3ae1be801a2f3ad757",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 1565,
+    "end": 1571,
+    "kind": "string",
+    "source": "验证问题",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "d9082e57afae1504dbf1508c7103bc7abd4ab7e2db3973676dd444a48304eb3f",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 1586,
+    "end": 1606,
+    "kind": "string",
+    "source": "用访谈、表单和最小承诺确认问题强度。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "1f014de7ff72cacbf5ac21e5f242ab17aaeac257aea9fb4265e639be599d6fbd",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 1666,
+    "end": 1689,
+    "kind": "string",
+    "source": "询问过去发生的事实，不询问未来是否会购买。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "705732d6471391ca3ebdc5eb3990170a50669675813916d93e8b1bece9794979",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 1691,
+    "end": 1715,
+    "kind": "string",
+    "source": "付款、订金、预约和投入时间比口头赞美更可靠。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "ff43aa1f2e4ce883591b8fd79bed4c4ffcfcfa50446b03b6358e42f18d54d75d",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 1733,
+    "end": 1741,
+    "kind": "string",
+    "source": "只采访朋友。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "fce654c36d1e2ca8c0add06da4cd8c2b008fe3e5ffb78e66d0a3ccd9891b9086",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 1743,
+    "end": 1759,
+    "kind": "string",
+    "source": "展示完整方案后诱导用户同意。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "dea016abc3ba0c9cd46e7c69532699c49062808bcc239b1e84a54436324db24b",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 1805,
+    "end": 1820,
+    "kind": "string",
+    "source": "完成了多少次目标用户访谈？",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "79f90eaa81f243e70fc99f70965b3a8140a90eda2eb06da9b1e72f23b57bd9d6",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 1822,
+    "end": 1843,
+    "kind": "string",
+    "source": "建议先完成 5–10 次，并记录原话。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "7ed2a33b31f5cdaaf1f21e639527b525518b18b24c9397ed5ff4c246ecd9f40a",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 1878,
+    "end": 1896,
+    "kind": "string",
+    "source": "重复出现最多的高成本问题是什么？",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "6788c623da4998b15d1875cd820504f6b09a50fcf6946e5d47744d9514762a5a",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 1898,
+    "end": 1921,
+    "kind": "string",
+    "source": "至少记录出现次数和造成的时间、金钱或风险。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "54cd13193acff5713067cb94ccdeb87369644794b86f25aba13e2f13b171b86e",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 1945,
+    "end": 1961,
+    "kind": "string",
+    "source": "用户过去为解决它付出过什么？",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "7cfc1802b541efc2a6a60a529cf34d7f0f738686723a12c152f820ea20ac1dc4",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 1963,
+    "end": 1984,
+    "kind": "string",
+    "source": "包括采购、人工、外包、返工和机会成本。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "3a646c7540a732615903ce820d7e397607eaed3db02d5cdccf9195f377661767",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 2009,
+    "end": 2022,
+    "kind": "string",
+    "source": "你获得了什么真实承诺？",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "6cc3a03419b17acb2cd3e29b88532b9df639c7ba293a470140fe9d1b4b4b4959",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 2024,
+    "end": 2048,
+    "kind": "string",
+    "source": "例如预约试用、加入等待名单、订金或付费试点。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "f90e994e331409a1ad02eb20aaa3878b6136f10acc9c4461e6b8d5a24f217b70",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 2077,
+    "end": 2085,
+    "kind": "string",
+    "source": "需求验证记录",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "9f83c2531e78e8132d1544e91e81f13332693ecccada826a2133210e82c39e16",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 2109,
+    "end": 2198,
+    "kind": "string",
+    "source": "访谈数量：{{interviewCount}}\n重复痛点：{{repeatedPain}}\n过去投入：{{pastSpend}}\n真实承诺：{{commitment}}",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "c35809cf0d05a661881fe3d8d48a1d16c6ca70cac0542940949083bb2c74c476",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 2249,
+    "end": 2257,
+    "kind": "string",
+    "source": "定义 MVP",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "fb518b35f109615eb1ca99dda5ada41f4122331650aa2d21af6c630103cf731c",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 2272,
+    "end": 2292,
+    "kind": "string",
+    "source": "把验证过的问题压缩成一条可交付路径。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "b12ff580cfcc742c8938ea74a13158f7843e752bb7a710fa5f8d17a6598b9fc3",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 2356,
+    "end": 2372,
+    "kind": "string",
+    "source": "MVP 只证明一个关键假设。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "4700d367ebc843777c12f768ef74f4ffbe51f03dcdd85de36bf6d85802c7585f",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 2374,
+    "end": 2396,
+    "kind": "string",
+    "source": "完成定义必须同时包含不做清单和验收标准。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "bfbeb39606f2c1fc0ac10525eb67030f31f7c3d4207a13c53afd20271656485f",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 2414,
+    "end": 2428,
+    "kind": "string",
+    "source": "把完整愿景当成首版范围。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "029865812cf73d3d3727fd2c822ae0dc6005f3a6730b882a77f9116986b6d499",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 2430,
+    "end": 2449,
+    "kind": "string",
+    "source": "以页面数量而不是用户结果定义完成。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "9de8cc5ccf4849b4d92f7281b2c57a4c8f7c0d40d65ec8787699dad0210c0f8d",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 2492,
+    "end": 2509,
+    "kind": "string",
+    "source": "首版必须帮助用户完成什么结果？",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "a20f501c801e96a04e704ef5459a57ec14420245cdc49b282bb2fedd66e573b8",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 2511,
+    "end": 2525,
+    "kind": "string",
+    "source": "用“用户可以……”描述。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "98966071975fb46fddf5f5bdaa3a77ba338ef1f4bd20ab4bdcadeff6e6ddb280",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 2548,
+    "end": 2565,
+    "kind": "string",
+    "source": "完成结果所需的最短流程是什么？",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "f40050c5f221414007971036efaad74fe24b3c90d02115da2fd2ba30f46348ac",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 2567,
+    "end": 2583,
+    "kind": "string",
+    "source": "控制在 3–5 个关键步骤。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "c8af31e0ecb4c52d130c2ab3eff0347e490f921bf567a70cb40e2184258a8f02",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 2608,
+    "end": 2621,
+    "kind": "string",
+    "source": "如何判断首版真的可用？",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "a748e72cfbf296da107360b52258effe63793198bcc11a22654bd9ec5a4c92fa",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 2623,
+    "end": 2640,
+    "kind": "string",
+    "source": "写出可观察、可测试的验收条件。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "4402fab1fcfe93f02a474f7a8678b9310f1e643fa0bb2a7610b91b2a0952af85",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 2663,
+    "end": 2674,
+    "kind": "string",
+    "source": "首版明确不做什么？",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "65af0e8546ac280e4c6acc84c96ad433e9c1d2da6fef134cfbe577105d99cbae",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 2676,
+    "end": 2693,
+    "kind": "string",
+    "source": "列出至少三项会拖慢上线的能力。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "270e9798180c2fd5f318b97cf909d6204cf8a231f93ddf562db10f76aba27ebd",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 2725,
+    "end": 2740,
+    "kind": "string",
+    "source": "首个价格或收费假设是什么？",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "7f17467e0d9f806a71e4014ac7ba8774e25339aa08d2e4836ebafa1e4af8f9df",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 2742,
+    "end": 2761,
+    "kind": "string",
+    "source": "说明收费方式、金额区间和验证方式。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "92c220cf69f3d89d4876258b3853e52801ad8e4c7b299cbf7e36e72159623329",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 2790,
+    "end": 2803,
+    "kind": "string",
+    "source": "一页式 MVP PRD",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "b91c1bee5f35c2e0699a12a8d4e28c1cc171d102884ebb34d5cdacb737a08945",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 2827,
+    "end": 2936,
+    "kind": "string",
+    "source": "核心结果：{{coreOutcome}}\n最短流程：{{coreFlow}}\n验收标准：{{acceptance}}\n不做清单：{{excluded}}\n价格假设：{{pricingHypothesis}}",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "48ce7662950b381f1c79e90d15dbd54e0704ace034070a37e8f43f2544df1018",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 2989,
+    "end": 2996,
+    "kind": "string",
+    "source": "AI 开发",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "bbac9abe7c5756e8bbedcda8718057d93be76014a296c65cbd4422b14936de0d",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 3011,
+    "end": 3038,
+    "kind": "string",
+    "source": "用仓库、任务、测试和 AI 编程完成可审查的实现。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "fb6031942ba89b903b13da165b17122daca4a720467f8ab42d644bce4d5d49c9",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 3097,
+    "end": 3118,
+    "kind": "string",
+    "source": "先写验收和测试，再让 AI 修改代码。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "dfab4f339e1a5877d16dc5534d2b8ac4ea4a88d367f2f031c9b12cf991bb5587",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 3120,
+    "end": 3135,
+    "kind": "string",
+    "source": "把任务拆成可回滚的小提交。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "abf0b4fcb5fd5d63b6ff0235f2edc4c4d7f77b8b9aa454594c0cfb9c64660698",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 3153,
+    "end": 3168,
+    "kind": "string",
+    "source": "把整个项目一次性交给模型。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "423f282b8111a013bfd37f1305b1dcb35e893fd875115dea35ba8d0a33d035ed",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 3170,
+    "end": 3191,
+    "kind": "string",
+    "source": "只看页面能打开，不运行测试和代码审查。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "1d5392f53e2e1f5436039ddca0862b64610f1caca7aec1c94a13ba80a50fc1fd",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 3228,
+    "end": 3243,
+    "kind": "string",
+    "source": "首版使用什么前端和运行时？",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "ead22629954451089bd7f3b186ee88eccbb286ac7c8c920f6b62f3def2b4918e",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 3245,
+    "end": 3265,
+    "kind": "string",
+    "source": "选择熟悉且部署路径清晰的最小技术栈。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "7b150e00e6b3d56f7d77d0f4ebe0bf577c8631eefbc5146970a23ab9fe8e7e52",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 3290,
+    "end": 3305,
+    "kind": "string",
+    "source": "代码仓库和分支策略是什么？",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "d2e3369fe132d346b63765c6696ac60977b5e907d8c25f0c9acdee94bf6f688f",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 3307,
+    "end": 3327,
+    "kind": "string",
+    "source": "说明主分支保护、提交粒度和回滚方式。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "9c10817e2b909c0ec60626ac599b899c633474dee96f3ad1be96ee052615d330",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 3352,
+    "end": 3369,
+    "kind": "string",
+    "source": "AI 编程任务如何描述和审查？",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "81f83634867f48b6ffd83c2bd0d8cf45d3d608e1b8c639c06be1e7e8b2b639ae",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 3371,
+    "end": 3393,
+    "kind": "string",
+    "source": "包含上下文、范围、禁止修改项和验收命令。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "601172d080722a0c651b76d2dc0fe8ad298d6d555bac3379f84d9a9c4c2299ce",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 3419,
+    "end": 3434,
+    "kind": "string",
+    "source": "每次修改必须通过什么命令？",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "293c90123d35d3ddeddaa487540d38b3f52444d78c0bff6f17ad72b3a04b6185",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 3436,
+    "end": 3459,
+    "kind": "string",
+    "source": "记录测试、类型检查、lint 和构建命令。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "47a8cd2d58efb12c324c9b109111a263a69d25dc0f5ce5321129aa7606eb38c7",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 3488,
+    "end": 3499,
+    "kind": "string",
+    "source": "AI 开发执行清单",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "177b35f1b28dd96503d56b78d861dbf8b00f833f5e1da153f77e5e54778a2b2c",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 3523,
+    "end": 3604,
+    "kind": "string",
+    "source": "技术栈：{{stack}}\n仓库策略：{{repository}}\nAI 工作流：{{aiWorkflow}}\n验证命令：{{testCommand}}",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "8e32979f053dc9d3ea2f9f96c364cad529806ab448f37229363e19fff67435b0",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 3659,
+    "end": 3665,
+    "kind": "string",
+    "source": "后端能力",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "29eaa3806845b2b8a0f5ff5b6db6d7a7af00231c36f65e5a4c6a4e4ba1d644dc",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 3680,
+    "end": 3702,
+    "kind": "string",
+    "source": "设计最小数据模型、认证、存储和访问控制。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "014b6672ab7e59b6c8f5570c50739e5a796cb4baf78b82dd3503e332a9057c21",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 3761,
+    "end": 3782,
+    "kind": "string",
+    "source": "数据表从用户所有权和访问边界开始设计。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "7bb4ab30d5d94033b1290022e9c1528433ec36dd2ab9c6fbafb88c97e57d783e",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 3784,
+    "end": 3816,
+    "kind": "string",
+    "source": "Supabase 公开 schema 的表必须启用 RLS。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "cef8ba20177355d5a323e15be8719e7ef470cc732f56b655eeb072e429880df4",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 3834,
+    "end": 3856,
+    "kind": "string",
+    "source": "在浏览器暴露 service_role。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "172e1617d6c3612e62c32b58620ea941c6460e3e533ab085c07bc31ad48688c1",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 3858,
+    "end": 3879,
+    "kind": "string",
+    "source": "只创建表，不设计删除、备份和权限策略。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "74bc21c5417ab3a8400186d3e17ab48e23a61f4a4c2b60b5489be09ef929cc29",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 3919,
+    "end": 3933,
+    "kind": "string",
+    "source": "首版有哪些核心数据实体？",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "fe561b2e1ade520936b69923a6c0a6772398e6d808d7988da7e0a203728e2678",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 3935,
+    "end": 3951,
+    "kind": "string",
+    "source": "只列支撑核心流程的表和关系。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "71af8f9bb4bf2add2c737756dc305a05013c1ac1e5ecddb9951cc80935e7391c",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 3975,
+    "end": 3989,
+    "kind": "string",
+    "source": "每类数据由谁读取和修改？",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "8f1c7ca875c22b8871fdd3ccbe825eb9e7e3f82918651c8ccdcd4a67ba0bf478",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 3991,
+    "end": 4012,
+    "kind": "string",
+    "source": "区分匿名、登录用户、管理员和后台任务。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "caeb254a7c6b87db0c1d2ceb1d79bba4f80d61381dfb2616f40fb873eae5a0cc",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 4030,
+    "end": 4048,
+    "kind": "string",
+    "source": "RLS 与服务端密钥边界是什么？",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "38fa94f83933d70568ae41f1d4b06c81cdc5fafcdd79597e7669f9a33c89d25f",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 4050,
+    "end": 4070,
+    "kind": "string",
+    "source": "写出所有权判断和绝不进入前端的密钥。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "32534c48d2b4cf7acd5d35a790a7eb6d78c6fc5ca6c50f2dee64ee8a3e218369",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 4091,
+    "end": 4107,
+    "kind": "string",
+    "source": "备份、导出和删除策略是什么？",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "f5f804633229ed976163d4717a24f4f9e3f597899e56e3870e3276da5706a989",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 4109,
+    "end": 4127,
+    "kind": "string",
+    "source": "说明免费方案限制和升级触发条件。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "3e3c692361cd2986faeb26049f0f76072cb8286bd4a3e6c718160766c439c143",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 4156,
+    "end": 4167,
+    "kind": "string",
+    "source": "数据模型与安全边界",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "fe3277ad63345019198351370a262297d121d3221044fa7378c5f05cf64707e3",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 4191,
+    "end": 4266,
+    "kind": "string",
+    "source": "核心实体：{{entities}}\n数据所有权：{{ownership}}\nRLS 与密钥：{{rls}}\n备份与删除：{{backup}}",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "dc40e3b6ad019ee83665298cb951826f014141220be34542f037fed01c0ec255",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 4320,
+    "end": 4326,
+    "kind": "string",
+    "source": "部署上线",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "f9161d84bb7535b88db2a6696900fe62bd671c05dd66a96fd22583b473778896",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 4341,
+    "end": 4364,
+    "kind": "string",
+    "source": "把可运行代码变成可回滚、可观测的生产版本。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "53639a929c95e953115ebff2f0e2926ba52a606035e1844426e69e3db3b880e9",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 4423,
+    "end": 4441,
+    "kind": "string",
+    "source": "生产环境变量只能保存在部署平台。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "0b169ff057e5edd4c7da98d44baab5efc41139c050c0981163e2f837659dd017",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 4443,
+    "end": 4464,
+    "kind": "string",
+    "source": "上线必须同时准备回滚、域名和健康检查。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "aa59140ff6156789b3b229a82d2fc10fbd60e1e19a283fd73b2bc00f044b936e",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 4482,
+    "end": 4499,
+    "kind": "string",
+    "source": "把本地 .env 提交到仓库。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "3439ab8a9e61f88460a74fb9edee8d69389e37cadbd097425bcd71dc70c36713",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 4501,
+    "end": 4522,
+    "kind": "string",
+    "source": "只验证首页，不验证支付回调和关键路径。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "4dfcaf2070af1884640bfcdea78934b1292ec1b40627ca6d288aef9e636e43ca",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 4562,
+    "end": 4577,
+    "kind": "string",
+    "source": "选择哪个部署平台，为什么？",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "e7b3ff5d36cefe906ab084f72efb64079c5c1d9833f9a8a652a1387f95e07cbc",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 4579,
+    "end": 4601,
+    "kind": "string",
+    "source": "比较运行时、免费限制、地域和现有技术栈。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "3575e1e70729564f945a6b6ec41678a442f7ead45dc5be6d83ae27846397ee30",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 4622,
+    "end": 4644,
+    "kind": "string",
+    "source": "域名、DNS 和 HTTPS 如何配置？",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "c278ebbf4b52b6f77bb8b7b979f5a0b670c36785c90fdb0d6bd9a465ab8ef3cf",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 4646,
+    "end": 4668,
+    "kind": "string",
+    "source": "记录域名所有权、DNS 平台和证书策略。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "2925c279bca923ea2d6ec1175d537064b4303b74a61179e37f5adc313969d077",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 4690,
+    "end": 4703,
+    "kind": "string",
+    "source": "生产环境需要哪些变量？",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "1b7b458ec3ddad338472eca74dd0186e6190773d772d245d3c232b7b0272a31d",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 4705,
+    "end": 4723,
+    "kind": "string",
+    "source": "只写变量名和用途，不填写真实值。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "8a008153b9153ba6c6f1cb64c3bb6908ae634d4b46bcc3d846794890eba9a84f",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 4746,
+    "end": 4759,
+    "kind": "string",
+    "source": "失败时如何回滚和验证？",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "78b77f0021edc51eb834d8648934a6aa81515c41becdbb340b01fa43205637cf",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 4761,
+    "end": 4783,
+    "kind": "string",
+    "source": "记录上一个稳定版本、回滚命令和健康检查。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "0cb3e7992976635f1bb80083a54e6ed5b1139b60d1afeb2a8480122ad842dd7f",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 4812,
+    "end": 4820,
+    "kind": "string",
+    "source": "生产部署清单",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "db249bb009bbacab69ee904920d59a5a8c5482759bd84c4b2567ee8e475acb99",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 4844,
+    "end": 4927,
+    "kind": "string",
+    "source": "部署平台：{{platform}}\n域名与 HTTPS：{{domain}}\n环境变量名称：{{secrets}}\n回滚与健康检查：{{rollback}}",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "1c76305a5cffa8a6a4577b2333c258e699c0e794d23dbb1a170be37c9797e884",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 4983,
+    "end": 4989,
+    "kind": "string",
+    "source": "支付变现",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "91660f5f93d3f56d32af6308b71384289a2db80a60caf93788b6f90d6a3e9d3e",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 5004,
+    "end": 5031,
+    "kind": "string",
+    "source": "根据主体、地区和产品选择收单、MoR 与结算路径。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "f28ee1038296b7a6a91cf34b4498b525d0f7919ea034b5f87be831ab64e16594",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 5090,
+    "end": 5115,
+    "kind": "string",
+    "source": "先确认经营主体和产品资格，再集成支付 API。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "62cc2214bc70e45de76e49b2a7d9f4e4c369434c7bca477e776d4f8859677ef3",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 5117,
+    "end": 5145,
+    "kind": "string",
+    "source": "Wise 是多币种账户/结算候选，不是通用订阅网关。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "0b99a37d9b2c5cd72ebfdf583128512bfa3af11b04c775b36816b72b4ebbea1b",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 5163,
+    "end": 5184,
+    "kind": "string",
+    "source": "假设平台一定通过 KYC 和产品审核。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "bcde5ea263d2c151a93a06716bdd2ffeb0adbb7193ac5869e2d55e574204326b",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 5186,
+    "end": 5211,
+    "kind": "string",
+    "source": "忽略退款、争议、税务和 webhook 幂等。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "de8626268107957d3257a513f5af96cfb744753ec3933bb49e2bbff851854755",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 5254,
+    "end": 5272,
+    "kind": "string",
+    "source": "你已人工核验哪些主体与地区资格？",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "522540b2f19baabd5718443863fef3a652bb3dd8a52864258e3c472389ebab33",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 5274,
+    "end": 5296,
+    "kind": "string",
+    "source": "记录官方页面、核验日期和仍不确定的条件。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "48e0e145d521574f4c799afd304e8cc753b734070622a0cc30842cd4ea39e1ef",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 5319,
+    "end": 5349,
+    "kind": "string",
+    "source": "选择直接收单还是 Merchant of Record？",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "1a9034707c32d36db71ff7da0007a47510715d04a6857c7c7ff87613ee5b28a8",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 5351,
+    "end": 5371,
+    "kind": "string",
+    "source": "比较税务责任、费率、审核和客户体验。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "116d4d75d689a5116fe3e4464419b229196e561ad1dfa2012d4451b0649a2ba5",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 5396,
+    "end": 5406,
+    "kind": "string",
+    "source": "资金结算到哪里？",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "549e857c2f928959ab89afbb7725614beb549d99ad3a0ea05977245598a433cc",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 5408,
+    "end": 5431,
+    "kind": "string",
+    "source": "区分结账平台、银行账户、多币种账户和换汇。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "eb144932a16e5176df2efdc68d3fbb7f2fd04f993621ca1274aab71db2946de7",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 5454,
+    "end": 5473,
+    "kind": "string",
+    "source": "支付成功、退款和订阅变化如何处理？",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "695bbd6a3c505078ce2e07361d66faebda4cbb054c9913b6fbd93c4a6e379aef",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 5475,
+    "end": 5499,
+    "kind": "string",
+    "source": "定义 webhook、幂等、重试和人工对账。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "0742c5ccecfd827ce9edbcf339b6d0e36e211346540aec46b197bc4de38d8ac9",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 5528,
+    "end": 5537,
+    "kind": "string",
+    "source": "支付与结算路径",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "fad62a0479a9697a34d1fcbf775a44709d9eefbde8aa3b18819e1c23770e1b3f",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 5561,
+    "end": 5649,
+    "kind": "string",
+    "source": "资格核验：{{entityCheck}}\n收单模式：{{checkout}}\n结算路径：{{settlement}}\nWebhook 与对账：{{webhooks}}",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "5d8ec6f62009eef7358db6118471df87163576497235e7413b57fb25ed12a232",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 5706,
+    "end": 5712,
+    "kind": "string",
+    "source": "数据分析",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "aeafa77ce2dfdbfa984e5500af8712d18b5edc136f4dd8e2c343a258937d945e",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 5727,
+    "end": 5751,
+    "kind": "string",
+    "source": "用最少事件看清获取、激活、付费、留存和错误。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "a4b63b8bdfa6d9306d25774889ee9e93326ebac35bc35485cc4190b48f794b51",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 5809,
+    "end": 5823,
+    "kind": "string",
+    "source": "先定义决策，再定义事件。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "1e82eb5679efff1fcec286fdb36ea3291907db8bb7fc3d6638a71e0485ad030f",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 5825,
+    "end": 5848,
+    "kind": "string",
+    "source": "流量分析、产品分析和错误监控解决不同问题。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "a099efc1f9699c048827002384d2552d05f392eca28329d703275462163b7159",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 5866,
+    "end": 5882,
+    "kind": "string",
+    "source": "埋点所有点击却没有决策问题。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "550aab04bc5efb2a4a061eda03fd9c44338752a20852f4aa67bb8497dfb1cddc",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 5884,
+    "end": 5903,
+    "kind": "string",
+    "source": "采集敏感数据或无法解释的用户标识。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "a0021ee07944cbf1cb61404bcf6f9dac4001be8ef9029551127ddb44905eaa69",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 5944,
+    "end": 5958,
+    "kind": "string",
+    "source": "当前唯一核心指标是什么？",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "02e7a21783259ec9c8f9f184c01fbb265cd29d1499569e81958d5b4e39cafe0d",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 5960,
+    "end": 5976,
+    "kind": "string",
+    "source": "指标必须与用户获得价值相关。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "ee5d485d5a9dab6d77af29b349db246739cb82b3391bd3e21f9bea8e2df48eb4",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 6001,
+    "end": 6018,
+    "kind": "string",
+    "source": "什么事件代表用户首次获得价值？",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "cd9eade058b7086f5f1726ef172ad15871b1e32919009325e231a8ddda07d7e9",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 6020,
+    "end": 6038,
+    "kind": "string",
+    "source": "描述事件名、触发条件和必要属性。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "503af5f9a9f2ea44ca2d9f8f7c696a7d89ee511030a09d01089250783b2e57ff",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 6059,
+    "end": 6076,
+    "kind": "string",
+    "source": "从访问到付费的关键漏斗是什么？",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "d0a8c44055993785243c11be3f0cd40851ea1243712763aa19b23e335d40976d",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 6078,
+    "end": 6092,
+    "kind": "string",
+    "source": "控制在 3–6 个事件。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "64619e9c2cf303ed9f87a917470a732edee755dc336bc237a7d16552f9e5d34a",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 6113,
+    "end": 6126,
+    "kind": "string",
+    "source": "哪些错误必须立即告警？",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "285960ff39f66b234ad8ce8fb0fbe5c1593f66622ae38b4b83ea43d8f97524cd",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 6128,
+    "end": 6148,
+    "kind": "string",
+    "source": "覆盖登录、数据、支付和核心任务失败。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "5481859fec62f85bb31b2d91ff415274f76e18381ac7ed26cf18496cb51a6787",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 6177,
+    "end": 6193,
+    "kind": "string",
+    "source": "Analytics 事件计划",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "9250f57bf8b99bc23cc68fc1f040e42e9e0d7dd803637cc2341d0d598dd282be",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 6217,
+    "end": 6292,
+    "kind": "string",
+    "source": "核心指标：{{northStar}}\n激活事件：{{activation}}\n转化漏斗：{{funnel}}\n错误告警：{{errors}}",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "e4a2f900701bb1e3aceba19dc707744ef387c47160b483b945f6309289291d18",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 6350,
+    "end": 6356,
+    "kind": "string",
+    "source": "自动运营",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "ece45d9a97ed8f7922f82ff7cef062c3de2ffee7fbcf82f7be720a51c2121c20",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 6371,
+    "end": 6394,
+    "kind": "string",
+    "source": "只自动化重复、稳定、可观察且可恢复的工作。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "2fa34cafbff8fb125a28ae50bb980b149d55e8c2f3a8ce63949172322ca50ac0",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 6452,
+    "end": 6467,
+    "kind": "string",
+    "source": "先手工跑通三次，再自动化。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "fa9c65b949b078ef5637712a36a14733aefb79ec277215ced981597bee763356",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 6469,
+    "end": 6496,
+    "kind": "string",
+    "source": "每条自动化必须有所有者、日志、失败通知和人工接管。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "8f898eabd53b398d331b729f2114127bdfb1d2177cc0e74559646314bd2e679a",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 6514,
+    "end": 6529,
+    "kind": "string",
+    "source": "自动化尚未稳定的业务流程。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "4766415389a388065ea6228ef08db4b7694f2d2ca4c45c2787d2c8d05e5b1a9a",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 6531,
+    "end": 6555,
+    "kind": "string",
+    "source": "没有失败队列和幂等，导致重复发信或重复扣费。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "d80cef283dca471844ad44d1214db1f8765bc906d6f78378bbb65f2a9539fd44",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 6595,
+    "end": 6613,
+    "kind": "string",
+    "source": "首个值得自动化的高频流程是什么？",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "01f59ed9a2275be850cda512d1d8f31e78b7ea513645b9c2c45ae5b141070f75",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 6615,
+    "end": 6632,
+    "kind": "string",
+    "source": "说明当前频率、耗时和错误成本。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "e802889c8ac2e4c208c043b4113efa66e9c7d21c5d3bc55615819951e2465b73",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 6660,
+    "end": 6676,
+    "kind": "string",
+    "source": "触发、条件和动作分别是什么？",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "28ff9218ad307958f1e9896436c5888df45be6e26ab7d3c6710a0687dabd4ef1",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 6678,
+    "end": 6693,
+    "kind": "string",
+    "source": "明确输入、输出和外部系统。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "2197e647091b063bde8fc57d4d927223ab0e52a08a20ca82a8573b65abebb81e",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 6715,
+    "end": 6732,
+    "kind": "string",
+    "source": "失败如何告警、重试和人工接管？",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "528649313e37a05a523a964227fb92711f0342f53ce74dd90da3c0a1bd31e09d",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 6734,
+    "end": 6750,
+    "kind": "string",
+    "source": "包含重试上限和重复执行保护。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "5905a4ab9db145f7073db4e455102aa90b174dacfc3ca9d351b5f44fc6e8c4cf",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 6770,
+    "end": 6782,
+    "kind": "string",
+    "source": "谁负责每周检查结果？",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "9ce1e9aac766b9947c275677940d40cb2be0239c55e41caa3f967c4cb4c84537",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 6784,
+    "end": 6804,
+    "kind": "string",
+    "source": "超级个体也要明确检查时间和退出条件。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "6ae27fb281844879a97adc91f17bba89c69bcd801541ab80c936e36a79c2443a",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 6833,
+    "end": 6842,
+    "kind": "string",
+    "source": "自动化运行手册",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "db818f039624a62e749e71e8773ee34e5595c6ee171003657c60c9a350da4976",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 6866,
+    "end": 6948,
+    "kind": "string",
+    "source": "目标流程：{{workflow}}\n触发与动作：{{triggerAction}}\n失败处理：{{failure}}\n负责人和检查节奏：{{owner}}",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "c74f55ad58447b7aedf0b636fcc449a90998c006b939c751488f1dad5c58108f",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 7004,
+    "end": 7010,
+    "kind": "string",
+    "source": "迭代决策",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "7da8cdb8316a5ec9fb2f54d1f9ee6b4ee73be1c538a19b0d8697c1899d15b2e0",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 7025,
+    "end": 7043,
+    "kind": "string",
+    "source": "用真实结果决定继续、转向或停止。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "e9bf6f808542d6e056ea2529cdece2ae4732ee260f13d1ed04a2fcc6b264af7b",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 7100,
+    "end": 7121,
+    "kind": "string",
+    "source": "预先定义继续与停止阈值，避免沉没成本。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "8c12d97037e2038ea6185cf515e04e821e9c2e97ca4efbd3745f95f59fe806d4",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 7123,
+    "end": 7142,
+    "kind": "string",
+    "source": "复盘决策链并把重复成果沉淀成资产。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "a33c024430df11b1719a4bf70ecc1bbfe63a2c67d744f59cea9ac610396a4d8c",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 7160,
+    "end": 7174,
+    "kind": "string",
+    "source": "用忙碌程度代替用户结果。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "3e02199fc52f2d7192c38537a828162e3c7fb5d3736c330ec5dddb32abe42316",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 7176,
+    "end": 7198,
+    "kind": "string",
+    "source": "指标不达标时只增加功能，不重新检查需求。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "c7992e27cea8834550b25551c6241be6580a416b72e05c26c87ff2864c468bb9",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 7237,
+    "end": 7252,
+    "kind": "string",
+    "source": "本周期获得了哪些真实结果？",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "20c50d681861eb94ecc10e638b0ed35910e8903c4d241517486584d10bf334f3",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 7254,
+    "end": 7276,
+    "kind": "string",
+    "source": "记录访谈、激活、付费、留存、成本和时间。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "11911a4e8814f78567a53ccd2d08b777e930c243d49c7fe6f56f2fa241b3aa29",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 7301,
+    "end": 7317,
+    "kind": "string",
+    "source": "继续、转向和停止阈值是什么？",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "2d9408eb1a4df012253d8b48fc849f1272e90eb3d09f17a9987f489d4a3ba9b4",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 7319,
+    "end": 7337,
+    "kind": "string",
+    "source": "写出下一周期前可验证的数字条件。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "582a7ed86f0c6fb5d7ff57cdde3ddefeba4687db8eb9e24caceb1f1c23b5ef7b",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 7360,
+    "end": 7376,
+    "kind": "string",
+    "source": "当前决定是什么，依据是什么？",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "97d51c3f22f4ad8c17bb9d6761ec6424719e5788046a68661399c3f7c779ca79",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 7378,
+    "end": 7397,
+    "kind": "string",
+    "source": "选择继续、转向或停止，并引用证据。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "a22f76aa5aecbd52ec2bb939aaa7cc662445c3d551a83680f9034614b9dc0815",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 7418,
+    "end": 7429,
+    "kind": "string",
+    "source": "哪些成果可以复用？",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "f343f32e2e4a86a84d972a0b56ba4ca13be31abdbdb32782932e0d3917b99418",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 7431,
+    "end": 7454,
+    "kind": "string",
+    "source": "沉淀模板、代码、内容、SOP、数据或案例。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "25268fc5e0ec79d407c5b0f19cf3e6040f9ec1e13db2106a3f36fc3ff2d01601",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 7483,
+    "end": 7494,
+    "kind": "string",
+    "source": "周期复盘与决策记录",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "dcd045137f71d408ab3011bd9dcd13ec5957c6aa2c72e9486162f000f2603256",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 7518,
+    "end": 7594,
+    "kind": "string",
+    "source": "真实结果：{{results}}\n决策阈值：{{thresholds}}\n当前决定：{{decision}}\n可复用资产：{{assets}}",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "4f28ec48398125c091315f42ab037e592f8b2727a8bd82bbb7dfe85ba23fed2d",
+    "file": "lib/super-individual/curriculum.ts",
+    "start": 8288,
+    "end": 8293,
+    "kind": "string",
+    "source": "待填写",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "80780125b0aadfc950034f85f45e894f2116acb8715de40584c164f432faaa83",
+    "file": "lib/super-individual/decision-engine.ts",
+    "start": 1814,
+    "end": 1874,
+    "kind": "template",
+    "source": "适用于{p0}的{p1}阶段",
+    "expressions": [
+      "profile.productType",
+      "item.categories.join(\" / \")"
+    ],
+    "expressionRanges": [
+      {
+        "start": 1820,
+        "end": 1839
+      },
+      {
+        "start": 1843,
+        "end": 1870
+      }
+    ]
+  },
+  {
+    "id": "3dd957077fb3392d0f60764c7a009064cd53c36f2bb528f52f0904eded6c0f36",
+    "file": "lib/super-individual/decision-engine.ts",
+    "start": 1948,
+    "end": 1975,
+    "kind": "template",
+    "source": "匹配{p0}主体",
+    "expressions": [
+      "profile.entityType"
+    ],
+    "expressionRanges": [
+      {
+        "start": 1953,
+        "end": 1971
+      }
+    ]
+  },
+  {
+    "id": "ee2c3b33bdce23f84aeeace5ca6fd490b718ab6640204560c83532621ca2051c",
+    "file": "lib/super-individual/decision-engine.ts",
+    "start": 2039,
+    "end": 2066,
+    "kind": "template",
+    "source": "明确支持 {p0} 地区",
+    "expressions": [
+      "profile.region"
+    ],
+    "expressionRanges": [
+      {
+        "start": 2047,
+        "end": 2061
+      }
+    ]
+  },
+  {
+    "id": "484d55613910eb8c0917fe308b499d474115ced993cd002a17d7cc75254330a4",
+    "file": "lib/super-individual/decision-engine.ts",
+    "start": 2143,
+    "end": 2146,
+    "kind": "string",
+    "source": "无",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "694bf3cd871285a5ff38f84fd45d36cc6c159ed5b9675c81f93f017baaaac148",
+    "file": "lib/super-individual/decision-engine.ts",
+    "start": 2168,
+    "end": 2184,
+    "kind": "string",
+    "source": "存在可用于验证阶段的免费方案",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "c8a3a46fe9b0727097139dc7ef7a4662c53e70c5f959cefb491b01e82e7d535d",
+    "file": "lib/super-individual/decision-engine.ts",
+    "start": 2520,
+    "end": 2545,
+    "kind": "string",
+    "source": "此工具资料已超过核验周期，请重新查看官方来源。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "54d898c99ea7739cd35ce49f85605442cfd8d59b92c16020c7e41ef55cbb2591",
+    "file": "lib/super-individual/decision-engine.ts",
+    "start": 2597,
+    "end": 2626,
+    "kind": "string",
+    "source": "开户、产品审核、费率和地区资格以平台官方最终决定为准。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "d985c1e7f644fcaf68025ce15c6f03cb1608a996d530d0f114eac6637e054fb9",
+    "file": "lib/super-individual/decision-engine.ts",
+    "start": 4280,
+    "end": 4313,
+    "kind": "string",
+    "source": "跨境收款前需要核验经营主体、平台 KYC、提现和本地税务要求。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "81c0f898e53eb22b61a0a01e397bb3b789116a5823f9a8c9c0c6efbf6e5dce50",
+    "file": "lib/super-individual/decision-engine.ts",
+    "start": 4386,
+    "end": 4417,
+    "kind": "string",
+    "source": "敏感数据需要最小化收集、严格访问控制、日志脱敏和备份策略。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "65978ede83e51b677047f6de5e329f4be8bb02acb9c2749712306b9b67b10d03",
+    "file": "lib/super-individual/decision-engine.ts",
+    "start": 4490,
+    "end": 4517,
+    "kind": "string",
+    "source": "受监管数据需要在上线前获得适用地区的专业合规意见。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "dba382628b27799f9c4d97355c144373210c42f9a84e5530b13015344846be89",
+    "file": "lib/super-individual/decision-engine.ts",
+    "start": 4583,
+    "end": 4612,
+    "kind": "string",
+    "source": "零预算路线应设置升级阈值，避免免费额度耗尽后服务中断。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "0b5daa927681e86358f4cd3b74e55df326f598e68980e27f282662529e309c40",
+    "file": "lib/super-individual/report.ts",
+    "start": 890,
+    "end": 894,
+    "kind": "string",
+    "source": "地区",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "ea24891dbb8c48aab6ef2b06b48b2c925aa0217ed5ceb77e406b067adbf57429",
+    "file": "lib/super-individual/report.ts",
+    "start": 934,
+    "end": 940,
+    "kind": "string",
+    "source": "经营主体",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "0b3894ed2a385e0080158640fbf9fcc066014a4e8d4a1e25634199ed49375afe",
+    "file": "lib/super-individual/report.ts",
+    "start": 984,
+    "end": 990,
+    "kind": "string",
+    "source": "产品类型",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "9c8c374f3c8a378b8e71e1d9731ddfe1dc4b4e3ce85ffe66f3b27fc441ac2feb",
+    "file": "lib/super-individual/report.ts",
+    "start": 1035,
+    "end": 1041,
+    "kind": "string",
+    "source": "收费方式",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "763a84c87d2f556da0efd58bf0f2fb68e8af51c018df0ceea5c5246d97d6a23f",
+    "file": "lib/super-individual/report.ts",
+    "start": 1087,
+    "end": 1093,
+    "kind": "string",
+    "source": "技能水平",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "903da586e53ae6594b30a59ee31305540bd52eb39950423e55d06a82ada44750",
+    "file": "lib/super-individual/report.ts",
+    "start": 1137,
+    "end": 1143,
+    "kind": "string",
+    "source": "月度预算",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "7722f3aceb1ae440102dc6c1d29d7831ae0de736981215b1f5587deced91ead8",
+    "file": "lib/super-individual/report.ts",
+    "start": 1190,
+    "end": 1196,
+    "kind": "string",
+    "source": "目标市场",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "7f05190592e57c0eac54c960fc09e6093d941570651d9bd889cf7632eee11247",
+    "file": "lib/super-individual/report.ts",
+    "start": 1240,
+    "end": 1245,
+    "kind": "string",
+    "source": "未填写",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "c9c672ccb099cb1b78935b8dd53a2adacc2df369e437f00ce5b42141e46cf6a2",
+    "file": "lib/super-individual/report.ts",
+    "start": 1262,
+    "end": 1269,
+    "kind": "string",
+    "source": "数据敏感度",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "d5638d161f8ffa0f8a0393f785e66cafa3cfc6eb7545cc75671764eb2be941af",
+    "file": "lib/super-individual/report.ts",
+    "start": 1832,
+    "end": 1838,
+    "kind": "string",
+    "source": "尚未生成",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "80e65a12243d89f70e7677a83d6b07f1ffbe519f08ad0afa95da35c1e536dfab",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 1377,
+    "end": 1400,
+    "kind": "string",
+    "source": "公开趋势研究工具，可免费查看相对搜索热度。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "45322c20dbcb00d65e818ba4d31796ff8d1d63cfb1483cc3162267014a136726",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 1420,
+    "end": 1443,
+    "kind": "string",
+    "source": "趋势热度不等于付费需求，必须结合访谈验证。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "e2a6fb2a9d4326097435b1d63a1d17889c871d1b4d0ce51342ebd116540fa09f",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 1467,
+    "end": 1489,
+    "kind": "string",
+    "source": "需要更精细的关键词量级、广告或竞品数据。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "4e6db2483e8bbe6bf73d67c157e841cffc5d1850cd4a63db7c28b958ae3dc00f",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 1846,
+    "end": 1865,
+    "kind": "string",
+    "source": "浏览产品、评论和发布动态无需付费。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "f59fbfde3b2902bb17a8b42e60c4ef681a7400dfd5e7ab26a180bec82df69e2b",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 1885,
+    "end": 1909,
+    "kind": "string",
+    "source": "社区反馈偏早期采用者，不能代表全部目标客户。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "af6902d2f4c455f0099adc96c9cf202601c2d02893534528264805c08e94dbf8",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 1933,
+    "end": 1955,
+    "kind": "string",
+    "source": "需要稳定的自有用户访谈和产品内行为数据。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "a40b06be72c8587c3004df1d6a9e0e1e1b00d28418ee4a87d2426b6419d4998e",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 2258,
+    "end": 2281,
+    "kind": "string",
+    "source": "免费方案覆盖多数表单、逻辑和响应收集需求。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "ceb1ed4b31a4aeca7743381ccf9e38f91c623db890e2542962e1d236057d72c4",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 2301,
+    "end": 2325,
+    "kind": "string",
+    "source": "品牌、团队协作和高级域名能力需核对付费方案。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "5e97c9b8686e169f15908b7547ca641a9a05df8b8c9e932a161ef592190528a6",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 2349,
+    "end": 2373,
+    "kind": "string",
+    "source": "需要自定义域名、团队权限或更复杂的数据治理。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "8157c26f500d584d8d19360f09bd95d988fb4ac9afd0f2aab9ccf44a7c68aceb",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 2685,
+    "end": 2704,
+    "kind": "string",
+    "source": "免费方案适合一个基础访谈预约流程。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "015dceca5081d4397f27068da06d370a225d68760d239618405cf59e3a7a100e",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 2724,
+    "end": 2747,
+    "kind": "string",
+    "source": "多事件类型、自动化和团队路由通常需要升级。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "8d9b9dee0cda74b5899762f90dea9846f4a184f6feafcb4624c3c893cbd6f0b3",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 2771,
+    "end": 2792,
+    "kind": "string",
+    "source": "访谈量增长或需要自动提醒和多成员分配。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "834ca8e3c3db7475bbb7104c870cf6070d914db1061ef274a9527fa9680b992e",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 3094,
+    "end": 3120,
+    "kind": "string",
+    "source": "Starter 免费方案适合个人原型和有限协作。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "b26c152293db30650f9989d9d319494349e35a6353cda25d3b854a2c6e32abdb",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 3140,
+    "end": 3161,
+    "kind": "string",
+    "source": "高级协作、分支和团队管理能力需要升级。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "0ae6de2a7844fa6eb1c8ce1ef4b7bec7e01dcfac68416800fca866df8f80113f",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 3185,
+    "end": 3204,
+    "kind": "string",
+    "source": "设计文件和协作者数量开始阻碍交付。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "8cc962419028655be7bc2ce2158ef111cf2f66be69f2be8e72faab17857e3623",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 3541,
+    "end": 3570,
+    "kind": "string",
+    "source": "Free 方案可创建公开和私有仓库并使用基础协作能力。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "d92a7b7dc85b113762907bfcf77bf7f3c7d1f27a926ed78d574f41abebb5f3fc",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 3590,
+    "end": 3612,
+    "kind": "string",
+    "source": "高级安全、规则和团队治理需要付费或资格。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "7a9d94ee20f94b204c31c4b045b937eae31103255b1566b5b69d4116abfd1afb",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 3636,
+    "end": 3658,
+    "kind": "string",
+    "source": "需要组织级权限、强制审查或高级安全扫描。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "de285bf5192e81a6c90d9c61a7f367b4e5c023d214a830e5ff6befde17c3f4fb",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 3963,
+    "end": 3996,
+    "kind": "string",
+    "source": "无持久免费额度承诺；按当前 ChatGPT/API 方案核验。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "c0855011eac6b91e5749652fd634208390646748bd8191fc54b82ccb7cdf254c",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 4016,
+    "end": 4037,
+    "kind": "string",
+    "source": "需要人工审查代码、测试结果和权限边界。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "d1c1e8634f0b7be0e742d979186bf4186b29d3824c57dd556ea6abc2559d0719",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 4061,
+    "end": 4083,
+    "kind": "string",
+    "source": "使用量、并行任务或团队治理超出当前方案。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "03a1a484f96178b6d085f40d17283be0c465244e9f60a474ee1589ef07f30f39",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 4434,
+    "end": 4462,
+    "kind": "string",
+    "source": "无持久免费额度承诺；按订阅或 API 使用方式核验。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "a44e0600d71c7e4b2e0f5533c378aa80d8582bd48a697893f8b9c4b14a5e4adc",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 4482,
+    "end": 4507,
+    "kind": "string",
+    "source": "模型生成代码必须经过测试、审查和最小权限控制。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "4622871f996949ea2178f7cbdba2dade2c66bf7362c6f01775afec54a262c4e7",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 4531,
+    "end": 4552,
+    "kind": "string",
+    "source": "上下文、调用量或团队管理需要更高方案。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "f4ac8930f2546cdc26cb9a3cd77f59958d283715b9a70cc8ca80b72c29990f43",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 4892,
+    "end": 4920,
+    "kind": "string",
+    "source": "Hobby 方案提供有限的编辑器与 AI 使用能力。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "f8ebd9411ef3c6312b47933086eb4349707c606e7d2b4fe0ec8f7e16d161cfcc",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 4940,
+    "end": 4963,
+    "kind": "string",
+    "source": "Agent 调用和高级模型用量受方案限制。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "a3655918cc17a492eae8d7778651b397dce72e88bc48018b0cf4e08a06fa244e",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 4987,
+    "end": 5005,
+    "kind": "string",
+    "source": "免费调用不足以完成稳定开发周期。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "7cea9643dde3410157969b8ae3b91628c2b5b52667391a66a99874110a516473",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 5338,
+    "end": 5387,
+    "kind": "string",
+    "source": "免费方案包含 500 MB 数据库、50,000 MAU、1 GB 文件存储；闲置项目会暂停。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "b9ac0d0ed70bf54a7ce8dc6b45208df58da31ca48d1a701f9e38cb2bf1d83895",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 5407,
+    "end": 5443,
+    "kind": "string",
+    "source": "公开 schema 表必须启用 RLS；免费项目缺少生产级备份保障。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "fd7c939136219df34d38543bc6b049c662bc3cd2aadf9a766a9fb086af4f4c2d",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 5467,
+    "end": 5494,
+    "kind": "string",
+    "source": "需要不暂停、自动备份、更高数据库/存储/带宽配额。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "4253bae6db5f6be9c582fae916a4c4f2c7667d6a987af787fa2f4f9bd942faa4",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 6015,
+    "end": 6045,
+    "kind": "string",
+    "source": "免费方案适合静态站和小型边缘函数；额度以官方限制页为准。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "4cf7f97675b6bdae9ae0cd38e66534fda586f221f80bd22e1ee430d9150477e7",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 6065,
+    "end": 6089,
+    "kind": "string",
+    "source": "静态导出与运行时函数边界需要在架构阶段明确。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "a71e6163abcc8e97cc5295cc8b92732732c16c6cbe9979d76463cf816580644d",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 6113,
+    "end": 6137,
+    "kind": "string",
+    "source": "请求、构建、CPU 或存储需求超过免费限制。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "2e0ccf3ca9ac3b037ce0a4de3f7c0be1d29a4be9e7e8a7eda82a2c75afbd0426",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 6464,
+    "end": 6495,
+    "kind": "string",
+    "source": "Hobby 方案适合个人和非商业试验，商业使用需核对条款。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "cc107f31c73851697bc7b97139d6c2931b1ef284ce3330820143ae6d6e588186",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 6515,
+    "end": 6540,
+    "kind": "string",
+    "source": "商业项目、团队功能和更高资源需求可能需要付费。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "f2bffd20e7a63be254488a25320e54389e1f77e496606c3408118a32478ddd3a",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 6564,
+    "end": 6587,
+    "kind": "string",
+    "source": "开始商业运营或达到 Hobby 使用边界。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "cfc95777c34136bafa72ba67eab696dbf9c5c702465728d5406f05724bd49f77",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 7055,
+    "end": 7083,
+    "kind": "string",
+    "source": "通常按交易计费，无固定月费；地区和产品资格必须核验。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "63f305f29818e914f966d65a65d21da53711ab3184568470e673731946c5d1f9",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 7103,
+    "end": 7142,
+    "kind": "string",
+    "source": "中国大陆不在 Stripe 直接开户支持地区列表；商户承担税务与争议责任。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "40fea8aec303dafeb2eecbd9e790243366d7d9fbcd9dd72574c43da8c1a9d1c2",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 7166,
+    "end": 7187,
+    "kind": "string",
+    "source": "需要更复杂订阅、税务、风控或企业支持。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "e35bf6803169b8fd8521ce384e5afadc12f9c5583b16171242b6d15f19c29e61",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 7591,
+    "end": 7615,
+    "kind": "string",
+    "source": "无固定免费额度；以交易费和当前商业审核为准。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "505750236b45f1702e89ca3a6780c9859e1e8b3375389d373f91105c3954ad5e",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 7635,
+    "end": 7665,
+    "kind": "string",
+    "source": "仅适用于平台接受的软件/数字产品，供应商和产品都需审核。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "dc80c20556cf3076491c92df86b3e46c0640f1b7e2975c0d1c2a85c82b4d1bda",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 7689,
+    "end": 7716,
+    "kind": "string",
+    "source": "交易量使 MoR 综合费率高于自建税务与支付成本。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "72281cce50f50a7753d5fcdc74fbf240699042fd3f64a87854ab908adf51735f",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 8324,
+    "end": 8352,
+    "kind": "string",
+    "source": "无固定月费承诺；销售与提现按当前费率和支持地区核验。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "7d9a249e4e2e24b492fb45faa8bb9fdbb601acb4388d30d276dfaa5f502c4bba",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 8372,
+    "end": 8400,
+    "kind": "string",
+    "source": "商户需通过身份、产品和提现资格审核；支持国家会变化。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "08d178cbda00319c0c31e87fb5d59b872528b0545cc9adaf2c7e8aa3cbfb7314",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 8424,
+    "end": 8446,
+    "kind": "string",
+    "source": "需要更低综合费率或更复杂的企业合同能力。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "9ac07ffe12b4851df3d275b1e05388e956eee1b6a718f4a7ef74de23c333885a",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 8979,
+    "end": 9010,
+    "kind": "string",
+    "source": "无统一免费额度；开户、账户详情、换汇和收款费用按地区核验。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "1a73bfcb0e59275969a7258ad1804cc084a778ba659f205a3f14d91c880fdf69",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 9030,
+    "end": 9063,
+    "kind": "string",
+    "source": "不是通用订阅支付网关；银行卡收款能力受地区和新客户可用性限制。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "640129fa598e4f5682de424f580885c1cdf065ebbdedd647d5497f93b6da14b4",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 9087,
+    "end": 9113,
+    "kind": "string",
+    "source": "需要完整订阅管理、税务代征或更广泛本地支付方式。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "bae6515d52c4083df4746e9ac17c496776c6f6eeb4fd7c35769499ad1ab612f4",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 9732,
+    "end": 9769,
+    "kind": "string",
+    "source": "Cloudflare 提供隐私友好的基础 Web Analytics。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "e9eb4d9e2826a796c2e9ae998232cc6a2bcbc971ecdff1b8a07b055e9612ebcb",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 9789,
+    "end": 9811,
+    "kind": "string",
+    "source": "不替代完整产品事件、用户路径和留存分析。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "ba9a12fdc30c6d74e9c64c7c6e410e11bb988c20fb50a49454dae390f9d8964d",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 9835,
+    "end": 9854,
+    "kind": "string",
+    "source": "需要产品漏斗、用户分群和行为回放。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "1b541f6bc87fe41b8fb9777ca25b83a8744c7786c8a3d573a778cb3a9014e604",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 10219,
+    "end": 10251,
+    "kind": "string",
+    "source": "免费额度覆盖早期产品事件与基础分析，具体配额按官方定价核验。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "ce1da41d9c54b0b939f3459ee2b26979e8167fbcb427b8546e8a435c78423986",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 10271,
+    "end": 10294,
+    "kind": "string",
+    "source": "错误事件设计会产生噪声和不必要的数据成本。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "525d13b6fa96bf2af70adaf87bdeb21346f20fade4274dbdb6ca78749c52d29b",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 10318,
+    "end": 10343,
+    "kind": "string",
+    "source": "事件量、回放、数据保留或团队协作超过免费额度。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "6dcd474edf5d22f66e4d3e3fb258495ebf8f4a7ea086b0d01e9d1c03c5198e9c",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 10674,
+    "end": 10709,
+    "kind": "string",
+    "source": "Developer 免费方案适合早期错误监控，配额按官方定价核验。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "a27bcf53827710fa6adbee801a89030178e872e787cfdf29add6a4dd9d4480b1",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 10729,
+    "end": 10754,
+    "kind": "string",
+    "source": "敏感数据必须在采集前过滤；事件量可能快速增长。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "c9bc6cdec5e758e073b482ebe3c7e8f1d9e44e72a72440df81ec12012ce12da2",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 10778,
+    "end": 10801,
+    "kind": "string",
+    "source": "需要更长保留、更高事件量或团队级可观测性。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "c4554eee293660c1c2dfa8802f8756db1aefad7a26ce42617e021faf947cab3d",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 11106,
+    "end": 11137,
+    "kind": "string",
+    "source": "免费方案适合早期交易邮件，发送量和每日限制按官方页面核验。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "381941b43de82cb20513ce435234e2837d9d90d7a0a8584337f35d0739dc1e52",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 11157,
+    "end": 11182,
+    "kind": "string",
+    "source": "生产发送需要域名验证、退信处理和合规退订策略。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "55e62a9d34db403909d923a1dc04fe8d901eaaddaaf84e0ab7fc4f9488b50e37",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 11206,
+    "end": 11228,
+    "kind": "string",
+    "source": "邮件量、团队权限或数据保留超出免费方案。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "e608dfe138109ddfc1b711ce16b9bcd1d4fdd68b5a40d4fb37fa1b3a5306f9e1",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 11528,
+    "end": 11574,
+    "kind": "string",
+    "source": "自托管 Community Edition 可用；Cloud 方案和试用按官方定价核验。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "9f8912af2fd9675e08c0678db72c0010b52e499e215a5afb52ef630a8b2e7757",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 11594,
+    "end": 11619,
+    "kind": "string",
+    "source": "自托管意味着自行负责升级、备份、安全和可用性。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "e3404579b777b0bbed3669e285a51e7a233a76456d2be5b9c2538b2430711308",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 11643,
+    "end": 11665,
+    "kind": "string",
+    "source": "维护成本超过托管方案费用或需要企业治理。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "9aaf9a19d4f9435fcba04582d120c4d27951248796f835e64196aa7d3a94d6a5",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 11980,
+    "end": 12011,
+    "kind": "string",
+    "source": "免费方案提供有限月度 credits，适合验证简单自动化。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "173efc45205e5fe743ff28a9323b0e3cde5ceb6e4d659c25849a1bdba4073b42",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 12031,
+    "end": 12056,
+    "kind": "string",
+    "source": "高频轮询和复杂场景会快速消耗 credits。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "c0f17feeccdf65f6d46a9f35f1977009b9ccb223fe6db75249be99d1455f65e1",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 12080,
+    "end": 12103,
+    "kind": "string",
+    "source": "执行频率、数据量或高级连接器超过免费限制。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "470173c5c76514c7df1f00bd564c56a70e143fdeeeb170704cfd384fa95a2438",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 12576,
+    "end": 12610,
+    "kind": "string",
+    "source": "公开仓库和 Free 方案包含一定的 Actions 使用额度。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "7507d64f1569dfba0d890516e425f70c7627ee938d164bfe394e379187de0479",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 12630,
+    "end": 12651,
+    "kind": "string",
+    "source": "私有仓库分钟数、存储和并发受方案限制。",
+    "expressions": [],
+    "expressionRanges": []
+  },
+  {
+    "id": "e5288275361609e38483292050a85f7b7a3308b2c81345d2fbc8607164542b01",
+    "file": "lib/super-individual/tool-catalog.ts",
+    "start": 12675,
+    "end": 12696,
+    "kind": "string",
+    "source": "构建分钟、制品存储或并发成为交付瓶颈。",
     "expressions": [],
     "expressionRanges": []
   }

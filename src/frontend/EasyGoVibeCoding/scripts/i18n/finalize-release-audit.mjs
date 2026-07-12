@@ -36,7 +36,7 @@ export function parseBuildEvidence(stdout) {
 export function parseTapEvidence(stdout) {
   const read = (label) => Number(new RegExp(`(?:ℹ\\s+)?${label}\\s+(\\d+)`, "u").exec(String(stdout))?.[1])
   const result = { total: read("tests"), pass: read("pass"), fail: read("fail") }
-  if (result.total !== 115 || result.pass !== 115 || result.fail !== 0) throw new Error(`TAP evidence failed exact validation: ${JSON.stringify(result)}`)
+  if (result.total !== 116 || result.pass !== 116 || result.fail !== 0) throw new Error(`TAP evidence failed exact validation: ${JSON.stringify(result)}`)
   return result
 }
 
