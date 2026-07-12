@@ -4,7 +4,7 @@ compatibility_date = "2024-09-23"
 compatibility_flags = ["nodejs_compat"]
 
 # Cloudflare Pages 静态部署配置
-pages_build_output_dir = "out"
+pages_build_output_dir = ".cache/i18n-deploy"
 
 # 真实站点统计需要绑定 Cloudflare KV
 # 请先创建 KV namespace，然后把下面的占位 ID 替换为你的真实值
