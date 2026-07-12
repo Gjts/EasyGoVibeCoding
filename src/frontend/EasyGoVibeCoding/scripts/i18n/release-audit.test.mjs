@@ -100,6 +100,15 @@ test("scanSecurityBytes rejects ordinary Windows, UNC, file URL and POSIX local 
   assert.equal(scanSecurityBytes({ path: "routes.ts", bytes: Buffer.from(routePrefixes), forbiddenMarkers: [] }).some(({ category }) => category === "absolute-local-path"), false)
   assert.deepEqual(findLocalPaths('"/home/user" "/build/output" "/root/secret" "/tmp/file"'), ["/home/user", "/build/output", "/root/secret", "/tmp/file"])
   assert.equal(findLocalPaths('const route="/custom/build/output"; const url="/custom/build/file.txt"; const href="/custom/build/file.txt"; const path="/custom/build/output"; const pathname="/custom/build/output"; const basePath="/custom/build/output"; paths: "/api/tasks"').length, 0)
+  const escapedShortUnc = String.raw`const filePath="\\\\a\\b\\secret.txt"`
+  const escapedAdminUnc = String.raw`const filePath="\\\\127.0.0.1\\C$\\secret.txt"`
+  assert.equal(findLocalPaths(escapedShortUnc).length, 1)
+  assert.equal(scanSecurityBytes({ path: "short-unc.ts", bytes: Buffer.from(escapedShortUnc), forbiddenMarkers: [] }).some(({ category }) => category === "absolute-local-path"), true)
+  assert.equal(findLocalPaths(escapedAdminUnc).length, 1)
+  assert.equal(scanSecurityBytes({ path: "admin-unc.ts", bytes: Buffer.from(escapedAdminUnc), forbiddenMarkers: [] }).some(({ category }) => category === "absolute-local-path"), true)
+  assert.equal(findLocalPaths(String.raw`const pattern = /\\\\[^\\s]+\\share/u`).length, 0)
+  assert.equal(findLocalPaths(String.raw`const filePath = "\\\\n\\u003c"`).length, 0)
+  assert.equal(findLocalPaths(String.raw`const route = "\\\\a\\b\\secret.txt"; const url = "\\\\127.0.0.1\\C$\\secret.txt"`).length, 0)
 })
 
 test("allowlist requires exact locale, route, file, scope, text, and reason", () => {

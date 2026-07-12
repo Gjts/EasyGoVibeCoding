@@ -320,6 +320,7 @@ export function findLocalPathOccurrences(text, { includeGenericPosix = true } = 
   const patterns = [
     { kind: "explicit", pattern: /(?<![\p{L}\p{N}])[a-z]:[\\/](?![\\/])[^\s"'`<>|]+/giu },
     { kind: "explicit", pattern: /(?<!\\)\\\\(?!\\)(?![nrtbfv0]\\(?:u[\da-f]{4}|x[\da-f]{2}))[a-z\d][a-z\d._-]*\\[a-z\d$][a-z\d$._-]*(?:\\[^\s"'`<>|]+)*/giu },
+    { kind: "escaped-unc", pattern: /(?<!\\)\\\\\\\\(?!\\)(?![nrtbfv0]\\\\(?:u[\da-f]{4}|x[\da-f]{2}))[a-z\d][a-z\d._-]*\\\\[a-z\d$][a-z\d$._-]*(?:\\\\[^\s"'`<>|]+)*/giu },
     { kind: "explicit", pattern: /file:\/\/\/(?:[a-z]:\/)?[^\s"'`<>]+/giu },
     { kind: "explicit", pattern: /(?<![\p{L}\p{N}:\/\\.])\/(?:Users|home|workspace|opt|tmp|var\/tmp|root|mnt|etc|srv|usr|bin|build|Applications|Library|\.gradle|\.cargo|\.m2|\.pip)(?=\/|[\s"'`<>,;:)\]}]|$)(?:\/[^\s"'`<>|]+)?/gu },
     ...(includeGenericPosix ? [{ kind: "generic", pattern: /(?<![\p{L}\p{N}:\/\\.])\/[a-z\d._~-]+(?:\/[a-z\d._~+@%=-]+)+(?![\p{L}\p{N}])/giu }] : []),
@@ -327,7 +328,7 @@ export function findLocalPathOccurrences(text, { includeGenericPosix = true } = 
   const source = String(text)
   const occurrences = patterns.flatMap(({ kind, pattern }) => [...source.matchAll(pattern)].map((match) => ({ text: match[0].replace(/[),.;\]}]+$/gu, ""), offset: match.index, kind })))
     .filter(({ kind, offset }) => {
-      if (kind !== "generic") return true
+      if (kind === "explicit") return true
       const prefix = source.slice(Math.max(0, offset - 120), offset)
       const binding = prefix.match(/([\p{L}\p{N}_$]+)\s*(?:=|:)\s*["'`]?\s*$/u)
       const identifier = binding?.[1]?.toLowerCase() ?? ""

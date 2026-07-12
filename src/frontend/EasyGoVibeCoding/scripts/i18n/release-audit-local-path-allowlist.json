@@ -2250,6 +2250,18 @@
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
+    "path": "scripts/i18n/release-audit.test.mjs",
+    "text": "\\\\\\\\a\\\\b\\\\secret.txt",
+    "offset": 8623,
+    "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
+  },
+  {
+    "path": "scripts/i18n/release-audit.test.mjs",
+    "text": "\\\\\\\\127.0.0.1\\\\C$\\\\secret.txt",
+    "offset": 8699,
+    "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
+  },
+  {
     "path": "scripts/i18n/static-deployment.test.mjs",
     "text": "C:/project",
     "offset": 1310,
