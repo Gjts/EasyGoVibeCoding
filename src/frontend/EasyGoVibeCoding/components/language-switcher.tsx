@@ -14,6 +14,7 @@ import {
   siteLocale,
   type SiteLocale,
 } from "@/lib/i18n-routing"
+import { savePreferredLocale } from "@/lib/language-preference"
 
 const languageOptions: { locale: SiteLocale; label: string }[] = [
   { locale: "zh-CN", label: String.fromCodePoint(0x7b80, 0x4f53, 0x4e2d, 0x6587) },
@@ -83,6 +84,7 @@ export function LanguageSwitcher({ className = "" }: { className?: string }) {
                   lang={locale}
                   translate="no"
                   aria-current={isCurrent ? "page" : undefined}
+                  onClick={() => savePreferredLocale(window.localStorage, locale)}
                   className="flex w-full cursor-pointer items-center rounded-lg px-3 py-2.5 text-sm font-semibold text-gray-700 outline-none transition-colors focus:bg-purple-50 focus:text-purple-700"
                 >
                   <span>{label}</span>

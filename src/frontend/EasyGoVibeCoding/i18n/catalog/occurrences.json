@@ -56165,8 +56165,8 @@
   {
     "id": "2234a060c480b8a086e31349114d4f69bd071ce6e4c701aac2e3b3d38f52fea3",
     "file": "app/layout.tsx",
-    "start": 611,
-    "end": 650,
+    "start": 688,
+    "end": 727,
     "kind": "string",
     "source": "EasyGoVibeCoding | 企业级 AI 编程工具与架构培训平台",
     "expressions": [],
@@ -56175,8 +56175,8 @@
   {
     "id": "e2a84e29edac63f4a12fe2c5a18ebece1bb6492d450b174a318fe9d8a45bd2d5",
     "file": "app/layout.tsx",
-    "start": 667,
-    "end": 715,
+    "start": 744,
+    "end": 792,
     "kind": "string",
     "source": "AI 编程工具不是魔法，是工程。理解机制才能驾驭工具。企业级 AI 编程工具与架构培训平台。",
     "expressions": [],

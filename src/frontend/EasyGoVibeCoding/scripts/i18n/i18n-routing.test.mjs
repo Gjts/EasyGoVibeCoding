@@ -133,6 +133,75 @@ test("validates locale/base-path pairs", () => {
   )
 })
 
+test("language preference storage validates values and fails closed", () => {
+  withBuildEnv("zh-CN", "", () => {
+    const preference = loadTypeScript("lib/language-preference.ts")
+    const values = new Map()
+    const storage = {
+      getItem: (key) => values.get(key) ?? null,
+      setItem: (key, value) => values.set(key, value),
+    }
+
+    preference.savePreferredLocale(storage, "en")
+    assert.equal(preference.readPreferredLocale(storage), "en")
+
+    values.set(preference.LANGUAGE_PREFERENCE_STORAGE_KEY, "es")
+    assert.equal(preference.readPreferredLocale(storage), null)
+    assert.equal(
+      preference.readPreferredLocale({ getItem() { throw new Error("blocked") } }),
+      null,
+    )
+    assert.doesNotThrow(() =>
+      preference.savePreferredLocale(
+        { setItem() { throw new Error("blocked") } },
+        "fr",
+      ),
+    )
+  })
+})
+
+test("remembered language redirects only the public root", () => {
+  withBuildEnv("zh-CN", "", () => {
+    const preference = loadTypeScript("lib/language-preference.ts")
+    const runRedirect = (pathname, storedLocale) => {
+      let replacement = null
+      let storageReads = 0
+      const browserWindow = {
+        location: {
+          pathname,
+          replace: (destination) => { replacement = destination },
+        },
+        localStorage: {
+          getItem: (key) => {
+            storageReads += 1
+            assert.equal(key, preference.LANGUAGE_PREFERENCE_STORAGE_KEY)
+            return storedLocale
+          },
+        },
+      }
+      new Function("window", preference.languagePreferenceRedirectScript)(browserWindow)
+      return { replacement, storageReads }
+    }
+
+    assert.deepEqual(runRedirect("/", "en"), {
+      replacement: "/en/academy",
+      storageReads: 1,
+    })
+    assert.deepEqual(runRedirect("/", "zh-CN"), {
+      replacement: null,
+      storageReads: 1,
+    })
+    assert.deepEqual(runRedirect("/", "es"), {
+      replacement: null,
+      storageReads: 1,
+    })
+    assert.deepEqual(runRedirect("/fr/academy/", "en"), {
+      replacement: null,
+      storageReads: 0,
+    })
+  })
+})
+
 test("language switcher uses an accessible native-name dropdown and canonical route mapping", () => {
   const switcher = source("components/language-switcher.tsx")
   for (const [locale, label] of [
@@ -165,6 +234,15 @@ test("language switcher uses an accessible native-name dropdown and canonical ro
   assert.match(switcher, /localizedAcademyHref/)
   assert.match(switcher, /translate="no"/)
   assert.match(switcher, /aria-current=/)
+})
+
+test("language selection persists and the Chinese root installs the early redirect", () => {
+  const switcher = source("components/language-switcher.tsx")
+  const layout = source("app/layout.tsx")
+  assert.match(switcher, /savePreferredLocale\(window\.localStorage, locale\)/)
+  assert.match(layout, /siteLocale === ["']zh-CN["']/)
+  assert.match(layout, /languagePreferenceRedirectScript/)
+  assert.match(layout, /dangerouslySetInnerHTML/)
 })
 
 test("progress canonicalizes locale paths and re-keys legacy records", () => {

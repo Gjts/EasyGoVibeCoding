@@ -5,6 +5,7 @@ import { Analytics } from '@vercel/analytics/next'
 import { VisitTracker } from '@/components/learning/visit-tracker'
 import { LearningProgressControl } from '@/components/learning/learning-progress-control'
 import { siteLocale } from '@/lib/i18n-routing'
+import { languagePreferenceRedirectScript } from '@/lib/language-preference'
 import './globals.css'
 
 const geist = Geist({
@@ -37,6 +38,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang={siteLocale}>
+      <head>
+        {siteLocale === "zh-CN" ? (
+          <script dangerouslySetInnerHTML={{ __html: languagePreferenceRedirectScript }} />
+        ) : null}
+      </head>
       <body className={`${geist.variable} ${geistMono.variable} font-sans antialiased`}>
         {children}
         <VisitTracker />
