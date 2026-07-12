@@ -90,6 +90,11 @@ test("scanSecurityBytes rejects ordinary Windows, UNC, file URL and POSIX local 
   assert.deepEqual(["index.html", "styles.css", "image.svg"].map(shouldScanDeploymentGenericPosix), [false, false, false])
   assert.equal(scanSecurityBytes({ path: "bundle.js", bytes: Buffer.from(deploymentSource), forbiddenMarkers: [], includeGenericPosix: shouldScanDeploymentGenericPosix("bundle.js") }).some(({ category }) => category === "absolute-local-path"), true)
   assert.equal(scanSecurityBytes({ path: "index.html", bytes: Buffer.from(deploymentSource), forbiddenMarkers: [], includeGenericPosix: shouldScanDeploymentGenericPosix("index.html") }).some(({ category }) => category === "absolute-local-path"), false)
+  assert.equal(scanSecurityBytes({ path: "app.ts", bytes: Buffer.from('const filePath="/custom/build/file.txt"'), forbiddenMarkers: [] }).some(({ category }) => category === "absolute-local-path"), true)
+  assert.equal(scanSecurityBytes({ path: "app.tsx", bytes: Buffer.from('const workspaceRoot="/custom/build/output"'), forbiddenMarkers: [] }).some(({ category }) => category === "absolute-local-path"), true)
+  assert.equal(scanSecurityBytes({ path: "README.md", bytes: Buffer.from('filePath: "/custom/build/readme.txt"'), forbiddenMarkers: [] }).some(({ category }) => category === "absolute-local-path"), true)
+  assert.equal(scanSecurityBytes({ path: "artifact.bin", bytes: Buffer.from('const filePath="/custom/build/file.txt"'), forbiddenMarkers: [] }).some(({ category }) => category === "absolute-local-path"), false)
+  assert.equal(findLocalPaths('import { x } from "./home-live-strip"').length, 0)
   assert.equal(findLocalPaths('const route="/custom/build/output"; const url="/custom/build/file.txt"; const href="/custom/build/file.txt"; const path="/custom/build/output"; const pathname="/custom/build/output"; const basePath="/custom/build/output"; paths: "/api/tasks"').length, 0)
 })
 

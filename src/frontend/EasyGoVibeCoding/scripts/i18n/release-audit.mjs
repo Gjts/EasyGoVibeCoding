@@ -16,7 +16,7 @@ const SALES_LEGAL = Object.freeze(["/ja", "/ja/privacy", "/ja/refund", "/ja/term
 const URL_ATTRIBUTES = new Set(["href", "src", "action", "poster", "data", "manifest"])
 const VISIBLE_ATTRIBUTES = new Set(["alt", "title", "placeholder", "aria-label", "value"])
 const SKIP_PROTOCOLS = /^(?:data|blob|mailto|tel|javascript|about):/iu
-const TEXT_EXTENSIONS = new Set([".css", ".html", ".js", ".json", ".mjs", ".svg", ".txt", ".xml"])
+const TEXT_EXTENSIONS = new Set([".cjs", ".css", ".html", ".js", ".json", ".jsx", ".md", ".mdx", ".mjs", ".svg", ".toml", ".ts", ".tsx", ".txt", ".xml", ".yaml", ".yml"])
 export const SYSTEM_HTML_PATHS = Object.freeze([
   "404.html", "_not-found.html", "generate-icons.html",
   "ja/academy/404.html", "ja/academy/_not-found.html", "ja/academy/generate-icons.html",
@@ -321,7 +321,7 @@ export function findLocalPathOccurrences(text, { includeGenericPosix = true } = 
     { kind: "explicit", pattern: /(?<![\p{L}\p{N}])[a-z]:[\\/](?![\\/])[^\s"'`<>|]+/giu },
     { kind: "explicit", pattern: /(?<!\\)\\\\(?!\\)(?![nrtbfv0]\\(?:u[\da-f]{4}|x[\da-f]{2}))[a-z\d][a-z\d._-]*\\[a-z\d$][a-z\d$._-]*(?:\\[^\s"'`<>|]+)*/giu },
     { kind: "explicit", pattern: /file:\/\/\/(?:[a-z]:\/)?[^\s"'`<>]+/giu },
-    { kind: "explicit", pattern: /(?<![\p{L}\p{N}:\/\\])\/(?:Users|home|workspace|opt|tmp|var\/tmp|root|mnt|etc|srv|usr|bin|build|Applications|Library|\.gradle|\.cargo|\.m2|\.pip)(?![\p{L}\p{N}|)\\])(?:\/[^\s"'`<>|]+)?/gu },
+    { kind: "explicit", pattern: /(?<![\p{L}\p{N}:\/\\.])\/(?:Users|home|workspace|opt|tmp|var\/tmp|root|mnt|etc|srv|usr|bin|build|Applications|Library|\.gradle|\.cargo|\.m2|\.pip)(?![\p{L}\p{N}|)\\])(?:\/[^\s"'`<>|]+)?/gu },
     ...(includeGenericPosix ? [{ kind: "generic", pattern: /(?<![\p{L}\p{N}:\/\\.])\/[a-z\d._~-]+(?:\/[a-z\d._~+@%=-]+)+(?![\p{L}\p{N}])/giu }] : []),
   ]
   const source = String(text)

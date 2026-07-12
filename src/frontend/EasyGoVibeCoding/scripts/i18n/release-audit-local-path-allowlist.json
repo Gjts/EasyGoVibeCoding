@@ -282,6 +282,84 @@
     "reason": "Intentional filesystem path literal rendered in generated academy lesson or code-example content."
   },
   {
+    "path": "app/advanced/deployment/page.tsx",
+    "text": "/bin/bash",
+    "offset": 20262,
+    "reason": "Intentional filesystem path literal in source academy lesson or code-example content."
+  },
+  {
+    "path": "app/advanced/deployment/page.tsx",
+    "text": "/var/log/health-check.log",
+    "offset": 20309,
+    "reason": "Intentional filesystem path literal in source academy lesson or code-example content."
+  },
+  {
+    "path": "app/advanced/environment/page.tsx",
+    "text": "/.m2/settings.xml",
+    "offset": 1931,
+    "reason": "Intentional filesystem path literal in source academy lesson or code-example content."
+  },
+  {
+    "path": "app/advanced/environment/page.tsx",
+    "text": "/.gradle/gradle.properties",
+    "offset": 1976,
+    "reason": "Intentional filesystem path literal in source academy lesson or code-example content."
+  },
+  {
+    "path": "app/advanced/environment/page.tsx",
+    "text": "/.m2/repository",
+    "offset": 2269,
+    "reason": "Intentional filesystem path literal in source academy lesson or code-example content."
+  },
+  {
+    "path": "app/advanced/environment/page.tsx",
+    "text": "/.pip/pip.conf",
+    "offset": 3573,
+    "reason": "Intentional filesystem path literal in source academy lesson or code-example content."
+  },
+  {
+    "path": "app/advanced/environment/page.tsx",
+    "text": "/.cargo/config.toml",
+    "offset": 8902,
+    "reason": "Intentional filesystem path literal in source academy lesson or code-example content."
+  },
+  {
+    "path": "app/advanced/environment/page.tsx",
+    "text": "/.cargo",
+    "offset": 9024,
+    "reason": "Intentional filesystem path literal in source academy lesson or code-example content."
+  },
+  {
+    "path": "app/advanced/environment/page.tsx",
+    "text": "/Applications/Xcode.app",
+    "offset": 25714,
+    "reason": "Intentional filesystem path literal in source academy lesson or code-example content."
+  },
+  {
+    "path": "app/advanced/environment/page.tsx",
+    "text": "/.gradle/init.gradle",
+    "offset": 27659,
+    "reason": "Intentional filesystem path literal in source academy lesson or code-example content."
+  },
+  {
+    "path": "app/advanced/environment/page.tsx",
+    "text": "/.gradle/init.gradle",
+    "offset": 30030,
+    "reason": "Intentional filesystem path literal in source academy lesson or code-example content."
+  },
+  {
+    "path": "app/advanced/environment/page.tsx",
+    "text": "/Applications/Xcode-15.0.app",
+    "offset": 30724,
+    "reason": "Intentional filesystem path literal in source academy lesson or code-example content."
+  },
+  {
+    "path": "app/practice/efficiency/page.tsx",
+    "text": "/bin/bash",
+    "offset": 11998,
+    "reason": "Intentional filesystem path literal in source academy lesson or code-example content."
+  },
+  {
     "path": "de/academy/advanced/deployment.html",
     "text": "/bin/bash\\\\n#",
     "offset": 128130,
@@ -2100,10 +2178,28 @@
     "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
-    "path": "scripts/i18n/static-deployment.test.mjs",
-    "text": "/build",
-    "offset": 453,
-    "reason": "Tracked i18n regression fixture containing an intentional filesystem example."
+    "path": "scripts/i18n/release-audit.test.mjs",
+    "text": "/custom/build/file.txt",
+    "offset": 6929,
+    "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
+  },
+  {
+    "path": "scripts/i18n/release-audit.test.mjs",
+    "text": "/custom/build/output",
+    "offset": 7139,
+    "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
+  },
+  {
+    "path": "scripts/i18n/release-audit.test.mjs",
+    "text": "/custom/build/readme.txt",
+    "offset": 7339,
+    "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
+  },
+  {
+    "path": "scripts/i18n/release-audit.test.mjs",
+    "text": "/custom/build/file.txt",
+    "offset": 7551,
+    "reason": "Malicious local-path constants used by the scanner regression test; production scanning calls the same detector without this fixture allowlist."
   },
   {
     "path": "scripts/i18n/static-deployment.test.mjs",
