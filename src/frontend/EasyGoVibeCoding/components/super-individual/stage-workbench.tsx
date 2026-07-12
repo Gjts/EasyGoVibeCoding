@@ -85,7 +85,7 @@ export function StageWorkbench({ stageIds }: { stageIds: SuperIndividualStageId[
                 {question.kind === "textarea" ? (
                   <Textarea id={`${stage.id}-${question.id}`} aria-describedby={`${stage.id}-${question.id}-help`} value={answers[question.id] ?? ""} onChange={(event) => setAnswer(stage.id, question.id, event.target.value)} rows={4} />
                 ) : question.kind === "single" && question.options ? (
-                  <select id={`${stage.id}-${question.id}`} className="h-10 w-full rounded-md border border-input bg-background px-3 text-sm" value={answers[question.id] ?? ""} onChange={(event) => setAnswer(stage.id, question.id, event.target.value)}>
+                  <select id={`${stage.id}-${question.id}`} className="h-10 w-full rounded-md border border-gray-300 bg-white px-3 text-sm text-gray-900" value={answers[question.id] ?? ""} onChange={(event) => setAnswer(stage.id, question.id, event.target.value)}>
                     <option value="">请选择</option>
                     {question.options.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}
                   </select>

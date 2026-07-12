@@ -65,9 +65,9 @@ export function LearningProgressControl() {
   return (
     <aside
       aria-live="polite"
-      className="fixed bottom-3 left-3 right-3 z-40 rounded-2xl border border-orange-200/80 bg-white/95 p-4 shadow-[0_12px_40px_rgba(15,23,42,0.16)] backdrop-blur-xl sm:bottom-6 sm:left-auto sm:right-6 sm:w-[360px]"
+      className="fixed bottom-3 left-3 right-3 z-40 flex items-center gap-2 rounded-2xl border border-orange-200/80 bg-white/95 p-2 shadow-[0_12px_40px_rgba(15,23,42,0.16)] backdrop-blur-xl sm:bottom-6 sm:left-auto sm:right-6 sm:block sm:w-[360px] sm:p-4"
     >
-      <div className="mb-3 flex items-start justify-between gap-3">
+      <div className="mb-0 flex min-w-0 flex-1 items-start justify-between gap-3 sm:mb-3">
         <div className="min-w-0">
           <div className="mb-1 flex items-center gap-2 text-xs font-bold text-orange-600">
             <GaugeCircle className="h-4 w-4 shrink-0" />
@@ -77,25 +77,25 @@ export function LearningProgressControl() {
               {categoryStats.done}/{categoryStats.total} 完成
             </span>
           </div>
-          <h2 className="truncate text-sm font-extrabold text-gray-950">
+          <h2 className="hidden truncate text-sm font-extrabold text-gray-950 sm:block">
             {title}
           </h2>
         </div>
         {completed ? (
-          <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500" />
+          <CheckCircle2 className="mt-0.5 hidden h-5 w-5 shrink-0 text-emerald-500 sm:block" />
         ) : (
-          <Circle className="mt-0.5 h-5 w-5 shrink-0 text-gray-300" />
+          <Circle className="mt-0.5 hidden h-5 w-5 shrink-0 text-gray-300 sm:block" />
         )}
       </div>
 
-      <div className="mb-3 h-2 overflow-hidden rounded-full bg-orange-100">
+      <div className="mb-3 hidden h-2 overflow-hidden rounded-full bg-orange-100 sm:block">
         <div
           className="h-full rounded-full bg-gradient-to-r from-orange-400 via-pink-500 to-purple-500 transition-all duration-500"
           style={{ width: `${categoryStats.pct}%` }}
         />
       </div>
 
-      <div className="flex flex-col gap-2 sm:flex-row">
+      <div className="flex shrink-0 flex-row gap-1 sm:gap-2">
         <Button
           type="button"
           size="sm"
@@ -116,8 +116,8 @@ export function LearningProgressControl() {
             variant="ghost"
             className="justify-center gap-1 text-gray-700 hover:bg-purple-50 hover:text-purple-700"
           >
-            <Link href={nextRoute.path}>
-              下一章
+            <Link href={nextRoute.path} aria-label="下一章">
+              <span className="hidden sm:inline">下一章</span>
               <ArrowRight className="h-4 w-4" />
             </Link>
           </Button>

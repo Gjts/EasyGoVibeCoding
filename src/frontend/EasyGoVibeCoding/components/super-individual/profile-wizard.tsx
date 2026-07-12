@@ -112,7 +112,7 @@ export function ProfileWizard({
           <Label htmlFor="si-entity">经营主体</Label>
           <select
             id="si-entity"
-            className="h-10 w-full rounded-md border border-input bg-background px-3 text-sm"
+            className="h-10 w-full rounded-md border border-gray-300 bg-white px-3 text-sm text-gray-900"
             value={draft.entityType}
             onChange={(event) => setField("entityType", event.target.value as EntityType)}
           >
@@ -124,7 +124,7 @@ export function ProfileWizard({
           <Label htmlFor="si-product">产品类型</Label>
           <select
             id="si-product"
-            className="h-10 w-full rounded-md border border-input bg-background px-3 text-sm"
+            className="h-10 w-full rounded-md border border-gray-300 bg-white px-3 text-sm text-gray-900"
             value={draft.productType}
             onChange={(event) => setField("productType", event.target.value as ProductType)}
           >
@@ -134,7 +134,7 @@ export function ProfileWizard({
 
         <div className="space-y-2">
           <Label htmlFor="si-billing">收费方式</Label>
-          <select id="si-billing" className="h-10 w-full rounded-md border border-input bg-background px-3 text-sm" value={draft.billingModel} onChange={(event) => setField("billingModel", event.target.value as SuperIndividualProfile["billingModel"])}>
+          <select id="si-billing" className="h-10 w-full rounded-md border border-gray-300 bg-white px-3 text-sm text-gray-900" value={draft.billingModel} onChange={(event) => setField("billingModel", event.target.value as SuperIndividualProfile["billingModel"])}>
             <option value="unknown">尚未确定</option>
             <option value="one-time">一次性付款</option>
             <option value="subscription">订阅</option>
@@ -145,7 +145,7 @@ export function ProfileWizard({
 
         <div className="space-y-2">
           <Label htmlFor="si-skill">技术水平</Label>
-          <select id="si-skill" className="h-10 w-full rounded-md border border-input bg-background px-3 text-sm" value={draft.skillLevel} onChange={(event) => setField("skillLevel", event.target.value as SuperIndividualProfile["skillLevel"])}>
+          <select id="si-skill" className="h-10 w-full rounded-md border border-gray-300 bg-white px-3 text-sm text-gray-900" value={draft.skillLevel} onChange={(event) => setField("skillLevel", event.target.value as SuperIndividualProfile["skillLevel"])}>
             <option value="beginner">入门</option>
             <option value="intermediate">中级</option>
             <option value="advanced">高级</option>
@@ -154,7 +154,7 @@ export function ProfileWizard({
 
         <div className="space-y-2">
           <Label htmlFor="si-budget">月度工具预算</Label>
-          <select id="si-budget" className="h-10 w-full rounded-md border border-input bg-background px-3 text-sm" value={draft.monthlyBudget} onChange={(event) => setField("monthlyBudget", event.target.value as SuperIndividualProfile["monthlyBudget"])}>
+          <select id="si-budget" className="h-10 w-full rounded-md border border-gray-300 bg-white px-3 text-sm text-gray-900" value={draft.monthlyBudget} onChange={(event) => setField("monthlyBudget", event.target.value as SuperIndividualProfile["monthlyBudget"])}>
             <option value="zero">暂时零预算</option>
             <option value="under-25">25 美元以内</option>
             <option value="under-100">100 美元以内</option>
@@ -169,7 +169,7 @@ export function ProfileWizard({
 
         <div className="space-y-2">
           <Label htmlFor="si-sensitivity">数据敏感等级</Label>
-          <select id="si-sensitivity" className="h-10 w-full rounded-md border border-input bg-background px-3 text-sm" value={draft.dataSensitivity} onChange={(event) => setField("dataSensitivity", event.target.value as SuperIndividualProfile["dataSensitivity"])}>
+          <select id="si-sensitivity" className="h-10 w-full rounded-md border border-gray-300 bg-white px-3 text-sm text-gray-900" value={draft.dataSensitivity} onChange={(event) => setField("dataSensitivity", event.target.value as SuperIndividualProfile["dataSensitivity"])}>
             <option value="normal">普通产品数据</option>
             <option value="sensitive">包含敏感业务或个人数据</option>
             <option value="regulated">可能属于受监管数据</option>
