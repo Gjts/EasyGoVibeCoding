@@ -7,8 +7,11 @@ export default defineConfig([
   ...nextTs,
   globalIgnores([
     '.next/**',
+    '.cache/**',
+    '.wrangler/**',
     'out/**',
     'build/**',
+    'coverage/**',
     'next-env.d.ts',
   ]),
 ])

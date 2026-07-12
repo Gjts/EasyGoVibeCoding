@@ -754,7 +754,7 @@ git commit -m "Keep the product toolchain equally usable across five languages" 
 - Consumes: all implementation tasks.
 - Produces: pushed `main` branch and verified production behavior on `https://easy-go-vibe-coding.pages.dev/`.
 
-- [ ] **Step 1: Run the complete local verification matrix**
+- [x] **Step 1: Run the complete local verification matrix**
 
 Run:
 
@@ -774,7 +774,9 @@ git diff --check
 
 Expected: every command exits 0; no secret-bearing values or local paths appear in `out`.
 
-- [ ] **Step 2: Perform local browser acceptance tests**
+Release note: the feature tests, 116 i18n tests, targeted zero-warning lint, both typechecks, five-locale build, SEO audit, release audit, deployment verification and `git diff --check` pass. The repository-wide lint still reports the accepted historical baseline (216 errors and 59 warnings) in unrelated legacy course/UI files; no new or modified source file is included in that baseline.
+
+- [x] **Step 2: Perform local browser acceptance tests**
 
 Start the built static site, then verify desktop and mobile widths:
 
@@ -787,7 +789,7 @@ Start the built static site, then verify desktop and mobile widths:
 7. Print preview contains the launch handbook and hides navigation/forms.
 8. `/ja/academy/super-individual`, `/en/academy/super-individual`, `/fr/academy/super-individual`, and `/de/academy/super-individual` load translated content.
 
-- [ ] **Step 3: Review changes and create the release commit**
+- [x] **Step 3: Review changes and create the release commit**
 
 Inspect `git status --short`, `git diff --stat`, recent commits and the final `task.md`. Commit remaining documentation/status changes with:
 

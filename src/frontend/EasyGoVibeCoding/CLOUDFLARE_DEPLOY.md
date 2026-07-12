@@ -44,6 +44,16 @@ MODEL_UPDATER_TOKEN = 与 model-updater Worker RUN_TOKEN 一致的随机长 toke
 MODEL_UPDATER_URL = https://model-updater.<your-subdomain>.workers.dev/__run
 ```
 
+“超级个体”AI 教练还需要以下仅服务端可见的 Pages 变量：
+
+```text
+SUPER_INDIVIDUAL_AI_BASE_URL = OpenAI 兼容中转服务的 HTTPS 基础地址
+SUPER_INDIVIDUAL_AI_API_KEY = 中转服务密钥
+SUPER_INDIVIDUAL_AI_MODEL = 该中转服务支持的模型名称
+```
+
+这三个变量只由 `functions/api/super-individual/coach.ts` 读取。不要添加 `NEXT_PUBLIC_` 前缀，也不要把真实值写入仓库或静态构建输出。
+
 `model-updater` Worker 如需真实联网模型情报更新，单独配置 Worker secret：
 
 ```bash
@@ -68,6 +78,7 @@ FEEDBACK_KV = 用于存储待确认和已确认的邮箱反馈
 - `SITE_STATS_KV` 同时服务站点统计和模型动态读取；Pages 与 `src/backend/model-updater` Worker 必须指向同一个 KV namespace
 - `FEEDBACK_KV` 用于双重确认反馈展示；当前 `wrangler.toml` 复用同一 KV namespace，并通过 `email-feedback:*` 前缀隔离
 - `MODEL_UPDATER_TOKEN` 不要放到前端公开变量里；它只由 Pages Function 在服务端调用 Worker 时使用
+- `SUPER_INDIVIDUAL_AI_API_KEY` 只配置为 Pages secret；前端只调用同源 `/api/super-individual/coach`
 - `MODEL_UPDATER` 是 Pages → Worker 的 Service Binding，当前已在 `wrangler.toml` 配置为绑定到 `model-updater`
 - `OPENROUTER_API_KEY` / `PERPLEXITY_API_KEY` / `ANTHROPIC_API_KEY` 是配置在 `src/backend/model-updater` Worker 上的 secret，不是 Pages secret；没有外部 key 时刷新链路仍可用，但数据源会显示为 `seed-static-fallback`。OpenRouter Web Search 会产生少量搜索费用，即使所选模型本身免费
 
