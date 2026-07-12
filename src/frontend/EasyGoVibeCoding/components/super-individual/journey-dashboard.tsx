@@ -5,8 +5,11 @@ import { ArrowRight, CircleCheckBig, RotateCcw, Route } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { ProfileWizard } from "@/components/super-individual/profile-wizard"
+import { LaunchReport } from "@/components/super-individual/launch-report"
 import { SUPER_INDIVIDUAL_STAGES } from "@/lib/super-individual/curriculum"
 import { getProfileWarnings } from "@/lib/super-individual/decision-engine"
+import { buildLaunchReport } from "@/lib/super-individual/report"
+import { TOOL_CATALOG } from "@/lib/super-individual/tool-catalog"
 import { useSuperIndividualWorkspace } from "@/lib/super-individual/use-workspace"
 
 export function JourneyDashboard() {
@@ -58,6 +61,8 @@ export function JourneyDashboard() {
           return <Link key={stage.id} href={stage.route} className="group rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-violet-300 hover:shadow-md"><div className="flex items-start justify-between gap-4"><div><p className="text-xs font-semibold text-violet-600">第 {stage.order} 阶段</p><h3 className="mt-1 font-bold text-gray-950">{stage.title}</h3><p className="mt-2 text-sm leading-6 text-gray-600">{stage.summary}</p></div>{complete ? <CircleCheckBig className="h-6 w-6 shrink-0 text-emerald-600" /> : <ArrowRight className="h-5 w-5 shrink-0 text-gray-400 transition group-hover:translate-x-1 group-hover:text-violet-600" />}</div></Link>
         })}</div>
       </section>
+
+      <LaunchReport report={buildLaunchReport(workspace, TOOL_CATALOG)} />
 
       <div className="flex justify-end border-t pt-5"><Button type="button" variant="ghost" onClick={reset}><RotateCcw className="mr-2 h-4 w-4" />重新开始课程</Button></div>
     </div>

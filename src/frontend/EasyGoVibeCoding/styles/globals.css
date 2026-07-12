@@ -123,3 +123,31 @@
     @apply bg-background text-foreground;
   }
 }
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  [data-print-report],
+  [data-print-report] * {
+    visibility: visible;
+  }
+
+  [data-print-report] {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    border: 0;
+    box-shadow: none;
+  }
+
+  [data-print-hide] {
+    display: none !important;
+  }
+
+  [data-print-report] a[href]::after {
+    content: " (" attr(href) ")";
+    overflow-wrap: anywhere;
+  }
+}

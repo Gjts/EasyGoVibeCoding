@@ -641,17 +641,17 @@ git commit -m "Add optional coaching without weakening deterministic guidance" -
 - Consumes: `SuperIndividualWorkspace`, catalog and curriculum.
 - Produces: `buildLaunchReport(workspace, catalog)`, print view and JSON download.
 
-- [ ] **Step 1: Write report completeness and redaction tests**
+- [x] **Step 1: Write report completeness and redaction tests**
 
 Assert the report contains all ten stage headings in order, includes official source links for recommendations, labels unfinished stages, and excludes keys matching `/api[_-]?key|token|password/i` from arbitrary answer keys.
 
-- [ ] **Step 2: Run report tests and verify failure**
+- [x] **Step 2: Run report tests and verify failure**
 
 Run: `npm run test:super-individual`
 
 Expected: report test FAIL with missing exports.
 
-- [ ] **Step 3: Implement a deterministic report model**
+- [x] **Step 3: Implement a deterministic report model**
 
 Use this output shape:
 
@@ -672,7 +672,7 @@ export interface LaunchReport {
 
 Never include raw AI request metadata or secret-shaped answer fields.
 
-- [ ] **Step 4: Implement print and JSON export UI**
+- [x] **Step 4: Implement print and JSON export UI**
 
 `LaunchReport` must provide:
 
@@ -684,7 +684,7 @@ Never include raw AI request metadata or secret-shaped answer fields.
 
 Run `npm run test:super-individual && npm run typecheck && npm run lint`; expected: PASS.
 
-- [ ] **Step 5: Commit the handbook**
+- [x] **Step 5: Commit the handbook**
 
 ```powershell
 git add lib/super-individual/report.ts components/super-individual styles/globals.css scripts/super-individual/report.test.mjs
