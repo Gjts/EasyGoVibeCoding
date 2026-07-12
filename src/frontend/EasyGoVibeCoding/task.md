@@ -479,17 +479,17 @@ git commit -m "Turn the solo course into a guided ten-stage workbench" -m "Const
 - Consumes: `<JourneyDashboard />`, `<StageWorkbench />`, `superIndividualChapters`.
 - Produces: stable route pages with the approved ten-stage workflow.
 
-- [ ] **Step 1: Add a route-render smoke test**
+- [x] **Step 1: Add a route-render smoke test**
 
 Create `scripts/super-individual/pages.test.mjs` that reads all six page files and asserts each imports the approved shared component and keeps `CourseLayout`; assert no page contains the obsolete phrases `三种 Offer 形态` or `四个系统` as its only instructional structure.
 
-- [ ] **Step 2: Run smoke test and verify failure**
+- [x] **Step 2: Run smoke test and verify failure**
 
 Run: `npm run test:super-individual`
 
 Expected: pages test FAIL because existing pages do not import the shared journey components.
 
-- [ ] **Step 3: Recompose the overview and five chapter routes**
+- [x] **Step 3: Recompose the overview and five chapter routes**
 
 Use these exact stage groups:
 
@@ -512,7 +512,7 @@ Use these exact stage groups:
 
 Preserve valuable existing examples by moving them into `principles`, `mistakes` or artifact guidance rather than duplicating long static sections.
 
-- [ ] **Step 4: Update navigation copy and verify buildability**
+- [x] **Step 4: Update navigation copy and verify buildability**
 
 Keep the same hrefs, update summaries to describe the new stage group, and run:
 
@@ -520,7 +520,7 @@ Keep the same hrefs, update summaries to describe the new stage group, and run:
 
 Expected: tests, typecheck and lint PASS; build produces all six routes in `out/super-individual`.
 
-- [ ] **Step 5: Commit the page transition**
+- [x] **Step 5: Commit the page transition**
 
 ```powershell
 git add app/super-individual components/course/chapters.ts scripts/super-individual/pages.test.mjs
