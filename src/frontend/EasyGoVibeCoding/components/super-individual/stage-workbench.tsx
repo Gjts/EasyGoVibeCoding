@@ -25,6 +25,7 @@ export function StageWorkbench({ stageIds }: { stageIds: SuperIndividualStageId[
     setAnswer,
     setRecommendations,
     setArtifact,
+    setAIFeedback,
     markStageComplete,
   } = useSuperIndividualWorkspace()
   const stage = getStage(activeStageId)
@@ -104,7 +105,13 @@ export function StageWorkbench({ stageIds }: { stageIds: SuperIndividualStageId[
           })}</div>
         </div>
 
-        <CoachPanel />
+        <CoachPanel
+          stageId={stage.id}
+          answers={answers}
+          candidateTools={recommendations.map((item) => item.toolId)}
+          existingFeedback={workspace.aiFeedback[stage.id]}
+          onFeedback={(feedback) => setAIFeedback(stage.id, feedback)}
+        />
 
         <div className="rounded-3xl border border-violet-200 bg-violet-50 p-6">
           <h2 className="flex items-center gap-2 text-xl font-bold text-violet-950"><FileText className="h-5 w-5" />{stage.artifactTitle}</h2>

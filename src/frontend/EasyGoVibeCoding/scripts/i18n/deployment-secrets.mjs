@@ -7,6 +7,8 @@ export const DEPLOYMENT_SECRET_NAMES = Object.freeze([
   "TRANSLATION_API_KEY",
   "OPENAI_API_KEY",
   "RESEND_API_KEY",
+  "SUPER_INDIVIDUAL_AI_BASE_URL",
+  "SUPER_INDIVIDUAL_AI_API_KEY",
 ])
 
 export function createSecretFreeEnvironment(parentEnv = process.env) {

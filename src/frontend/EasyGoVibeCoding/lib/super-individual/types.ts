@@ -70,6 +70,14 @@ export interface CoachResponse {
   disclaimer?: string
 }
 
+export interface CoachRequest {
+  locale: string
+  stageId: SuperIndividualStageId
+  answers: Record<string, string>
+  candidateTools: string[]
+  action: "feedback" | "questions" | "summary"
+}
+
 export interface SuperIndividualProfile {
   version: 1
   locale: string

@@ -543,7 +543,7 @@ git commit -m "Make every solo-course chapter produce an executable product asse
 - Consumes: current stage answers and deterministic recommendations.
 - Produces: POST `/api/super-individual/coach`, `createCoachHandler({ fetchImpl })`, `onRequestPost` and `requestCoachFeedback(input, signal)`.
 
-- [ ] **Step 1: Write API contract tests**
+- [x] **Step 1: Write API contract tests**
 
 Import `onRequestPost` from the Pages Function and assert:
 
@@ -574,13 +574,13 @@ test("coach validates upstream structured output", async () => {
 })
 ```
 
-- [ ] **Step 2: Run tests and verify missing handler failure**
+- [x] **Step 2: Run tests and verify missing handler failure**
 
 Run: `npm run test:super-individual`
 
 Expected: coach API test FAIL with missing module.
 
-- [ ] **Step 3: Implement the Cloudflare function**
+- [x] **Step 3: Implement the Cloudflare function**
 
 Use environment names:
 
@@ -605,7 +605,7 @@ Requirements:
 - Add both new secret names to `DEPLOYMENT_SECRET_NAMES` so release audits scan for them.
 - Export `createCoachHandler({ fetchImpl = fetch })`; assign `onRequestPost = createCoachHandler({ fetchImpl: fetch })` so tests can inject an upstream response without changing the Cloudflare function signature.
 
-- [ ] **Step 4: Implement the client panel and fallback**
+- [x] **Step 4: Implement the client panel and fallback**
 
 `requestCoachFeedback` must throw one of `unconfigured`, `timeout`, `rate-limited`, `invalid-response` or `upstream-failed`. `CoachPanel` must retain the user's answers, keep deterministic recommendations visible, show a retry button, and never render model HTML.
 
@@ -619,7 +619,7 @@ SUPER_INDIVIDUAL_AI_MODEL=gpt-5.4-mini
 
 Run `npm run test:super-individual && npm run typecheck:functions && npm run typecheck`; expected: PASS.
 
-- [ ] **Step 5: Commit the secure coach**
+- [x] **Step 5: Commit the secure coach**
 
 ```powershell
 git add functions/api/super-individual lib/super-individual/coach-client.ts components/super-individual/coach-panel.tsx scripts/super-individual/coach-api.test.mjs .env.example scripts/i18n/deployment-secrets.mjs
