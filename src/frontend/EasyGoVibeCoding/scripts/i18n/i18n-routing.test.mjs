@@ -133,14 +133,38 @@ test("validates locale/base-path pairs", () => {
   )
 })
 
-test("language switcher uses five cross-app anchors and canonical route mapping", () => {
+test("language switcher uses an accessible native-name dropdown and canonical route mapping", () => {
   const switcher = source("components/language-switcher.tsx")
-  for (const label of ["ZH-CN", "JA", "EN", "FR", "DE"]) {
-    assert.match(switcher, new RegExp(`label: \\"${label}\\"`))
+  for (const [locale, label] of [
+    ["zh-CN", "简体中文"],
+    ["ja", "日本語"],
+    ["en", "English"],
+    ["fr", "Français"],
+    ["de", "Deutsch"],
+  ]) {
+    const labelExpression = switcher.match(
+      new RegExp(
+        `locale: \\"${locale}\\", label: (String\\.fromCodePoint\\([^)]*\\)|\\"(?:\\\\.|[^\\"])*\\")`,
+      ),
+    )?.[1]
+    assert.ok(labelExpression, `missing language option for ${locale}`)
+    const renderedLabel = labelExpression.startsWith("String.fromCodePoint")
+      ? String.fromCodePoint(
+          ...Array.from(labelExpression.matchAll(/0x([\da-f]+)/gi), (match) =>
+            Number.parseInt(match[1], 16),
+          ),
+        )
+      : JSON.parse(labelExpression)
+    assert.equal(renderedLabel, label)
   }
+  assert.match(switcher, /DropdownMenuTrigger/)
+  assert.match(switcher, /DropdownMenuContent/)
+  assert.match(switcher, /DropdownMenuItem/)
   assert.match(switcher, /<a\s/)
   assert.doesNotMatch(switcher, /<Link\s/)
   assert.match(switcher, /localizedAcademyHref/)
+  assert.match(switcher, /translate="no"/)
+  assert.match(switcher, /aria-current=/)
 })
 
 test("progress canonicalizes locale paths and re-keys legacy records", () => {

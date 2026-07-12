@@ -86,8 +86,8 @@ export function Header() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b-2 border-white/50 shadow-[0_4px_16px_0_rgba(0,0,0,0.1)]">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
-        <div className="flex lg:flex-1">
+      <nav className="mx-auto flex max-w-[1536px] items-center justify-between px-6 py-4 xl:px-8">
+        <div className="flex xl:flex-1">
           <Link href="/" className="-m-1.5 p-1.5 flex items-center gap-2 group">
             <div className="h-8 w-8 rounded-xl bg-gradient-to-br from-pink-500 via-purple-500 to-blue-500 flex items-center justify-center shadow-lg group-hover:shadow-xl transform group-hover:scale-110 transition-all duration-200">
               <span className="text-white font-bold text-sm">AI</span>
@@ -96,7 +96,7 @@ export function Header() {
           </Link>
         </div>
 
-        <div className="flex lg:hidden">
+        <div className="flex xl:hidden">
           <button
             type="button"
             className="-m-2.5 inline-flex items-center justify-center rounded-xl p-2.5 text-gray-700 hover:text-purple-600 hover:bg-purple-50 transition-colors"
@@ -107,17 +107,17 @@ export function Header() {
           </button>
         </div>
 
-        <div className="hidden lg:flex lg:gap-x-6">
+        <div className="hidden xl:flex xl:gap-x-2 2xl:gap-x-6">
           <Link
             href="/"
-            className="text-sm font-semibold text-gray-700 hover:text-purple-600 transition-colors px-3 py-2 rounded-lg hover:bg-purple-50"
+            className="whitespace-nowrap text-sm font-semibold text-gray-700 hover:text-purple-600 transition-colors px-2 2xl:px-3 py-2 rounded-lg hover:bg-purple-50"
           >
             首页
           </Link>
 
           {/* 课程 mega menu */}
           <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center gap-1 text-sm font-semibold text-gray-700 hover:text-purple-600 transition-colors px-3 py-2 rounded-lg hover:bg-purple-50">
+            <DropdownMenuTrigger className="flex items-center gap-1 whitespace-nowrap text-sm font-semibold text-gray-700 hover:text-purple-600 transition-colors px-2 2xl:px-3 py-2 rounded-lg hover:bg-purple-50">
               课程
               <ChevronDown className="h-4 w-4" />
             </DropdownMenuTrigger>
@@ -172,15 +172,15 @@ export function Header() {
               <Link
                 key={link.name}
                 href={link.href}
-                className="text-sm font-semibold text-gray-700 hover:text-purple-600 transition-colors px-3 py-2 rounded-lg hover:bg-purple-50"
+                className="whitespace-nowrap text-sm font-semibold text-gray-700 hover:text-purple-600 transition-colors px-2 2xl:px-3 py-2 rounded-lg hover:bg-purple-50"
               >
                 {link.name}
               </Link>
             ))}
         </div>
 
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-3">
-          <LanguageSwitcher className="mr-1 max-w-[150px] justify-end" />
+        <div className="hidden xl:flex xl:flex-1 xl:items-center xl:justify-end xl:gap-x-1 2xl:gap-x-3">
+          <LanguageSwitcher className="mr-1 justify-end" />
           <Button
             variant="ghost"
             size="sm"
@@ -188,8 +188,8 @@ export function Header() {
             className="text-gray-700 hover:text-purple-600 hover:bg-purple-50 font-semibold gap-2"
           >
             <Search className="h-4 w-4" />
-            <span>搜索</span>
-            <kbd className="hidden xl:inline-flex h-5 items-center gap-0.5 rounded bg-gray-100 px-1.5 font-mono text-xs text-gray-600 border border-gray-300">
+            <span className="sr-only 2xl:not-sr-only">搜索</span>
+            <kbd className="hidden 2xl:inline-flex h-5 items-center gap-0.5 rounded bg-gray-100 px-1.5 font-mono text-xs text-gray-600 border border-gray-300">
               <span className="text-xs">⌘</span>K
             </kbd>
           </Button>
@@ -199,24 +199,28 @@ export function Header() {
             onClick={() => setProfileOpen(true)}
             className="text-gray-700 hover:text-purple-600 hover:bg-purple-50 font-semibold"
           >
-            <UserRound className="mr-1 h-4 w-4" />
-            {profile ? profile.name : "本地登录"}
+            <UserRound className="h-4 w-4 2xl:mr-1" />
+            <span className="sr-only 2xl:not-sr-only">
+              {profile ? profile.name : "本地登录"}
+            </span>
           </Button>
-          <Button
-            size="sm"
-            asChild
-            className="bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 font-semibold"
-          >
-            <Link href="/basics">
-              开始学习
-            </Link>
-          </Button>
+          <div className="hidden 2xl:block">
+            <Button
+              size="sm"
+              asChild
+              className="bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 font-semibold"
+            >
+              <Link href="/basics">
+                开始学习
+              </Link>
+            </Button>
+          </div>
         </div>
       </nav>
 
       {/* Mobile menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-0 z-50">
+        <div className="xl:hidden fixed inset-0 z-50">
           <div className="fixed inset-0 bg-black/20 backdrop-blur-sm" onClick={() => setMobileMenuOpen(false)} />
           <div className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white/95 backdrop-blur-xl px-6 py-6 sm:max-w-sm shadow-[0_8px_32px_0_rgba(0,0,0,0.15)] border-l-2 border-white/50">
             <div className="flex items-center justify-between mb-6">
