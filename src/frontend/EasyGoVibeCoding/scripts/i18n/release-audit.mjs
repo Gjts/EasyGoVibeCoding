@@ -321,7 +321,7 @@ export function findLocalPathOccurrences(text, { includeGenericPosix = true } = 
     { kind: "explicit", pattern: /(?<![\p{L}\p{N}])[a-z]:[\\/](?![\\/])[^\s"'`<>|]+/giu },
     { kind: "explicit", pattern: /(?<!\\)\\\\(?!\\)(?![nrtbfv0]\\(?:u[\da-f]{4}|x[\da-f]{2}))[a-z\d][a-z\d._-]*\\[a-z\d$][a-z\d$._-]*(?:\\[^\s"'`<>|]+)*/giu },
     { kind: "explicit", pattern: /file:\/\/\/(?:[a-z]:\/)?[^\s"'`<>]+/giu },
-    { kind: "explicit", pattern: /(?<![\p{L}\p{N}:\/\\.])\/(?:Users|home|workspace|opt|tmp|var\/tmp|root|mnt|etc|srv|usr|bin|build|Applications|Library|\.gradle|\.cargo|\.m2|\.pip)(?![\p{L}\p{N}|)\\])(?:\/[^\s"'`<>|]+)?/gu },
+    { kind: "explicit", pattern: /(?<![\p{L}\p{N}:\/\\.])\/(?:Users|home|workspace|opt|tmp|var\/tmp|root|mnt|etc|srv|usr|bin|build|Applications|Library|\.gradle|\.cargo|\.m2|\.pip)(?=\/|[\s"'`<>,;:)\]}]|$)(?:\/[^\s"'`<>|]+)?/gu },
     ...(includeGenericPosix ? [{ kind: "generic", pattern: /(?<![\p{L}\p{N}:\/\\.])\/[a-z\d._~-]+(?:\/[a-z\d._~+@%=-]+)+(?![\p{L}\p{N}])/giu }] : []),
   ]
   const source = String(text)

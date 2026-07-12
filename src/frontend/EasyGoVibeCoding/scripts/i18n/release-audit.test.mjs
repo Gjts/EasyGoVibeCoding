@@ -95,6 +95,10 @@ test("scanSecurityBytes rejects ordinary Windows, UNC, file URL and POSIX local 
   assert.equal(scanSecurityBytes({ path: "README.md", bytes: Buffer.from('filePath: "/custom/build/readme.txt"'), forbiddenMarkers: [] }).some(({ category }) => category === "absolute-local-path"), true)
   assert.equal(scanSecurityBytes({ path: "artifact.bin", bytes: Buffer.from('const filePath="/custom/build/file.txt"'), forbiddenMarkers: [] }).some(({ category }) => category === "absolute-local-path"), false)
   assert.equal(findLocalPaths('import { x } from "./home-live-strip"').length, 0)
+  const routePrefixes = 'const route="/home-live-strip"; const href="/build-assets/app.js"; const url="/root.css"; const pathname="/tmp_file"'
+  assert.deepEqual(findLocalPaths(routePrefixes), [])
+  assert.equal(scanSecurityBytes({ path: "routes.ts", bytes: Buffer.from(routePrefixes), forbiddenMarkers: [] }).some(({ category }) => category === "absolute-local-path"), false)
+  assert.deepEqual(findLocalPaths('"/home/user" "/build/output" "/root/secret" "/tmp/file"'), ["/home/user", "/build/output", "/root/secret", "/tmp/file"])
   assert.equal(findLocalPaths('const route="/custom/build/output"; const url="/custom/build/file.txt"; const href="/custom/build/file.txt"; const path="/custom/build/output"; const pathname="/custom/build/output"; const basePath="/custom/build/output"; paths: "/api/tasks"').length, 0)
 })
 
