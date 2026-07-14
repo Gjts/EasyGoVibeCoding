@@ -69,10 +69,10 @@ export function LearningProgressControl() {
     >
       <div className="mb-0 flex min-w-0 flex-1 items-start justify-between gap-3 sm:mb-3">
         <div className="min-w-0">
-          <div className="mb-1 flex items-center gap-2 text-xs font-bold text-orange-600">
+          <div className="mb-1 flex items-center gap-2 text-xs font-bold text-orange-800">
             <GaugeCircle className="h-4 w-4 shrink-0" />
             <span>{CATEGORY_LABELS[category]}</span>
-            <span className="text-gray-400">·</span>
+            <span className="text-orange-700">·</span>
             <span>
               {categoryStats.done}/{categoryStats.total} 完成
             </span>
@@ -99,11 +99,11 @@ export function LearningProgressControl() {
         <Button
           type="button"
           size="sm"
-          variant={completed ? "outline" : "default"}
+          variant={completed ? "ghost" : "default"}
           onClick={() => toggleComplete(path)}
           className={
             completed
-              ? "border-emerald-200 text-emerald-700 hover:bg-emerald-50"
+              ? "border border-emerald-300 bg-white text-emerald-800 shadow-xs hover:bg-emerald-50 hover:text-emerald-900"
               : "bg-gradient-to-r from-orange-500 to-pink-500 text-white hover:from-orange-600 hover:to-pink-600"
           }
         >
