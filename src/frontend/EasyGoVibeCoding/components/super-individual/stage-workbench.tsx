@@ -115,10 +115,17 @@ export function StageWorkbench({ stageIds }: { stageIds: SuperIndividualStageId[
 
         <div className="rounded-3xl border border-violet-200 bg-violet-50 p-6">
           <h2 className="flex items-center gap-2 text-xl font-bold text-violet-950"><FileText className="h-5 w-5" />{stage.artifactTitle}</h2>
-          <pre className="mt-4 whitespace-pre-wrap rounded-2xl bg-white p-5 text-sm leading-7 text-gray-700 ring-1 ring-violet-100">{workspace.artifacts[stage.id] ?? renderArtifact(stage, answers)}</pre>
+          <output className="mt-4 block whitespace-pre-wrap rounded-2xl bg-white p-5 text-sm leading-7 text-gray-700 ring-1 ring-violet-100">{workspace.artifacts[stage.id] ?? renderArtifact(stage, answers)}</output>
           {error && <p role="alert" className="mt-4 text-sm font-semibold text-red-700">{error}</p>}
           <div className="mt-5 flex flex-wrap gap-3">
-            <Button type="button" variant="outline" onClick={saveOutput}>生成并保存成果</Button>
+            <Button
+              type="button"
+              variant="ghost"
+              className="border border-gray-300 bg-white text-gray-800 hover:bg-gray-50 hover:text-gray-950"
+              onClick={saveOutput}
+            >
+              生成并保存成果
+            </Button>
             <Button type="button" onClick={() => {
               try {
                 saveOutput()

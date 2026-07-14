@@ -60,7 +60,13 @@ export function CoachPanel({
           <p className="mt-1 text-sm leading-6 text-violet-900/75">规则引擎已经给出基础路线。AI 只负责追问、解释和补齐遗漏，不判断开户或合规资格。</p>
           {existingFeedback && <div className="mt-4 space-y-3 rounded-xl bg-white p-4 text-sm text-gray-700"><p className="leading-6">{existingFeedback.feedback}</p>{existingFeedback.followUpQuestions.length > 0 && <ul className="space-y-1">{existingFeedback.followUpQuestions.map((item) => <li key={item}>• {item}</li>)}</ul>}<p className="border-t pt-3 font-medium">建议成果：{existingFeedback.suggestedArtifact}</p>{existingFeedback.disclaimer && <p className="text-xs text-amber-700">{existingFeedback.disclaimer}</p>}</div>}
           {error && <p role="alert" className="mt-3 text-sm font-medium text-amber-800">{error}</p>}
-          <Button type="button" variant="outline" className="mt-4" disabled={loading || Object.keys(answers).length === 0} onClick={askCoach}>
+          <Button
+            type="button"
+            variant="ghost"
+            className="mt-4 border border-gray-300 bg-white text-gray-800 hover:bg-gray-50 hover:text-gray-950 disabled:bg-gray-100 disabled:text-gray-600 disabled:opacity-100"
+            disabled={loading || Object.keys(answers).length === 0}
+            onClick={askCoach}
+          >
             {loading ? <LoaderCircle className="mr-2 h-4 w-4 animate-spin" /> : <RefreshCcw className="mr-2 h-4 w-4" />}
             {existingFeedback ? "重新获取反馈" : "让 AI 检查我的答案"}
           </Button>

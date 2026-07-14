@@ -31,7 +31,14 @@ export function LaunchReport({ report }: { report: LaunchReportModel }) {
           <p className="mt-2 text-sm text-gray-600">生成时间：{new Date(report.generatedAt).toLocaleString()}</p>
         </div>
         <div className="flex flex-wrap gap-2" data-print-hide>
-          <Button type="button" variant="outline" onClick={() => window.print()}><Printer className="mr-2 h-4 w-4" />打印 / 保存为 PDF</Button>
+          <Button
+            type="button"
+            variant="ghost"
+            className="border border-gray-300 bg-white text-gray-800 hover:bg-gray-50 hover:text-gray-950"
+            onClick={() => window.print()}
+          >
+            <Printer className="mr-2 h-4 w-4" />打印 / 保存为 PDF
+          </Button>
           <Button type="button" onClick={downloadJson}><Download className="mr-2 h-4 w-4" />导出 JSON</Button>
         </div>
       </div>
