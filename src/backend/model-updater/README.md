@@ -199,7 +199,7 @@ npx wrangler kv key put --binding=SITE_STATS_KV models:latest "$(cat /tmp/prev.j
   - `seed-static-fallback`：静态种子兜底，内容不会因 Cron 自动发现新品
 - `models[]` 当前主流模型，每项含 `provider / name / releaseDate / dateKind / contextWindow / highlights / tier (1-3) / url / category / tags / description`
   - `tier` 是能力分级，不是发布时间排序：`1=旗舰/高强度模型`，`2=平衡主力模型`，`3=轻量/免费/低成本模型`
-  - 首页第一梯队优先按御三家各取一个旗舰代表（Anthropic / OpenAI / Google），避免同一家模型家族占满全部旗舰位
+  - 首页第一梯队固定优先展示四家旗舰代表（Anthropic / OpenAI / xAI / Google），避免同一家模型家族占满全部旗舰位
   - `dateKind=official-release` 表示厂商官方发布记录；`catalog-observed` 表示 OpenRouter 目录首次可见时间，前端会明确区分
 - `news[]` 最近 6 个月内重大发布，每项含 `date / provider / title / summary (≤240 字) / url`
 - `releases[]` 最近发布与既有历史的去重合并集合，最多 120 条；首页“历史模型发布时间”读取此字段并同时兼容旧 payload

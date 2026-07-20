@@ -51,6 +51,12 @@ const verifiedSeed = payload({
       dateKind: "official-release",
     }),
     model({
+      provider: "xAI",
+      name: "Grok 4.5",
+      releaseDate: "2026-07-16",
+      dateKind: "official-release",
+    }),
+    model({
       provider: "Google",
       name: "Gemini 3.5 Flash",
       releaseDate: "2026-06-23",
@@ -97,14 +103,15 @@ test("keeps the verified GPT-5.6 flagship ahead of a stale runtime catalog", () 
   })
 
   const result = reconcileModelPayload(runtime, verifiedSeed)
-  const topThree = result.models
+  const topFour = result.models
     .filter((entry) => entry.tier === 1)
-    .slice(0, 3)
+    .slice(0, 4)
     .map((entry) => entry.name)
 
-  assert.deepEqual(topThree, [
+  assert.deepEqual(topFour, [
     "Claude Fable 5",
     "GPT-5.6 Sol",
+    "Grok 4.5",
     "Gemini 3.5 Flash",
   ])
   assert.ok(result.models.some((entry) => entry.name === "GLM 4.7 Flash"))
@@ -135,6 +142,33 @@ test("lets a newer officially verified runtime flagship supersede the seed", () 
   )
 
   assert.equal(openAiFlagship?.name, "GPT-5.7 Sol")
+})
+
+test("keeps the latest officially verified xAI flagship in third place", () => {
+  const runtime = payload({
+    source: "openrouter-catalog",
+    models: [
+      model({
+        provider: "xAI",
+        name: "Grok 4.6",
+        releaseDate: "2026-08-01",
+        dateKind: "official-release",
+      }),
+    ],
+  })
+
+  const result = reconcileModelPayload(runtime, verifiedSeed)
+  const topFour = result.models
+    .filter((entry) => entry.tier === 1)
+    .slice(0, 4)
+    .map((entry) => entry.name)
+
+  assert.deepEqual(topFour, [
+    "Claude Fable 5",
+    "GPT-5.6 Sol",
+    "Grok 4.6",
+    "Gemini 3.5 Flash",
+  ])
 })
 
 test("does not promote a catalog-only claim above an official seed flagship", () => {

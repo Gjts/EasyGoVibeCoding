@@ -33,7 +33,7 @@ const OFFICIAL_SEARCH_DOMAINS = [
   "x.ai",
   "about.fb.com",
 ]
-const PRIMARY_FLAGSHIP_PROVIDERS = ["anthropic", "openai", "google"]
+const PRIMARY_FLAGSHIP_PROVIDERS = ["anthropic", "openai", "x-ai", "google"]
 const RELEASE_HISTORY_LIMIT = 60
 
 interface OpenRouterResponse {
@@ -510,7 +510,7 @@ function selectCapabilityRankedModels(
   for (const provider of PRIMARY_FLAGSHIP_PROVIDERS) {
     add(pickProviderFlagship(ranked, provider))
   }
-  addTier(1, 2)
+  addTier(1, Math.max(0, 5 - picked.length))
   addTier(2, 2)
   addTier(3, 1)
 
@@ -585,7 +585,7 @@ function scoreModelCapability(model: CatalogModel): number {
   }
 
   if (
-    /(opus|sonnet 5|sonnet-5|gpt-5|gpt-oss-120b|o3|gemini-3-pro|gemini 3 pro|grok-4|deepseek-r2|qwen3-max|glm-5\.2|kimi-k2|llama-4|ultra|max)/.test(
+    /(opus|sonnet 5|sonnet-5|gpt-5|gpt-oss-120b|o3|gemini-3-pro|gemini 3 pro|gemini-3\.5-flash|gemini 3\.5 flash|grok-4|deepseek-r2|qwen3-max|glm-5\.2|kimi-k2|llama-4|ultra|max)/.test(
       haystack,
     )
   ) {

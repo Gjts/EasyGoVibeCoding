@@ -90,7 +90,7 @@ function balanceFlagshipProviders(
   models: ModelsPayload["models"],
 ): ModelsPayload["models"] {
   const tierOne = models.filter((model) => model.tier === 1)
-  const preferred = ["Anthropic", "OpenAI", "Google"]
+  const preferred = ["Anthropic", "OpenAI", "xAI", "Google"]
     .map((provider) => tierOne.find((model) => model.provider === provider))
     .filter((model): model is ModelsPayload["models"][number] => Boolean(model))
   const preferredKeys = new Set(

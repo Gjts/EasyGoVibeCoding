@@ -46,6 +46,12 @@ const PROVIDER_STYLES: Record<
     glow: "from-blue-200/60 via-sky-100/60 to-indigo-100/60",
     medal: "from-blue-400 to-indigo-400",
   },
+  xAI: {
+    chip: "bg-zinc-100 text-zinc-700 border-zinc-200",
+    ring: "ring-zinc-200",
+    glow: "from-zinc-200/60 via-stone-100/60 to-neutral-100/60",
+    medal: "from-zinc-800 to-neutral-600",
+  },
   Moonshot: {
     chip: "bg-violet-100 text-violet-700 border-violet-200",
     ring: "ring-violet-200",
@@ -155,7 +161,7 @@ export function LatestModelsPanel() {
   }, [loadLatest])
 
   const news = getLatestNews(state.payload, MAX_NEWS)
-  const topModels = state.payload.models.filter((m) => m.tier === 1).slice(0, 3)
+  const topModels = state.payload.models.filter((m) => m.tier === 1).slice(0, 4)
   const releaseKeys = new Set<string>()
   const releaseHistory = [
     ...state.payload.releases,

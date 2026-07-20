@@ -1,6 +1,6 @@
 import type { ModelEntry, ModelsPayload, NewsEntry } from "./model-schema"
 
-const PREFERRED_FLAGSHIP_PROVIDERS = ["Anthropic", "OpenAI", "Google"]
+const PREFERRED_FLAGSHIP_PROVIDERS = ["Anthropic", "OpenAI", "xAI", "Google"]
 const OFFICIAL_VERIFIED_SUFFIX = "+official-verified"
 
 const DATE_KIND_QUALITY: Record<ModelEntry["dateKind"], number> = {

@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-07-10T00:00:00.000Z",
-  "source": "seed-official-verified-2026-07-10",
+  "updatedAt": "2026-07-20T00:00:00.000Z",
+  "source": "seed-official-verified-2026-07-20",
   "models": [
     {
       "provider": "Anthropic",
@@ -33,6 +33,22 @@
       "category": "model",
       "tags": ["OpenAI", "推理", "Codex", "Agent"],
       "description": "OpenAI 2026-07-09 发布的前沿旗舰，适合复杂软件工程、Agent 和专业知识工作"
+    },
+    {
+      "provider": "xAI",
+      "name": "Grok 4.5",
+      "releaseDate": "2026-07-16",
+      "contextWindow": "500K",
+      "highlights": [
+        "xAI 官方称其为目前最智能、最快的模型，面向编码、Agent 和知识工作",
+        "模型 ID：grok-4.5，支持文本与图像输入、文本输出",
+        "500K 上下文，支持 low、medium、high 可配置推理强度和原生工具调用"
+      ],
+      "tier": 1,
+      "url": "https://docs.x.ai/developers/models/grok-4.5",
+      "category": "model",
+      "tags": ["xAI", "编程", "Agent", "推理"],
+      "description": "xAI 2026-07-16 发布的前沿旗舰，适合编码、Agentic 任务、复杂推理和知识工作"
     },
     {
       "provider": "Google",
@@ -230,6 +246,13 @@
     }
   ],
   "news": [
+    {
+      "date": "2026-07-16",
+      "provider": "xAI",
+      "title": "Grok 4.5 发布并登陆 xAI API",
+      "summary": "xAI 发布 Grok 4.5，将其定位为面向编码、Agentic 任务和知识工作的前沿模型；模型提供 500K 上下文、可配置推理强度与原生工具调用。",
+      "url": "https://x.ai/news/grok-4-5"
+    },
     {
       "date": "2026-07-09",
       "provider": "OpenAI",

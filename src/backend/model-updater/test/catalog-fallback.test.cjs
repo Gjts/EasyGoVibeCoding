@@ -36,6 +36,13 @@ test("catalog fallback promotes the newest OpenAI flagship", async () => {
   const openAiFlagship = payload.models.find(
     (model) => model.provider === "OpenAI",
   )
+  const topProviders = payload.models
+    .filter((model) => model.tier === 1)
+    .slice(0, 4)
+    .map((model) => model.provider)
+  const xAiFlagship = payload.models.find(
+    (model) => model.provider === "xAI",
+  )
 
   assert.equal(openAiFlagship?.name, "GPT-5.6 Sol")
   assert.equal(openAiFlagship?.releaseDate, "2026-07-09")
@@ -43,6 +50,8 @@ test("catalog fallback promotes the newest OpenAI flagship", async () => {
     openAiFlagship?.url,
     "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
   )
+  assert.deepEqual(topProviders, ["Anthropic", "OpenAI", "xAI", "Google"])
+  assert.equal(xAiFlagship?.name, "Grok 4.5")
 })
 
 test("catalog fallback exposes recent releases beyond the current shortlist", async () => {
@@ -224,6 +233,7 @@ test("updater prefers official releases and balances flagship providers", async 
       modelEntry("OpenAI", "GPT Beta", "2026-07-08", { tier: 1 }),
       modelEntry("OpenAI", "GPT Gamma", "2026-07-07", { tier: 1 }),
       modelEntry("Anthropic", "Claude Fable 5", "2026-06-09", { tier: 1 }),
+      modelEntry("xAI", "Grok 4.5", "2026-07-16", { tier: 1 }),
       modelEntry("Google", "Gemini Pro", "2026-06-01", { tier: 1 }),
     ],
     releases: [
@@ -246,14 +256,14 @@ test("updater prefers official releases and balances flagship providers", async 
   const stored = JSON.parse(await kv.get("models:latest"))
   const topProviders = stored.models
     .filter((item) => item.tier === 1)
-    .slice(0, 3)
+    .slice(0, 4)
     .map((item) => item.provider)
   const anthropicRelease = stored.releases.find(
     (item) => item.provider === "Anthropic" && item.name === "Claude Fable 5",
   )
 
   assert.equal(outcome.status, "updated")
-  assert.deepEqual(topProviders, ["Anthropic", "OpenAI", "Google"])
+  assert.deepEqual(topProviders, ["Anthropic", "OpenAI", "xAI", "Google"])
   assert.equal(anthropicRelease.releaseDate, "2026-06-10")
   assert.equal(
     anthropicRelease.url,
