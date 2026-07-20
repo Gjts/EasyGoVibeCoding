@@ -423,9 +423,9 @@ test("every framework renderer has a localized no-PNG diagram branch", () => {
   }
 })
 
-test("source catalog remains at the immutable Task 8 baseline", () => {
+test("source catalog matches the approved Grok 4.5 release baseline", () => {
   const bytes = readFileSync(join(projectRoot, "i18n/catalog/source.zh-CN.json"))
   const catalog = JSON.parse(bytes)
-  assert.equal(Object.keys(catalog.entries).length, 9282)
-  assert.equal(createHash("sha256").update(bytes).digest("hex"), "099041df08522f5a581a45df23337493dd7a2f02d2d5bb9ace1e626f9878ed48")
+  assert.equal(Object.keys(catalog.entries).length, 9289)
+  assert.equal(createHash("sha256").update(bytes).digest("hex"), "55d91d217208e1e7e3e3d33851eeb2af3d905cb7a6e6bbedff6f2e4a1920a710")
 })

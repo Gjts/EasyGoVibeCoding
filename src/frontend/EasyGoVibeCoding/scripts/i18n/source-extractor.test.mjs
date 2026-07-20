@@ -1,7 +1,7 @@
 import assert from "node:assert/strict"
 import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises"
 import { tmpdir } from "node:os"
-import { join } from "node:path"
+import { join, resolve } from "node:path"
 import test from "node:test"
 
 async function loadExtractor() {
@@ -248,6 +248,24 @@ test("writes byte-identical, sorted full extraction outputs", async (t) => {
     JSON.stringify(storedOccurrences),
     /销售页面|销售卡片|日本市場の販売文|测试文案|生成文案/,
   )
+})
+
+test("keeps stored occurrences aligned with LF-normalized source files", async () => {
+  const { extractTranslationUnitsFromText } = await loadExtractor()
+  assert.equal(typeof extractTranslationUnitsFromText, "function")
+
+  const projectRoot = resolve(import.meta.dirname, "../..")
+  const storedOccurrences = JSON.parse(
+    await readFile(join(projectRoot, "i18n/catalog/occurrences.json"), "utf8"),
+  )
+  const occurrenceFiles = [...new Set(storedOccurrences.map(({ file }) => file))].sort()
+
+  for (const file of occurrenceFiles) {
+    const source = (await readFile(join(projectRoot, file), "utf8")).replace(/\r\n?/gu, "\n")
+    const extractedOccurrences = extractTranslationUnitsFromText({ file, source })
+    const expectedOccurrences = storedOccurrences.filter((occurrence) => occurrence.file === file)
+    assert.deepEqual(expectedOccurrences, extractedOccurrences, `${file} occurrence catalog is stale`)
+  }
 })
 
 test("fails a full extraction when no translation entries are found", async (t) => {
