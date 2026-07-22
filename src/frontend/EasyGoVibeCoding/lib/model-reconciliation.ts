@@ -66,9 +66,25 @@ function balanceFlagshipProviders(models: ModelEntry[]): ModelEntry[] {
 
 function bestModel(models: ModelEntry[]): ModelEntry | undefined {
   return models.reduce<ModelEntry | undefined>((best, model) => {
-    if (!best || compareVerification(model, best) > 0) return model
+    if (!best || compareFlagshipFreshness(model, best) > 0) return model
     return best
   }, undefined)
+}
+
+function compareFlagshipFreshness(
+  candidate: ModelEntry,
+  current: ModelEntry,
+): number {
+  const candidateQuality = DATE_KIND_QUALITY[candidate.dateKind]
+  const currentQuality = DATE_KIND_QUALITY[current.dateKind]
+  if (candidateQuality === 0 || currentQuality === 0) {
+    return candidateQuality - currentQuality
+  }
+
+  return (
+    candidate.releaseDate.localeCompare(current.releaseDate) ||
+    candidateQuality - currentQuality
+  )
 }
 
 function compareVerification(candidate: ModelEntry, current: ModelEntry): number {

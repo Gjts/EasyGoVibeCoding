@@ -43,6 +43,12 @@ test("catalog fallback promotes the newest OpenAI flagship", async () => {
   const xAiFlagship = payload.models.find(
     (model) => model.provider === "xAI",
   )
+  const anthropicFlagship = payload.models.find(
+    (model) => model.provider === "Anthropic",
+  )
+  const googleFlagship = payload.models.find(
+    (model) => model.provider === "Google",
+  )
 
   assert.equal(openAiFlagship?.name, "GPT-5.6 Sol")
   assert.equal(openAiFlagship?.releaseDate, "2026-07-09")
@@ -51,7 +57,9 @@ test("catalog fallback promotes the newest OpenAI flagship", async () => {
     "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
   )
   assert.deepEqual(topProviders, ["Anthropic", "OpenAI", "xAI", "Google"])
+  assert.equal(anthropicFlagship?.name, "Claude Sonnet 5")
   assert.equal(xAiFlagship?.name, "Grok 4.5")
+  assert.equal(googleFlagship?.name, "Gemini 3.6 Flash")
 })
 
 test("catalog fallback exposes recent releases beyond the current shortlist", async () => {
@@ -278,6 +286,8 @@ function createFetchStub() {
     model("google/gemini-3.5-flash", "Google: Gemini 3.5 Flash", "2026-05-19", "Google efficient multimodal coding model"),
     model("anthropic/claude-opus-4.8", "Anthropic: Claude Opus 4.8", "2026-05-27", "Anthropic capable Opus reasoning model"),
     model("anthropic/claude-sonnet-5", "Anthropic: Claude Sonnet 5", "2026-06-30", "Anthropic frontier coding and agent model"),
+    model("google/gemini-3.6-flash", "Google: Gemini 3.6 Flash", "2026-07-21", "Google workhorse model for coding, knowledge work, and multimodal agents"),
+    model("google/gemini-3.5-flash-lite", "Google: Gemini 3.5 Flash-Lite", "2026-07-21", "Google low-latency model for high-volume automation"),
     model("openai/gpt-5.6-sol-pro", "OpenAI: GPT-5.6 Sol Pro", "2026-07-10", "OpenAI frontier model using a higher-compute route"),
     model("openai/gpt-5.6-sol", "OpenAI: GPT-5.6 Sol", "2026-07-10", "OpenAI frontier model for complex professional work"),
     model("openai/gpt-5.6-terra", "OpenAI: GPT-5.6 Terra", "2026-07-10", "OpenAI balanced intelligence and cost model"),

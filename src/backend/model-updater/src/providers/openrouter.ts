@@ -528,14 +528,16 @@ function pickProviderFlagship(
   ranked: CatalogModel[],
   provider: string,
 ): CatalogModel | undefined {
-  const providerModels = ranked.filter(
-    (model) => catalogProviderId(model.id) === provider,
+  const providerModels = dedupeCatalogAliases(
+    ranked.filter((model) => catalogProviderId(model.id) === provider),
   )
   const fullSizeModels = providerModels.filter(
     (model) => !isLightweightOrSpecialized(model),
   )
   return (fullSizeModels.length > 0 ? fullSizeModels : providerModels).sort(
-    compareCapabilityThenDate,
+    (a, b) =>
+      dateRank(b.createdDate) - dateRank(a.createdDate) ||
+      compareCapabilityThenDate(a, b),
   )[0]
 }
 
@@ -545,7 +547,7 @@ function catalogProviderId(modelId: string): string {
 
 function isLightweightOrSpecialized(model: CatalogModel): boolean {
   const value = `${model.id} ${model.name}`.toLowerCase()
-  return /(?:^|[-\s])(free|mini|nano|lite|small|xs|flash|fast|luna|terra|image|realtime|audio|embedding|moderation)(?:$|[-\s])/.test(
+  return /(?:^|[-\s])(free|mini|nano|lite|small|xs|fast|luna|terra|image|realtime|audio|embedding|moderation)(?:$|[-\s])/.test(
     value,
   )
 }
@@ -585,7 +587,7 @@ function scoreModelCapability(model: CatalogModel): number {
   }
 
   if (
-    /(opus|sonnet 5|sonnet-5|gpt-5|gpt-oss-120b|o3|gemini-3-pro|gemini 3 pro|gemini-3\.5-flash|gemini 3\.5 flash|grok-4|deepseek-r2|qwen3-max|glm-5\.2|kimi-k2|llama-4|ultra|max)/.test(
+    /(opus|sonnet 5|sonnet-5|gpt-5|gpt-oss-120b|o3|gemini-(?:3(?:\.\d+)?)-(?:pro|flash)|gemini 3(?:\.\d+)? (?:pro|flash)|grok-4|deepseek-r2|qwen3-max|glm-5\.2|kimi-k2|llama-4|ultra|max)/.test(
       haystack,
     )
   ) {

@@ -144,6 +144,27 @@ test("lets a newer officially verified runtime flagship supersede the seed", () 
   assert.equal(openAiFlagship?.name, "GPT-5.7 Sol")
 })
 
+test("lets a newer catalog release refresh a watched provider", () => {
+  const runtime = payload({
+    source: "openrouter-catalog",
+    models: [
+      model({
+        provider: "Google",
+        name: "Gemini 3.6 Flash",
+        releaseDate: "2026-07-21",
+        dateKind: "catalog-observed",
+      }),
+    ],
+  })
+
+  const result = reconcileModelPayload(runtime, verifiedSeed)
+  const googleFlagship = result.models.find(
+    (entry) => entry.provider === "Google" && entry.tier === 1,
+  )
+
+  assert.equal(googleFlagship?.name, "Gemini 3.6 Flash")
+})
+
 test("keeps the latest officially verified xAI flagship in third place", () => {
   const runtime = payload({
     source: "openrouter-catalog",
@@ -171,7 +192,7 @@ test("keeps the latest officially verified xAI flagship in third place", () => {
   ])
 })
 
-test("does not promote a catalog-only claim above an official seed flagship", () => {
+test("does not promote an unverified claim above an official seed flagship", () => {
   const runtime = payload({
     source: "openrouter-catalog",
     models: [
@@ -179,7 +200,7 @@ test("does not promote a catalog-only claim above an official seed flagship", ()
         provider: "OpenAI",
         name: "GPT-5.7 Rumor",
         releaseDate: "2026-08-01",
-        dateKind: "catalog-observed",
+        dateKind: "unverified",
       }),
     ],
   })
